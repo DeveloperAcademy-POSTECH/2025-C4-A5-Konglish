@@ -5,7 +5,7 @@
 > 간단한 한 줄 소개 – 프로젝트의 핵심 가치 또는 기능
 
 [![Swift](https://img.shields.io/badge/Swift-6.0-orange.svg)]()
-[![Xcode](https://img.shields.io/badge/Xcode-16.0-blue.svg)]()
+[![Xcode](https://img.shields.io/badge/Xcode-16.4-blue.svg)]()
 [![License](https://img.shields.io/badge/license-MIT-green.svg)]()
 
 ---
