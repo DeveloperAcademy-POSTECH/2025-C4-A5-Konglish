@@ -65,6 +65,9 @@ extension ARContainerViewController {
             
             addPlaneVisualization(planeAnchor: planeAnchor, animate: true)
             delegate?.arContainerDidFindPlaneAnchor(self)
+            if checkAllPlanesAttached() {
+                delegate?.arContainerDidFindAllPlaneAnchor(self)
+            }
         }
     }
     
@@ -100,6 +103,9 @@ extension ARContainerViewController {
                 
                 addPlaneVisualization(planeAnchor: planeAnchor, animate: true)
                 delegate?.arContainerDidFindPlaneAnchor(self)
+                if checkAllPlanesAttached() {
+                    delegate?.arContainerDidFindAllPlaneAnchor(self)
+                }
             }
         }
     }
