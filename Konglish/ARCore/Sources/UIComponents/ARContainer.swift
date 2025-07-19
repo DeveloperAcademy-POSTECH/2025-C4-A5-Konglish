@@ -12,29 +12,38 @@ public struct ARContainer: UIViewControllerRepresentable {
     // MARK: - Properties
     let gameSettings: GameSettings
     
-    public init(gameSettings: GameSettings) {
+    @Binding var currentDetectedPlanes: Int
+    
+    public init(gameSettings: GameSettings, currentDetectedPlanes: Binding<Int>) {
         self.gameSettings = gameSettings
+        self._currentDetectedPlanes = currentDetectedPlanes
     }
     
     public func makeUIViewController(context: Context) -> ARContainerViewController {
-        ARContainerViewController(gameSettings: gameSettings)
+        let viewController = ARContainerViewController(gameSettings: gameSettings)
+        viewController.delegate = context.coordinator
+        return viewController
     }
     
     public func updateUIViewController(_ uiViewController: ARContainerViewController, context: Context) {
-        uiViewController.delegate = context.coordinator
     }
     
     public func makeCoordinator() -> Coordinator {
-        return Coordinator()
+        return Coordinator(self)
     }
     
     public class Coordinator: ARContainerViewControllerDelegate {
+        var parent: ARContainer
+        
+        init(_ parent : ARContainer) {
+            self.parent = parent
+        }
+        
         public func arContainerDidFindPlaneAnchor(_ arContainer: ARContainerViewController) {
-            print("arContainerDidFindPlaneAnchor")
+            parent.currentDetectedPlanes += 1
         }
         
         public func arContainerDidFindAllPlaneAnchor(_ arContainer: ARContainerViewController) {
-            print("arContainerDidFindAllPlaneAnchor")
         }
     }
 }
