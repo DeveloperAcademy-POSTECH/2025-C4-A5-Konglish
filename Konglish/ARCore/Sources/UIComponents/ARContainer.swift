@@ -7,7 +7,41 @@
 
 import SwiftUI
 
-/// ARContainerViewController를 SwiftUI로 브릿지하는 UIViewControllerRepresentable 클래스
+/**
+ ARContainerViewController를 SwiftUI로 브릿지하는 UIViewControllerRepresentable 클래스
+ 
+ 사용 예시
+ 
+ ```swift
+ import SwiftUI
+ import ARCore
+
+ public struct ContentView: View {
+     @State var currentDetectedPlanes: Int = 0
+     
+     public init() {}
+
+     public var body: some View {
+         ZStack {
+             ARContainer(
+                 gameSettings: GameSettings(
+                     numberOfCards: 10,
+                     minimumSizeOfPlane: 4
+                 ),
+                 currentDetectedPlanes: $currentDetectedPlanes
+             )
+             .ignoresSafeArea()
+             
+             VStack {
+                 Text("currentDetectedPlanes: \(currentDetectedPlanes)")
+                 
+                 Spacer()
+             }
+         }
+     }
+ }
+ ```
+ */
 public struct ARContainer: UIViewControllerRepresentable {
     // MARK: - Properties
     let gameSettings: GameSettings
