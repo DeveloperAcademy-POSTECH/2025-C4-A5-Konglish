@@ -29,6 +29,19 @@ public class ARContainerViewController: UIViewController {
     /// 인식된 평면의 시각화 엔티티들
     var detectedPlaneEntities: [UUID: AnchorEntity] = [:]
     
+    // MARK: 초기화가 필요한 게임 속성
+    let gameSettings: GameSettings
+    
+    // MARK: - Init
+    init(gameSettings: GameSettings) {
+        self.gameSettings = gameSettings
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Life Cycle
     public override func viewDidLoad() {
         super.viewDidLoad()

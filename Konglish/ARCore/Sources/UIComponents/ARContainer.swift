@@ -8,11 +8,15 @@
 import SwiftUI
 
 public struct ARContainer: UIViewControllerRepresentable {
-    public init () {
+    // MARK: - Properties
+    let gameSettings: GameSettings
+    
+    public init(gameSettings: GameSettings) {
+        self.gameSettings = gameSettings
     }
     
     public func makeUIViewController(context: Context) -> ARContainerViewController {
-        ARContainerViewController()
+        ARContainerViewController(gameSettings: gameSettings)
     }
     
     public func updateUIViewController(_ uiViewController: ARContainerViewController, context: Context) {
