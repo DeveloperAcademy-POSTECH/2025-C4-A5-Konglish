@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// ARContainerViewController를 SwiftUI로 브릿지하는 UIViewControllerRepresentable 클래스
 public struct ARContainer: UIViewControllerRepresentable {
     // MARK: - Properties
     let gameSettings: GameSettings
@@ -20,5 +21,20 @@ public struct ARContainer: UIViewControllerRepresentable {
     }
     
     public func updateUIViewController(_ uiViewController: ARContainerViewController, context: Context) {
+        uiViewController.delegate = context.coordinator
+    }
+    
+    public func makeCoordinator() -> Coordinator {
+        return Coordinator()
+    }
+    
+    public class Coordinator: ARContainerViewControllerDelegate {
+        public func arContainerDidFindPlaneAnchor(_ arContainer: ARContainerViewController) {
+            print("arContainerDidFindPlaneAnchor")
+        }
+        
+        public func arContainerDidFindAllPlaneAnchor(_ arContainer: ARContainerViewController) {
+            print("arContainerDidFindAllPlaneAnchor")
+        }
     }
 }
