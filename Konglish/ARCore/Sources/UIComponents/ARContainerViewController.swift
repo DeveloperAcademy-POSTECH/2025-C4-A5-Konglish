@@ -12,7 +12,9 @@ import RealityKit
 public class ARContainerViewController: UIViewController {
     // MARK: - Properties
     internal let arView = ARView()
-    public var isDebugModeEnabled = false // debugOption을 포함하고 싶으면 true로 지정한다. 세션을 다시 시작해야 반영된다.
+    
+    /// ARSession debugOption 포함 여부를 지정한다.  debugOption을 포함하고 싶으면 true로 지정한다. 세션을 다시 시작해야 반영된다.
+    public var isDebugModeEnabled = false
     
     // MARK: - Life Cycle
     public override func viewDidLoad() {

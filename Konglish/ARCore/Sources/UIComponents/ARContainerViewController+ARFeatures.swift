@@ -9,6 +9,8 @@ import ARKit
 
 extension ARContainerViewController {
     // MARK: - Setup ARView
+    
+    /// 처음 ARView를 초기화한다
     func setupARView() {
         arView.environment.sceneUnderstanding.options = [
             .occlusion,
@@ -18,6 +20,7 @@ extension ARContainerViewController {
         resetSession()
     }
     
+    /// 현재 ARSession을 리셋한다
     public func resetSession() {
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = [.vertical]
@@ -35,6 +38,7 @@ extension ARContainerViewController {
         arView.session.run(configuration)
     }
     
+    /// 현재 ARSession을 멈춘다
     public func pauseSession() {
         arView.session.pause()
     }
