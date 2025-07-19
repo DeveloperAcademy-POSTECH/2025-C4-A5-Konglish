@@ -5,6 +5,7 @@
 //  Created by 임영택 on 7/19/25.
 //
 
+/// 게임 설정
 public struct GameSettings {
     // MARK: - Properties
     
