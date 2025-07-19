@@ -14,6 +14,9 @@ class PlaneVisualizer: ARFeatureProvider {
     
     let logger = Logger.of("PlaneVisualizer")
     
+    /// 평면으로부터 띄울 오프셋
+    let translationOffset: Float = 0.005
+    
     init(arView: ARView) {
         self.arView = arView
     }
@@ -36,7 +39,7 @@ class PlaneVisualizer: ARFeatureProvider {
         let planeEntity = ModelEntity(mesh: planeMesh, materials: [material])
         
         // 더 높이 띄워서 겹치지 않게
-        planeEntity.transform.translation.y = 0.002
+        planeEntity.transform.translation.y = translationOffset
         
         // 초기 스케일
         planeEntity.transform.scale = context.animate ? [0.2, 0.2, 0.2] : [1.0, 1.0, 1.0]
