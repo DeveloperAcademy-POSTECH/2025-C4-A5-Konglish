@@ -42,7 +42,6 @@ extension ARContainerViewController {
     
     func handleAddedAnchors(for anchors: [ARAnchor]) {
         guard !checkAllPlanesAttached() else {
-            logger.debug("🔨 all anchors have been found... early return")
             return
         }
         logger.debug("🔨 new anchors have been added: \(anchors.count)")
@@ -73,7 +72,6 @@ extension ARContainerViewController {
     
     func handleUpdatedAnchors(for anchors: [ARAnchor]) {
         guard !checkAllPlanesAttached() else {
-            logger.debug("🔨 all anchors have been found... early return")
             return
         }
         logger.debug("🔨 some anchors have been updated: \(anchors.count)")
