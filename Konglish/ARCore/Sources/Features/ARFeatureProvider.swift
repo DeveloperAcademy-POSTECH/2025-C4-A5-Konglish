@@ -13,8 +13,8 @@ protocol ARFeatureProvider: AnyObject {
     associatedtype Input
     associatedtype Output
     
-    /// 기능을 반영할 ARView
-    var arView: ARView { get }
+    /// 기능을 반영할 ARView. weak으로 참조해야함.
+    var arView: ARView? { get }
     
     /// 기능 수행 메서드
     func operate(context: Input) -> Output

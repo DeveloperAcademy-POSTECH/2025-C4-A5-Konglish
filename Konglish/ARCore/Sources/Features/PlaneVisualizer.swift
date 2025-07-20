@@ -10,7 +10,7 @@ import RealityKit
 import os.log
 
 class PlaneVisualizer: ARFeatureProvider {
-    let arView: ARView
+    weak var arView: ARView?
     
     let logger = Logger.of("PlaneVisualizer")
     
@@ -21,7 +21,15 @@ class PlaneVisualizer: ARFeatureProvider {
         self.arView = arView
     }
     
-    func operate(context: Input) -> AnchorEntity {
+    
+    /// ARPlaneAnchor를 시각화하는 RealityKit 엔티티를 ARView 씬에 추가하고 반환한다.
+    /// - Parameter context: 인식한 ARPlaneAnchor와 애니메이트 여부
+    /// - Returns: 추가한 AnchorEntity. 실패했으면 nil을 반환.
+    func operate(context: Input) -> AnchorEntity? {
+        guard let arView = arView else {
+            return nil
+        }
+        
         let planeAnchor = context.planeAnchor
         
         // 평면에 고정될 AnchorEntity 생성
