@@ -71,9 +71,6 @@ extension ARContainerViewController {
     }
     
     func handleUpdatedAnchors(for anchors: [ARAnchor]) {
-        guard !checkAllPlanesAttached() else {
-            return
-        }
         logger.debug("🔨 some anchors have been updated: \(anchors.count)")
         
         let planeAnchors = anchors.compactMap { anchor in
