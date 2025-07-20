@@ -9,13 +9,6 @@ import ARKit
 
 /// ARView 초기화, 해제 로직
 extension ARContainerViewController {
-    // MARK: - Computed Variables
-    
-    /// 인식된 평면 앵커의 개수
-    public var planeAnchorsCount: Int {
-        return arView.session.currentFrame?.anchors.filter { $0 is ARPlaneAnchor }.count ?? 0
-    }
-    
     // MARK: - Setup ARView
     
     /// 처음 ARView를 초기화한다
