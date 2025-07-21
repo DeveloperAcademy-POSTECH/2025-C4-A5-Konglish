@@ -20,7 +20,7 @@ public struct GameSettings {
     /// 인식할 평면의 최소 면적
     let minimumSizeOfPlane: Float
     
-    init(gameCards: [GameCard], minimumSizeOfPlane: Float) {
+    public init(gameCards: [GameCard], minimumSizeOfPlane: Float) {
         self.gameCards = gameCards
         self.minimumSizeOfPlane = minimumSizeOfPlane
     }
