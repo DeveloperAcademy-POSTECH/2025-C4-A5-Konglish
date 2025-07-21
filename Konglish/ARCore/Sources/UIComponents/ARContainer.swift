@@ -18,14 +18,20 @@ import SwiftUI
 
  public struct ContentView: View {
      @State var currentDetectedPlanes: Int = 0
+     @State var cardScatterTrigger = false
+     
+     let gameCards: [GameCard] = [
+         .init(id: UUID(uuidString: "00000000-0000-0000-0000-000000000000")!, imageName: "apple", wordKor: "사과", wordEng: "apple"),
+          /* 생략 */
+     ]
      
      public init() {}
-
+     
      public var body: some View {
          ZStack {
              ARContainer(
                  gameSettings: GameSettings(
-                     numberOfCards: 10,
+                     gameCards: gameCards,
                      minimumSizeOfPlane: 4
                  ),
                  currentDetectedPlanes: $currentDetectedPlanes
