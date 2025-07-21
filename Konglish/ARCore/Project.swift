@@ -16,7 +16,7 @@ let project = Project(
                 product: .staticFramework,
                 bundleId: "app.arCore.Konglish",
                 infoPlist: .default,
-                sources: [],
+                sources: ["Sources/**"],
                 resources: [],
                 dependencies: []
         )
