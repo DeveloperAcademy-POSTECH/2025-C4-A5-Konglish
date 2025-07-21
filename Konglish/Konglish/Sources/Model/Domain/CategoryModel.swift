@@ -7,23 +7,22 @@
 
 import Foundation
 import SwiftData
-import SwiftUI
 
 /// 카테고리 선택 시 보이는 카테고리
 @Model
 final class CategoryModel {
     @Attribute(.unique) var id: UUID
-    var imageName: ImageResource
+    var imageName: String
     var nameKor: String
     var nameEng: String
     
     @Relationship(deleteRule: .cascade) var levels: [LevelModel] = []
     @Relationship(deleteRule: .cascade) var cards: [CardModel] = []
     
-    init(id: UUID = UUID(), imageName: ImageResource, nameKor: String, nameEng: String) {
-            self.id = id
-            self.imageName = imageName
-            self.nameKor = nameKor
-            self.nameEng = nameEng
-        }
+    init(id: UUID = UUID(), imageName: String, nameKor: String, nameEng: String) {
+        self.id = id
+        self.imageName = imageName
+        self.nameKor = nameKor
+        self.nameEng = nameEng
+    }
 }

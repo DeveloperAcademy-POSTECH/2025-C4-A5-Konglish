@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+public enum AppRoute: Hashable {
+    case home
+    case category
+    case level
+}

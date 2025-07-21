@@ -6,6 +6,7 @@
 //
 
 import SwiftData
+import SwiftUI
 
 /// 카드를 띄우고 영어 단어 발음 후 획득 포인트
 @Model
