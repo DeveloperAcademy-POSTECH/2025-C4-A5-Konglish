@@ -10,6 +10,11 @@ import RealityKit
 
 /// 인식 평면 시각화 로직
 extension ARContainerViewController {
+    /// 평면 인식을 시작한다.
+    public func startDetectingPlane() {
+        gamePhase = .scanning
+    }
+    
     /// 인식된 평면을 시각화하는 엔티티를 제거한다
     func removeDetectedPlaneEntities() {
         detectedPlaneEntities.values.forEach { $0.removeFromParent() }
@@ -41,7 +46,7 @@ extension ARContainerViewController {
     }
     
     func handleAddedAnchors(for anchors: [ARAnchor]) {
-        guard !checkAllPlanesAttached() else {
+        guard gamePhase == .scanning, !checkAllPlanesAttached() else {
             return
         }
         
@@ -70,6 +75,9 @@ extension ARContainerViewController {
     }
     
     func handleUpdatedAnchors(for anchors: [ARAnchor]) {
+        guard gamePhase == .scanning else {
+            return
+        }
         
         let planeAnchors = anchors.compactMap { anchor in
             if let planeAnchor = anchor as? ARPlaneAnchor {
