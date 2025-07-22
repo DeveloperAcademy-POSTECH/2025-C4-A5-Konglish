@@ -52,10 +52,19 @@ public struct ARContainer: UIViewControllerRepresentable {
     // MARK: - Properties
     let gameSettings: GameSettings
     
+    /// 현재 발생한 에러. 에러가 없으면 nil
+    @Binding var gamePhage: GamePhase
+    
+    /// 현재 인식된 평면 수
     @Binding var currentDetectedPlanes: Int
     
     public init(gameSettings: GameSettings, currentDetectedPlanes: Binding<Int>) {
+    public init(
+        gameSettings: GameSettings,
+        gamePhase: Binding<GamePhase>,
+    ) {
         self.gameSettings = gameSettings
+        self._gamePhage = gamePhase
         self._currentDetectedPlanes = currentDetectedPlanes
     }
     
