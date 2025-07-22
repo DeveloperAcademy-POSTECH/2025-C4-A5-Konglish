@@ -20,7 +20,7 @@ extension ARContainerViewController {
     /// - Parameter planeAnchor: 새로 인식한 평면의 앵커
     fileprivate func addPlaneVisualization(planeAnchor: ARPlaneAnchor, animate: Bool) {
         let addedEntity = self.planeVisualizer?.operate(context: .init(planeAnchor: planeAnchor, animate: animate))
-        detectedPlaneEntities[planeAnchor.identifier] = addedEntity
+        detectedPlaneEntities[planeAnchor] = addedEntity
     }
     
     /// 새로운 인식한 평면의 크기가 충분한지 검사한다. 최소 면적은 GameSettings의 minimumSizeOfPlane에 지정한다.
@@ -81,7 +81,7 @@ extension ARContainerViewController {
         }
         
         for planeAnchor in planeAnchors {
-            if let planeEntity = detectedPlaneEntities[planeAnchor.identifier] {
+            if let planeEntity = detectedPlaneEntities[planeAnchor] {
                 // 이미 존재하는 엔티티인 경우 제거하고 다시 그린다
                 planeEntity.removeFromParent()
                 addPlaneVisualization(planeAnchor: planeAnchor, animate: false)

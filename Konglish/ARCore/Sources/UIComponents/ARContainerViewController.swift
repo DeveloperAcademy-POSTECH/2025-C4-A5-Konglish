@@ -27,7 +27,7 @@ public class ARContainerViewController: UIViewController {
     var planeVisualizer: PlaneVisualizer?
     
     /// 인식된 평면의 시각화 엔티티들
-    var detectedPlaneEntities: [UUID: AnchorEntity] = [:]
+    var detectedPlaneEntities: [ARPlaneAnchor: AnchorEntity] = [:]
     
     // MARK: 초기화가 필요한 게임 속성
     let gameSettings: GameSettings
