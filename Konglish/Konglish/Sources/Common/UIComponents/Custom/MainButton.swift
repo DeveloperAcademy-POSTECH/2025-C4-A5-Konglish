@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// 앱 전체적으로 사용하는 버튼 정의
 struct MainButton: View {
     // MARK: - Property
     let buttonType: ButtonType
@@ -23,6 +24,7 @@ struct MainButton: View {
         self.action = action
     }
     
+    // MARK: - Body
     var body: some View {
         Button(action: {
             action()
@@ -39,6 +41,8 @@ struct MainButton: View {
         })
     }
     
+    // MARK: - ButtonStyle
+    /// 버튼 스타일 분기
     @ViewBuilder
     private var buttonStyle: some View {
         switch buttonType {
