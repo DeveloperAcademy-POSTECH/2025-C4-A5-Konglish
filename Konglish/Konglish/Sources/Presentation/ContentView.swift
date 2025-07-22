@@ -5,7 +5,7 @@ public struct ContentView: View {
 
     public var body: some View {
         Text("Hello, World!")
-            .font(.bold32)
+            //.font(.bold32)
             .padding()
     }
 }
