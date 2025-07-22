@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ARKit
 import RealityKit
 import os.log
 
@@ -25,6 +26,7 @@ public class ARContainerViewController: UIViewController {
     
     /// 기능을 제공하는 클래스들 (ARFeatureProvider)
     var planeVisualizer: PlaneVisualizer?
+    var cardPositioner: CardPositioner?
     
     /// 인식된 평면의 시각화 엔티티들
     var detectedPlaneEntities: [ARPlaneAnchor: AnchorEntity] = [:]

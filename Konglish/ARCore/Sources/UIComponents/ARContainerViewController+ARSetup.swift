@@ -29,6 +29,7 @@ extension ARContainerViewController {
     
     func prepareFeatureProviders() {
         self.planeVisualizer = PlaneVisualizer(arView: arView)
+        self.cardPositioner = CardPositioner(arView: arView)
         // TODO: 다른 ARFeatureProvider 추가
     }
     
