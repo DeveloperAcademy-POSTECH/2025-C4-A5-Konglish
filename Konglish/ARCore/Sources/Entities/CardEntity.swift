@@ -9,6 +9,7 @@ import Foundation
 import RealityKit
 import Combine
 import UIKit
+import os.log
 
 /// 실제 씬에 추가되는 학습 카드의 엔티티
 class CardEntity: Entity, HasModel {
@@ -25,7 +26,11 @@ class CardEntity: Entity, HasModel {
     /// 카드 백그라운드 컬러
     static let backgroundColor = UIColor(named: "primary01") ?? .red
     
+    // MARK: - Properties
+    /// 카드 데이터
     let cardData: GameCard?
+    
+    private let logger = Logger.of("CardEntity")
     
     var displayLabelText: NSAttributedString {
         let wordEng = NSAttributedString(
@@ -71,10 +76,21 @@ class CardEntity: Entity, HasModel {
             ),
         )
         
-        Task { @MainActor in
-            self.model?.materials = [
-                try! await createTextImageMaterial(from: image)
-            ]
+        Task {
+            var material: Material
+            do {
+                material = try await createTextImageMaterial(from: image)
+            } catch {
+                let logMessage = "❌ CardEntity: failed to create text image material"
+                    + "=> fallback texture will be applied."
+                    + "error:"
+                logger.error("\(logMessage) \(error)")
+                material = SimpleMaterial(color: CardEntity.backgroundColor, isMetallic: false)
+            }
+            
+            await MainActor.run {
+                self.model?.materials = [material]
+            }
         }
     }
     
