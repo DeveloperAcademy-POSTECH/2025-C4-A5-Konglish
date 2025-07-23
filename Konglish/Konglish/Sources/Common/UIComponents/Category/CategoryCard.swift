@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// 카테고리 카드
 struct CategoryCard: View {
     
     // MARK: - Property
