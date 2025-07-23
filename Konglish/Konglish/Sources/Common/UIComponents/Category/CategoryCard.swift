@@ -15,14 +15,8 @@ struct CategoryCard: View {
     
     // MARK: - Property
     fileprivate enum CategoryConstants {
-        static let cornerRadius: CGFloat = 20
-        static let cardTopPadding: CGFloat = 8
         static let cardInfoVspacing: CGFloat = 8
         static let cardContetnsVspacing: CGFloat = 12
-        
-        static let cardWidth: CGFloat = 280
-        static let cardBottomHeight: CGFloat = 448
-        static let cardTopHeight: CGFloat = 440
     }
     
     // MARK: - Init
@@ -33,31 +27,15 @@ struct CategoryCard: View {
     
     // MARK: - Body
     var body: some View {
-        Button(action: {
-            
-        }, label: {
-            ZStack(alignment: .top, content: {
-                RoundedRectangle(cornerRadius: CategoryConstants.cornerRadius)
-                    .fill(Color.gray01)
-                    .frame(width: CategoryConstants.cardWidth, height: CategoryConstants.cardBottomHeight)
-                
-                topArea
-            })
+        ButtonCard(content: {
+            cardContetns
+        }, action: {
+            action()
         })
     }
     
-    // MARK: - TopArea
-    private var topArea: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: CategoryConstants.cornerRadius)
-                .fill(Color.white)
-                .frame(width: CategoryConstants.cardWidth, height: CategoryConstants.cardTopHeight)
-            
-            cardContetns
-        }
-    }
-    
     // MARK: - Top
+    /// 카드 내부 컨텐츠
     private var cardContetns: some View {
         VStack(spacing: CategoryConstants.cardContetnsVspacing, content: {
             Image(categoryModel.imageName)
@@ -88,4 +66,10 @@ struct CategoryCard: View {
             .font(.bold20)
             .foregroundStyle(.gray02)
     }
+}
+
+#Preview {
+    CategoryCard(categoryModel: .init(imageName: "", difficulty: 2, nameKor: "1", nameEng: "1"), action: {
+        print("hello")
+    })
 }
