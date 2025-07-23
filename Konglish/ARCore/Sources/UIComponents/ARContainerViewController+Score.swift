@@ -15,13 +15,21 @@ extension ARContainerViewController {
             throw ARCoreError.cardNotFound
         }
         
+        // 실패한 경우 라이프 카운트 1 감소
         if !isPassed(accuracy: accuracy) {
             reaminLifeCounts -= 1
         }
         
+        // 프로퍼티 업데이트
         gameCardToAccuracy[gameCard] = accuracy
         
+        // 대리자 호출
         delegate?.didChangeScore(self)
+        
+        // 모두 완료한 경우 완료 상태로 게임 페이즈 변경
+        if numberOfFinishedCards == gameSettings.gameCards.count {
+            gamePhase = .fisished
+        }
     }
     
     /// 정확도 점수에 따른 점수를 계산한다
