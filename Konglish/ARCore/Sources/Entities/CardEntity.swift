@@ -30,6 +30,9 @@ class CardEntity: Entity, HasModel {
     /// 카드 데이터
     let cardData: GameCard?
     
+    /// 카드 앞면/뒷면 상태 (false: 뒷면, true: 앞면)
+    var isFlipped: Bool = false
+    
     private let logger = Logger.of("CardEntity")
     
     var displayLabelText: NSAttributedString {
