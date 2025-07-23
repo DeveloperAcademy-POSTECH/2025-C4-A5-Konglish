@@ -13,11 +13,12 @@
 <br>
 
 ## 👥 멤버
-| 팀원 1 | 팀원 2 | 팀원 3 | 임영택 (Bob) |
-|:------:|:------:|:------:|:------:|
-| <img width="200" src="https://github.com/user-attachments/assets/108a8d81-af80-48f5-b56d-ccd1699e9fc4"> | 사진2 | 사진3 | <img src="https://avatars.githubusercontent.com/u/68181872?v=4" width="200"> |
+| 정의찬 (jeOng) | 권윤진 (Riel) | 길지훈 (Gil) | 임영택 (Bob) | 박신범 (Powel)
+|:------:|:------:|:------:|:------:|:------:|
+| <img width="200" src="https://github.com/user-attachments/assets/108a8d81-af80-48f5-b56d-ccd1699e9fc4"> | 사진2 | <img src="https://avatars.githubusercontent.com/u/75918176?v=4" width="200"> | <img src="https://avatars.githubusercontent.com/u/68181872?v=4" width="200"> | 사진4 |
+
 | FE | FE | FE | FE |
-| [제옹의 깃허브](https://github.com/JEONG-J) | [GitHub](깃허브 링크) | [GitHub](깃허브 링크) | [밥의 깃허브](https://github.com/0tak2) |
+| [제옹의 깃허브](https://github.com/JEONG-J) | [GitHub](깃허브 링크) | [길의 깃허브](https://github.com/giljihun) | [밥의 깃허브](https://github.com/0tak2) |
 
 <br>
 
