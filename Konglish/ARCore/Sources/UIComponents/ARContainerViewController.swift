@@ -12,6 +12,9 @@ import os.log
 
 /// ARView를 포함하는 UIViewController
 public class ARContainerViewController: UIViewController {
+    // MARK: - Type Properties
+    static let maxLifeCounts = 5
+    
     // MARK: - Properties
     let arView = ARView()
     
@@ -34,6 +37,9 @@ public class ARContainerViewController: UIViewController {
     // MARK: 게임 진행과 관련된 속성
     let gameSettings: GameSettings
     
+    /// 게임카드에 대한 발음 정확도를 표현하는 딕셔너리
+    var gameCardToAccuracy: [GameCard: Float?]
+    
     /// 현재 게임 진행 단계
     public internal(set) var gamePhase: GamePhase = .initialized {
         didSet {
@@ -42,10 +48,39 @@ public class ARContainerViewController: UIViewController {
         }
     }
     
+    /// 잔여 라이프 카운트. 0이면 게임이 종료된다
+    var reaminLifeCounts = ARContainerViewController.maxLifeCounts {
+        didSet {
+            delegate?.didChangeLifeCount(self)
+            if reaminLifeCounts <= 0 {
+                gamePhase = .fisished // Game Over
+            }
+        }
+    }
+    
+    public var numberOfFinishedCards: Int {
+        gameCardToAccuracy.compactMapValues { $0 }.count
+    }
+    
+    /// 현재 스코어
+    public var currentScore: Int {
+        gameCardToAccuracy.compactMapValues{ $0 }
+            .reduce(0) { prev, keyAndValue in
+                let (card, accuracy) = keyAndValue
+                return prev + calcualteScore(gameCard: card, accuracy: accuracy)
+            }
+    }
+    
     // MARK: - Init
     init(gameSettings: GameSettings) {
         self.gameSettings = gameSettings
+        self.gameCardToAccuracy = [:]
+        
         super.init(nibName: nil, bundle: nil)
+        
+        gameSettings.gameCards.forEach { gameCard in
+            self.gameCardToAccuracy[gameCard] = nil // gameCardToAccuracy 초기화
+        }
     }
     
     required init?(coder: NSCoder) {
