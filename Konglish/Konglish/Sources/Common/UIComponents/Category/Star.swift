@@ -27,7 +27,7 @@ struct Star: View {
     // MARK: - Body
     var body: some View {
         HStack(spacing: StarConstants.spacing, content: {
-            ForEach(0..<maxCount, id: \.self) { index in
+            ForEach(.zero..<maxCount, id: \.self) { index in
                 if index < count {
                     Image(.star)
                 } else {

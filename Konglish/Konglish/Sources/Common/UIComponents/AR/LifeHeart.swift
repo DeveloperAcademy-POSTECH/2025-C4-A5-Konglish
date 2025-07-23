@@ -27,7 +27,7 @@ struct LifeHeart: View {
     // MARK: - Body
     var body: some View {
         HStack(spacing: GameStatusConstatns.spacing, content: {
-            ForEach(0..<maxCount, id: \.self) { index in
+            ForEach(.zero..<maxCount, id: \.self) { index in
                 if index < currentLife {
                     Image(.heart)
                 } else {

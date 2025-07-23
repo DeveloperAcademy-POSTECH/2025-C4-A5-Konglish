@@ -69,7 +69,7 @@ struct LevelCard: View {
     /// 중간 스코어 표시
     @ViewBuilder
     private var bestScore: some View {
-        if level.bestScore > 0 {
+        if level.bestScore > .zero {
             VStack(alignment: .center, spacing: LevelCardConstants.middleVspacing, content: {
                 Text(LevelCardConstants.bestScoreText)
                     .font(.semibold64)
