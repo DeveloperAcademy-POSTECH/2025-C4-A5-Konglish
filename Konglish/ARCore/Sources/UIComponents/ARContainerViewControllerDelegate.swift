@@ -16,4 +16,8 @@ public protocol ARContainerViewControllerDelegate: AnyObject {
     /// 매번 평면 앵커를 찾을 때마다 `arContainerDidFindPlaneAnchor(_:)`가 호출되며, 마지막 평면 앵커를 찾은 경우
     /// `arContainerDidFindPlaneAnchor(_:)` 호출 이후 이 메서드가 호출된다.
     func arContainerDidFindAllPlaneAnchor(_ arContainer: ARContainerViewController)
+    
+    /// 게임 페이즈가 변경되었을 때 호출되는 메서드
+    /// 게임의 페이즈는 `gamePhase` 프로퍼티로 참조할 수 있다
+    func didChangeGamePhase(_ arContainer: ARContainerViewController)
 }

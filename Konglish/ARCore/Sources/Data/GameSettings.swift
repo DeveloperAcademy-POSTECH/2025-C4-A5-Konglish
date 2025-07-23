@@ -9,16 +9,19 @@
 public struct GameSettings {
     // MARK: - Properties
     
+    /// 이번 게임에서 부착할 게임 카드 데이터
+    let gameCards: [GameCard]
+    
     /// 배치할 카드의 총 개수
-    let numberOfCards: Int
+    var numberOfCards: Int {
+        gameCards.count
+    }
     
     /// 인식할 평면의 최소 면적
     let minimumSizeOfPlane: Float
     
-    public init(numberOfCards: Int, minimumSizeOfPlane: Float) {
-        self.numberOfCards = numberOfCards
+    public init(gameCards: [GameCard], minimumSizeOfPlane: Float) {
+        self.gameCards = gameCards
         self.minimumSizeOfPlane = minimumSizeOfPlane
     }
-    
-    // TODO: 단어 세트 카테고리, 레벨 등을 표현할 수 있는 속성을 포함한다.
 }

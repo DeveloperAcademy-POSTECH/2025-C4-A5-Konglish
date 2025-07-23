@@ -10,6 +10,11 @@ import RealityKit
 
 /// 인식 평면 시각화 로직
 extension ARContainerViewController {
+    /// 평면 인식을 시작한다.
+    public func startDetectingPlane() {
+        gamePhase = .scanning
+    }
+    
     /// 인식된 평면을 시각화하는 엔티티를 제거한다
     func removeDetectedPlaneEntities() {
         detectedPlaneEntities.values.forEach { $0.removeFromParent() }
@@ -20,7 +25,7 @@ extension ARContainerViewController {
     /// - Parameter planeAnchor: 새로 인식한 평면의 앵커
     fileprivate func addPlaneVisualization(planeAnchor: ARPlaneAnchor, animate: Bool) {
         let addedEntity = self.planeVisualizer?.operate(context: .init(planeAnchor: planeAnchor, animate: animate))
-        detectedPlaneEntities[planeAnchor.identifier] = addedEntity
+        detectedPlaneEntities[planeAnchor] = addedEntity
     }
     
     /// 새로운 인식한 평면의 크기가 충분한지 검사한다. 최소 면적은 GameSettings의 minimumSizeOfPlane에 지정한다.
@@ -41,10 +46,9 @@ extension ARContainerViewController {
     }
     
     func handleAddedAnchors(for anchors: [ARAnchor]) {
-        guard !checkAllPlanesAttached() else {
+        guard gamePhase == .scanning, !checkAllPlanesAttached() else {
             return
         }
-        logger.debug("🔨 new anchors have been added: \(anchors.count)")
         
         let planeAnchors = anchors.compactMap { anchor in
             if let planeAnchor = anchor as? ARPlaneAnchor {
@@ -71,7 +75,9 @@ extension ARContainerViewController {
     }
     
     func handleUpdatedAnchors(for anchors: [ARAnchor]) {
-        logger.debug("🔨 some anchors have been updated: \(anchors.count)")
+        guard gamePhase == .scanning else {
+            return
+        }
         
         let planeAnchors = anchors.compactMap { anchor in
             if let planeAnchor = anchor as? ARPlaneAnchor {
@@ -81,7 +87,7 @@ extension ARContainerViewController {
         }
         
         for planeAnchor in planeAnchors {
-            if let planeEntity = detectedPlaneEntities[planeAnchor.identifier] {
+            if let planeEntity = detectedPlaneEntities[planeAnchor] {
                 // 이미 존재하는 엔티티인 경우 제거하고 다시 그린다
                 planeEntity.removeFromParent()
                 addPlaneVisualization(planeAnchor: planeAnchor, animate: false)

@@ -21,7 +21,6 @@ class PlaneVisualizer: ARFeatureProvider {
         self.arView = arView
     }
     
-    
     /// ARPlaneAnchor를 시각화하는 RealityKit 엔티티를 ARView 씬에 추가하고 반환한다.
     /// - Parameter context: 인식한 ARPlaneAnchor와 애니메이트 여부
     /// - Returns: 추가한 AnchorEntity. 실패했으면 nil을 반환.

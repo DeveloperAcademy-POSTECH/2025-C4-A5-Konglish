@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ARKit
 import RealityKit
 import os.log
 
@@ -25,12 +26,21 @@ public class ARContainerViewController: UIViewController {
     
     /// 기능을 제공하는 클래스들 (ARFeatureProvider)
     var planeVisualizer: PlaneVisualizer?
+    var cardPositioner: CardPositioner?
     
     /// 인식된 평면의 시각화 엔티티들
-    var detectedPlaneEntities: [UUID: AnchorEntity] = [:]
+    var detectedPlaneEntities: [ARPlaneAnchor: AnchorEntity] = [:]
     
-    // MARK: 초기화가 필요한 게임 속성
+    // MARK: 게임 진행과 관련된 속성
     let gameSettings: GameSettings
+    
+    /// 현재 게임 진행 단계
+    public internal(set) var gamePhase: GamePhase = .initialized {
+        didSet {
+            logger.info("GamePhase changed to \(String(describing: self.gamePhase))")
+            delegate?.didChangeGamePhase(self)
+        }
+    }
     
     // MARK: - Init
     init(gameSettings: GameSettings) {
