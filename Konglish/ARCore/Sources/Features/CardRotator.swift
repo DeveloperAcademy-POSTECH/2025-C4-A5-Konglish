@@ -46,41 +46,34 @@ class CardRotator: ARFeatureProvider {
     }
     
     private func rotateCard(_ cardEntity: CardEntity) {
-        // 목표 회전 상태 결정
-        let targetRotation: simd_quatf
-        let newFlippedState: Bool
+        
+        let currentRotation = cardEntity.transform.rotation
+        let additionalRotation = simd_quatf(angle: .pi, axis: [1, 0, 0]) // X축 180도
+        let targetRotation = currentRotation * additionalRotation
+        
+        let newFlippedState = !cardEntity.isFlipped
         
         if cardEntity.isFlipped {
-            // 앞면 → 뒷면 (실패 후 되돌리기)
-            targetRotation = simd_quatf(angle: 0, axis: [0, 1, 0])
-            newFlippedState = false
             logger.info("카드를 뒷면으로 되돌립니다.")
         } else {
-            // 뒷면 → 앞면 (처음 시도)
-            targetRotation = simd_quatf(angle: .pi, axis: [0, 1, 0])
-            newFlippedState = true
             logger.info("카드를 앞면으로 뒤집습니다.")
         }
         
-        // 회전 애니메이션 생성
-        let rotationAnimation = try! AnimationResource.generate(
-            with: FromToByAnimation<Transform>(
-                from: cardEntity.transform,
-                to: Transform(
-                    scale: cardEntity.transform.scale,
-                    rotation: targetRotation,
-                    translation: cardEntity.transform.translation
-                ),
-                duration: 0.5,
-                timing: .easeInOut
-            )
+        // 상태 업데이트
+        cardEntity.isFlipped = newFlippedState
+        
+        // 애니메이션으로 실제 회전 실행
+        var targetTransform = cardEntity.transform
+        targetTransform.rotation = targetRotation
+        
+        cardEntity.move(
+            to: targetTransform,
+            relativeTo: cardEntity.parent,
+            duration: 0.5,
+            timingFunction: .easeInOut
         )
         
-        // 애니메이션 실행
-        cardEntity.playAnimation(rotationAnimation)
-        
-        // 회전 상태 업데이트
-        cardEntity.isFlipped = newFlippedState
+        logger.info("🔄 회전 애니메이션 시작: \(newFlippedState ? "앞면" : "뒷면")")
     }
     
     struct Input {
