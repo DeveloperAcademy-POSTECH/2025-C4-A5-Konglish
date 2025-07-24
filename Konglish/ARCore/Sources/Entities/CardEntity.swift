@@ -72,6 +72,9 @@ class CardEntity: Entity, HasModel {
             materials: []
         )
         
+        // 컴포넌트 추가 (검색 목적)
+        self.components[CardComponent.self] = CardComponent()
+        
         // 텍스쳐 추가
         let image = imageFrom(
             text: displayLabelText,
