@@ -8,7 +8,7 @@
 import Foundation
 
 /// 카드에 들어가는 데이터를 표현하는 구조체
-public struct GameCard {
+public struct GameCard: Hashable {
     /// 카드의 아이디. CardModel의 ID와 동일하게 지정한다.
     public let id: UUID
     

@@ -17,15 +17,19 @@ import SwiftUI
  import ARCore
 
  public struct ContentView: View {
-     @State var arError: Error? // ARCore 발생 에러
-     @State var currentDetectedPlanes: Int = 0 // 현재 인식한 평면 수
-     @State var triggerScanStart = false // 평면 스캔 시작
-     @State var triggerPlaceCards = false // 카드 배치 시작
-     @State var gamePhase: GamePhase = .initialized // 현재 게임 단계
+     @State var arError: Error?
+     @State var currentDetectedPlanes: Int = 0
+     @State var currentLifeCounts: Int = 5
+     @State var currentGameScore: Int = 0
+     @State var numberOfFinishedCards: Int = 0
+     @State var triggerScanStart = false
+     @State var triggerPlaceCards = false
+     @State var triggerSubmitAccuracy: (UUID, Float)?
+     @State var gamePhase: GamePhase = .initialized
      
      let gameCards: [GameCard] = [
          .init(id: UUID(uuidString: "00000000-0000-0000-0000-000000000000")!, imageName: "apple", wordKor: "사과", wordEng: "apple"),
-         // More game cards
+         .init(id: UUID(uuidString: "11111111-1111-1111-1111-111111111111")!, imageName: "banana", wordKor: "바나나", wordEng: "banana"),
      ]
      
      
@@ -41,8 +45,12 @@ import SwiftUI
                  gamePhase: $gamePhase,
                  arError: $arError,
                  currentDetectedPlanes: $currentDetectedPlanes,
+                 currentLifeCounts: $currentLifeCounts,
+                 currentGameScore: $currentGameScore,
+                 numberOfFinishedCards: $numberOfFinishedCards,
                  triggerScanStart: $triggerScanStart,
-                 triggerPlaceCards: $triggerPlaceCards
+                 triggerPlaceCards: $triggerPlaceCards,
+                 triggerSubmitAccuracy: $triggerSubmitAccuracy
              )
              .ignoresSafeArea()
              
@@ -51,12 +59,36 @@ import SwiftUI
                  
                  Text("currentDetectedPlanes: \(currentDetectedPlanes)")
                  
+                 Text("currentLifeCounts: \(currentLifeCounts)")
+                 
+                 Text("currentGameScore: \(currentGameScore)")
+                 
+                 Text("numberOfPassedCards: \(numberOfFinishedCards)")
+                 
                  Button("스캔 시작") {
                      triggerScanStart = true
                  }
                  
                  Button("카드 배치") {
                      triggerPlaceCards = true
+                 }
+                 
+                 Button("단어 정답 제출 1") {
+                     if let id = gameCards.first?.id {
+                         triggerSubmitAccuracy = (
+                             id,
+                             0.6
+                         )
+                     }
+                 }
+                 
+                 Button("단어 정답 제출 2") {
+                     if gameCards.count >= 2 {
+                         triggerSubmitAccuracy = (
+                             gameCards[1].id,
+                             0.3
+                         )
+                     }
                  }
                  
                  if let arError = arError {
@@ -83,26 +115,47 @@ public struct ARContainer: UIViewControllerRepresentable {
     /// 현재 인식된 평면 수
     @Binding var currentDetectedPlanes: Int
     
+    /// 현재 라이프 카운트 수
+    @Binding var currentLifeCounts: Int
+    
+    /// 현재 게임 스코어
+    @Binding var currentGameScore: Int
+    
+    /// 해결한 카드 수
+    @Binding var numberOfFinishedCards: Int
+    
     /// 스캔 시작 트리거
     @Binding var triggerScanStart: Bool
     
     /// 카드 배치 트리거
     @Binding var triggerPlaceCards: Bool
     
+    /// 단어의 아이디와 정확도
+    /// 세팅하면 ARContainer에서 점수를 계산해 반영한다
+    @Binding var triggerSubmitAccuracy: (UUID, Float)?
+    
     public init(
         gameSettings: GameSettings,
         gamePhase: Binding<GamePhase>,
         arError: Binding<Error?>,
         currentDetectedPlanes: Binding<Int>,
+        currentLifeCounts: Binding<Int>,
+        currentGameScore: Binding<Int>,
+        numberOfFinishedCards: Binding<Int>,
         triggerScanStart: Binding<Bool>,
-        triggerPlaceCards: Binding<Bool>
+        triggerPlaceCards: Binding<Bool>,
+        triggerSubmitAccuracy: Binding<(UUID, Float)?>
     ) {
         self.gameSettings = gameSettings
         self._gamePhage = gamePhase
         self._arError = arError
         self._currentDetectedPlanes = currentDetectedPlanes
+        self._currentLifeCounts = currentLifeCounts
+        self._currentGameScore = currentGameScore
+        self._numberOfFinishedCards = numberOfFinishedCards
         self._triggerScanStart = triggerScanStart
         self._triggerPlaceCards = triggerPlaceCards
+        self._triggerSubmitAccuracy = triggerSubmitAccuracy
     }
     
     public func makeUIViewController(context: Context) -> ARContainerViewController {
@@ -127,13 +180,30 @@ public struct ARContainer: UIViewControllerRepresentable {
             } catch {
                 // 바로 Binding을 통해 Publish하면
                 // `Modifying state during view update, this will cause undefined behavior` 경고 발생
-                // 따라서 메인 큐에서 비동기로 작성 실행
+                // 따라서 메인 큐에서 비동기로 실행
                 raisedError = error
             }
             
             DispatchQueue.main.async {
                 triggerPlaceCards.toggle()
-                arError = raisedError //
+                arError = raisedError
+            }
+        }
+        
+        if let triggerSubmitAccuracy = triggerSubmitAccuracy {
+            let (wordId, accuracy) = triggerSubmitAccuracy
+            
+            var raisedError: Error?
+            do {
+                try uiViewController.submitAccuracy(wordId: wordId, accuracy: accuracy)
+            } catch {
+                // 메인 큐에서 비동기로 에러 바인딩 업데이트
+                raisedError = error
+            }
+            
+            DispatchQueue.main.async {
+                self.triggerSubmitAccuracy = nil
+                arError = raisedError
             }
         }
     }
@@ -160,6 +230,19 @@ public struct ARContainer: UIViewControllerRepresentable {
         public func didChangeGamePhase(_ arContainer: ARContainerViewController) {
             DispatchQueue.main.async {
                 self.parent.gamePhage = arContainer.gamePhase
+            }
+        }
+        
+        public func didChangeLifeCount(_ arContainer: ARContainerViewController) {
+            DispatchQueue.main.async {
+                self.parent.currentLifeCounts = arContainer.reaminLifeCounts
+            }
+        }
+        
+        public func didChangeScore(_ arContainer: ARContainerViewController) {
+            DispatchQueue.main.async {
+                self.parent.currentGameScore = arContainer.currentScore
+                self.parent.numberOfFinishedCards = arContainer.numberOfFinishedCards
             }
         }
     }
