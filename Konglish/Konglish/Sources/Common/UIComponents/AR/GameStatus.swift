@@ -36,7 +36,7 @@ struct GameStatus: View {
         })
         .padding(.vertical, GameStatusConstatns.verticalPadding)
         .padding(.horizontal, GameStatusConstatns.horizonPadding)
-        .background(Material.ultraThin.quaternary)
+        .background(Material.thin.quaternary)
         .clipShape(RoundedRectangle(cornerRadius: GameStatusConstatns.cornerRadius))
     }
     // MARK: - Bottom
@@ -53,7 +53,7 @@ struct GameStatus: View {
     private var scoreText: some View {
         Text(GameStatusConstatns.scoreText + " " + "\(currentScore)")
             .font(.bold36)
-            .foregroundStyle(Color.black)
+            .foregroundStyle(Color.black01)
     }
     
     /// 카드 현재 수집 정보
@@ -62,7 +62,7 @@ struct GameStatus: View {
             Image(.arCard)
             Text("\(currentCard) / \(maxCount)")
                 .font(.bold36)
-                .foregroundStyle(Color.black)
+                .foregroundStyle(Color.black01)
         })
     }
 }

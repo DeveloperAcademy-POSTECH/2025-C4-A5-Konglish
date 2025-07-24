@@ -30,7 +30,7 @@ struct ChekScanCamera: View {
         })
         .padding(.horizontal, CheckScanCameraConstants.horizonPadding)
         .padding(.vertical, CheckScanCameraConstants.verticalPadding)
-        .background(Material.ultraThin)
+        .background(Material.thin)
         .clipShape(RoundedRectangle(cornerRadius: CheckScanCameraConstants.cornerRadius))
     }
     
