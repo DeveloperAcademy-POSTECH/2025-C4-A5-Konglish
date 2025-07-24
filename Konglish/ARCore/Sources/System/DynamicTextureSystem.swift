@@ -16,7 +16,7 @@ class DynamicTextureSystem: System {
     private static let hoveringBackgroundColor: UIColor = .red
     
     // MARK: - Properties
-    private var materialsCache: [String: Material] = [:]
+    private var materialsCache = NSCache<NSString, MaterialValue>()
     private let logger = Logger.of("DynamicTextureSystem")
     
     required init(scene: Scene) { }
@@ -54,11 +54,11 @@ class DynamicTextureSystem: System {
     
     private func createFrontMaterial(for entity: HasModel, displayText: NSAttributedString, isHovering: Bool) async -> Material {
         // Load Cache
-        if let cached = materialsCache[
-            getMaterialCacheKey(entity: entity, isFlipped: true, isHovering: isHovering)
-        ] {
+        if let cached = materialsCache.object(
+            forKey: getMaterialCacheKey(entity: entity, isFlipped: true, isHovering: isHovering)
+        ) {
             logger.debug("used cached material for entity=\(entity.id) isFlipped=\(true) isHovering=\(isHovering)")
-            return cached
+            return cached.value
         }
         
         let backgroundColor = isHovering ? Self.hoveringBackgroundColor : Self.backgroundColor
@@ -87,21 +87,21 @@ class DynamicTextureSystem: System {
         logger.debug("created front material for \(entity.id) isHovering=\(isHovering)")
         
         // Set Cache
-        materialsCache[
-            getMaterialCacheKey(entity: entity, isFlipped: true, isHovering: isHovering)
-        ] = material
+        materialsCache.setObject(
+            MaterialValue(value: material),
+            forKey: getMaterialCacheKey(entity: entity, isFlipped: true, isHovering: isHovering)
+        )
         
         return material
     }
     
     private func createBackMaterial(for entity: Entity, displayText: NSAttributedString, isHovering: Bool) -> Material {
         // Load Cache
-        // Load Cache
-        if let cached = materialsCache[
-            getMaterialCacheKey(entity: entity, isFlipped: false, isHovering: isHovering)
-        ] {
+        if let cached = materialsCache.object(
+            forKey: getMaterialCacheKey(entity: entity, isFlipped: false, isHovering: isHovering)
+        ) {
             logger.debug("used cached material for entity=\(entity.id) isFlipped=\(false) isHovering=\(isHovering)")
-            return cached
+            return cached.value
         }
         
         let backgroundColor = isHovering ? Self.hoveringBackgroundColor : Self.backgroundColor
@@ -110,9 +110,10 @@ class DynamicTextureSystem: System {
         logger.debug("created back material for \(entity.id) isHovering=\(isHovering)")
         
         // Set Cache
-        materialsCache[
-            getMaterialCacheKey(entity: entity, isFlipped: true, isHovering: isHovering)
-        ] = material
+        materialsCache.setObject(
+            MaterialValue(value: material),
+            forKey: getMaterialCacheKey(entity: entity, isFlipped: false, isHovering: isHovering)
+        )
         
         return material
     }
@@ -156,7 +157,15 @@ class DynamicTextureSystem: System {
         return material
     }
     
-    private func getMaterialCacheKey(entity: Entity, isFlipped: Bool, isHovering: Bool) -> String {
-        "\(entity.id)_\(isFlipped ? "Flipped" : "Normal")_\(isHovering ? "Hovering" : "Normal")"
+    private func getMaterialCacheKey(entity: Entity, isFlipped: Bool, isHovering: Bool) -> NSString {
+        NSString(string: "\(entity.id)_\(isFlipped ? "Flipped" : "Normal")_\(isHovering ? "Hovering" : "Normal")")
+    }
+}
+
+fileprivate class MaterialValue: NSObject {
+    let value: Material
+    
+    init(value: Material) {
+        self.value = value
     }
 }
