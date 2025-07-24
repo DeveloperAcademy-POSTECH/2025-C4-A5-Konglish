@@ -9,6 +9,7 @@ import UIKit
 import ARKit
 import RealityKit
 import os.log
+import Combine
 
 /// ARView를 포함하는 UIViewController
 public class ARContainerViewController: UIViewController {
@@ -33,6 +34,10 @@ public class ARContainerViewController: UIViewController {
     
     /// 인식된 평면의 시각화 엔티티들
     var detectedPlaneEntities: [ARPlaneAnchor: AnchorEntity] = [:]
+    
+    var sceneSubscriptions: Set<AnyCancellable> = []
+    
+    var accumulatedTime: TimeInterval = 0
     
     // MARK: 게임 진행과 관련된 속성
     let gameSettings: GameSettings
