@@ -13,15 +13,16 @@ import os.log
 ///
 /// ## 주요 기능
 /// - 화면 중앙 좌표에서 raycast를 통한 카드 감지
-/// - 감지된 카드의 고유 ID (UUID) 반환
+/// - 감지된 CardEntity 객체 반환
+/// - .cardData.id 로 카드 UUID 반환 가능.
 ///
 /// ## 사용법
 /// ```swift
 /// let detector = CardDetector(arView: myARView)
-/// let cardId = detector.operate(context: CardDetector.Input())
+/// let cardEntity = detector.operate(context: CardDetector.Input())
 ///
-/// if let cardId = cardId {
-///     // 카드 감지됨 - 프로그레스 시작
+/// if let cardEntity = cardEntity {
+///     // 카드 감지됨 - 다른 기능에 CardEntity 전달 가능
 /// } else {
 ///     // 카드 없음 - 무반응
 /// }
@@ -37,11 +38,11 @@ class CardDetector: ARFeatureProvider {
         logger.info("CardDetector 초기화됨.")
     }
     
-    func operate(context: Input) -> UUID? {
+    func operate(context: Input) -> CardEntity? {
         return findCardAtCenter()
     }
     
-    private func findCardAtCenter() -> UUID? {
+    private func findCardAtCenter() -> CardEntity? {
         guard let arView = arView else { return nil }
         
         // Raycast 동작
@@ -61,7 +62,7 @@ class CardDetector: ARFeatureProvider {
                     
                     for child in anchorEntity.children {
                         if let cardEntity = child as? CardEntity {
-                            return cardEntity.cardData?.id
+                            return cardEntity
                         }
                     }
                 }
@@ -76,5 +77,5 @@ class CardDetector: ARFeatureProvider {
         //
     }
     
-    typealias Output = UUID?
+    typealias Output = CardEntity?
 }
