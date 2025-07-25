@@ -42,7 +42,12 @@ import SwiftUI
              ARContainer(
                  gameSettings: GameSettings(
                      gameCards: gameCards,
-                     minimumSizeOfPlane: 0.5
+                     minimumSizeOfPlane: 0.5,
+                     fontSetting: ARCoreFontSetting(
+                         title: .system(size: 24, weight: .bold),
+                         subtitle: .system(size: 12, weight: .semibold),
+                         body: .system(size: 12, weight: .regular),
+                     )
                  ),
                  gamePhase: $gamePhase,
                  arError: $arError,
@@ -100,7 +105,7 @@ import SwiftUI
                  }
                  
                  if let flippedCardId = flippedCardId {
-                       Text("뒤집힌 카드: \(flippedCardId)")
+                     Text("뒤집힌 카드: \(flippedCardId)")
                  }
                  
                  if let arError = arError {
@@ -112,6 +117,7 @@ import SwiftUI
          }
      }
  }
+
  ```
  */
 public struct ARContainer: UIViewControllerRepresentable {
