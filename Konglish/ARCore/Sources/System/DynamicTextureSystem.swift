@@ -65,7 +65,6 @@ class DynamicTextureSystem: System {
         
         let image = await imageFrom(
             text: displayText,
-            font: .systemFont(ofSize: 24),
             size: CGSize(
                 width: Double(CardEntity.cardWidth) * 1000.0,
                 height: Double(CardEntity.cardHeight) * 1000.0
@@ -122,7 +121,6 @@ class DynamicTextureSystem: System {
     // TODO: 하이파이 디자인에 맞게 카드 이미지, 폰트 등 세팅 필요함
     private func imageFrom(
         text: NSAttributedString,
-        font: UIFont,
         size: CGSize,
         textColor: UIColor = .black,
         backgroundColor: UIColor = backgroundColor
