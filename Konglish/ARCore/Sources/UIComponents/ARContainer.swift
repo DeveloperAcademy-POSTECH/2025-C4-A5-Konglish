@@ -35,14 +35,16 @@ import SwiftUI
              imageName: "apple",
              wordKor: "사과",
              wordEng: "apple",
-             image: UIImage(systemName: "apple.logo")!
+             image: UIImage(systemName: "apple.logo")!,
+             isBoss: true
          ),
          .init(
              id: UUID(uuidString: "11111111-1111-1111-1111-111111111111")!,
              imageName: "banana",
              wordKor: "바나나",
              wordEng: "banana",
-             image: UIImage(systemName: "questionmark.app.fill")!
+             image: UIImage(systemName: "questionmark.app.fill")!,
+             isBoss: false
          ),
      ]
      
