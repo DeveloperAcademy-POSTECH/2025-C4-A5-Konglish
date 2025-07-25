@@ -16,11 +16,11 @@ enum ARCoreFont {
 
 /// 폰트 설정을 위한 구조체
 public struct ARCoreFontSetting {
-    let title: Font
-    let subtitle: Font
-    let body: Font
+    let title: UIFont
+    let subtitle: UIFont
+    let body: UIFont
     
-    public init(title: Font, subtitle: Font, body: Font) {
+    public init(title: UIFont, subtitle: UIFont, body: UIFont) {
         self.title = title
         self.subtitle = subtitle
         self.body = body
@@ -31,14 +31,14 @@ public struct ARCoreFontSetting {
 class ARCoreFontSystem {
     static let shared = ARCoreFontSystem()
     
-    private(set) var title: Font?
-    private(set) var subtitle: Font?
-    private(set) var body: Font?
+    private(set) var title: UIFont?
+    private(set) var subtitle: UIFont?
+    private(set) var body: UIFont?
     
     private init() { }
     
     /// 폰트 시스템을 설정한다. 각 타이포그라피에 따라 Font 객체를 지정한다.
-    func configure(title: Font, subtitle: Font, body: Font) {
+    func configure(title: UIFont, subtitle: UIFont, body: UIFont) {
         self.title = title
         self.subtitle = subtitle
         self.body = body
@@ -50,25 +50,25 @@ class ARCoreFontSystem {
     }
     
     /// 특정 타이포그라피에 대한 폰트를 반환한다.
-    func font(for style: ARCoreFont) -> Font {
+    func font(for style: ARCoreFont) -> UIFont {
         switch style {
-        case .title: title ?? .title
-        case .subtitle: subtitle ?? .title2
-        case .body: body ?? .body
+        case .title: title ?? .systemFont(ofSize: 36, weight: .bold)
+        case .subtitle: subtitle ?? .systemFont(ofSize: 24, weight: .semibold)
+        case .body: body ?? .systemFont(ofSize: 16, weight: .bold)
         }
     }
 }
 
 extension Font {
-    static var arCoreTitle: Font {
+    static var arCoreTitle: UIFont {
         ARCoreFontSystem.shared.font(for: .title)
     }
     
-    static var arCoreSubtitle: Font {
+    static var arCoreSubtitle: UIFont {
         ARCoreFontSystem.shared.font(for: .subtitle)
     }
     
-    static var arCoreBody: Font {
+    static var arCoreBody: UIFont {
         ARCoreFontSystem.shared.font(for: .body)
     }
 }

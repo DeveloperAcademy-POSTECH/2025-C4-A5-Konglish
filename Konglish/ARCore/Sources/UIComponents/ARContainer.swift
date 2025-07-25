@@ -34,7 +34,6 @@ import SwiftUI
          .init(id: UUID(uuidString: "11111111-1111-1111-1111-111111111111")!, imageName: "banana", wordKor: "바나나", wordEng: "banana"),
      ]
      
-     
      public init() {}
      
      public var body: some View {
@@ -44,9 +43,9 @@ import SwiftUI
                      gameCards: gameCards,
                      minimumSizeOfPlane: 0.5,
                      fontSetting: ARCoreFontSetting(
-                         title: .system(size: 24, weight: .bold),
-                         subtitle: .system(size: 12, weight: .semibold),
-                         body: .system(size: 12, weight: .regular),
+                         title: KonglishFontFamily.NPSFont.bold.font(size: 36),
+                         subtitle: KonglishFontFamily.NPSFont.regular.font(size: 24),
+                         body: KonglishFontFamily.NPSFont.bold.font(size: 18),
                      )
                  ),
                  gamePhase: $gamePhase,
@@ -117,7 +116,6 @@ import SwiftUI
          }
      }
  }
-
  ```
  */
 public struct ARContainer: UIViewControllerRepresentable {

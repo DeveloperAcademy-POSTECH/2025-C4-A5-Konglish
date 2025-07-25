@@ -133,8 +133,7 @@ class DynamicTextureSystem: System {
             
             // 텍스트 크기 계산
             let textRect = CGRect(origin: .zero, size: size)
-            let attributedText = text
-            attributedText.draw(in: textRect)
+            text.draw(in: textRect)
         }
         
         return image
