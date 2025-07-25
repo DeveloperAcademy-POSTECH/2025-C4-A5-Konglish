@@ -26,6 +26,8 @@ import SwiftUI
      @State var triggerPlaceCards = false
      @State var triggerSubmitAccuracy: (UUID, Float)?
      @State var gamePhase: GamePhase = .initialized
+     @State var triggerFlipCard = false
+     @State var flippedCardId: UUID?
      
      let gameCards: [GameCard] = [
          .init(id: UUID(uuidString: "00000000-0000-0000-0000-000000000000")!, imageName: "apple", wordKor: "사과", wordEng: "apple"),
@@ -48,9 +50,11 @@ import SwiftUI
                  currentLifeCounts: $currentLifeCounts,
                  currentGameScore: $currentGameScore,
                  numberOfFinishedCards: $numberOfFinishedCards,
+                 flippedCardId: $flippedCardId,
                  triggerScanStart: $triggerScanStart,
                  triggerPlaceCards: $triggerPlaceCards,
-                 triggerSubmitAccuracy: $triggerSubmitAccuracy
+                 triggerSubmitAccuracy: $triggerSubmitAccuracy,
+                 triggerFlipCard: $triggerFlipCard
              )
              .ignoresSafeArea()
              
@@ -89,6 +93,14 @@ import SwiftUI
                              0.3
                          )
                      }
+                 }
+                 
+                 Button("카드 뒤집기") {
+                     triggerFlipCard = true
+                 }
+                 
+                 if let flippedCardId = flippedCardId {
+                       Text("뒤집힌 카드: \(flippedCardId)")
                  }
                  
                  if let arError = arError {
@@ -130,6 +142,12 @@ public struct ARContainer: UIViewControllerRepresentable {
     /// 카드 배치 트리거
     @Binding var triggerPlaceCards: Bool
     
+    /// 카드 뒤집기 트리거
+    @Binding var triggerFlipCard: Bool
+    
+    /// 뒤집힌 카드 UUID
+    @Binding var flippedCardId: UUID?
+    
     /// 단어의 아이디와 정확도
     /// 세팅하면 ARContainer에서 점수를 계산해 반영한다
     @Binding var triggerSubmitAccuracy: (UUID, Float)?
@@ -142,9 +160,11 @@ public struct ARContainer: UIViewControllerRepresentable {
         currentLifeCounts: Binding<Int>,
         currentGameScore: Binding<Int>,
         numberOfFinishedCards: Binding<Int>,
+        flippedCardId: Binding<UUID?>,
         triggerScanStart: Binding<Bool>,
         triggerPlaceCards: Binding<Bool>,
-        triggerSubmitAccuracy: Binding<(UUID, Float)?>
+        triggerSubmitAccuracy: Binding<(UUID, Float)?>,
+        triggerFlipCard: Binding<Bool>
     ) {
         self.gameSettings = gameSettings
         self._gamePhage = gamePhase
@@ -153,9 +173,11 @@ public struct ARContainer: UIViewControllerRepresentable {
         self._currentLifeCounts = currentLifeCounts
         self._currentGameScore = currentGameScore
         self._numberOfFinishedCards = numberOfFinishedCards
+        self._flippedCardId = flippedCardId
         self._triggerScanStart = triggerScanStart
         self._triggerPlaceCards = triggerPlaceCards
         self._triggerSubmitAccuracy = triggerSubmitAccuracy
+        self._triggerFlipCard = triggerFlipCard
     }
     
     public func makeUIViewController(context: Context) -> ARContainerViewController {
@@ -206,6 +228,16 @@ public struct ARContainer: UIViewControllerRepresentable {
                 arError = raisedError
             }
         }
+        
+        if triggerFlipCard {
+            let cardId = uiViewController.flipCardAtCenter()
+            
+            DispatchQueue.main.async {
+                triggerFlipCard.toggle()
+                flippedCardId = cardId
+            }
+        }
+        
     }
     
     public func makeCoordinator() -> Coordinator {
