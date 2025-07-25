@@ -35,9 +35,11 @@ public class ARContainerViewController: UIViewController {
     /// 인식된 평면의 시각화 엔티티들
     var detectedPlaneEntities: [ARPlaneAnchor: AnchorEntity] = [:]
     
+    /// 씬에 대한 이벤트 구독을 보관
     var sceneSubscriptions: Set<AnyCancellable> = []
     
-    var accumulatedTime: TimeInterval = 0
+    /// 호버링 여부 판단 주기를 조절하기 위해 필요한 델타 누적 프로퍼티
+    var observeHoveringAccumulatedTime: TimeInterval = 0
     
     // MARK: 게임 진행과 관련된 속성
     let gameSettings: GameSettings

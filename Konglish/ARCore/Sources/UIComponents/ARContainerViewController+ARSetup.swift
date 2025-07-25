@@ -69,14 +69,16 @@ extension ARContainerViewController {
     
     /// 씬이 업데이트될 때 실행되어 호버링 여부를 업데이트한다
     private func updateHoveringState(event: SceneEvents.Update) {
+        let observeCycle = 0.5
+        
         // 누적 시간 증가
-        self.accumulatedTime += event.deltaTime
+        self.observeHoveringAccumulatedTime += event.deltaTime
 
-        // 일정 주기(예: 0.5초)마다 raycast 수행
-        guard self.accumulatedTime > 0.5 else {
+        // 일정 주기(`observeCycle`)마다 수행
+        guard self.observeHoveringAccumulatedTime > observeCycle else {
             return
         }
-        self.accumulatedTime = 0  // 리셋
+        self.observeHoveringAccumulatedTime = 0  // 리셋
         
         let entityQuery = EntityQuery(where: .has(DynamicTextureComponent.self))
         self.arView.scene.performQuery(entityQuery)
