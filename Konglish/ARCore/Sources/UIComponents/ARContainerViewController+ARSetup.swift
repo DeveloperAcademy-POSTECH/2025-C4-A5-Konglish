@@ -33,7 +33,10 @@ extension ARContainerViewController {
     func prepareFeatureProviders() {
         self.planeVisualizer = PlaneVisualizer(arView: arView)
         self.cardPositioner = CardPositioner(arView: arView)
-        // TODO: 다른 ARFeatureProvider 추가
+        self.cardDetector = CardDetector(arView: arView)
+        self.cardRotator = CardRotator(arView: arView)
+        
+        logger.info("✅ ARFeatureProviders 초기화 완료")
     }
     
     /// 현재 ARSession을 리셋한다
