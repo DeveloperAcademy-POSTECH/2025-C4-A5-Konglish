@@ -39,11 +39,19 @@ public extension Font {
         return .konglish(.extraBold, size: 64)
     }
     
+    static var semibold32: Font {
+        return .konglish(.extraBold, size: 32)
+    }
+    
     static var semibold24: Font {
         return .konglish(.extraBold, size: 24)
     }
     
     // MARK: - Bold
+    static var bold80: Font {
+        return .konglish(.bold, size: 80)
+    }
+    
     static var bold40: Font {
         return .konglish(.bold, size: 40)
     }

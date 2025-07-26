@@ -12,15 +12,17 @@ import SwiftData
 @Model
 final class CardModel {
     @Attribute(.unique) var id: UUID
-    var imageName: String?
+    var imageName: String
+    var pronunciation: String
     var wordKor: String
     var wordEng: String
 
     @Relationship var category: CategoryModel
     
-    init(id: UUID = UUID(), imageName: String?, wordKor: String, wordEng: String, category: CategoryModel) {
+    init(id: UUID = UUID(), imageName: String, pronunciation: String, wordKor: String, wordEng: String, category: CategoryModel) {
         self.id = id
         self.imageName = imageName
+        self.pronunciation = pronunciation
         self.wordKor = wordKor
         self.wordEng = wordEng
         self.category = category
