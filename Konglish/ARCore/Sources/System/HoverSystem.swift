@@ -11,9 +11,11 @@ import os.log
 
 struct HoverSystem: System {
     // MARK: - Type Properties
+    /// 대상 엔티티 쿼리
     private static let query = EntityQuery(where: .has(HoverComponent.self))
-    private static let backgroundColor = UIColor(named: "primary01") ?? .blue
-    private static let hoveringBackgroundColor: UIColor = .red
+    
+    /// 뒷면  엔티티 이름
+    private static let planeEntityName = "PlaneBack"
     
     // MARK: - Properties
     private let logger = Logger.of("HoverSystem")
@@ -26,18 +28,7 @@ struct HoverSystem: System {
             updatingSystemWhen: .rendering
         ) {
             let isHovering = entity.components[HoverComponent.self]?.isHovering ?? false
-            
-            entity.children.forEach { child in
-                if child.name == "Cube" {
-                    if let modelEntity = child.children.first as? ModelEntity { // Cube_001
-                        if isHovering {
-                            modelEntity.components[ParticleEmitterComponent.self]?.isEmitting = true
-                        } else {
-                            modelEntity.components[ParticleEmitterComponent.self]?.isEmitting = false
-                        }
-                    }
-                }
-            }
+            entity.components[ParticleEmitterComponent.self]?.isEmitting = isHovering
         }
     }
 }

@@ -56,7 +56,7 @@ class CardRotator: ARFeatureProvider {
         }
         
         let currentRotation = cardEntity.transform.rotation
-        let additionalRotation = simd_quatf(angle: .pi, axis: [1, 0, 0]) // X축 180도
+        let additionalRotation = simd_quatf(angle: .pi, axis: [0, 1, 0]) // Y축 180도
         let targetRotation = currentRotation * additionalRotation
         
         // 상태 업데이트

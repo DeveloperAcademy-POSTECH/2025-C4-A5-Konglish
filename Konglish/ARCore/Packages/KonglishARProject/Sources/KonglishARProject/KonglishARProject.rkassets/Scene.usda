@@ -10,24 +10,41 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Card", "HoveredCard"]
     def "Card" (
         active = true
-        prepend apiSchemas = ["MaterialBindingAPI"]
         customData = {
-            float3 rotationEulerHint = (1.5707964, 0, 0)
+            float3 rotationEulerHint = (1.5707959, 3.1415927, 0)
         }
-        references = @Card.usdz@
+        references = @CardV2.1.usdz@
     )
     {
-        reorder nameChildren = ["Cube", "_materials", "Plane", "env_light", "Collider", "HoverdCube"]
-        rel material:binding = None (
-            bindMaterialAs = "weakerThanDescendants"
-        )
-        quatf xformOp:orient = (0.70710677, 0.70710677, 0, 0)
+        quatf xformOp:orient = (3.090862e-8, 3.090862e-8, -0.70710677, 0.70710677)
         float3 xformOp:scale = (0.5, 0.5, 0.5)
         float3 xformOp:translate = (0, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "VFXEmitter"
+        {
+            uniform token info:id = "RealityKit.VFXEmitter"
+
+            def RealityKitStruct "currentState"
+            {
+                token emitterShape = "Sphere"
+
+                def RealityKitStruct "mainEmitter"
+                {
+                    float4 endColorA = (0, 0.948754, 0.8281131, 1)
+                    float4 startColorA = (0.43340933, 0.88969874, 0.1427257, 1)
+                    bool useEndColor = 1
+                    bool useEndColorRange = 0
+                    bool useStartColorRange = 0
+                }
+
+                def RealityKitStruct "spawnedEmitter"
+                {
+                }
+            }
+        }
 
         def RealityKitComponent "Collider"
         {
@@ -38,87 +55,14 @@ def Xform "Root"
 
             def RealityKitStruct "Shape"
             {
-                float3 extent = (0.68, 0.44, 0.04212779)
+                float3 extent = (0.68, 0.43999997, 0.042381972)
                 token shapeType = "Box"
 
                 def RealityKitStruct "pose"
                 {
-                    float3 position = (0, 0, 0.0010638963)
+                    float3 position = (0, 0, 0.00093680527)
                 }
             }
-        }
-
-        over "_materials"
-        {
-            reorder nameChildren = ["Material_001", "Material_002", "Hovered"]
-            over "Material_002"
-            {
-                token outputs:mtlx:surface
-                token outputs:realitykit:vertex
-
-                over "Principled_BSDF"
-                {
-                    color3f inputs:diffuseColor = (0.85498697, 0.85499364, 0.5711252)
-                }
-            }
-
-            over "Material_001"
-            {
-                token outputs:mtlx:surface
-                token outputs:realitykit:vertex
-
-                over "Principled_BSDF"
-                {
-                    color3f inputs:diffuseColor = (0.85498697, 0.85499364, 0.5711252)
-                }
-            }
-        }
-
-        over "Cube"
-        {
-            reorder nameChildren = ["Cube_001", "ParticleEmitter"]
-            over "Cube_001"
-            {
-                float3 xformOp:translate = (0, 0, 0)
-                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-                def RealityKitComponent "VFXEmitter"
-                {
-                    uniform token info:id = "RealityKit.VFXEmitter"
-
-                    def RealityKitStruct "currentState"
-                    {
-                        token birthLocation = "Surface"
-                        int64 burstCount = 100
-                        token emitterShape = "Sphere"
-                        bool isEmitting = 1
-                        bool isLocal = 0
-                        bool isLocalFields = 0
-                        float3 shapeSize = (0.1, 0.1, 0.1)
-
-                        def RealityKitStruct "mainEmitter"
-                        {
-                            float4 endColorA = (0.0013006331, 0.032195132, 1, 1)
-                            double particleLifeSpan = 1
-                            float particleSize = 0.02
-                            float4 startColorA = (0.117473066, 0.90055364, 0.09806286, 1)
-                            bool useEndColor = 1
-                            bool useEndColorRange = 0
-                            bool useStartColorRange = 0
-                        }
-
-                        def RealityKitStruct "spawnedEmitter"
-                        {
-                        }
-                    }
-                }
-            }
-        }
-
-        over "env_light" (
-            active = false
-        )
-        {
         }
     }
 }

@@ -15,6 +15,9 @@ struct DynamicCardContentSystem: System {
     /// 대상 엔티티 쿼리
     private static let query = EntityQuery(where: .has(CardComponent.self))
     
+    /// 앞면 엔티티 이름
+    private static let planeEntityName = "PlaneFront"
+    
     /// 카드 너비
     static let cardWidth: Double = 680
     
@@ -41,7 +44,7 @@ struct DynamicCardContentSystem: System {
             updatingSystemWhen: .rendering
         ) {
             entity.children.forEach { child in
-                if child.name == "Plane" {
+                if child.name == Self.planeEntityName {
                     if let modelEntity = child.children.first as? ModelEntity,
                        let cardData = entity.components[CardComponent.self]?.cardData { // Nested `Plane`
                         
