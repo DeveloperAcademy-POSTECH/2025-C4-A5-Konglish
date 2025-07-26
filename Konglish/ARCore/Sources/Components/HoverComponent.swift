@@ -40,11 +40,8 @@ struct HoverComponent: Component {
         return combined
     }
     
-    let originalBaseColor: PhysicallyBasedMaterial.BaseColor
-    
-    init(cardData: GameCard?, originalBaseColor: PhysicallyBasedMaterial.BaseColor, isHovering: Bool = false) {
+    init(cardData: GameCard?, isHovering: Bool = false) {
         self.cardData = cardData
-        self.originalBaseColor = originalBaseColor
         self.isHovering = isHovering
     }
 }

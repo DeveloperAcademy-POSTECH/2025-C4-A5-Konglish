@@ -51,18 +51,8 @@ class CardPositioner: ARFeatureProvider {
                 // 커스텀 컴포넌트 추가
                 entity.components[CardComponent.self] = CardComponent(cardData: data)
                 
-                // 원래 머테리얼 찾기
-                if let cubeEntity = entity.children.first { // Cube
-                    if let cubeModelEntity = cubeEntity.children.first as? ModelEntity {
-                        logger.debug("original material found: \(cubeModelEntity.model?.materials.first?.name ?? "N/A")")
-                        if let originalMaterial = cubeModelEntity.model?.materials.first as? PhysicallyBasedMaterial {
-                            // 동적 텍스쳐 지정을 위한 컴포넌트
-                            entity.components[HoverComponent.self] = HoverComponent(cardData: data, originalBaseColor: originalMaterial.baseColor)
-                        } else {
-                            logger.error("original material not found. faliled to set DynamicTextureComponent")
-                        }
-                    }
-                }
+                // 호버 컴포넌트 추가
+                entity.components[HoverComponent.self] = HoverComponent(cardData: data)
             }
         }
         

@@ -24,19 +24,16 @@ struct HoverSystem: System {
         for entity in context.entities(
             matching: Self.query,
             updatingSystemWhen: .rendering
-        ) {            
+        ) {
             let isHovering = entity.components[HoverComponent.self]?.isHovering ?? false
             
             entity.children.forEach { child in
                 if child.name == "Cube" {
                     if let modelEntity = child.children.first as? ModelEntity { // Cube_001
-                        if var pbMaterial = modelEntity.model?.materials.first as? PhysicallyBasedMaterial {
-                            if isHovering {
-                                pbMaterial.baseColor = .init(tint: .red)
-                            } else {
-                                pbMaterial.baseColor = entity.components[HoverComponent.self]?.originalBaseColor ?? .init(tint: .blue)
-                            }
-                            modelEntity.model?.materials[0] = pbMaterial
+                        if isHovering {
+                            modelEntity.components[ParticleEmitterComponent.self]?.isEmitting = true
+                        } else {
+                            modelEntity.components[ParticleEmitterComponent.self]?.isEmitting = false
                         }
                     }
                 }
