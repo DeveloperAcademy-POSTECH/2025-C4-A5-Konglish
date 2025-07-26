@@ -14,7 +14,9 @@ extension ARContainerViewController {
     
     /// 처음 ARView를 초기화한다
     func setupARView() {
+        // 시스템 등록
         HoverSystem.registerSystem()
+        DynamicCardContentSystem.registerSystem()
         
         arView.session.delegate = self
         
