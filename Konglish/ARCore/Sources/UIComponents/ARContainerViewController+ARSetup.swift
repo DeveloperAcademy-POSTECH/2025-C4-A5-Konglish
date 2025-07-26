@@ -85,13 +85,7 @@ extension ARContainerViewController {
         
         let entityQuery = EntityQuery(where: .has(DynamicTextureComponent.self))
         self.arView.scene.performQuery(entityQuery)
-            .compactMap { havingCardComponent in
-                if let cardEntity = havingCardComponent as? CardEntity {
-                    return cardEntity
-                }
-                return nil
-            }
-            .forEach { (cardEntity: CardEntity) in
+            .forEach { cardEntity in
                 cardEntity.components[DynamicTextureComponent.self]?.isHovering = false
             }
         
@@ -99,9 +93,7 @@ extension ARContainerViewController {
         let hits = self.arView.hitTest(center)
 
         for result in hits {
-            if let cardEntity = result.entity as? CardEntity {
-                cardEntity.components[DynamicTextureComponent.self]?.isHovering = true
-            }
+            result.entity.components[DynamicTextureComponent.self]?.isHovering = true
         }
     }
 }

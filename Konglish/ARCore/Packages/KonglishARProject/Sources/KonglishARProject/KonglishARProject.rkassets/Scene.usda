@@ -10,17 +10,105 @@
 
 def Xform "Root"
 {
+    reorder nameChildren = ["Card", "HoveredCard"]
     def "Card" (
         active = true
+        prepend apiSchemas = ["MaterialBindingAPI"]
         customData = {
             float3 rotationEulerHint = (1.5707964, 0, 0)
         }
-        prepend references = @Card.usdz@
+        references = @Card.usdz@
     )
     {
+        reorder nameChildren = ["Cube", "_materials", "Plane", "env_light", "Collider", "HoverdCube"]
+        rel material:binding = None (
+            bindMaterialAs = "weakerThanDescendants"
+        )
         quatf xformOp:orient = (0.70710677, 0.70710677, 0, 0)
         float3 xformOp:scale = (0.5, 0.5, 0.5)
+        float3 xformOp:translate = (0, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "Collider"
+        {
+            uint group = 1
+            uniform token info:id = "RealityKit.Collider"
+            uint mask = 4294967295
+            token type = "Default"
+
+            def RealityKitStruct "Shape"
+            {
+                float3 extent = (0.68, 0.44, 0.04212779)
+                token shapeType = "Box"
+
+                def RealityKitStruct "pose"
+                {
+                    float3 position = (0, 0, 0.0010638963)
+                }
+            }
+        }
+
+        over "_materials"
+        {
+            reorder nameChildren = ["Material_001", "Material_002", "Hovered"]
+            over "Material_002"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "Principled_BSDF"
+                {
+                    color3f inputs:diffuseColor = (0.85498697, 0.85499364, 0.5711252)
+                }
+            }
+
+            over "Material_001"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+
+                over "Principled_BSDF"
+                {
+                    color3f inputs:diffuseColor = (0.85498697, 0.85499364, 0.5711252)
+                }
+            }
+
+            def Material "Hovered" (
+                references = </Root/Card/_materials/Material_002>
+            )
+            {
+                token outputs:surface.connect = </Root/Card/_materials/Hovered/Principled_BSDF.outputs:surface>
+                float2 ui:nodegraph:node:pos = (20, 20)
+                int ui:nodegraph:node:stackingOrder = 1
+                custom string userProperties:blender:data_name = "Material.002"
+
+                def Shader "Principled_BSDF"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float inputs:clearcoat = 0
+                    float inputs:clearcoatRoughness = 0.03
+                    color3f inputs:diffuseColor = (0.93333626, 0.21484026, 0.23803164) (
+                        colorSpace = "srgb_displayp3"
+                    )
+                    float inputs:ior = 1.5
+                    float inputs:metallic = 0
+                    float inputs:opacity = 1
+                    float inputs:roughness = 0.5
+                    float inputs:specular = 0.5
+                    token outputs:surface
+                }
+            }
+        }
+
+        over "Cube"
+        {
+        }
+
+        over "env_light" (
+            active = false
+        )
+        {
+        }
     }
 }
 

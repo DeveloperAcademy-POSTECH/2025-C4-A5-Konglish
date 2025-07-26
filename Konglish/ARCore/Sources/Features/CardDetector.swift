@@ -38,19 +38,19 @@ class CardDetector: ARFeatureProvider {
         logger.info("CardDetector 초기화됨.")
     }
     
-    func operate(context: Input) -> CardEntity? {
+    func operate(context: Input) -> Entity? {
         return findCardAtCenter()
     }
     
-    private func findCardAtCenter() -> CardEntity? {
+    private func findCardAtCenter() -> Entity? {
         guard let arView = arView else { return nil }
         
         // hitTest
         let centerPoint = CGPoint(x: arView.bounds.midX, y: arView.bounds.midY)
     
         for hit in arView.hitTest(centerPoint) {
-            if let cardEntity = hit.entity as? CardEntity {
-                return cardEntity
+            if hit.entity.components.has(CardComponent.self) {
+                return hit.entity
             }
         }
         
@@ -62,5 +62,5 @@ class CardDetector: ARFeatureProvider {
         //
     }
     
-    typealias Output = CardEntity?
+    typealias Output = Entity?
 }

@@ -8,7 +8,7 @@
 import RealityKit
 import UIKit
 
-class DynamicTextureComponent: Component {
+struct DynamicTextureComponent: Component {
     // MARK: Properties
     /// 카드 데이터
     let cardData: GameCard?
@@ -40,9 +40,11 @@ class DynamicTextureComponent: Component {
         return combined
     }
     
+    let originalBaseColor: PhysicallyBasedMaterial.BaseColor
     
-    init(cardData: GameCard?, isHovering: Bool = false) {
+    init(cardData: GameCard?, originalBaseColor: PhysicallyBasedMaterial.BaseColor, isHovering: Bool = false) {
         self.cardData = cardData
+        self.originalBaseColor = originalBaseColor
         self.isHovering = isHovering
     }
 }
