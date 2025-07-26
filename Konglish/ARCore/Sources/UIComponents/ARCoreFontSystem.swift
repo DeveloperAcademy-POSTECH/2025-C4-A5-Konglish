@@ -5,7 +5,7 @@
 //  Created by 임영택 on 7/25/25.
 //
 
-import SwiftUI
+import UIKit
 
 /// ARCore 모듈에서 사용할 폰트 목록
 enum ARCoreFont {
@@ -53,7 +53,7 @@ class ARCoreFontSystem {
     }
 }
 
-extension Font {
+extension UIFont {
     static var arCoreTitle: UIFont {
         ARCoreFontSystem.shared.font(for: .title)
     }
