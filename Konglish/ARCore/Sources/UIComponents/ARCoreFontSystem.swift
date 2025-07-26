@@ -11,19 +11,16 @@ import SwiftUI
 enum ARCoreFont {
     case title
     case subtitle
-    case body
 }
 
 /// 폰트 설정을 위한 구조체
 public struct ARCoreFontSetting {
     let title: UIFont
     let subtitle: UIFont
-    let body: UIFont
     
-    public init(title: UIFont, subtitle: UIFont, body: UIFont) {
+    public init(title: UIFont, subtitle: UIFont) {
         self.title = title
         self.subtitle = subtitle
-        self.body = body
     }
 }
 
@@ -33,28 +30,25 @@ class ARCoreFontSystem {
     
     private(set) var title: UIFont?
     private(set) var subtitle: UIFont?
-    private(set) var body: UIFont?
     
     private init() { }
     
     /// 폰트 시스템을 설정한다. 각 타이포그라피에 따라 Font 객체를 지정한다.
-    func configure(title: UIFont, subtitle: UIFont, body: UIFont) {
+    func configure(title: UIFont, subtitle: UIFont) {
         self.title = title
         self.subtitle = subtitle
-        self.body = body
     }
     
     /// 폰트 시스템을 설정한다. ARCoreFontSetting 구조체를 넘긴다.
     func configure(with setting: ARCoreFontSetting) {
-        configure(title: setting.title, subtitle: setting.subtitle, body: setting.body)
+        configure(title: setting.title, subtitle: setting.subtitle)
     }
     
     /// 특정 타이포그라피에 대한 폰트를 반환한다.
     func font(for style: ARCoreFont) -> UIFont {
         switch style {
-        case .title: title ?? .systemFont(ofSize: 36, weight: .bold)
-        case .subtitle: subtitle ?? .systemFont(ofSize: 24, weight: .semibold)
-        case .body: body ?? .systemFont(ofSize: 16, weight: .bold)
+        case .title: title ?? .systemFont(ofSize: 64, weight: .black)
+        case .subtitle: subtitle ?? .systemFont(ofSize: 32, weight: .bold)
         }
     }
 }
@@ -66,9 +60,5 @@ extension Font {
     
     static var arCoreSubtitle: UIFont {
         ARCoreFontSystem.shared.font(for: .subtitle)
-    }
-    
-    static var arCoreBody: UIFont {
-        ARCoreFontSystem.shared.font(for: .body)
     }
 }

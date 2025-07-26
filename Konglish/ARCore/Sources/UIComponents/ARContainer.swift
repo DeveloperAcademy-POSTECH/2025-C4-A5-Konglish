@@ -43,9 +43,8 @@ import SwiftUI
                      gameCards: gameCards,
                      minimumSizeOfPlane: 0.5,
                      fontSetting: ARCoreFontSetting(
-                         title: KonglishFontFamily.NPSFont.bold.font(size: 36),
-                         subtitle: KonglishFontFamily.NPSFont.regular.font(size: 24),
-                         body: KonglishFontFamily.NPSFont.bold.font(size: 18),
+                         title: KonglishFontFamily.NPSFont.extraBold.font(size: 64),
+                         subtitle: KonglishFontFamily.NPSFont.bold.font(size: 32)
                      )
                  ),
                  gamePhase: $gamePhase,
