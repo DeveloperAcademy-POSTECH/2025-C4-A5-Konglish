@@ -8,7 +8,7 @@
 import RealityKit
 import UIKit
 
-struct DynamicTextureComponent: Component {
+struct HoverComponent: Component {
     // MARK: Properties
     /// 카드 데이터
     let cardData: GameCard?

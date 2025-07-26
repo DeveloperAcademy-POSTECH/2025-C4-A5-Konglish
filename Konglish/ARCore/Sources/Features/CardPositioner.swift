@@ -57,7 +57,7 @@ class CardPositioner: ARFeatureProvider {
                         logger.debug("original material found: \(cubeModelEntity.model?.materials.first?.name ?? "N/A")")
                         if let originalMaterial = cubeModelEntity.model?.materials.first as? PhysicallyBasedMaterial {
                             // 동적 텍스쳐 지정을 위한 컴포넌트
-                            entity.components[DynamicTextureComponent.self] = DynamicTextureComponent(cardData: data, originalBaseColor: originalMaterial.baseColor)
+                            entity.components[HoverComponent.self] = HoverComponent(cardData: data, originalBaseColor: originalMaterial.baseColor)
                         } else {
                             logger.error("original material not found. faliled to set DynamicTextureComponent")
                         }
