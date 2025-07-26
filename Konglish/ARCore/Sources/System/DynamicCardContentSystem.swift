@@ -16,13 +16,13 @@ struct DynamicCardContentSystem: System {
     private static let query = EntityQuery(where: .has(CardComponent.self))
     
     /// 카드 너비
-    static let cardWidth: Double = 0.3
+    static let cardWidth: Double = 680
     
     /// 카드 높이
-    static let cardHeight: Double = 0.18
+    static let cardHeight: Double = 440
     
     /// 너비와 높이 가지고 이미지 해상도를 계산할 떄 사용하는 인자
-    static let scaleFactor: Double = 1000.0
+    static let scaleFactor: Double = 4
     
     static let cardBackgroundColor: UIColor = UIColor(red: 0.855, green: 0.855, blue: 0.571, alpha: 1.0)
     
@@ -42,12 +42,12 @@ struct DynamicCardContentSystem: System {
         ) {
             entity.children.forEach { child in
                 if child.name == "Plane" {
-                    if let modelEntity = child.children.first as? ModelEntity { // Nested `Plane`
-                        let contentText = entity.components[CardComponent.self]?.attributedText ?? NSAttributedString()
+                    if let modelEntity = child.children.first as? ModelEntity,
+                       let cardData = entity.components[CardComponent.self]?.cardData { // Nested `Plane`
                         
                         Task { @MainActor in
                             modelEntity.model?.materials = [
-                                await createContentMaterial(for: modelEntity, displayText: contentText)
+                                await createContentMaterial(for: modelEntity, cardData: cardData)
                             ]
                         }
                     }
@@ -57,7 +57,7 @@ struct DynamicCardContentSystem: System {
     }
     
     @MainActor
-    private func createContentMaterial(for entity: HasModel, displayText: NSAttributedString) async -> Material {
+    private func createContentMaterial(for entity: HasModel, cardData: GameCard) async -> Material {
         // Load Cache
         if let cached = materialsCache.object(
             forKey: getMaterialCacheKey(entity: entity)
@@ -67,12 +67,10 @@ struct DynamicCardContentSystem: System {
         }
         
         let image = imageFrom(
-            text: displayText,
-            font: .systemFont(ofSize: 24),
-            size: CGSize(
-                width: Self.cardWidth * Self.scaleFactor,
-                height: Self.cardHeight * Self.scaleFactor
-            )
+            engTitle: cardData.wordEng,
+            korTitle: cardData.wordKor,
+            image: cardData.image,
+            size: .init(width: scale(Self.cardWidth), height: scale(Self.cardHeight))
         )
         
         var material: Material
@@ -101,21 +99,59 @@ struct DynamicCardContentSystem: System {
     /// 특정 텍스트가 포함된 이미지를 생성한다
     // TODO: 하이파이 디자인에 맞게 카드 이미지, 폰트 등 세팅 필요함
     private func imageFrom(
-        text: NSAttributedString,
-        font: UIFont,
+        engTitle: String,
+        korTitle: String,
+        image: UIImage,
         size: CGSize,
         textColor: UIColor = .black
     ) -> UIImage {
         let renderer = UIGraphicsImageRenderer(size: size)
         let image = renderer.image { context in
             // 배경 그리기
-            Self.cardBackgroundColor.setFill() // TODO: 의미있나?
+            Self.cardBackgroundColor.setFill()
             context.fill(CGRect(origin: .zero, size: size))
             
-            // 텍스트 크기 계산
-            let textRect = CGRect(origin: .zero, size: size)
-            let attributedText = text
-            attributedText.draw(in: textRect)
+            // 이미지
+            let imageRect = CGRect(
+                origin: .init(x: scale(40), y: scale(80)),
+                size: .init(width: scale(280), height: scale(280))
+            )
+            image.draw(in: imageRect)
+            
+            // 단락 스타일
+            let paragraphStyle: NSMutableParagraphStyle = {
+                let style = NSMutableParagraphStyle()
+                style.alignment = .center
+                return style
+            }()
+            
+            // 영문 텍스트
+            let engTextRect = CGRect(
+                origin: .init(x: scale(336), y: scale(116)),
+                size: .init(width: scale(304), height: scale(80))
+            )
+            let engAttributedText = NSAttributedString(string: engTitle, attributes: [
+                .font: UIFont.arCoreTitle.withSize(scale(UIFont.arCoreTitle.pointSize)),
+                .paragraphStyle: paragraphStyle,
+                .foregroundColor: UIColor.black,
+                .strokeColor: UIColor.white,
+                .strokeWidth: -10,
+            ])
+            engAttributedText.draw(in: engTextRect)
+            
+            // 국문 텍스트
+            let korTextRect = CGRect(
+                origin: .init(x: scale(336), y: scale(280)),
+                size: .init(width: scale(304), height: scale(47))
+            )
+            let korAttributedText = NSAttributedString(string: korTitle, attributes: [
+                .font: UIFont.arCoreSubtitle.withSize(scale(UIFont.arCoreSubtitle.pointSize)),
+                .paragraphStyle: paragraphStyle,
+                .foregroundColor: UIColor.black,
+                .strokeColor: UIColor.white,
+                .strokeWidth: -6,
+            ])
+            korAttributedText.draw(in: korTextRect)
         }
         
         return image
@@ -136,7 +172,7 @@ struct DynamicCardContentSystem: System {
         // CAUTION: Deprecated되어 `'init(image:withName:options:)'`를 사용하라는 경고가 발생하지만 사용하면 BAD_ACCESS 예외가 발생
         
         var material = baseMaterial ?? PhysicallyBasedMaterial()
-        material.baseColor = .init(texture: MaterialParameters.Texture(texture))
+        material.baseColor = .init(texture: MaterialParameters.Texture(texture)) // 원래 카드 엔티티 텍스쳐를 추출해 baseColor만 변경
         return material
     }
     
@@ -150,6 +186,10 @@ struct DynamicCardContentSystem: System {
         }
         
         return baseMaterialComponent.materials.first
+    }
+    
+    private func scale(_ scalar: Double) -> Double {
+        scalar * Self.scaleFactor
     }
 }
 
