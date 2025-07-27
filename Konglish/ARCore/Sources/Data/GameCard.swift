@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 /// 카드에 들어가는 데이터를 표현하는 구조체
 public struct GameCard: Hashable {
@@ -21,10 +22,14 @@ public struct GameCard: Hashable {
     /// 영어 철자
     public let wordEng: String
     
-    public init(id: UUID, imageName: String?, wordKor: String, wordEng: String) {
+    /// 이미지
+    public let image: UIImage
+    
+    public init(id: UUID, imageName: String?, wordKor: String, wordEng: String, image: UIImage) {
         self.id = id
         self.imageName = imageName
         self.wordKor = wordKor
         self.wordEng = wordEng
+        self.image = image
     }
 }

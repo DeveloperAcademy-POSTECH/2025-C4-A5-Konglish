@@ -36,7 +36,12 @@ class CardRotator: ARFeatureProvider {
         let cardEntity = context.cardEntity
         
         // 완료된 카드는 회전하지 않음
-        guard !cardEntity.isCompleted else {
+        guard let cardComponent = cardEntity.components[CardComponent.self] else {
+            logger.error("카드 컴포넌트가 아닙니다.")
+            return
+        }
+        
+        guard !cardComponent.isCompleted else {
             logger.info("이미 완료된 카드라서 회전하지 않습니다.")
             return
         }
@@ -45,22 +50,17 @@ class CardRotator: ARFeatureProvider {
         rotateCard(cardEntity)
     }
     
-    private func rotateCard(_ cardEntity: CardEntity) {
-        
-        let currentRotation = cardEntity.transform.rotation
-        let additionalRotation = simd_quatf(angle: .pi, axis: [1, 0, 0]) // X축 180도
-        let targetRotation = currentRotation * additionalRotation
-        
-        let newFlippedState = !cardEntity.isFlipped
-        
-        if cardEntity.isFlipped {
-            logger.info("카드를 뒷면으로 되돌립니다.")
-        } else {
-            logger.info("카드를 앞면으로 뒤집습니다.")
+    private func rotateCard(_ cardEntity: Entity) {
+        guard let cardComponent = cardEntity.components[CardComponent.self] else {
+            return
         }
         
+        let currentRotation = cardEntity.transform.rotation
+        let additionalRotation = simd_quatf(angle: .pi, axis: [0, 1, 0]) // Y축 180도
+        let targetRotation = currentRotation * additionalRotation
+        
         // 상태 업데이트
-        cardEntity.isFlipped = newFlippedState
+        cardEntity.components[CardComponent.self]?.isFlipped.toggle()
         
         // 애니메이션으로 실제 회전 실행
         var targetTransform = cardEntity.transform
@@ -73,11 +73,11 @@ class CardRotator: ARFeatureProvider {
             timingFunction: .easeInOut
         )
         
-        logger.info("🔄 회전 애니메이션 시작: \(newFlippedState ? "앞면" : "뒷면")")
+        logger.info("카드를 뒤집었습니다.")
     }
     
     struct Input {
-        let cardEntity: CardEntity
+        let cardEntity: Entity
     }
     
     typealias Output = Void

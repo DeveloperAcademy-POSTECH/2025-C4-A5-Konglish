@@ -8,7 +8,7 @@
 import RealityKit
 import UIKit
 
-class DynamicTextureComponent: Component {
+struct HoverComponent: Component {
     // MARK: Properties
     /// 카드 데이터
     let cardData: GameCard?
@@ -39,7 +39,6 @@ class DynamicTextureComponent: Component {
         
         return combined
     }
-    
     
     init(cardData: GameCard?, isHovering: Bool = false) {
         self.cardData = cardData

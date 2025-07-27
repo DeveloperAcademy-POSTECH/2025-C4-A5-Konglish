@@ -14,7 +14,9 @@ extension ARContainerViewController {
     
     /// 처음 ARView를 초기화한다
     func setupARView() {
-        DynamicTextureSystem.registerSystem()
+        // 시스템 등록
+        HoverSystem.registerSystem()
+        DynamicCardContentSystem.registerSystem()
         
         arView.session.delegate = self
         
@@ -67,42 +69,6 @@ extension ARContainerViewController {
     public func pauseSession() {
         removeDetectedPlaneEntities()
         arView.session.pause()
-    }
-    
-    
-    /// 씬이 업데이트될 때 실행되어 호버링 여부를 업데이트한다
-    private func updateHoveringState(event: SceneEvents.Update) {
-        let observeCycle = 0.5
-        
-        // 누적 시간 증가
-        self.observeHoveringAccumulatedTime += event.deltaTime
-
-        // 일정 주기(`observeCycle`)마다 수행
-        guard self.observeHoveringAccumulatedTime > observeCycle else {
-            return
-        }
-        self.observeHoveringAccumulatedTime = 0  // 리셋
-        
-        let entityQuery = EntityQuery(where: .has(DynamicTextureComponent.self))
-        self.arView.scene.performQuery(entityQuery)
-            .compactMap { havingCardComponent in
-                if let cardEntity = havingCardComponent as? CardEntity {
-                    return cardEntity
-                }
-                return nil
-            }
-            .forEach { (cardEntity: CardEntity) in
-                cardEntity.components[DynamicTextureComponent.self]?.isHovering = false
-            }
-        
-        let center = CGPoint(x: self.arView.bounds.midX, y: self.arView.bounds.midY)
-        let hits = self.arView.hitTest(center)
-
-        for result in hits {
-            if let cardEntity = result.entity as? CardEntity {
-                cardEntity.components[DynamicTextureComponent.self]?.isHovering = true
-            }
-        }
     }
 }
 

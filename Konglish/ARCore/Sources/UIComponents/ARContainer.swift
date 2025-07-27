@@ -30,8 +30,20 @@ import SwiftUI
      @State var flippedCardId: UUID?
      
      let gameCards: [GameCard] = [
-         .init(id: UUID(uuidString: "00000000-0000-0000-0000-000000000000")!, imageName: "apple", wordKor: "사과", wordEng: "apple"),
-         .init(id: UUID(uuidString: "11111111-1111-1111-1111-111111111111")!, imageName: "banana", wordKor: "바나나", wordEng: "banana"),
+         .init(
+             id: UUID(uuidString: "00000000-0000-0000-0000-000000000000")!,
+             imageName: "apple",
+             wordKor: "사과",
+             wordEng: "apple",
+             image: UIImage(systemName: "apple.logo")!
+         ),
+         .init(
+             id: UUID(uuidString: "11111111-1111-1111-1111-111111111111")!,
+             imageName: "banana",
+             wordKor: "바나나",
+             wordEng: "banana",
+             image: UIImage(systemName: "questionmark.app.fill")!
+         ),
      ]
      
      
@@ -42,7 +54,11 @@ import SwiftUI
              ARContainer(
                  gameSettings: GameSettings(
                      gameCards: gameCards,
-                     minimumSizeOfPlane: 0.5
+                     minimumSizeOfPlane: 0.5,
+                     fontSetting: ARCoreFontSetting(
+                         title: KonglishFontFamily.NPSFont.extraBold.font(size: 64),
+                         subtitle: KonglishFontFamily.NPSFont.bold.font(size: 32)
+                     )
                  ),
                  gamePhase: $gamePhase,
                  arError: $arError,
@@ -100,7 +116,7 @@ import SwiftUI
                  }
                  
                  if let flippedCardId = flippedCardId {
-                       Text("뒤집힌 카드: \(flippedCardId)")
+                     Text("뒤집힌 카드: \(flippedCardId)")
                  }
                  
                  if let arError = arError {
@@ -112,6 +128,7 @@ import SwiftUI
          }
      }
  }
+
  ```
  */
 public struct ARContainer: UIViewControllerRepresentable {

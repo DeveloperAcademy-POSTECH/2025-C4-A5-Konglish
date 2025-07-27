@@ -27,7 +27,7 @@ extension ARContainerViewController {
         
         // 대리자 호출
         delegate?.didChangeScore(self)
-        cardEntity.isCompleted = true
+        cardEntity.components[CardComponent.self]?.isCompleted = true
         
         // 모두 완료한 경우 완료 상태로 게임 페이즈 변경
         if numberOfFinishedCards == gameSettings.gameCards.count {
@@ -54,15 +54,14 @@ extension ARContainerViewController {
         accuracy >= 0.4
     }
     
-    fileprivate func findCardEntityByWordId(by wordId: UUID) -> CardEntity? {
+    fileprivate func findCardEntityByWordId(by wordId: UUID) -> Entity? {
         let entityQuery = EntityQuery(where: .has(CardComponent.self))
         
         return self.arView.scene.performQuery(entityQuery)
             .compactMap { havingCardComponent in
-                if let cardEntity = havingCardComponent as? CardEntity,
-                   let cardData = cardEntity.cardData,
-                   cardData.id == wordId {
-                    return cardEntity
+                if let cardComponent = havingCardComponent.components[CardComponent.self],
+                   cardComponent.cardData.id == wordId {
+                    return havingCardComponent
                 }
                 return nil
             }
