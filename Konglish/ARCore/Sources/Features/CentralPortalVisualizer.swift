@@ -10,6 +10,36 @@ import ARKit
 import RealityKit
 import os.log
 
+/// 화면 중앙에 포털을 생성하고 관리하는 기능을 제공
+///
+/// ## 주요 기능
+/// - RayCast를 통한 수직 평면 감지 후 포털 생성
+/// - Portal Material을 사용한 실제 포털 효과 구현
+/// - 동화 같은 반짝이 파티클 효과 추가
+/// - 포털 생성 시 스케일 애니메이션 적용
+///
+/// ## 사용법
+/// ```swift
+/// let portalVisualizer = CentralPortalVisualizer(arView: arView)
+/// let input = CentralPortalVisualizer.Input(arAnchor: myARAnchor)
+/// let portalAnchor = portalVisualizer.operate(context: input)
+/// 
+/// if let portalAnchor = portalAnchor {
+///     // 포털이 성공적으로 생성됨
+///     // portalAnchor.name == "PortalAnchor"로 식별 가능
+/// }
+/// ```
+///
+/// ## 포털 구성 요소
+/// - **World Entity**: WorldComponent를 가진 포털 내부 세계
+/// - **Portal Entity**: PortalMaterial을 사용한 포털 게이트웨이
+/// - **Particle Entity**: 동화 같은 반짝이 파티클 효과
+///
+/// ## 좌표계 변환
+/// - ARKit 좌표계에서 RealityKit 좌표계로 변환
+/// - Portal World Scene 회전: simd_quatf(angle: .pi/2, axis: [-1, 0, 0])
+/// - Portal Z 위치 오프셋: 0.05 (평면 앞으로 배치)
+///
 class CentralPortalVisualizer: ARFeatureProvider {
     weak var arView: ARView?
     
