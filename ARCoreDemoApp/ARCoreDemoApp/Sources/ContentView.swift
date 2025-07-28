@@ -55,46 +55,46 @@ public struct ContentView: View {
             image: UIImage(systemName: "sun.max.fill")!,
             isBoss: false
         ),
-        .init(
-            id: UUID(uuidString: "55555555-5555-5555-5555-555555555555")!,
-            imageName: "melon",
-            wordKor: "멜론",
-            wordEng: "melon",
-            image: UIImage(systemName: "circle.grid.hex.fill")!,
-            isBoss: false
-        ),
-        .init(
-            id: UUID(uuidString: "66666666-6666-6666-6666-666666666666")!,
-            imageName: "orange",
-            wordKor: "오렌지",
-            wordEng: "orange",
-            image: UIImage(systemName: "circle.fill")!,
-            isBoss: false
-        ),
-        .init(
-            id: UUID(uuidString: "77777777-7777-7777-7777-777777777777")!,
-            imageName: "peach",
-            wordKor: "복숭아",
-            wordEng: "peach",
-            image: UIImage(systemName: "cloud.sun.fill")!,
-            isBoss: false
-        ),
-        .init(
-            id: UUID(uuidString: "88888888-8888-8888-8888-888888888888")!,
-            imageName: "pineapple",
-            wordKor: "파인애플",
-            wordEng: "pineapple",
-            image: UIImage(systemName: "bolt.fill")!,
-            isBoss: false
-        ),
-        .init(
-            id: UUID(uuidString: "99999999-9999-9999-9999-999999999999")!,
-            imageName: "watermelon",
-            wordKor: "수박",
-            wordEng: "watermelon",
-            image: UIImage(systemName: "drop.fill")!,
-            isBoss: true
-        ),
+//        .init(
+//            id: UUID(uuidString: "55555555-5555-5555-5555-555555555555")!,
+//            imageName: "melon",
+//            wordKor: "멜론",
+//            wordEng: "melon",
+//            image: UIImage(systemName: "circle.grid.hex.fill")!,
+//            isBoss: false
+//        ),
+//        .init(
+//            id: UUID(uuidString: "66666666-6666-6666-6666-666666666666")!,
+//            imageName: "orange",
+//            wordKor: "오렌지",
+//            wordEng: "orange",
+//            image: UIImage(systemName: "circle.fill")!,
+//            isBoss: false
+//        ),
+//        .init(
+//            id: UUID(uuidString: "77777777-7777-7777-7777-777777777777")!,
+//            imageName: "peach",
+//            wordKor: "복숭아",
+//            wordEng: "peach",
+//            image: UIImage(systemName: "cloud.sun.fill")!,
+//            isBoss: false
+//        ),
+//        .init(
+//            id: UUID(uuidString: "88888888-8888-8888-8888-888888888888")!,
+//            imageName: "pineapple",
+//            wordKor: "파인애플",
+//            wordEng: "pineapple",
+//            image: UIImage(systemName: "bolt.fill")!,
+//            isBoss: false
+//        ),
+//        .init(
+//            id: UUID(uuidString: "99999999-9999-9999-9999-999999999999")!,
+//            imageName: "watermelon",
+//            wordKor: "수박",
+//            wordEng: "watermelon",
+//            image: UIImage(systemName: "drop.fill")!,
+//            isBoss: true
+//        ),
     ]
     
     public init() {}

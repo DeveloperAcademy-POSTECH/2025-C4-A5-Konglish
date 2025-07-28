@@ -10,6 +10,9 @@ public protocol ARContainerViewControllerDelegate: AnyObject {
     /// 새로운 평면 앵커를 찾았을 때 호출되는 메서드
     func arContainerDidFindPlaneAnchor(_ arContainer: ARContainerViewController)
     
+    /// 평면이 제거되어 포털이 부족해진 경우에 호출되는 메서드
+    func arContainerDidLosePlaneAnchor(_ arContainer: ARContainerViewController)
+    
     /// 전체 개수의 모든 평면 앵커를 찾았을 때 호출되는 메서드. 찾을 평면 앵커의 개수는 `GameSettings`의
     /// `numberOfCards` 프로퍼티에 정의한다.
     ///

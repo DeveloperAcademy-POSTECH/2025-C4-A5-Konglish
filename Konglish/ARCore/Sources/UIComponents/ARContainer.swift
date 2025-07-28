@@ -264,6 +264,7 @@ public struct ARContainer: UIViewControllerRepresentable {
     }
     
     public class Coordinator: ARContainerViewControllerDelegate {
+        
         var parent: ARContainer
         
         init(_ parent : ARContainer) {
@@ -272,6 +273,10 @@ public struct ARContainer: UIViewControllerRepresentable {
         
         public func arContainerDidFindPlaneAnchor(_ arContainer: ARContainerViewController) {
             parent.currentDetectedPlanes += 1
+        }
+        
+        public func arContainerDidLosePlaneAnchor(_ arContainer: ARContainerViewController) {
+            parent.currentDetectedPlanes -= 1
         }
         
         public func arContainerDidFindAllPlaneAnchor(_ arContainer: ARContainerViewController) {

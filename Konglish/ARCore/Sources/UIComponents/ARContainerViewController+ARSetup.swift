@@ -82,13 +82,19 @@ extension ARContainerViewController {
 extension ARContainerViewController: ARSessionDelegate {
     /// 새로운 앵커가 추가되면 ARPlaneAnchor에 대해 시각화하는 엔티티를 추가한다
     public func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
-        logger.debug("🔨 new anchors have been added: \(anchors.count)")
+//        logger.debug("🔨 new anchors have been added: \(anchors.count)")
         handleAddedAnchors(for: anchors)
     }
     
     /// 기존 앵커가 업데이트되면 이전에 추가한 시각화 엔티티를 제거하고 새로운 시각화 엔티티를 만든다
     public func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
-        logger.debug("🔨 some anchors have been updated: \(anchors.count)")
+//        logger.debug("🔨 some anchors have been updated: \(anchors.count)")
         handleUpdatedAnchors(for: anchors)
+    }
+    
+    /// 앵커가 제거되면 대응하는 엔티티도 제거한다
+    public func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {
+        logger.debug("🔨 some anchors have been removed: \(anchors.count)")
+        handleRemovedAnchors(for: anchors)
     }
 }
