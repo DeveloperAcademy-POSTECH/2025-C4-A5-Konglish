@@ -10,7 +10,7 @@ import RealityKit
 import UIKit
 
 class CardContentImageCache {
-    let cache = NSCache<NSString, UIImage>()
+    private let cache = NSCache<NSString, UIImage>()
     
     func get(id: UUID) -> UIImage? {
         cache.object(forKey: getKey(id: id))
