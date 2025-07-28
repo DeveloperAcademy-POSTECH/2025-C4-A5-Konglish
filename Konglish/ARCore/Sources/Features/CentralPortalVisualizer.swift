@@ -62,6 +62,7 @@ class CentralPortalVisualizer: ARFeatureProvider {
         let portalMesh = MeshResource.generatePlane(width: 1.8, depth: 2.0, cornerRadius: 0.2)
         let portal = ModelEntity(mesh: portalMesh, materials: [PortalMaterial()])
         portal.components.set(PortalComponent(target: world))
+        portal.transform.translation.z = 0.05 // 포털 평면을 앵커 원점으로부터 약간 앞으로 밀어냄
         
         
         // 3. 동화 같은 반짝이 파티클 ✨
@@ -97,6 +98,8 @@ class CentralPortalVisualizer: ARFeatureProvider {
         anchor.addChild(world)
         anchor.addChild(portal)
         anchor.addChild(sparkleEntity)
+        
+        
         
         // 초기 스케일을 0으로 설정하여 보이지 않게 시작
         anchor.transform.scale = .zero
