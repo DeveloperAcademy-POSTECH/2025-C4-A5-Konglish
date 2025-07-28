@@ -8,6 +8,7 @@ public struct ContentView: View {
     @State var currentGameScore: Int = 0
     @State var numberOfFinishedCards: Int = 0
     @State var triggerScanStart = false
+    @State var triggerCreatePortal = false
     @State var triggerPlaceCards = false
     @State var triggerSubmitAccuracy: (UUID, Float)?
     @State var gamePhase: GamePhase = .initialized
@@ -118,6 +119,7 @@ public struct ContentView: View {
                 numberOfFinishedCards: $numberOfFinishedCards,
                 flippedCardId: $flippedCardId,
                 triggerScanStart: $triggerScanStart,
+                triggerCreatePortal: $triggerCreatePortal,
                 triggerPlaceCards: $triggerPlaceCards,
                 triggerSubmitAccuracy: $triggerSubmitAccuracy,
                 triggerFlipCard: $triggerFlipCard
@@ -141,11 +143,10 @@ public struct ContentView: View {
                 .disabled(gamePhase == .scanning || gamePhase == .portalCreated) // 스캔 시작 후 비활성화
                 
                 Button {
-                    if gamePhase == .initialized || gamePhase == .scanning {
-                        triggerPlaceCards = true
+                    if gamePhase == .scanned {
+                        triggerCreatePortal = true
                     } else if gamePhase == .portalCreated {
-                        // 이제... 카드 날라오기 하자
-                        
+                        triggerPlaceCards = true
                     }
                 } label: {
                     Text(buttonText)
@@ -198,7 +199,7 @@ public struct ContentView: View {
     
     var buttonText: String {
         switch gamePhase {
-        case .initialized, .scanning:
+        case .scanned:
             return "포털 생성!"
         case .portalCreated:
             return "저 너머의 세계엔..?"
@@ -209,7 +210,7 @@ public struct ContentView: View {
     
     var buttonDisabled: Bool {
         switch gamePhase {
-        case .initialized, .scanning, .portalCreated:
+        case .scanned, .portalCreated:
             return false
         default:
             return true
