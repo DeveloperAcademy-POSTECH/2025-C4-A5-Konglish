@@ -24,12 +24,16 @@ public struct GameCard: Hashable {
     
     /// 이미지
     public let image: UIImage
+
+    /// 보스 여부 (true이면 보스, false이면 일반)
+    public let isBoss: Bool
     
-    public init(id: UUID, imageName: String?, wordKor: String, wordEng: String, image: UIImage) {
+    public init(id: UUID, imageName: String?, wordKor: String, wordEng: String, image: UIImage, isBoss: Bool) {
         self.id = id
         self.imageName = imageName
         self.wordKor = wordKor
         self.wordEng = wordEng
         self.image = image
+        self.isBoss = isBoss
     }
 }

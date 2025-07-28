@@ -37,21 +37,20 @@ extension ARContainerViewController {
     
     /// 정확도 점수에 따른 점수를 계산한다
     func calcualteScore(gameCard: GameCard, accuracy: Float) -> Int {
-        let isBoss = false // TODO: 추후 GameCard에 보스 여부 프로퍼티 추가 후 변경 필요
-        let baseScore = isBoss ? 300 : 100
+        let baseScore = gameCard.isBoss ? 3 : 1
         
         switch accuracy {
-        case 1.0: return baseScore * 10
-        case 0.9..<1.0: return baseScore * 5
-        case 0.7..<0.9: return baseScore * 3
-        case 0.6..<0.7: return baseScore * 2
-        default: return baseScore
+        case 1.0: return baseScore * 3
+        case 0.85..<1.0: return baseScore * 3
+        case 0.7..<0.85: return baseScore * 2
+        case 0.6..<0.7: return baseScore * 1
+        default: return 0
         }
     }
     
     /// 정확도 점수에 따른 통과, 미통과 여부를 결정한다
     func isPassed(accuracy: Float) -> Bool {
-        accuracy >= 0.4
+        accuracy >= 0.6
     }
     
     fileprivate func findCardEntityByWordId(by wordId: UUID) -> Entity? {
