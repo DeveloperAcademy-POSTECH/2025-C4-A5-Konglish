@@ -26,7 +26,6 @@ extension ARContainerViewController {
             for (planeAnchor, _) in detectedPlaneEntities {
                 savedPlaneTransforms[planeAnchor.identifier] = planeAnchor.transform
             }
-            logger.debug("모든 평면 위치 저장 완료: \(self.savedPlaneTransforms.count)개")
             
             // 평면 ARAnchor들을 ARSession에서 제거하여 ARKit의 자동 업데이트 중단
             for (planeAnchor, _) in detectedPlaneEntities {
@@ -80,6 +79,46 @@ extension ARContainerViewController {
         } else {
             logger.warning("❌ Hit-Test 실패: 화면 중앙에 수직 평면이 없습니다.")
             // TODO: 사용자에게 피드백을 주는 로직?
+        }
+    }
+    
+    /// 포털을 애니메이션과 함께 제거한다
+    public func removePortalWithAnimation() {
+        guard let portalAnchor = arView.scene.anchors.first(where: { $0.name == "PortalAnchor" }) else {
+            logger.warning("제거할 포털을 찾을 수 없습니다")
+            return
+        }
+        
+        // 포털 모델 엔티티와 파티클 찾기
+        portalAnchor.children.forEach { child in
+            if let modelEntity = child as? ModelEntity {
+                // 포털 원형이 중심에서 점점 작아지며 사라지는 애니메이션
+                var disappearTransform = modelEntity.transform
+                disappearTransform.scale = .zero
+                
+                modelEntity.move(
+                    to: disappearTransform,
+                    relativeTo: portalAnchor,
+                    duration: 1.5,
+                    timingFunction: .easeInOut
+                )
+            } else if child.components.has(ParticleEmitterComponent.self) {
+                // 파티클도 함께 사라지게
+                var particleTransform = child.transform
+                particleTransform.scale = .zero
+                
+                child.move(
+                    to: particleTransform,
+                    relativeTo: portalAnchor,
+                    duration: 1.5,
+                    timingFunction: .easeInOut
+                )
+            }
+        }
+        
+        // 애니메이션 완료 후 포털 완전 제거
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            portalAnchor.removeFromParent()
         }
     }
 }

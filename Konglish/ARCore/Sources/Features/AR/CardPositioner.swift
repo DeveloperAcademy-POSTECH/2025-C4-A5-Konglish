@@ -34,6 +34,21 @@ class CardPositioner: ARFeatureProvider {
         arView.scene.anchors.append(anchorEntity)
     }
     
+    /// Transform을 기반으로 카드를 생성하고 AnchorEntity를 반환한다.
+    /// - Parameter context: 추가할 카드의 CardData와 대상 transform
+    /// - Returns: 생성된 AnchorEntity
+    func createCardWithTransform(context: TransformInput) -> AnchorEntity? {
+        guard let arView = arView else {
+            return nil
+        }
+        
+        let cardEntity = createCardEntity(data: context.cardData)
+        let anchorEntity = AnchorEntity(world: context.transform)
+        anchorEntity.addChild(cardEntity)
+        
+        return anchorEntity
+    }
+    
     private func createCardEntity(data: GameCard) -> Entity {
         guard let sceneEntity = try? Entity.load(named: "Scene", in: konglishARProjectBundle),
               let rootEntity = sceneEntity.children.first else {
@@ -61,6 +76,11 @@ class CardPositioner: ARFeatureProvider {
     
     struct Input {
         let planeAnchor: ARPlaneAnchor
+        let cardData: GameCard
+    }
+    
+    struct TransformInput {
+        let transform: simd_float4x4
         let cardData: GameCard
     }
 }

@@ -27,7 +27,6 @@ class CentralPortalVisualizer: ARFeatureProvider {
             do {
                 if let portalWorldURL = Bundle.module.url(forResource: "skybox1", withExtension: "usdz") {
                     portalWorldScene = try await Entity.init(contentsOf: portalWorldURL)
-                    logger.debug("✅ skybox1.usdz 로드 성공!")
                 } else {
                     logger.error("❌ skybox1.usdz 파일을 찾을 수 없습니다.")
                 }
@@ -95,6 +94,7 @@ class CentralPortalVisualizer: ARFeatureProvider {
         
         // 4. 앵커에 추가
         let anchor = AnchorEntity(anchor: arAnchor) // ARAnchor를 부모로 갖도록 변경
+        anchor.name = "PortalAnchor" // 포털 앵커 식별용 이름
         anchor.addChild(world)
         anchor.addChild(portal)
         anchor.addChild(sparkleEntity)
@@ -110,8 +110,6 @@ class CentralPortalVisualizer: ARFeatureProvider {
         var transform = anchor.transform
         transform.scale = [1, 1, 1]
         anchor.move(to: transform, relativeTo: nil, duration: 1.5, timingFunction: .easeOut)
-        
-        logger.debug("✅ 포털 생성 완료!")
         return anchor
     }
     

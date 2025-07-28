@@ -23,6 +23,7 @@ import SwiftUI
      @State var currentGameScore: Int = 0
      @State var numberOfFinishedCards: Int = 0
      @State var triggerScanStart = false
+     @State var triggerCreatePortal = false
      @State var triggerPlaceCards = false
      @State var triggerSubmitAccuracy: (UUID, Float)?
      @State var gamePhase: GamePhase = .initialized
@@ -70,6 +71,7 @@ import SwiftUI
                  numberOfFinishedCards: $numberOfFinishedCards,
                  flippedCardId: $flippedCardId,
                  triggerScanStart: $triggerScanStart,
+                 triggerCreatePortal: $triggerCreatePortal,
                  triggerPlaceCards: $triggerPlaceCards,
                  triggerSubmitAccuracy: $triggerSubmitAccuracy,
                  triggerFlipCard: $triggerFlipCard
@@ -91,8 +93,12 @@ import SwiftUI
                      triggerScanStart = true
                  }
                  
-                 Button("카드 배치") {
-                     triggerPlaceCards = true
+                 Button(buttonText(for: gamePhase)) {
+                     if gamePhase == .scanned {
+                         triggerCreatePortal = true
+                     } else if gamePhase == .portalCreated {
+                         triggerPlaceCards = true
+                     }
                  }
                  
                  Button("단어 정답 제출 1") {
@@ -129,6 +135,18 @@ import SwiftUI
              }
          }
      }
+     
+     /// GamePhase에 따른 버튼 텍스트 반환
+     private func buttonText(for phase: GamePhase) -> String {
+         switch phase {
+         case .scanned:
+             return "포털 생성"
+         case .portalCreated:
+             return "저 너머 세계엔..?"
+         default:
+             return "카드 배치"
+         }
+     }
  }
 
  ```
@@ -158,6 +176,9 @@ public struct ARContainer: UIViewControllerRepresentable {
     /// 스캔 시작 트리거
     @Binding var triggerScanStart: Bool
     
+    /// 포털 생성 트리거
+    @Binding var triggerCreatePortal: Bool
+    
     /// 카드 배치 트리거
     @Binding var triggerPlaceCards: Bool
     
@@ -181,6 +202,7 @@ public struct ARContainer: UIViewControllerRepresentable {
         numberOfFinishedCards: Binding<Int>,
         flippedCardId: Binding<UUID?>,
         triggerScanStart: Binding<Bool>,
+        triggerCreatePortal: Binding<Bool>,
         triggerPlaceCards: Binding<Bool>,
         triggerSubmitAccuracy: Binding<(UUID, Float)?>,
         triggerFlipCard: Binding<Bool>
@@ -194,6 +216,7 @@ public struct ARContainer: UIViewControllerRepresentable {
         self._numberOfFinishedCards = numberOfFinishedCards
         self._flippedCardId = flippedCardId
         self._triggerScanStart = triggerScanStart
+        self._triggerCreatePortal = triggerCreatePortal
         self._triggerPlaceCards = triggerPlaceCards
         self._triggerSubmitAccuracy = triggerSubmitAccuracy
         self._triggerFlipCard = triggerFlipCard
@@ -214,8 +237,16 @@ public struct ARContainer: UIViewControllerRepresentable {
             }
         }
         
-        if triggerPlaceCards {
+        if triggerCreatePortal {
             uiViewController.createPortalAtCenter()
+            
+            DispatchQueue.main.async {
+                triggerCreatePortal.toggle()
+            }
+        }
+        
+        if triggerPlaceCards {
+            uiViewController.placeCardsFromPortal()
             
             DispatchQueue.main.async {
                 triggerPlaceCards.toggle()

@@ -35,8 +35,6 @@ extension ARContainerViewController {
         let width = planeAnchor.planeExtent.width
         let height = planeAnchor.planeExtent.height
         
-        logger.debug("🔨 detected plane size=\(width * height)...")
-        
         return width * height > gameSettings.minimumSizeOfPlane
     }
     
@@ -46,7 +44,7 @@ extension ARContainerViewController {
     }
     
     func handleAddedAnchors(for anchors: [ARAnchor]) {
-        guard gamePhase == .scanning, !checkAllPlanesAttached() else {
+        guard (gamePhase == .scanning || gamePhase == .scanned), !checkAllPlanesAttached() else {
             return
         }
         
@@ -69,6 +67,7 @@ extension ARContainerViewController {
             addPlaneVisualization(planeAnchor: planeAnchor, animate: true)
             delegate?.arContainerDidFindPlaneAnchor(self)
             if checkAllPlanesAttached() {
+                gamePhase = .scanned  // 모든 평면 감지 완료 시 scanned 상태로 변경
                 delegate?.arContainerDidFindAllPlaneAnchor(self)
             }
         }
@@ -76,7 +75,7 @@ extension ARContainerViewController {
     
     func handleRemovedAnchors(for anchors: [ARAnchor]) {
         
-        guard gamePhase == .scanning, !checkAllPlanesAttached() else {
+        guard (gamePhase == .scanning || gamePhase == .scanned) else {
             return
         }
         
@@ -86,7 +85,10 @@ extension ARContainerViewController {
             if let planeEntity = detectedPlaneEntities[planeAnchor] {
                 planeEntity.removeFromParent()
                 detectedPlaneEntities.removeValue(forKey: planeAnchor)
-                logger.debug("🗑️ 평면 제거됨 - 남은 개수: \(self.detectedPlaneEntities.count)")
+                // 평면이 부족해지면 다시 scanning 상태로 변경
+                if gamePhase == .scanned && !checkAllPlanesAttached() {
+                    gamePhase = .scanning
+                }
                 
                 // 다시 스캔 가능하게 delegate 호출
                 delegate?.arContainerDidLosePlaneAnchor(self)
@@ -95,7 +97,7 @@ extension ARContainerViewController {
     }
     
     func handleUpdatedAnchors(for anchors: [ARAnchor]) {
-        guard gamePhase == .scanning else {
+        guard (gamePhase == .scanning || gamePhase == .scanned) else {
             return
         }
         
@@ -125,6 +127,7 @@ extension ARContainerViewController {
                 addPlaneVisualization(planeAnchor: planeAnchor, animate: true)
                 delegate?.arContainerDidFindPlaneAnchor(self)
                 if checkAllPlanesAttached() {
+                    gamePhase = .scanned  // 모든 평면 감지 완료 시 scanned 상태로 변경
                     delegate?.arContainerDidFindAllPlaneAnchor(self)
                 }
             }
