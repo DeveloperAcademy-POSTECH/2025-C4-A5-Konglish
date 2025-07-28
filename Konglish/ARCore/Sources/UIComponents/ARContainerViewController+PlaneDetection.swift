@@ -63,13 +63,33 @@ extension ARContainerViewController {
             }
             
             if !checkNewPlaneSize(planeAnchor: planeAnchor) {
-                break
+                continue
             }
             
             addPlaneVisualization(planeAnchor: planeAnchor, animate: true)
             delegate?.arContainerDidFindPlaneAnchor(self)
             if checkAllPlanesAttached() {
                 delegate?.arContainerDidFindAllPlaneAnchor(self)
+            }
+        }
+    }
+    
+    func handleRemovedAnchors(for anchors: [ARAnchor]) {
+        
+        guard gamePhase == .scanning, !checkAllPlanesAttached() else {
+            return
+        }
+        
+        let planeAnchors = anchors.compactMap { $0 as? ARPlaneAnchor }
+        
+        for planeAnchor in planeAnchors {
+            if let planeEntity = detectedPlaneEntities[planeAnchor] {
+                planeEntity.removeFromParent()
+                detectedPlaneEntities.removeValue(forKey: planeAnchor)
+                logger.debug("🗑️ 평면 제거됨 - 남은 개수: \(self.detectedPlaneEntities.count)")
+                
+                // 다시 스캔 가능하게 delegate 호출
+                delegate?.arContainerDidLosePlaneAnchor(self)
             }
         }
     }
