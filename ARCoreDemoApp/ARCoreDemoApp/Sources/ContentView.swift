@@ -138,10 +138,19 @@ public struct ContentView: View {
                 Button("스캔 시작") {
                     triggerScanStart = true
                 }
+                .disabled(gamePhase == .scanning || gamePhase == .portalCreated) // 스캔 시작 후 비활성화
                 
-                Button("포털 생성!") {
-                    triggerPlaceCards = true
+                Button {
+                    if gamePhase == .initialized || gamePhase == .scanning {
+                        triggerPlaceCards = true
+                    } else if gamePhase == .portalCreated {
+                        // 이제... 카드 날라오기 하자
+                        
+                    }
+                } label: {
+                    Text(buttonText)
                 }
+                .disabled(buttonDisabled)
                 
                 Button("단어 정답 제출 1") {
                     if let id = gameCards.first?.id {
@@ -184,6 +193,26 @@ public struct ContentView: View {
                 
                 Spacer()
             }
+        }
+    }
+    
+    var buttonText: String {
+        switch gamePhase {
+        case .initialized, .scanning:
+            return "포털 생성!"
+        case .portalCreated:
+            return "저 너머의 세계엔..?"
+        default:
+            return "..." // 다른 게임 단계에서는 버튼 텍스트를 다르게 설정하거나 숨길 수 있습니다.
+        }
+    }
+    
+    var buttonDisabled: Bool {
+        switch gamePhase {
+        case .initialized, .scanning, .portalCreated:
+            return false
+        default:
+            return true
         }
     }
 }

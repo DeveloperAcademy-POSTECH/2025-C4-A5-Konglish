@@ -70,9 +70,9 @@ class CentralPortalVisualizer: ARFeatureProvider {
         var sparkleEmitter = ParticleEmitterComponent()
         
         // 가벼운 반짝이 파티클 설정
-        sparkleEmitter.mainEmitter.birthRate = 30                  // 초당 15개 (가볍게)
-        sparkleEmitter.mainEmitter.lifeSpan = 2.5                  // 1.5초 (금방 사라지게)
-        sparkleEmitter.mainEmitter.size = 0.02                    // 작은 크기
+        sparkleEmitter.mainEmitter.birthRate = 200
+        sparkleEmitter.mainEmitter.lifeSpan = 2.5
+        sparkleEmitter.mainEmitter.size = 0.02
         
         // 동화 같은 파스텔 색상
         sparkleEmitter.mainEmitter.color = .evolving(
@@ -82,13 +82,13 @@ class CentralPortalVisualizer: ARFeatureProvider {
         
         // 포털 주변에서 살짝 퍼져나가게
         sparkleEmitter.emitterShape = .sphere
-        sparkleEmitter.emitterShapeSize = [1, 1, 1]          // 포털 중심 작은 영역
+        sparkleEmitter.emitterShapeSize = [1, 1, 1]
         
         // 위로 살짝 떠오르는 느낌
         sparkleEmitter.emissionDirection = [0, 0.5, 0]
         sparkleEmitter.speed = 0.1
-        sparkleEmitter.speedVariation = 0.05           // 작은 속도 변화
-        sparkleEmitter.mainEmitter.spreadingAngle = .pi * 0.8      // 넓게 퍼짐
+        sparkleEmitter.speedVariation = 0.05
+        sparkleEmitter.mainEmitter.spreadingAngle = .pi * 0.8      // 퍼짐 정도
         
         sparkleEntity.components.set(sparkleEmitter)
         sparkleEntity.transform.translation = [0, 0, 0.03]         // 포털 바로 앞
@@ -109,13 +109,13 @@ class CentralPortalVisualizer: ARFeatureProvider {
         // 애니메이션을 통해 스케일을 1로 키움
         var transform = anchor.transform
         transform.scale = [1, 1, 1]
-        anchor.move(to: transform, relativeTo: nil, duration: 1.5, timingFunction: .easeOut) // relativeTo: nil로 변경
+        anchor.move(to: transform, relativeTo: nil, duration: 1.5, timingFunction: .easeOut)
         
         logger.debug("✅ 포털 생성 완료!")
         return anchor
     }
     
     struct Input {
-        let arAnchor: ARAnchor // ARAnchor를 입력으로 받도록 변경
+        let arAnchor: ARAnchor
     }
 }
