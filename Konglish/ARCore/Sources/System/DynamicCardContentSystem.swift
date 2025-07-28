@@ -53,10 +53,11 @@ struct DynamicCardContentSystem: System {
                             continue
                         }
                         
+                        entity.components[CardComponent.self]?.isFrontRendered = true
+                        
                         Task { @MainActor in
                             if let material = await createContentMaterial(for: modelEntity, cardData: cardComponent.cardData) {
                                 modelEntity.model?.materials = [material]
-                                entity.components[CardComponent.self]?.isFrontRendered = true
                             }
                         }
                     }
