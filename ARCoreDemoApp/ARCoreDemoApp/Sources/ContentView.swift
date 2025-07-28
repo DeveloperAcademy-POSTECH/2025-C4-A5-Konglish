@@ -139,7 +139,7 @@ public struct ContentView: View {
                     triggerScanStart = true
                 }
                 
-                Button("카드 배치") {
+                Button("포털 생성!") {
                     triggerPlaceCards = true
                 }
                 

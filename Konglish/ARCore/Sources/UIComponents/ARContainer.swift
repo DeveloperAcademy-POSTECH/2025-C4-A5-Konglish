@@ -215,19 +215,10 @@ public struct ARContainer: UIViewControllerRepresentable {
         }
         
         if triggerPlaceCards {
-            var raisedError: Error?
-            do {
-                try uiViewController.placeCards()
-            } catch {
-                // 바로 Binding을 통해 Publish하면
-                // `Modifying state during view update, this will cause undefined behavior` 경고 발생
-                // 따라서 메인 큐에서 비동기로 실행
-                raisedError = error
-            }
+            uiViewController.createPortalAtCenter()
             
             DispatchQueue.main.async {
                 triggerPlaceCards.toggle()
-                arError = raisedError
             }
         }
         

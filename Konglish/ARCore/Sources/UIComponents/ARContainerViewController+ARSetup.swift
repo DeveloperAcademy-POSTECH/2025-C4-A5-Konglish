@@ -40,6 +40,7 @@ extension ARContainerViewController {
     
     func prepareFeatureProviders() {
         self.planeVisualizer = PlaneVisualizer(arView: arView)
+        self.portalVisualizer = CentralPortalVisualizer(arView: arView)
         self.cardPositioner = CardPositioner(arView: arView)
         self.cardDetector = CardDetector(arView: arView)
         self.cardRotator = CardRotator(arView: arView)
@@ -94,7 +95,7 @@ extension ARContainerViewController: ARSessionDelegate {
     
     /// 앵커가 제거되면 대응하는 엔티티도 제거한다
     public func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {
-        logger.debug("🔨 some anchors have been removed: \(anchors.count)")
+//        logger.debug("🔨 some anchors have been removed: \(anchors.count)")
         handleRemovedAnchors(for: anchors)
     }
 }

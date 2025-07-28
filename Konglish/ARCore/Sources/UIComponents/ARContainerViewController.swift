@@ -30,6 +30,7 @@ public class ARContainerViewController: UIViewController {
     
     /// 기능을 제공하는 클래스들 (ARFeatureProvider)
     var planeVisualizer: PlaneVisualizer?
+    var portalVisualizer: CentralPortalVisualizer?
     var cardPositioner: CardPositioner?
     var cardDetector: CardDetector?
     var cardRotator: CardRotator?
