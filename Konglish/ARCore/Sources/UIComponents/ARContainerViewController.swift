@@ -49,6 +49,9 @@ public class ARContainerViewController: UIViewController {
     /// 게임카드에 대한 발음 정확도를 표현하는 딕셔너리
     var gameCardToAccuracy: [GameCard: Float?]
     
+    /// 게임카드 앞면 텍스쳐 이미지를 로드하는 객체
+    let cardContentImageProvider: CardContentImageProvider
+    
     /// 현재 게임 진행 단계
     public internal(set) var gamePhase: GamePhase = .initialized {
         didSet {
@@ -84,6 +87,9 @@ public class ARContainerViewController: UIViewController {
     init(gameSettings: GameSettings) {
         self.gameSettings = gameSettings
         self.gameCardToAccuracy = [:]
+        self.cardContentImageProvider = CardContentImageProvider(
+            allCards: gameSettings.gameCards
+        )
         
         super.init(nibName: nil, bundle: nil)
         
