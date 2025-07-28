@@ -3,37 +3,6 @@
     "objectMetadataList" : [
       [
         "729A1152-EB3D-4B24-8944-C0FA915C3D48",
-        "Root",
-        "Card",
-        "Cube",
-        "Cube_001"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "729A1152-EB3D-4B24-8944-C0FA915C3D48",
-        "Root",
-        "Card",
-        "Cube"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "729A1152-EB3D-4B24-8944-C0FA915C3D48",
-        "Root",
-        "Card",
-        "PlaneFront"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "729A1152-EB3D-4B24-8944-C0FA915C3D48",
         "Root"
       ],
       {
@@ -53,28 +22,8 @@
       [
         "729A1152-EB3D-4B24-8944-C0FA915C3D48",
         "Root",
-        "HoverCard",
-        "_materials"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "729A1152-EB3D-4B24-8944-C0FA915C3D48",
-        "Root",
-        "HoveredCard",
-        "_materials"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "729A1152-EB3D-4B24-8944-C0FA915C3D48",
-        "Root",
-        "HoveredCard",
-        "Plane"
+        "Card",
+        "Cube"
       ],
       {
         "isExpanded" : true,
@@ -94,6 +43,47 @@
         "729A1152-EB3D-4B24-8944-C0FA915C3D48",
         "Root",
         "Card"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "729A1152-EB3D-4B24-8944-C0FA915C3D48",
+        "Root",
+        "HoveredCard",
+        "Plane"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "729A1152-EB3D-4B24-8944-C0FA915C3D48",
+        "Root",
+        "Card",
+        "Cube",
+        "Cube_001"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "729A1152-EB3D-4B24-8944-C0FA915C3D48",
+        "Root",
+        "HoveredCard",
+        "_materials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "729A1152-EB3D-4B24-8944-C0FA915C3D48",
+        "Root",
+        "HoverCard",
+        "_materials"
       ],
       {
         "isExpanded" : true,
