@@ -53,6 +53,32 @@ class CardPositioner: ARFeatureProvider {
                 
                 // 호버 컴포넌트 추가
                 entity.components[HoverComponent.self] = HoverComponent(cardData: data)
+                
+                // 가벼운 파티클 에미터 추가
+                var particleEmitter = ParticleEmitterComponent()
+                particleEmitter.mainEmitter.birthRate = 300
+                particleEmitter.mainEmitter.lifeSpan = 1.5
+                particleEmitter.mainEmitter.size = 0.02       
+                
+                // 부드러운 연한 골드 색상
+                particleEmitter.mainEmitter.color = .evolving(
+                    start: .single(UIColor(red: 0.1, green: 0.9, blue: 0.6, alpha: 0.6)),
+                    end: .single(UIColor(red: 0.1, green: 0.45, blue: 0.8, alpha: 0.0))
+                )
+                
+                // 카드 테두리에서 나오는 파티클 (얇은 직사각형 링 모양)
+                particleEmitter.emitterShape = .box
+                particleEmitter.emitterShapeSize = [0.34, 0.001, 0.22]  // 매우 얇은 박스로 카드 크기
+                particleEmitter.emissionDirection = [0, 1, 0]            // 위쪽으로
+                particleEmitter.speed = 0.35                             // 조금 더 빠르게
+                particleEmitter.speedVariation = 0.08
+                particleEmitter.mainEmitter.spreadingAngle = .pi * 0.1   // 좁은 퍼짐각도
+                
+                // 바깥쪽으로 살짝 퍼지도록
+                particleEmitter.mainEmitter.acceleration = [0, -0.1, 0]  // 중력 효과
+                
+                particleEmitter.isEmitting = false
+                entity.components.set(particleEmitter)
             }
         }
         
