@@ -196,7 +196,7 @@ struct WordDetailCard: View {
         HStack(spacing: WordDetailCardConstants.voiceHspacing) {
             ForEach(0..<WordDetailCardConstants.voiceBarCount, id: \.self) { index in
                 Capsule()
-                    .fill(.green02)
+                    .fill(Color.green02)
                     .frame(
                         width: WordDetailCardConstants.voiceWidth,
                         height: computedBarHeight(
