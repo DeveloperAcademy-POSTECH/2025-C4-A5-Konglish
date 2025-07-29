@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct StartOverlay: View {
+    var arViewModel: ARViewModel
     
     // MARK: - Constants
     fileprivate enum StartOverlayConstants {
@@ -26,7 +27,7 @@ struct StartOverlay: View {
                 guideText
                 Spacer()
                 MainButton(buttonType: .text(.start), action: {
-                    //TODO: - 시작
+                    arViewModel.startButtonTapped()
                 })
                 .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
             }
@@ -55,5 +56,16 @@ struct StartOverlay: View {
 }
 
 #Preview {
-    StartOverlay()
+    let category = CategoryModel(imageName: "동물", difficulty: 0, nameKor: "테스트", nameEng: "Test")
+    
+    let viewModel = ARViewModel(
+        cardModels: [
+            .init(imageName: "Apple", pronunciation: "Apple", wordKor: "사과", wordEng: "Apple", category: category),
+            .init(imageName: "Banana", pronunciation: "Banana", wordKor: "바나나", wordEng: "Banana", category: category),
+            .init(imageName: "Orange", pronunciation: "Orange", wordKor: "오렌지", wordEng: "Orange", category: category),
+        ],
+        categoryModel: category,
+        levelType: .easy
+    )
+    StartOverlay(arViewModel: viewModel)
 }
