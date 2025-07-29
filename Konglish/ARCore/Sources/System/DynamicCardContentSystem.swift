@@ -10,7 +10,7 @@ import RealityKit
 import UIKit
 import os.log
 
-struct DynamicCardContentSystem: System {
+struct DynamicCardContentSystem: System {    
     // MARK: - Type Properties
     /// 대상 엔티티 쿼리
     private static let query = EntityQuery(where: .has(CardComponent.self))
@@ -30,8 +30,9 @@ struct DynamicCardContentSystem: System {
     static let cardBackgroundColor: UIColor = UIColor(red: 0.855, green: 0.855, blue: 0.571, alpha: 1.0)
     
     // MARK: - Properties
-    /// 머테리얼 생성 후 캐시
-    private var materialsCache = NSCache<NSString, MaterialValue>()
+    
+    /// 이미지 제공자
+    static var imageProvider: CardContentImageProvider?
     
     /// 로거
     private let logger = Logger.of("DynamicCardContentSystem")
@@ -43,15 +44,23 @@ struct DynamicCardContentSystem: System {
             matching: Self.query,
             updatingSystemWhen: .rendering
         ) {
-            entity.children.forEach { child in
+            for child in entity.children {
                 if child.name == Self.planeEntityName {
                     if let modelEntity = child.children.first as? ModelEntity,
-                       let cardData = entity.components[CardComponent.self]?.cardData { // Nested `Plane`
+                       let cardComponent = entity.components[CardComponent.self] { // Nested `Plane`
                         
-                        Task { @MainActor in
-                            modelEntity.model?.materials = [
-                                await createContentMaterial(for: modelEntity, cardData: cardData)
-                            ]
+                        if cardComponent.isFrontRendered {
+                            continue
+                        }
+                        
+                        entity.components[CardComponent.self]?.isFrontRendered = true
+                        
+                        Task {
+                            if let material = await createContentMaterial(for: modelEntity, cardData: cardComponent.cardData) {
+                                await MainActor.run {
+                                    modelEntity.model?.materials = [material]
+                                }
+                            }
                         }
                     }
                 }
@@ -59,27 +68,17 @@ struct DynamicCardContentSystem: System {
         }
     }
     
-    @MainActor
-    private func createContentMaterial(for entity: HasModel, cardData: GameCard) async -> Material {
+    private func createContentMaterial(for entity: HasModel, cardData: GameCard) async -> Material? {
         // Load Cache
-        if let cached = materialsCache.object(
-            forKey: getMaterialCacheKey(entity: entity)
-        ) {
-            logger.debug("used cached material for entity=\(entity.id)")
-            return cached.value
+        guard let cachedImage = await Self.imageProvider?.getImage(cardData: cardData) else {
+            logger.error("CardContentImageProvider is not set")
+            return nil
         }
-        
-        let image = imageFrom(
-            engTitle: cardData.wordEng,
-            korTitle: cardData.wordKor,
-            image: cardData.image,
-            size: .init(width: scale(Self.cardWidth), height: scale(Self.cardHeight))
-        )
         
         var material: Material
         do {
             let baseMaterial = extractBaseMaterial(from: entity) as? PhysicallyBasedMaterial
-            material = try await convertImageToMaterial(from: image, baseMaterial: baseMaterial)
+            material = try await convertImageToMaterial(from: cachedImage, baseMaterial: baseMaterial)
         } catch {
             let logMessage = "❌ DynamicTextureSystem: failed to create text image material"
                 + "=> fallback texture will be applied."
@@ -90,74 +89,7 @@ struct DynamicCardContentSystem: System {
         
         logger.debug("created front material for \(entity.id)")
         
-        // Set Cache
-        materialsCache.setObject(
-            MaterialValue(value: material),
-            forKey: getMaterialCacheKey(entity: entity)
-        )
-        
         return material
-    }
-    
-    /// 특정 텍스트가 포함된 이미지를 생성한다
-    // TODO: 하이파이 디자인에 맞게 카드 이미지, 폰트 등 세팅 필요함
-    private func imageFrom(
-        engTitle: String,
-        korTitle: String,
-        image: UIImage,
-        size: CGSize,
-        textColor: UIColor = .black
-    ) -> UIImage {
-        let renderer = UIGraphicsImageRenderer(size: size)
-        let image = renderer.image { context in
-            // 배경 그리기
-            Self.cardBackgroundColor.setFill()
-            context.fill(CGRect(origin: .zero, size: size))
-            
-            // 이미지
-            let imageRect = CGRect(
-                origin: .init(x: scale(40), y: scale(80)),
-                size: .init(width: scale(280), height: scale(280))
-            )
-            image.draw(in: imageRect)
-            
-            // 단락 스타일
-            let paragraphStyle: NSMutableParagraphStyle = {
-                let style = NSMutableParagraphStyle()
-                style.alignment = .center
-                return style
-            }()
-            
-            // 영문 텍스트
-            let engTextRect = CGRect(
-                origin: .init(x: scale(336), y: scale(116)),
-                size: .init(width: scale(304), height: scale(80))
-            )
-            let engAttributedText = NSAttributedString(string: engTitle, attributes: [
-                .font: UIFont.arCoreTitle.withSize(scale(UIFont.arCoreTitle.pointSize)),
-                .paragraphStyle: paragraphStyle,
-                .foregroundColor: UIColor.black,
-                .strokeColor: UIColor.white,
-                .strokeWidth: -10,
-            ])
-            engAttributedText.draw(in: engTextRect)
-            
-            // 국문 텍스트
-            let korTextRect = CGRect(
-                origin: .init(x: scale(336), y: scale(280)),
-                size: .init(width: scale(304), height: scale(47))
-            )
-            let korAttributedText = NSAttributedString(string: korTitle, attributes: [
-                .font: UIFont.arCoreSubtitle.withSize(scale(UIFont.arCoreSubtitle.pointSize)),
-                .paragraphStyle: paragraphStyle,
-                .foregroundColor: UIColor.black,
-                .strokeColor: UIColor.white,
-                .strokeWidth: -6,
-            ])
-            korAttributedText.draw(in: korTextRect)
-        }
-        
-        return image
     }
     
     /// UIImage를 CGImage로 변환하고, RealityKit 텍스쳐로 반환한다.
@@ -179,27 +111,11 @@ struct DynamicCardContentSystem: System {
         return material
     }
     
-    private func getMaterialCacheKey(entity: Entity) -> NSString {
-        NSString(string: "\(entity.id)")
-    }
-    
     private func extractBaseMaterial(from entity: Entity) -> Material? {
         guard let baseMaterialComponent = entity.components[ModelComponent.self] else {
             return nil
         }
         
         return baseMaterialComponent.materials.first
-    }
-    
-    private func scale(_ scalar: Double) -> Double {
-        scalar * Self.scaleFactor
-    }
-}
-
-fileprivate class MaterialValue: NSObject {
-    let value: Material
-    
-    init(value: Material) {
-        self.value = value
     }
 }

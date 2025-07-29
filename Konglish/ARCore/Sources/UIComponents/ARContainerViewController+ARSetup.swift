@@ -14,8 +14,14 @@ extension ARContainerViewController {
     
     /// 처음 ARView를 초기화한다
     func setupARView() {
+        // 카드 앞면 이미지 웜업
+        Task.detached {
+            await self.cardContentImageProvider.loadAllImages()
+        }
+        
         // 시스템 등록
         HoverSystem.registerSystem()
+        DynamicCardContentSystem.imageProvider = cardContentImageProvider
         DynamicCardContentSystem.registerSystem()
         
         arView.session.delegate = self
