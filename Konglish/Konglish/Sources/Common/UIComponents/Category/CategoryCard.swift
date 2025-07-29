@@ -58,14 +58,14 @@ struct CategoryCard: View {
     private var title: some View {
         Text(categoryModel.nameKor)
             .font(.bold32)
-            .foregroundStyle(.gray03)
+            .foregroundStyle(Color.gray03)
     }
     
     /// 카테고리 영어 제목
     private var subTitle: some View {
         Text(categoryModel.nameEng)
             .font(.bold20)
-            .foregroundStyle(.gray02)
+            .foregroundStyle(Color.gray02)
     }
 }
 
