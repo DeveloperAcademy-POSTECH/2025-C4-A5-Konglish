@@ -7,9 +7,8 @@
 
 import Foundation
 
-@Observable
-public final class DIContainer {
-    public let navigationRouter: NavigationRouter<AppRoute>
+public final class DIContainer: ObservableObject {
+    @Published public var navigationRouter: NavigationRouter<AppRoute>
     
     public init(navigationRouter: NavigationRouter<AppRoute>) {
         self.navigationRouter = navigationRouter

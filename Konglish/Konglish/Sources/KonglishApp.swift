@@ -4,7 +4,7 @@ import SwiftUI
 struct KonglishApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Text("11")
         }
     }
 }

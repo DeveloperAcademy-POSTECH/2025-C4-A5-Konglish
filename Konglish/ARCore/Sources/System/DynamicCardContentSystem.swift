@@ -99,8 +99,9 @@ struct DynamicCardContentSystem: System {
             throw NSError(domain: "ImageError", code: 0, userInfo: [NSLocalizedDescriptionKey: "CGImage 변환 실패"])
         }
 
-        let texture = try await TextureResource.generate(
-            from: cgImage,
+        // FIXME: - 나중에 처리하기
+        let texture = try await TextureResource(
+            image: cgImage,
             withName: nil,
             options: .init(semantic: .normal, compression: .default)
         )

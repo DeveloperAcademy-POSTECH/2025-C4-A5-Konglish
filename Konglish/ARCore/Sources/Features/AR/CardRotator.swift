@@ -51,7 +51,7 @@ class CardRotator: ARFeatureProvider {
     }
     
     private func rotateCard(_ cardEntity: Entity) {
-        guard let cardComponent = cardEntity.components[CardComponent.self] else {
+        guard cardEntity.components[CardComponent.self] != nil else {
             return
         }
         
