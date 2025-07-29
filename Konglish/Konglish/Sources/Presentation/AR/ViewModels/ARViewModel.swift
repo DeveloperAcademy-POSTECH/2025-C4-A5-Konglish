@@ -12,11 +12,6 @@ import ARCore
 class ARViewModel {
     // ARCore에서 요청하는 프로퍼티
     
-    /// ARContainer가 요구하는 카드 정보
-    var gameCards: [GameCard] {
-        cardModels.map { GameModelMapper.toGameModel($0) }
-    }
-    
     /// 인식한 평면 수
     var currentDetectedPlanes: Int = 0
     
@@ -52,23 +47,12 @@ class ARViewModel {
     
     var arError: Error?
     
-    // MARK: - 도메인 모델
-    let cardModels: [CardModel]
-    let categoryModel: CategoryModel
-    let levelType: LevelType
-    
     // MARK: - UI에 필요한 프로퍼티
     /// 디테일 카드 오버레이 여부
     var showingWordDetailCard: Bool = false
     
     /// 카드 뒤집힌 후 몇 초 뒤 디테일 카드 표시할지 오프셋
     let cardShowingTimeOffset = 0.65
-    
-    init (cardModels: [CardModel], categoryModel: CategoryModel, levelType: LevelType) {
-        self.cardModels = cardModels
-        self.categoryModel = categoryModel
-        self.levelType = levelType
-    }
 }
 
 // User Intents
@@ -85,9 +69,4 @@ extension ARViewModel {
         showingWordDetailCard = false
         flippedCardId = nil
     }
-}
-
-// Logics
-extension ARViewModel {
-    
 }
