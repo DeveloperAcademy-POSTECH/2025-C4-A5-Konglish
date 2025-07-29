@@ -69,4 +69,8 @@ extension ARViewModel {
         showingWordDetailCard = false
         flippedCardId = nil
     }
+    
+    func placeCardsButtonTapped() {
+        triggerPlaceCards = true
+    }
 }

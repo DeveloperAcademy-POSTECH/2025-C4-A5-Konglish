@@ -24,7 +24,7 @@ struct CheckScanOverlay: View {
             })
             .overlay(alignment: .bottom, content: {
                 MainButton(buttonType: .text(.cardSprinkle(onOff: allPlanesDetected)), action: {
-                    arViewModel.triggerPlaceCards = true
+                    arViewModel.placeCardsButtonTapped()
                 })
                 .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
             })
