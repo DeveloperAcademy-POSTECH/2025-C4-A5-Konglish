@@ -56,16 +56,5 @@ struct StartOverlay: View {
 }
 
 #Preview {
-    let category = CategoryModel(imageName: "동물", difficulty: 0, nameKor: "테스트", nameEng: "Test")
-    
-    let viewModel = ARViewModel(
-        cardModels: [
-            .init(imageName: "Apple", pronunciation: "Apple", wordKor: "사과", wordEng: "Apple", category: category),
-            .init(imageName: "Banana", pronunciation: "Banana", wordKor: "바나나", wordEng: "Banana", category: category),
-            .init(imageName: "Orange", pronunciation: "Orange", wordKor: "오렌지", wordEng: "Orange", category: category),
-        ],
-        categoryModel: category,
-        levelType: .easy
-    )
-    StartOverlay(arViewModel: viewModel)
+    StartOverlay(arViewModel: ARViewModel())
 }

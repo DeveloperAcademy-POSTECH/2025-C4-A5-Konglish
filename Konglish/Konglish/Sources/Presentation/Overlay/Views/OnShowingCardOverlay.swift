@@ -1,5 +1,5 @@
 //
-//  TemporaryOverlayViews.swift
+//  OnShowingCardOverlay.swift
 //  Konglish
 //
 //  Created by 임영택 on 7/29/25.
@@ -7,52 +7,9 @@
 
 import SwiftUI
 
-// FIXME: 플레잉 중의 오버레이가 완성되면 삭제해주세요
-struct TemporaryPlayingOverlay: View {
-    var arViewModel: ARViewModel
-    
-    var body: some View {
-        VStack {
-            HStack {
-                VStack {
-                    Text("하트: \(arViewModel.currentLifeCounts)")
-                    Text("점수: \(arViewModel.currentGameScore)")
-                    Text("완료 수: \(arViewModel.numberOfFinishedCards)")
-                }
-                
-                Spacer()
-                
-                MainButton(buttonType: .icon(.exit)) {
-                    print("pause button tapped")
-                }
-            }
-            
-            Spacer()
-            
-            Text("+")
-                .font(.system(size: 32, weight: .bold))
-            
-            Spacer()
-            
-            HStack(alignment: .bottom) {
-                MainButton(buttonType: .icon(.aim)) {
-                    arViewModel.flipCardButtonTapped()
-                }
-                
-                Spacer()
-                
-                MainButton(buttonType: .icon(.aim)) {
-                    arViewModel.flipCardButtonTapped()
-                }
-            }
-        }
-        .padding(.vertical, 40)
-        .padding(.horizontal, 36)
-    }
-}
-
-// FIXME: 플레잉 중 카드 포커스 시 오버레이가 완성되면 삭제해주세요
-struct TemporaryPlayingOnShowingCardOverlay: View {
+/// 플레잉 중 카드 뒤집혔을 때 오버레이
+// TODO: 하이파이 디자인 맞추기
+struct OnShowingCardOverlay: View {
     var arViewModel: ARViewModel
     @State private var detailCardViewModel = DetailCardViewModel()
     
@@ -125,13 +82,5 @@ struct TemporaryPlayingOnShowingCardOverlay: View {
         }
         .padding(.vertical, 40)
         .padding(.horizontal, 36)
-    }
-}
-
-struct TemporaryFinishedOverlay: View {
-    var arViewModel: ARViewModel
-    
-    var body: some View {
-        CompleteWindow(model: .init(score: arViewModel.currentGameScore, level: .init(levelNumber: .easy, category: .init(imageName: "몰라", difficulty: 3, nameKor: "몰라", nameEng: "아돈노"))))
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CheckScanOverlay: View {
     @Bindable var arViewModel: ARViewModel
+    let allPlanesDetected: Bool
     
     var body: some View {
         Color.clear
@@ -22,7 +23,7 @@ struct CheckScanOverlay: View {
                 .safeAreaPadding(.trailing, UIConstants.naviLeadingPadding)
             })
             .overlay(alignment: .bottom, content: {
-                MainButton(buttonType: .text(.cardSprinkle(onOff: arViewModel.currentDetectedPlanes == arViewModel.gameCards.count)), action: {
+                MainButton(buttonType: .text(.cardSprinkle(onOff: allPlanesDetected)), action: {
                     arViewModel.triggerPlaceCards = true
                 })
                 .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
@@ -31,16 +32,5 @@ struct CheckScanOverlay: View {
 }
 
 #Preview {
-    let category = CategoryModel(imageName: "동물", difficulty: 0, nameKor: "테스트", nameEng: "Test")
-    
-    let viewModel = ARViewModel(
-        cardModels: [
-            .init(imageName: "Apple", pronunciation: "Apple", wordKor: "사과", wordEng: "Apple", category: category),
-            .init(imageName: "Banana", pronunciation: "Banana", wordKor: "바나나", wordEng: "Banana", category: category),
-            .init(imageName: "Orange", pronunciation: "Orange", wordKor: "오렌지", wordEng: "Orange", category: category),
-        ],
-        categoryModel: category,
-        levelType: .easy
-    )
-    CheckScanOverlay(arViewModel: viewModel)
+    CheckScanOverlay(arViewModel: ARViewModel(), allPlanesDetected: true)
 }
