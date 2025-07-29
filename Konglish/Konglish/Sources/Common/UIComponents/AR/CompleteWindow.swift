@@ -13,6 +13,8 @@ struct CompleteWindow: View {
     
     fileprivate enum CompleteWindowConstants {
         static let maxWidth: CGFloat = 749
+        static let safeAreaVerticalPadding: CGFloat = 203
+        static let safeAreaHorionPadding: CGFloat = 222
         static let mainVerticalPadding: CGFloat = 70
         static let mainHorizonPadding: CGFloat = 167
         static let verticalPadding: CGFloat = 14
@@ -20,38 +22,51 @@ struct CompleteWindow: View {
         static let cornerRadius: CGFloat = 30
         static let titleOutline: CGFloat = 4
         static let scoreOutline: CGFloat = 3
-        static let title: String = "Complete"
-        static let subTitle: String = "첫 화면으로 돌아가기"
+        static let title: String = "Clear!"
+        static let subTitle: String = "카테고리로 돌아가기"
     }
     
     var body: some View {
-        VStack {
-            title
-            score
-            MainButton(buttonType: .text(.backMain), action: {
-                print("Hello")
-            })
+        ZStack {
+            RoundedRectangle(cornerRadius: CompleteWindowConstants.cornerRadius)
+                .fill(Color.white01)
+                .background(Material.ultraThin)
+                .grayShadow()
+            
+            VStack {
+                title
+                score
+                MainButton(buttonType: .text(.backMain), action: {
+                    print("Hello")
+                })
+            }
+            .padding(.vertical, CompleteWindowConstants.mainVerticalPadding)
+            .padding(.horizontal, CompleteWindowConstants.mainHorizonPadding)
+            .frame(maxWidth: CompleteWindowConstants.maxWidth)
         }
-        .padding(.vertical, CompleteWindowConstants.mainVerticalPadding)
-        .padding(.horizontal, CompleteWindowConstants.mainHorizonPadding)
-        .background(Material.thin, in: RoundedRectangle(cornerRadius: CompleteWindowConstants.cornerRadius))
-        .frame(maxWidth: CompleteWindowConstants.maxWidth)
+        .safeAreaPadding(.vertical, CompleteWindowConstants.safeAreaVerticalPadding)
+        .safeAreaPadding(.horizontal, CompleteWindowConstants.safeAreaHorionPadding)
     }
     
     private var title: some View {
         Text(CompleteWindowConstants.title)
             .font(.semibold64)
-            .foregroundStyle(Color.secondary01)
+            .foregroundStyle(Color.green07)
             .customOutline(width: CompleteWindowConstants.titleOutline, color: .white)
     }
     
     private var score: some View {
-        Text(verbatim: "Scroe \(model.score)")
-            .font(.semibold32)
-            .foregroundStyle(Color.secondary01)
+        Label(title: {
+            Text("\(model.score)")
+                .font(.semibold64)
+                .foregroundStyle(Color.gray04)
+        }, icon: {
+            Image(.bin)
+        })
     }
 }
 
+
 #Preview {
-    CompleteWindow(model: .init(playedAt: .now, score: 2024, level: .init(levelNumber: 0, category: .init(imageName: "", difficulty: 2, nameKor: "11", nameEng: "11"))))
+    CompleteWindow(model: .init(score: 46, level: .init(levelNumber: .easy, category: .init(imageName: "", difficulty: 1, nameKor: "1", nameEng: "2"))))
 }

@@ -34,7 +34,7 @@ struct MainButton: View {
                     .fill(buttonType.bgColor)
                     .frame(maxWidth: buttonType.width == nil ? .infinity : nil)
                     .frame(width: buttonType.width, height: buttonType.height)
-                    .mainButtonShadow()
+                    .mainButtonShadow(shadowColor: buttonType.shadowColor)
                 
                 buttonStyle
             }
@@ -73,7 +73,7 @@ struct MainButton: View {
 }
 
 #Preview {
-    MainButton(buttonType: .text(.backMain), action: {
+    MainButton(buttonType: .icon(.back), action: {
         print("hello")
     })
 }

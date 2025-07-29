@@ -35,7 +35,7 @@ struct SuccessProgress: View {
         ZStack {
             progressBarBg(bottom: .bgShadow, top: .progressBg)
             GeometryReader { geo in
-                progressBarBg(bottom: .tintShadow, top: .tint)
+                progressBarBg(bottom: .tintShadow, top: .green05)
                     .frame(width: geo.size.width * progressValue)
             }
             successInfo

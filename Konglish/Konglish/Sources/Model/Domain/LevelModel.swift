@@ -13,14 +13,14 @@ import SwiftData
 @Model
 final class LevelModel {
     @Attribute(.unique) var id: UUID
-    var levelNumber: Int
+    var levelNumber: LevelType
     var bestScore: Int
     var successCount: Int
     
     @Relationship var category: CategoryModel
     @Relationship(deleteRule: .cascade) var sessions: [GameSessionModel] = []
     
-    init(id: UUID = UUID(), levelNumber: Int, bestScore: Int = 0, successCount: Int = 0, category: CategoryModel) {
+    init(id: UUID = UUID(), levelNumber: LevelType, bestScore: Int = 0, successCount: Int = 0, category: CategoryModel) {
         self.id = id
         self.levelNumber = levelNumber
         self.bestScore = bestScore
