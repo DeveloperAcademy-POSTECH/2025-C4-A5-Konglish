@@ -26,11 +26,11 @@ extension ARContainerViewController {
             for (planeAnchor, _) in detectedPlaneEntities {
                 savedPlaneTransforms[planeAnchor.identifier] = planeAnchor.transform
             }
-            
-            // 평면 ARAnchor들을 ARSession에서 제거하여 ARKit의 자동 업데이트 중단
-            for (planeAnchor, _) in detectedPlaneEntities {
-                arView.session.remove(anchor: planeAnchor)
-            }
+//            
+//            // 평면 ARAnchor들을 ARSession에서 제거하여 ARKit의 자동 업데이트 중단
+//            for (planeAnchor, _) in detectedPlaneEntities {
+//                arView.session.remove(anchor: planeAnchor)
+//            }
     
             let arAnchor = ARAnchor(transform: firstResult.worldTransform)
             arView.session.add(anchor: arAnchor)

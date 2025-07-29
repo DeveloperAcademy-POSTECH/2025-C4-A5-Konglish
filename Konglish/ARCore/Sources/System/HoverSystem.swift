@@ -29,6 +29,7 @@ struct HoverSystem: System {
         ) {
             let isHovering = entity.components[HoverComponent.self]?.isHovering ?? false
             entity.components[ParticleEmitterComponent.self]?.isEmitting = isHovering
+            print(entity.components[ParticleEmitterComponent.self]?.isEmitting)
         }
     }
 }
