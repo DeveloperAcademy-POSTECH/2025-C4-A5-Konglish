@@ -10,24 +10,24 @@ import SwiftUI
 struct LevelCard: View {
     // MARK: - Property
     let level: LevelModel
-    let num: Int
+    let num : LevelType
     let action: () -> Void
+    
+    @Binding var isTapped: Bool
     
     // MARK: - LevelCardConstants
     fileprivate enum LevelCardConstants {
+        static let cornerRadius: CGFloat = 30
         static let middleVspacing: CGFloat = 30
-        static let lelvelNumSize: CGFloat = 144
+        static let lelvelNumSize: CGFloat = 172
         static let contentsWiddth: CGFloat = 232
-        static let contentsHeight: CGFloat = 362
+        static let contentsHeight: CGFloat = 116
+        static let pointHspacing: CGFloat = 10
+        static let binWidth: CGFloat = 34
+        static let binHeight: CGFloat = 28
         static let bestScoreText: String = "BestScore"
         static let noScoreText: String = "NoScore"
-    }
-    
-    // MARK: - Init
-    init(level: LevelModel, num: Int, action: @escaping () -> Void) {
-        self.level = level
-        self.num = num
-        self.action = action
+        static let progressText: String = "학습 진행도"
     }
     
     // MARK: - Body
@@ -35,6 +35,7 @@ struct LevelCard: View {
         ButtonCard(content: {
             contents
         }, action: {
+            isTapped.toggle()
             action()
         })
     }
@@ -45,23 +46,27 @@ struct LevelCard: View {
             Spacer()
             bestScore
             Spacer()
-            SuccessProgress(currentCount: level.successCount)
         }
         .frame(width: LevelCardConstants.contentsWiddth)
         .frame(height: LevelCardConstants.contentsHeight)
+        .background {
+            RoundedRectangle(cornerRadius: LevelCardConstants.cornerRadius)
+                .fill(isTapped ? num.backgroundColor : .white)
+                .stroke(isTapped ? num.buttonStrokeColor : .clear, style: .init(lineWidth: 4))
+        }
     }
     
     // MARK: - TopContents
     /// 상단 레벨 숫자 넘버
     private var topNumber: some View {
         ZStack {
-            Circle()
-                .fill(.levelBg)
+            RoundedRectangle(cornerRadius: LevelCardConstants.cornerRadius)
+                .fill(num.color)
                 .frame(width: LevelCardConstants.lelvelNumSize, height: LevelCardConstants.lelvelNumSize)
             
-            Text("\(num)")
-                .font(.bold80)
-                .foregroundStyle(Color.secondary01)
+            Text(num.rawValue)
+                .font(.semibold36)
+                .foregroundStyle(num.fontColor)
         }
     }
     
@@ -72,28 +77,33 @@ struct LevelCard: View {
         if level.bestScore > .zero {
             VStack(alignment: .center, spacing: LevelCardConstants.middleVspacing, content: {
                 Text(LevelCardConstants.bestScoreText)
-                    .font(.semibold64)
-                Text("\(level.bestScore)")
-                    .font(.bold32)
+                    .font(.semibold32)
+                
+                pointHstack
             })
             .foregroundStyle(Color.gray03)
         } else {
             Text(LevelCardConstants.noScoreText)
                 .font(.semibold32)
-                .foregroundStyle(Color.gray03)
+                .foregroundStyle(Color.gray04)
         }
     }
     
-    // MARK: - BottomArea
-    private var bottomArea: some View {
-        ZStack {
+    private var pointHstack: some View {
+        HStack(spacing: LevelCardConstants.pointHspacing, content: {
+            Image(.bin)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: LevelCardConstants.binWidth, height: LevelCardConstants.binHeight)
+        })
+    }
+    
+    private var bottomProgress: some View {
+        VStack {
+            Text(LevelCardConstants.progressText)
+                .font(.bold16)
             
+            SuccessProgress(currentCount: level.successCount)
         }
     }
-}
-
-#Preview {
-    LevelCard(level: .init(levelNumber: 2, category: .init(imageName: "11", difficulty: 2, nameKor: "1", nameEng: "1")), num: 2, action: {
-        print("hello")
-    })
 }

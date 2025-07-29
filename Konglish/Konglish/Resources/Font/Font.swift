@@ -39,6 +39,10 @@ public extension Font {
         return .konglish(.extraBold, size: 64)
     }
     
+    static var semibold36: Font {
+        return .konglish(.extraBold, size: 36)
+    }
+    
     static var semibold32: Font {
         return .konglish(.extraBold, size: 32)
     }
@@ -66,5 +70,9 @@ public extension Font {
     
     static var bold20: Font {
         return .konglish(.bold, size: 20)
+    }
+    
+    static var bold16: Font {
+        return .konglish(.bold, size: 16)
     }
 }

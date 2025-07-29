@@ -195,13 +195,18 @@ struct WordDetailCard: View {
     private var voiceLevelRectangle: some View {
         HStack(spacing: WordDetailCardConstants.voiceHspacing) {
             ForEach(0..<WordDetailCardConstants.voiceBarCount, id: \.self) { index in
-                let relativeIndex = abs(index - WordDetailCardConstants.voiceBarCount / 2)
-                let barHeight = computedBarHeight(relativeIndex: relativeIndex)
-                
                 Capsule()
-                    .fill(.secondary01)
-                    .frame(width: WordDetailCardConstants.voiceWidth, height: barHeight)
-                    .animation(.easeOut(duration: WordDetailCardConstants.voiceAnimation), value: viewModel.level)
+                    .fill(.green02)
+                    .frame(
+                        width: WordDetailCardConstants.voiceWidth,
+                        height: computedBarHeight(
+                            relativeIndex: abs(index - WordDetailCardConstants.voiceBarCount / 2)
+                        )
+                    )
+                    .animation(
+                        .easeOut(duration: WordDetailCardConstants.voiceAnimation),
+                        value: viewModel.level
+                    )
             }
         }
     }

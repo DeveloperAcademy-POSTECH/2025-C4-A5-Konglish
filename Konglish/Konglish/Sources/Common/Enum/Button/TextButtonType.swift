@@ -12,6 +12,8 @@ enum TextButtonType {
     case start
     case cardSprinkle(onOff: Bool)
     case backMain
+    case restart
+    case returnCategory
     
 
     var text: String {
@@ -21,7 +23,11 @@ enum TextButtonType {
         case .cardSprinkle:
             return "카드 뿌리기"
         case .backMain:
-            return "메인으로 돌아가기"
+            return "카테고리로 돌아가기"
+        case .restart:
+            return "다시 도전하기!"
+        case .returnCategory:
+            return "카테고리로 돌아가기"
         }
     }
     
@@ -31,23 +37,40 @@ enum TextButtonType {
     
     var color: Color {
         switch self {
-        case .start, .backMain:
-            return .secondary01
+        case .start, .backMain, .restart:
+            return .green09
         case .cardSprinkle(let onOff):
-            return onOff ? .secondary01 : .offBtn
+            return onOff ? .green02 : .offBtn
+        case .returnCategory:
+            return .white01
         }
     }
     
     var bgColor: Color {
         switch self {
-        case .start, .backMain:
-            return .primary01
+        case .start, .backMain, .restart:
+            return .green02
         case .cardSprinkle(let onOff):
-            return onOff ? .primary01 : .gray01
+            return onOff ? .green04 : .gray01
+        case .returnCategory:
+            return .green08
         }
     }
     
     var btnHeight: CGFloat {
         return 87
+    }
+    
+    var shadowColor: Color {
+        switch self {
+        case .start:
+            return .green09
+        case .cardSprinkle(let onOff):
+            return onOff ? .green02 : .gray03
+        case .backMain, .restart:
+            return .greenShadow
+        case .returnCategory:
+            return .returnCategoryShadow
+        }
     }
 }

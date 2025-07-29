@@ -51,7 +51,7 @@ struct ChekScanCamera: View {
     private var guideText: some View {
         Text(CheckScanCameraConstants.guideText)
             .font(.bold20)
-            .foregroundStyle(Color.secondary01)
+            .foregroundStyle(Color.black01)
     }
 }
 

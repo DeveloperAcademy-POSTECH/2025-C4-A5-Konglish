@@ -17,6 +17,6 @@ enum NaviTitleType: String {
     }
     
     var color: Color {
-        return .secondary01
+        return .green02
     }
 }
