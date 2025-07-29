@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct StartOverlay: View {
+    var arViewModel: ARViewModel
     
     // MARK: - Constants
     fileprivate enum StartOverlayConstants {
@@ -26,7 +27,7 @@ struct StartOverlay: View {
                 guideText
                 Spacer()
                 MainButton(buttonType: .text(.start), action: {
-                    //TODO: - 시작
+                    arViewModel.startButtonTapped()
                 })
                 .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
             }
@@ -55,5 +56,5 @@ struct StartOverlay: View {
 }
 
 #Preview {
-    StartOverlay()
+    StartOverlay(arViewModel: ARViewModel())
 }

@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct CheckScanOverlay: View {
-    
-    @State var checkCount: Int = 0
-    @State var cardSprinkle: Bool = false
+    @Bindable var arViewModel: ARViewModel
+    let allPlanesDetected: Bool
     
     var body: some View {
         Color.clear
             .overlay(alignment: .top, content: {
-                ChekScanCamera(currentCount: $checkCount)
+                ChekScanCamera(currentCount: $arViewModel.currentDetectedPlanes)
             })
             .overlay(alignment: .topTrailing, content: {
                 MainButton(buttonType: .icon(.exit), action: {
@@ -24,8 +23,8 @@ struct CheckScanOverlay: View {
                 .safeAreaPadding(.trailing, UIConstants.naviLeadingPadding)
             })
             .overlay(alignment: .bottom, content: {
-                MainButton(buttonType: .text(.cardSprinkle(onOff: cardSprinkle)), action: {
-                    
+                MainButton(buttonType: .text(.cardSprinkle(onOff: allPlanesDetected)), action: {
+                    arViewModel.placeCardsButtonTapped()
                 })
                 .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
             })
@@ -33,5 +32,5 @@ struct CheckScanOverlay: View {
 }
 
 #Preview {
-    CheckScanOverlay()
+    CheckScanOverlay(arViewModel: ARViewModel(), allPlanesDetected: true)
 }
