@@ -20,6 +20,7 @@ struct PlayingGameOverlay: View {
         static let horizonPadding: CGFloat = 40
         static let cornerRadius: CGFloat = 20
         static let guideText: String = "가운데의 조준점을 카드 위에 대고 버튼을 눌러주세요"
+        static let bottomPadding: CGFloat = 177
     }
     
     var body: some View {
@@ -46,7 +47,7 @@ struct PlayingGameOverlay: View {
         })
         .safeAreaPadding(.top, UIConstants.topPadding)
         .safeAreaPadding(.horizontal, PlayingGameConstants.horizonPadding)
-        .safeAreaPadding(.bottom, UIConstants.bottomPadding)
+        .safeAreaPadding(.bottom, PlayingGameConstants.bottomPadding)
         .navigationBarBackButtonHidden(true)
     }
     

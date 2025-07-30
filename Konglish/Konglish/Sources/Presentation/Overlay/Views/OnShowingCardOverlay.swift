@@ -19,6 +19,10 @@ struct OnShowingCardOverlay: View {
     
     var currentSession: GameSessionModel
     
+    fileprivate enum OnShowingCardConstants {
+        static let bottomPadding: CGFloat = 177
+    }
+    
     var body: some View {
         ZStack {
             Color.black.opacity(0.4).ignoresSafeArea()
@@ -77,7 +81,7 @@ struct OnShowingCardOverlay: View {
             }
         })
         .safeAreaPadding(.horizontal, UIConstants.topPadding)
-        .safeAreaPadding(.bottom, UIConstants.bottomPadding)
+        .safeAreaPadding(.bottom, OnShowingCardConstants.bottomPadding)
         .safeAreaPadding(.top, UIConstants.topPadding)
         .navigationBarBackButtonHidden(true)
         .onChange(of: detailCardViewModel.heart) { _, newValue in
