@@ -11,6 +11,7 @@ import SwiftUI
 enum TextButtonType {
     case start
     case cardSprinkle(onOff: Bool)
+    case openPotal(onOff: Bool)
     case backMain
     case restart
     case returnCategory
@@ -21,7 +22,9 @@ enum TextButtonType {
         case .start:
             return "시작하기"
         case .cardSprinkle:
-            return "카드 뿌리기"
+            return "저 넘어 세상엔..?"
+        case .openPotal:
+            return "단어 세상 포탈 열기!"
         case .backMain:
             return "카테고리로 돌아가기"
         case .restart:
@@ -39,7 +42,7 @@ enum TextButtonType {
         switch self {
         case .start, .backMain, .restart:
             return .green09
-        case .cardSprinkle(let onOff):
+        case .cardSprinkle(let onOff), .openPotal(let onOff):
             return onOff ? .green02 : .offBtn
         case .returnCategory:
             return .white01
@@ -50,7 +53,7 @@ enum TextButtonType {
         switch self {
         case .start, .backMain, .restart:
             return .green02
-        case .cardSprinkle(let onOff):
+        case .cardSprinkle(let onOff), .openPotal(let onOff):
             return onOff ? .green04 : .gray01
         case .returnCategory:
             return .green08
@@ -65,7 +68,7 @@ enum TextButtonType {
         switch self {
         case .start:
             return .green09
-        case .cardSprinkle(let onOff):
+        case .cardSprinkle(let onOff), .openPotal(let onOff):
             return onOff ? .green02 : .gray03
         case .backMain, .restart:
             return .greenShadow

@@ -47,6 +47,7 @@ class ARViewModel {
         }
     }
     
+    var triggerOpenPortal = false
     var triggerScanStart = false
     var triggerPlaceCards = false
     var triggerSubmitAccuracy: (UUID, Float)?

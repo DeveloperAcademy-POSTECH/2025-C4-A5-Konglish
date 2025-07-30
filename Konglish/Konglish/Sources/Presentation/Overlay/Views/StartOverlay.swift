@@ -23,17 +23,17 @@ struct StartOverlay: View {
     var body: some View {
         ZStack {
             Color.black.opacity(StartOverlayConstants.opacity).ignoresSafeArea()
-            
-            VStack {
-                Spacer()
-                guideText
-                Spacer()
-                MainButton(buttonType: .text(.start), action: {
-                    arViewModel.startButtonTapped()
-                })
-                .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
-            }
         }
+        .overlay(alignment: .center, content: {
+            guideText
+        })
+        .overlay(alignment: .bottom, content: {
+            MainButton(buttonType: .text(.start), action: {
+                arViewModel.startButtonTapped()
+            })
+            .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
+            .safeAreaPadding(.bottom, UIConstants.bottomPadding)
+        })
         .overlay(alignment: .topLeading, content: {
             MainButton(buttonType: .icon(.back), action: {
                 container.navigationRouter.pop()

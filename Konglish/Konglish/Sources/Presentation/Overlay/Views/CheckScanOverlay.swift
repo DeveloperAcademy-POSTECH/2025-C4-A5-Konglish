@@ -24,9 +24,18 @@ struct CheckScanOverlay: View {
                 })
             })
             .overlay(alignment: .bottom, content: {
-                MainButton(buttonType: .text(.cardSprinkle(onOff: allPlanesDetected)), action: {
-                    arViewModel.placeCardsButtonTapped()
-                })
+                Group {
+                    if !arViewModel.triggerOpenPortal {
+                        MainButton(buttonType: .text(.openPotal(onOff: allPlanesDetected)), action: {
+                            arViewModel.triggerOpenPortal.toggle()
+                        })
+                        .disabled(!allPlanesDetected)
+                    } else {
+                        MainButton(buttonType: .text(.cardSprinkle(onOff: true)), action: {
+                            arViewModel.placeCardsButtonTapped()
+                        })
+                    }
+                }
                 .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
             })
             .navigationBarBackButtonHidden(true)

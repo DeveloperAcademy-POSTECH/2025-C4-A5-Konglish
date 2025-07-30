@@ -76,6 +76,7 @@ struct ARView: View {
             numberOfFinishedCards: $arViewModel.numberOfFinishedCards,
             flippedCardId: $arViewModel.flippedCardId,
             triggerScanStart: $arViewModel.triggerScanStart,
+            triggerCreatePortal: $arViewModel.triggerOpenPortal,
             triggerPlaceCards: $arViewModel.triggerPlaceCards,
             triggerSubmitAccuracy: $arViewModel.triggerSubmitAccuracy,
             triggerFlipCard: $arViewModel.triggerFlipCard
