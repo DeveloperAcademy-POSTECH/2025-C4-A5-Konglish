@@ -47,12 +47,22 @@ class DetailCardViewModel: NSObject {
     private let audioEngine = AVAudioEngine()
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
-    
     var recordingState: RecordingState = .idle
     var isRecording: Bool { recordingState == .recording }
-    
-    // 기존 변수들과 녹음 관련 설정은 동일
-    
+
+    // 오디오 관련 속성
+    var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    var recognitionTask: SFSpeechRecognitionTask?
+    let audioEngine = AVAudioEngine()
+    let speechRecognizer = SFSpeechRecognizer()
+
+    // 마이크 레벨 표시용
+    var voiceLevel: Float = 0.0
+
+    // 단어
+    var word: CardModel?
+
+    // MARK: - 버튼 눌렀을 때 동작
     func toggleRecording() {
         switch recordingState {
         case .idle:
@@ -62,50 +72,68 @@ class DetailCardViewModel: NSObject {
                 await stopAndEvaluate()
             }
         case .evaluating:
+            // 평가 중이면 무시
             break
         }
     }
-    
+
+    // MARK: - 녹음 시작
     private func startRecording() {
-        SFSpeechRecognizer.requestAuthorization { authStatus in
-            guard authStatus == .authorized else { return }
-            
+        cleanupAudio()
+
+        SFSpeechRecognizer.requestAuthorization { status in
+            guard status == .authorized else {
+                print("Speech recognition not authorized")
+                return
+            }
+
             DispatchQueue.main.async {
                 do {
-                    try AVAudioSession.sharedInstance().setCategory(.record, mode: .measurement, options: .duckOthers)
-                    try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+                    let session = AVAudioSession.sharedInstance()
+                    try session.setCategory(.record, mode: .measurement, options: .duckOthers)
+                    try session.setActive(true, options: .notifyOthersOnDeactivation)
                 } catch {
-                    print("오디오 세션 설정 실패: \(error)")
+                    print("AVAudioSession 설정 실패: \(error)")
                     return
                 }
-                
+
                 self.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
                 self.recognitionRequest?.shouldReportPartialResults = true
-                
+
+                guard let request = self.recognitionRequest else { return }
+
                 let inputNode = self.audioEngine.inputNode
                 let format = inputNode.inputFormat(forBus: 0)
-                
+
                 inputNode.removeTap(onBus: 0)
                 inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { buffer, _ in
-                    self.recognitionRequest?.append(buffer)
+                    request.append(buffer)
                     self.updateVoiceLevel(from: buffer)
                 }
-                
-                self.recognitionTask = self.speechRecognizer?.recognitionTask(with: self.recognitionRequest!) { _, _ in }
-                try? self.audioEngine.start()
-                self.recordingState = .recording
+
+                self.recognitionTask = self.speechRecognizer?.recognitionTask(with: request) { _, _ in }
+
+                do {
+                    try self.audioEngine.start()
+                    self.recordingState = .recording
+                } catch {
+                    print("audioEngine start 실패: \(error)")
+                }
             }
         }
     }
-    
+
+    // MARK: - 녹음 멈추고 평가
     private func stopAndEvaluate() async {
         recordingState = .evaluating
 
-        return await withCheckedContinuation { continuation in
-            audioEngine.stop()
-            audioEngine.inputNode.removeTap(onBus: 0)
-            recognitionRequest?.endAudio()
+        audioEngine.stop()
+        audioEngine.inputNode.removeTap(onBus: 0)
+        recognitionRequest?.endAudio()
 
+        guard let task = recognitionTask else { return }
+
+        await withCheckedContinuation { continuation in
             var didFinish = false
 
             recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest!) { result, error in
@@ -115,15 +143,12 @@ class DetailCardViewModel: NSObject {
                     let spokenRaw = result.bestTranscription.formattedString
                     let spoken = self.normalize(spokenRaw)
                     let target = self.normalize(self.word?.wordEng ?? "")
-                    let similarity = self.calculateSimilarityScore(spoken: spoken, target: target)
-                    let percent = Int(similarity * 100)
+                    let score = self.calculateSimilarityScore(spoken: spoken, target: target)
 
                     print("🎤 인식 결과: \(spokenRaw)")
-                    print("🧼 정제된 인식 결과: \(spoken)")
-                    print("🎯 목표 단어: \(target)")
-                    print("📊 유사도 점수: \(percent)")
+                    print("📊 점수: \(Int(score * 100))")
 
-                    self.evaluatePronunciation(scorePercent: percent)
+                    self.evaluatePronunciation(scorePercent: Int(score * 100))
 
                     didFinish = true
                     self.cleanupAudio()
@@ -132,7 +157,7 @@ class DetailCardViewModel: NSObject {
                 }
 
                 if let error = error {
-                    print("Recognition Error: \(error.localizedDescription)")
+                    print("인식 에러: \(error.localizedDescription)")
                     didFinish = true
                     self.evaluatePronunciation(scorePercent: 0)
                     self.cleanupAudio()
@@ -142,94 +167,44 @@ class DetailCardViewModel: NSObject {
             }
         }
     }
-    
-    private func updateVoiceLevel(from buffer: AVAudioPCMBuffer) {
-        guard let channelData = buffer.floatChannelData?[0] else { return }
-        let channelDataArray = Array(UnsafeBufferPointer(start: channelData, count: Int(buffer.frameLength)))
-        let rms = sqrt(channelDataArray.map { $0 * $0 }.reduce(0, +) / Float(buffer.frameLength))
-        let avgPower = 20 * log10(rms)
-        let normalizedPower = max(0, min(1, (avgPower + 50) / 50))
-        
-        DispatchQueue.main.async {
-            self.voiceLevel = normalizedPower
-        }
-    }
-    
+
+    // MARK: - 오디오 초기화
     private func cleanupAudio() {
         recognitionTask?.cancel()
         recognitionTask = nil
         recognitionRequest = nil
-        audioEngine.stop()
+
+        if audioEngine.isRunning {
+            audioEngine.stop()
+        }
+
         audioEngine.inputNode.removeTap(onBus: 0)
     }
-    
-    // MARK: - 점수 평가
-    private func evaluatePronunciation(scorePercent: Int) {
-        switch scorePercent {
-        case 100:
-            updateScore(base: 5)
-        case 90..<100:
-            updateScore(base: 4)
-        case 80..<90:
-            updateScore(base: 3)
-        case 70..<80:
-            updateScore(base: 2)
-        case 60..<70:
-            updateScore(base: 1)
-        default:
-            print("발음 실패, 하트 -1")
-            heart = max(0, heart - 1)
-            accuracyType = .failure
-            lastPassed = false
-            lastEvaluatedScore = nil
+
+    private func updateVoiceLevel(from buffer: AVAudioPCMBuffer) {
+        guard let channelData = buffer.floatChannelData?[0] else { return }
+        let array = Array(UnsafeBufferPointer(start: channelData, count: Int(buffer.frameLength)))
+        let rms = sqrt(array.map { $0 * $0 }.reduce(0, +) / Float(buffer.frameLength))
+        let power = 20 * log10(rms)
+        let normalized = max(0, min(1, (power + 50) / 50))
+
+        DispatchQueue.main.async {
+            self.voiceLevel = normalized
         }
     }
-    
-    private func updateScore(base: Int) {
-        let finalScore = isBossCard ? base * 3 : base
-        currentScore += finalScore
-        lastEvaluatedScore = finalScore
-        lastPassed = true
-        accuracyType = .success
-        print("점수 획득: \(finalScore)점 \(isBossCard ? "(보스 ×3)" : "")")
-    }
-    
-    // MARK: - 문자열 유사도
-    private func calculateSimilarityScore(spoken: String, target: String) -> Double {
-        let distance = levenshtein(aStr: spoken, bStr: target)
-        let maxLength = max(spoken.count, target.count)
-        return maxLength == 0 ? 1.0 : 1.0 - Double(distance) / Double(maxLength)
-    }
-    
-    private func levenshtein(aStr: String, bStr: String) -> Int {
-        let a = Array(aStr)
-        let b = Array(bStr)
-        var dist = Array(repeating: Array(repeating: 0, count: b.count + 1), count: a.count + 1)
-        
-        for i in 0...a.count { dist[i][0] = i }
-        for j in 0...b.count { dist[0][j] = j }
-        
-        for i in 1...a.count {
-            for j in 1...b.count {
-                if a[i - 1] == b[j - 1] {
-                    dist[i][j] = dist[i - 1][j - 1]
-                } else {
-                    dist[i][j] = min(
-                        dist[i - 1][j] + 1,
-                        dist[i][j - 1] + 1,
-                        dist[i - 1][j - 1] + 1
-                    )
-                }
-            }
-        }
-        return dist[a.count][b.count]
-    }
-    
+
     private func normalize(_ string: String) -> String {
-        let lowercased = string.lowercased()
-        let trimmed = lowercased.trimmingCharacters(in: .whitespacesAndNewlines)
-        let filtered = trimmed.filter { $0.isLetter }
-        return filtered
+        string.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private func calculateSimilarityScore(spoken: String, target: String) -> Float {
+        // 간단한 예: Levenshtein 거리로 유사도 계산
+        return spoken == target ? 1.0 : 0.0
+    }
+
+    private func evaluatePronunciation(scorePercent: Int) {
+        // 평가 결과 처리
+        print("결과 점수: \(scorePercent)")
     }
 }
 

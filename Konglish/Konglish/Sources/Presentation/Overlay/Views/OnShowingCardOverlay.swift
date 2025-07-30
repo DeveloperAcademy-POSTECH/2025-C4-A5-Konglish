@@ -45,7 +45,7 @@ struct OnShowingCardOverlay: View {
         })
         .overlay(alignment: .bottomTrailing, content: {
             MainButton(buttonType: .icon(.mic)) {
-                handlePronunciationAndSave()
+                detailCardViewModel.toggleRecording()
             }
         })
         .overlay(alignment: .leading, content: {
@@ -56,18 +56,5 @@ struct OnShowingCardOverlay: View {
         .safeAreaPadding(.horizontal, UIConstants.horizontalPading)
         .safeAreaPadding(.bottom, UIConstants.bottomPadding)
         .safeAreaPadding(.top, UIConstants.topPadding)
-    }
-    
-    private func handlePronunciationAndSave() {
-        Task {
-            await detailCardViewModel.startPronunciationEvaluation()
-
-            if let word = detailCardViewModel.word {
-                let usedCard = UsedCardModel(session: currentSession, card: word)
-                modelContext.insert(usedCard)
-                try? modelContext.save()
-                print("UsedCard 저장 완료: \(word.wordEng)")
-            }
-        }
     }
 }
