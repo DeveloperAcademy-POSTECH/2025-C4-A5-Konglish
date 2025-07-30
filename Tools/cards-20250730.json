@@ -1,0 +1,2162 @@
+[
+    {
+        "id": "10a04ea4-060e-403e-a9f9-64e9dbb9c072",
+        "categoryId": "ea7f8c97-5839-40e2-aa90-b56f54184911",
+        "imageName": "butterfly",
+        "pronunciation": "butterfly",
+        "wordKor": "나비",
+        "wordEng": "butterfly",
+        "isBoss": true
+    },
+    {
+        "id": "827495b8-40ba-45d7-9326-5d464afc3e0f",
+        "categoryId": "ea7f8c97-5839-40e2-aa90-b56f54184911",
+        "imageName": "dog",
+        "pronunciation": "dog",
+        "wordKor": "개",
+        "wordEng": "dog",
+        "isBoss": false
+    },
+    {
+        "id": "db874e45-6542-4efe-a270-05e060844c47",
+        "categoryId": "ea7f8c97-5839-40e2-aa90-b56f54184911",
+        "imageName": "cat",
+        "pronunciation": "cat",
+        "wordKor": "고양이",
+        "wordEng": "cat",
+        "isBoss": false
+    },
+    {
+        "id": "27eb746d-acce-469a-9996-ec052e5c7a74",
+        "categoryId": "ea7f8c97-5839-40e2-aa90-b56f54184911",
+        "imageName": "fish",
+        "pronunciation": "fish",
+        "wordKor": "물고기",
+        "wordEng": "fish",
+        "isBoss": false
+    },
+    {
+        "id": "e73338fa-64d9-44a8-8553-d74c0fc83ad0",
+        "categoryId": "ea7f8c97-5839-40e2-aa90-b56f54184911",
+        "imageName": "bird",
+        "pronunciation": "bird",
+        "wordKor": "새",
+        "wordEng": "bird",
+        "isBoss": false
+    },
+    {
+        "id": "341af5a3-ef2a-4d71-ab9a-d03cf64f8c78",
+        "categoryId": "ea7f8c97-5839-40e2-aa90-b56f54184911",
+        "imageName": "cow",
+        "pronunciation": "cow",
+        "wordKor": "소",
+        "wordEng": "cow",
+        "isBoss": false
+    },
+    {
+        "id": "ff4849b6-15b5-43e7-8685-fa4586a4530f",
+        "categoryId": "ea7f8c97-5839-40e2-aa90-b56f54184911",
+        "imageName": "pig",
+        "pronunciation": "pig",
+        "wordKor": "돼지",
+        "wordEng": "pig",
+        "isBoss": false
+    },
+    {
+        "id": "279932dd-06a7-4da9-9577-40dbfd25c556",
+        "categoryId": "ea7f8c97-5839-40e2-aa90-b56f54184911",
+        "imageName": "chicken",
+        "pronunciation": "chicken",
+        "wordKor": "닭",
+        "wordEng": "chicken",
+        "isBoss": false
+    },
+    {
+        "id": "2a9f36cf-a432-41ef-ab6c-7a234a6f15ea",
+        "categoryId": "ea7f8c97-5839-40e2-aa90-b56f54184911",
+        "imageName": "duck",
+        "pronunciation": "duck",
+        "wordKor": "오리",
+        "wordEng": "duck",
+        "isBoss": false
+    },
+    {
+        "id": "656a4e9f-3bfb-4a80-918a-102d411bec01",
+        "categoryId": "ea7f8c97-5839-40e2-aa90-b56f54184911",
+        "imageName": "sheep",
+        "pronunciation": "sheep",
+        "wordKor": "양",
+        "wordEng": "sheep",
+        "isBoss": false
+    },
+    {
+        "id": "340f9838-1504-4c01-bda7-2d500448bb3a",
+        "categoryId": "4c84b2a5-6bf2-48f9-979d-1bc1739870c1",
+        "imageName": "crocodile",
+        "pronunciation": "crocodile",
+        "wordKor": "악어",
+        "wordEng": "crocodile",
+        "isBoss": true
+    },
+    {
+        "id": "19ddfe90-596c-4db9-9633-77f047c3668e",
+        "categoryId": "4c84b2a5-6bf2-48f9-979d-1bc1739870c1",
+        "imageName": "camel",
+        "pronunciation": "camel",
+        "wordKor": "낙타",
+        "wordEng": "camel",
+        "isBoss": false
+    },
+    {
+        "id": "78454842-d25c-45c0-ad14-62989b728b08",
+        "categoryId": "4c84b2a5-6bf2-48f9-979d-1bc1739870c1",
+        "imageName": "donkey",
+        "pronunciation": "donkey",
+        "wordKor": "당나귀",
+        "wordEng": "donkey",
+        "isBoss": false
+    },
+    {
+        "id": "3b808250-9893-4fd6-840d-2ff7a863bb37",
+        "categoryId": "4c84b2a5-6bf2-48f9-979d-1bc1739870c1",
+        "imageName": "raccoon",
+        "pronunciation": "raccoon",
+        "wordKor": "너구리",
+        "wordEng": "raccoon",
+        "isBoss": false
+    },
+    {
+        "id": "64a8ae36-a544-443d-a004-322dc54d82f7",
+        "categoryId": "4c84b2a5-6bf2-48f9-979d-1bc1739870c1",
+        "imageName": "hedgehog",
+        "pronunciation": "hedgehog",
+        "wordKor": "고슴도치",
+        "wordEng": "hedgehog",
+        "isBoss": false
+    },
+    {
+        "id": "4aa99c42-26b3-4891-a84d-3dfa8619d691",
+        "categoryId": "4c84b2a5-6bf2-48f9-979d-1bc1739870c1",
+        "imageName": "goose",
+        "pronunciation": "goose",
+        "wordKor": "거위",
+        "wordEng": "goose",
+        "isBoss": false
+    },
+    {
+        "id": "92029882-0833-472b-b1e1-1564d5635917",
+        "categoryId": "4c84b2a5-6bf2-48f9-979d-1bc1739870c1",
+        "imageName": "wolf",
+        "pronunciation": "wolf",
+        "wordKor": "늑대",
+        "wordEng": "wolf",
+        "isBoss": false
+    },
+    {
+        "id": "cac6b485-0062-4335-ba9c-15ee0ba2ccf9",
+        "categoryId": "4c84b2a5-6bf2-48f9-979d-1bc1739870c1",
+        "imageName": "parrot",
+        "pronunciation": "parrot",
+        "wordKor": "앵무새",
+        "wordEng": "parrot",
+        "isBoss": false
+    },
+    {
+        "id": "aa7aa6d8-234e-4cad-89b3-db6f4e235d18",
+        "categoryId": "4c84b2a5-6bf2-48f9-979d-1bc1739870c1",
+        "imageName": "otter",
+        "pronunciation": "otter",
+        "wordKor": "수달",
+        "wordEng": "otter",
+        "isBoss": false
+    },
+    {
+        "id": "a3f50aa0-9312-4a87-acee-b121c76e8bdd",
+        "categoryId": "4c84b2a5-6bf2-48f9-979d-1bc1739870c1",
+        "imageName": "eagle",
+        "pronunciation": "eagle",
+        "wordKor": "독수리",
+        "wordEng": "eagle",
+        "isBoss": false
+    },
+    {
+        "id": "81adc57c-8f09-4226-b80a-14b4e004f085",
+        "categoryId": "78907b2f-8214-4745-828a-998b1c757cd1",
+        "imageName": "komodo dragon",
+        "pronunciation": "komodo dragon",
+        "wordKor": "코모도왕도마뱀",
+        "wordEng": "komodo dragon",
+        "isBoss": true
+    },
+    {
+        "id": "7f98f5dd-118b-4dd6-bec8-3ac724f1a109",
+        "categoryId": "78907b2f-8214-4745-828a-998b1c757cd1",
+        "imageName": "alpaca",
+        "pronunciation": "alpaca",
+        "wordKor": "알파카",
+        "wordEng": "alpaca",
+        "isBoss": false
+    },
+    {
+        "id": "8b7c36c2-ed46-4188-ae49-65bf74567107",
+        "categoryId": "78907b2f-8214-4745-828a-998b1c757cd1",
+        "imageName": "reindeer",
+        "pronunciation": "reindeer",
+        "wordKor": "순록",
+        "wordEng": "reindeer",
+        "isBoss": false
+    },
+    {
+        "id": "cea575d1-bfee-4d6b-b535-33511011391e",
+        "categoryId": "78907b2f-8214-4745-828a-998b1c757cd1",
+        "imageName": "polar bear",
+        "pronunciation": "polar bear",
+        "wordKor": "북극곰",
+        "wordEng": "polar bear",
+        "isBoss": false
+    },
+    {
+        "id": "1fd4aeae-6993-4de8-8092-f1d50d03aeaf",
+        "categoryId": "78907b2f-8214-4745-828a-998b1c757cd1",
+        "imageName": "platypus",
+        "pronunciation": "platypus",
+        "wordKor": "오리너구리",
+        "wordEng": "platypus",
+        "isBoss": false
+    },
+    {
+        "id": "29af5616-6dd0-47f6-9e30-6bdb3d5d25f5",
+        "categoryId": "78907b2f-8214-4745-828a-998b1c757cd1",
+        "imageName": "sloth",
+        "pronunciation": "sloth",
+        "wordKor": "나무늘보",
+        "wordEng": "sloth",
+        "isBoss": false
+    },
+    {
+        "id": "4526a060-370e-4655-b90b-2d68f08c4c8e",
+        "categoryId": "78907b2f-8214-4745-828a-998b1c757cd1",
+        "imageName": "stingray",
+        "pronunciation": "stingray",
+        "wordKor": "가오리",
+        "wordEng": "stingray",
+        "isBoss": false
+    },
+    {
+        "id": "c7a3d793-297b-4b9b-866f-ae91a2388c59",
+        "categoryId": "78907b2f-8214-4745-828a-998b1c757cd1",
+        "imageName": "dinosaur",
+        "pronunciation": "dinosaur",
+        "wordKor": "공룡",
+        "wordEng": "dinosaur",
+        "isBoss": false
+    },
+    {
+        "id": "7b9d5909-abe8-4afa-93ad-9a97f1d7c311",
+        "categoryId": "78907b2f-8214-4745-828a-998b1c757cd1",
+        "imageName": "squid",
+        "pronunciation": "squid",
+        "wordKor": "오징어",
+        "wordEng": "squid",
+        "isBoss": false
+    },
+    {
+        "id": "701bbddd-6ea8-40ea-9e87-46ca8689294c",
+        "categoryId": "78907b2f-8214-4745-828a-998b1c757cd1",
+        "imageName": "meerkat",
+        "pronunciation": "meerkat",
+        "wordKor": "미어캣",
+        "wordEng": "meerkat",
+        "isBoss": false
+    },
+    {
+        "id": "3c27552f-6857-4cc2-bdb8-64238a0f4e56",
+        "categoryId": "9c5240a0-2efd-46b8-a32e-98b54528a23a",
+        "imageName": "potato",
+        "pronunciation": "potato",
+        "wordKor": "감자",
+        "wordEng": "potato",
+        "isBoss": true
+    },
+    {
+        "id": "97176492-08d7-4095-a7c2-0380f13f3d03",
+        "categoryId": "9c5240a0-2efd-46b8-a32e-98b54528a23a",
+        "imageName": "egg",
+        "pronunciation": "egg",
+        "wordKor": "계란",
+        "wordEng": "egg",
+        "isBoss": false
+    },
+    {
+        "id": "eeb7e4e1-3571-42d1-a780-b72fbe538b8d",
+        "categoryId": "9c5240a0-2efd-46b8-a32e-98b54528a23a",
+        "imageName": "apple",
+        "pronunciation": "apple",
+        "wordKor": "사과",
+        "wordEng": "apple",
+        "isBoss": false
+    },
+    {
+        "id": "d63fb391-5752-4d9d-b60e-97f551a103bc",
+        "categoryId": "9c5240a0-2efd-46b8-a32e-98b54528a23a",
+        "imageName": "carrot",
+        "pronunciation": "carrot",
+        "wordKor": "당근",
+        "wordEng": "carrot",
+        "isBoss": false
+    },
+    {
+        "id": "1c027feb-982c-4c84-b750-2366a46c0922",
+        "categoryId": "9c5240a0-2efd-46b8-a32e-98b54528a23a",
+        "imageName": "banana",
+        "pronunciation": "banana",
+        "wordKor": "바나나",
+        "wordEng": "banana",
+        "isBoss": false
+    },
+    {
+        "id": "43dd27dd-5846-4d5c-9e71-86b0c6d12d1d",
+        "categoryId": "9c5240a0-2efd-46b8-a32e-98b54528a23a",
+        "imageName": "ham",
+        "pronunciation": "ham",
+        "wordKor": "햄",
+        "wordEng": "ham",
+        "isBoss": false
+    },
+    {
+        "id": "e55afe27-01e7-4b64-a70a-fb08d2f77e64",
+        "categoryId": "9c5240a0-2efd-46b8-a32e-98b54528a23a",
+        "imageName": "jam",
+        "pronunciation": "jam",
+        "wordKor": "잼",
+        "wordEng": "jam",
+        "isBoss": false
+    },
+    {
+        "id": "bfcf712c-3c6c-40a6-827d-23f44b3fbcf3",
+        "categoryId": "9c5240a0-2efd-46b8-a32e-98b54528a23a",
+        "imageName": "milk",
+        "pronunciation": "milk",
+        "wordKor": "우유",
+        "wordEng": "milk",
+        "isBoss": false
+    },
+    {
+        "id": "b561668e-4eda-4ddb-8d1e-c1dab720ec7c",
+        "categoryId": "9c5240a0-2efd-46b8-a32e-98b54528a23a",
+        "imageName": "water",
+        "pronunciation": "water",
+        "wordKor": "물",
+        "wordEng": "water",
+        "isBoss": false
+    },
+    {
+        "id": "a1daad44-89d0-4172-9c3a-d318685e39fd",
+        "categoryId": "9c5240a0-2efd-46b8-a32e-98b54528a23a",
+        "imageName": "rice",
+        "pronunciation": "rice",
+        "wordKor": "밥",
+        "wordEng": "rice",
+        "isBoss": false
+    },
+    {
+        "id": "8a86dd3d-601b-4845-bc32-cff25c765b39",
+        "categoryId": "8bec299f-7f42-45f4-bd7f-9a5ba7d19124",
+        "imageName": "hamburger",
+        "pronunciation": "hamburger",
+        "wordKor": "햄버거",
+        "wordEng": "hamburger",
+        "isBoss": true
+    },
+    {
+        "id": "317dec36-2268-4e10-9466-833a75305fa4",
+        "categoryId": "8bec299f-7f42-45f4-bd7f-9a5ba7d19124",
+        "imageName": "sugar",
+        "pronunciation": "sugar",
+        "wordKor": "설탕",
+        "wordEng": "sugar",
+        "isBoss": false
+    },
+    {
+        "id": "581602cd-1903-4981-b8ae-2adb838aab7c",
+        "categoryId": "8bec299f-7f42-45f4-bd7f-9a5ba7d19124",
+        "imageName": "flour",
+        "pronunciation": "flour",
+        "wordKor": "밀가루",
+        "wordEng": "flour",
+        "isBoss": false
+    },
+    {
+        "id": "e8be7882-87a2-4a32-bde9-c6c86691f846",
+        "categoryId": "8bec299f-7f42-45f4-bd7f-9a5ba7d19124",
+        "imageName": "salad",
+        "pronunciation": "salad",
+        "wordKor": "샐러드",
+        "wordEng": "salad",
+        "isBoss": false
+    },
+    {
+        "id": "86c9914c-07f7-4201-a2a7-242a00f0358d",
+        "categoryId": "8bec299f-7f42-45f4-bd7f-9a5ba7d19124",
+        "imageName": "cake",
+        "pronunciation": "cake",
+        "wordKor": "케이크",
+        "wordEng": "cake",
+        "isBoss": false
+    },
+    {
+        "id": "8b1c5d3a-5e09-4b42-9f63-7af09c83e544",
+        "categoryId": "8bec299f-7f42-45f4-bd7f-9a5ba7d19124",
+        "imageName": "bread",
+        "pronunciation": "bread",
+        "wordKor": "빵",
+        "wordEng": "bread",
+        "isBoss": false
+    },
+    {
+        "id": "d8686fa0-3fca-4b73-84c5-3610e8590fe2",
+        "categoryId": "8bec299f-7f42-45f4-bd7f-9a5ba7d19124",
+        "imageName": "candy",
+        "pronunciation": "candy",
+        "wordKor": "사탕",
+        "wordEng": "candy",
+        "isBoss": false
+    },
+    {
+        "id": "3c238ec3-b532-44d8-bf06-c5cf982321fc",
+        "categoryId": "8bec299f-7f42-45f4-bd7f-9a5ba7d19124",
+        "imageName": "curry",
+        "pronunciation": "curry",
+        "wordKor": "카레",
+        "wordEng": "curry",
+        "isBoss": false
+    },
+    {
+        "id": "79e1ca21-13b7-409c-ad97-e46e006f1ae6",
+        "categoryId": "8bec299f-7f42-45f4-bd7f-9a5ba7d19124",
+        "imageName": "sushi",
+        "pronunciation": "sushi",
+        "wordKor": "초밥",
+        "wordEng": "sushi",
+        "isBoss": false
+    },
+    {
+        "id": "e609fe73-7c41-43b2-a9ca-64eb53f41c6c",
+        "categoryId": "8bec299f-7f42-45f4-bd7f-9a5ba7d19124",
+        "imageName": "honey",
+        "pronunciation": "honey",
+        "wordKor": "꿀",
+        "wordEng": "honey",
+        "isBoss": false
+    },
+    {
+        "id": "547d1b41-2cfd-43f7-a388-3f70b4ebc776",
+        "categoryId": "4b4dba0d-7241-460f-80d0-8b601192af2b",
+        "imageName": "croissant",
+        "pronunciation": "croissant",
+        "wordKor": "크루아상",
+        "wordEng": "croissant",
+        "isBoss": true
+    },
+    {
+        "id": "2796d870-289b-49c9-a699-7c9d2295b3cf",
+        "categoryId": "4b4dba0d-7241-460f-80d0-8b601192af2b",
+        "imageName": "milkshake",
+        "pronunciation": "milkshake",
+        "wordKor": "밀크셰이크",
+        "wordEng": "milkshake",
+        "isBoss": false
+    },
+    {
+        "id": "e7f3e486-5ba1-4fe9-b143-87209145fa51",
+        "categoryId": "4b4dba0d-7241-460f-80d0-8b601192af2b",
+        "imageName": "sandwich",
+        "pronunciation": "sandwich",
+        "wordKor": "샌드위치",
+        "wordEng": "sandwich",
+        "isBoss": false
+    },
+    {
+        "id": "1834a92f-06fd-43c9-948b-805db2f5f106",
+        "categoryId": "4b4dba0d-7241-460f-80d0-8b601192af2b",
+        "imageName": "spaghetti",
+        "pronunciation": "spaghetti",
+        "wordKor": "스파게티",
+        "wordEng": "spaghetti",
+        "isBoss": false
+    },
+    {
+        "id": "b639f5ad-266d-454b-a8ad-275c51c1874d",
+        "categoryId": "4b4dba0d-7241-460f-80d0-8b601192af2b",
+        "imageName": "dumpling",
+        "pronunciation": "dumpling",
+        "wordKor": "만두",
+        "wordEng": "dumpling",
+        "isBoss": false
+    },
+    {
+        "id": "782105a3-f246-4aff-a724-61cadbf3a9d5",
+        "categoryId": "4b4dba0d-7241-460f-80d0-8b601192af2b",
+        "imageName": "pudding",
+        "pronunciation": "pudding",
+        "wordKor": "푸딩",
+        "wordEng": "pudding",
+        "isBoss": false
+    },
+    {
+        "id": "ac8a8417-b82a-46fb-bf8f-d7784ed7c630",
+        "categoryId": "4b4dba0d-7241-460f-80d0-8b601192af2b",
+        "imageName": "cheesecake",
+        "pronunciation": "cheesecake",
+        "wordKor": "치즈케이크",
+        "wordEng": "cheesecake",
+        "isBoss": false
+    },
+    {
+        "id": "f07c9afb-06e6-4ee6-90f8-381cbea40325",
+        "categoryId": "4b4dba0d-7241-460f-80d0-8b601192af2b",
+        "imageName": "breakfast",
+        "pronunciation": "breakfast",
+        "wordKor": "아침식사",
+        "wordEng": "breakfast",
+        "isBoss": false
+    },
+    {
+        "id": "ac3267bf-dd07-4214-8a0f-d3a376cafd84",
+        "categoryId": "4b4dba0d-7241-460f-80d0-8b601192af2b",
+        "imageName": "tiramisu",
+        "pronunciation": "tiramisu",
+        "wordKor": "티라미수",
+        "wordEng": "tiramisu",
+        "isBoss": false
+    },
+    {
+        "id": "5991e82a-abd9-4585-867a-b20e4cb3d029",
+        "categoryId": "4b4dba0d-7241-460f-80d0-8b601192af2b",
+        "imageName": "gelato",
+        "pronunciation": "gelato",
+        "wordKor": "젤라토",
+        "wordEng": "gelato",
+        "isBoss": false
+    },
+    {
+        "id": "532c5886-3b6e-44c7-bef4-d96e32c6036c",
+        "categoryId": "862bb2b8-52a0-4540-becf-270c43c7eb56",
+        "imageName": "post office",
+        "pronunciation": "post office",
+        "wordKor": "우체국",
+        "wordEng": "post office",
+        "isBoss": true
+    },
+    {
+        "id": "e2dee7e2-ca2b-491c-91c0-fea36619a12f",
+        "categoryId": "862bb2b8-52a0-4540-becf-270c43c7eb56",
+        "imageName": "zoo",
+        "pronunciation": "zoo",
+        "wordKor": "동물원",
+        "wordEng": "zoo",
+        "isBoss": false
+    },
+    {
+        "id": "533074c9-c259-4590-a703-5f2f3384c940",
+        "categoryId": "862bb2b8-52a0-4540-becf-270c43c7eb56",
+        "imageName": "park",
+        "pronunciation": "park",
+        "wordKor": "공원",
+        "wordEng": "park",
+        "isBoss": false
+    },
+    {
+        "id": "d220f831-5509-4211-a212-f5cb892905fa",
+        "categoryId": "862bb2b8-52a0-4540-becf-270c43c7eb56",
+        "imageName": "farm",
+        "pronunciation": "farm",
+        "wordKor": "농장",
+        "wordEng": "farm",
+        "isBoss": false
+    },
+    {
+        "id": "3b510d48-0a8c-4476-ae5c-ff97ce8a8ce3",
+        "categoryId": "862bb2b8-52a0-4540-becf-270c43c7eb56",
+        "imageName": "home",
+        "pronunciation": "home",
+        "wordKor": "집",
+        "wordEng": "home",
+        "isBoss": false
+    },
+    {
+        "id": "b5cd93a4-aecd-4553-b897-286d4b85b828",
+        "categoryId": "862bb2b8-52a0-4540-becf-270c43c7eb56",
+        "imageName": "room",
+        "pronunciation": "room",
+        "wordKor": "방",
+        "wordEng": "room",
+        "isBoss": false
+    },
+    {
+        "id": "19a255ac-3ca1-496b-bd8d-ee4c4592a6f3",
+        "categoryId": "862bb2b8-52a0-4540-becf-270c43c7eb56",
+        "imageName": "bank",
+        "pronunciation": "bank",
+        "wordKor": "은행",
+        "wordEng": "bank",
+        "isBoss": false
+    },
+    {
+        "id": "1fca51fc-ad9f-45db-9496-fee2d228d28b",
+        "categoryId": "862bb2b8-52a0-4540-becf-270c43c7eb56",
+        "imageName": "store",
+        "pronunciation": "store",
+        "wordKor": "가게",
+        "wordEng": "store",
+        "isBoss": false
+    },
+    {
+        "id": "524a800b-5de7-4be0-9723-d2c9d41ae891",
+        "categoryId": "862bb2b8-52a0-4540-becf-270c43c7eb56",
+        "imageName": "shop",
+        "pronunciation": "shop",
+        "wordKor": "상점",
+        "wordEng": "shop",
+        "isBoss": false
+    },
+    {
+        "id": "da603886-977a-40e8-8fed-467ae724f7ec",
+        "categoryId": "862bb2b8-52a0-4540-becf-270c43c7eb56",
+        "imageName": "cafe",
+        "pronunciation": "cafe",
+        "wordKor": "카페",
+        "wordEng": "cafe",
+        "isBoss": false
+    },
+    {
+        "id": "73b88094-b7ce-40cc-889f-1ab0d7211ace",
+        "categoryId": "8a4a6561-8ab9-41af-9d30-c5a456c01553",
+        "imageName": "police station",
+        "pronunciation": "police station",
+        "wordKor": "경찰서",
+        "wordEng": "police station",
+        "isBoss": true
+    },
+    {
+        "id": "cd0d5946-9393-49de-b556-f922b5aa4349",
+        "categoryId": "8a4a6561-8ab9-41af-9d30-c5a456c01553",
+        "imageName": "bus stop",
+        "pronunciation": "bus stop",
+        "wordKor": "버스정류장",
+        "wordEng": "bus stop",
+        "isBoss": false
+    },
+    {
+        "id": "71f7dad6-e6e2-4ebe-b90d-762b3e7ddb6a",
+        "categoryId": "8a4a6561-8ab9-41af-9d30-c5a456c01553",
+        "imageName": "waterfall",
+        "pronunciation": "waterfall",
+        "wordKor": "폭포",
+        "wordEng": "waterfall",
+        "isBoss": false
+    },
+    {
+        "id": "fd412a82-33e0-48d0-8c75-a4d4d68ee76a",
+        "categoryId": "8a4a6561-8ab9-41af-9d30-c5a456c01553",
+        "imageName": "lake",
+        "pronunciation": "lake",
+        "wordKor": "호수",
+        "wordEng": "lake",
+        "isBoss": false
+    },
+    {
+        "id": "2f637af3-72ce-4319-8907-f823523f4c88",
+        "categoryId": "8a4a6561-8ab9-41af-9d30-c5a456c01553",
+        "imageName": "sea",
+        "pronunciation": "sea",
+        "wordKor": "바다",
+        "wordEng": "sea",
+        "isBoss": false
+    },
+    {
+        "id": "c8e01691-0ccd-4061-a2d7-8fda0771f6dd",
+        "categoryId": "8a4a6561-8ab9-41af-9d30-c5a456c01553",
+        "imageName": "museum",
+        "pronunciation": "museum",
+        "wordKor": "박물관",
+        "wordEng": "museum",
+        "isBoss": false
+    },
+    {
+        "id": "39c597bf-6ee0-4672-9265-b2bbfb00ab71",
+        "categoryId": "8a4a6561-8ab9-41af-9d30-c5a456c01553",
+        "imageName": "cinema",
+        "pronunciation": "cinema",
+        "wordKor": "영화관",
+        "wordEng": "cinema",
+        "isBoss": false
+    },
+    {
+        "id": "876d91d4-806a-465c-8993-8c9bc3640413",
+        "categoryId": "8a4a6561-8ab9-41af-9d30-c5a456c01553",
+        "imageName": "hill",
+        "pronunciation": "hill",
+        "wordKor": "언덕",
+        "wordEng": "hill",
+        "isBoss": false
+    },
+    {
+        "id": "01195f09-bacc-4947-9101-12731245a33f",
+        "categoryId": "8a4a6561-8ab9-41af-9d30-c5a456c01553",
+        "imageName": "bakery",
+        "pronunciation": "bakery",
+        "wordKor": "빵집",
+        "wordEng": "bakery",
+        "isBoss": false
+    },
+    {
+        "id": "83ca3aa5-b23f-4138-8723-3be681174979",
+        "categoryId": "8a4a6561-8ab9-41af-9d30-c5a456c01553",
+        "imageName": "valley",
+        "pronunciation": "valley",
+        "wordKor": "계곡",
+        "wordEng": "valley",
+        "isBoss": false
+    },
+    {
+        "id": "5dc26426-c73a-44ed-b1d6-46f6596d8141",
+        "categoryId": "21683f6a-74f8-43b1-a02a-e0a984efc061",
+        "imageName": "space station",
+        "pronunciation": "space station",
+        "wordKor": "우주정거장",
+        "wordEng": "space station",
+        "isBoss": true
+    },
+    {
+        "id": "c4899da0-a1c3-446d-a9fd-96fe938fa3e5",
+        "categoryId": "21683f6a-74f8-43b1-a02a-e0a984efc061",
+        "imageName": "science center",
+        "pronunciation": "science center",
+        "wordKor": "과학관",
+        "wordEng": "science center",
+        "isBoss": false
+    },
+    {
+        "id": "6fa9e03b-922f-42e8-b803-12b3a62aec98",
+        "categoryId": "21683f6a-74f8-43b1-a02a-e0a984efc061",
+        "imageName": "soccer field",
+        "pronunciation": "soccer field",
+        "wordKor": "축구장",
+        "wordEng": "soccer field",
+        "isBoss": false
+    },
+    {
+        "id": "6194c958-b693-4689-9cbe-b6d6b94f7da0",
+        "categoryId": "21683f6a-74f8-43b1-a02a-e0a984efc061",
+        "imageName": "orchard",
+        "pronunciation": "orchard",
+        "wordKor": "과수원",
+        "wordEng": "orchard",
+        "isBoss": false
+    },
+    {
+        "id": "834d2217-a310-4bfc-adce-4a849dfed888",
+        "categoryId": "21683f6a-74f8-43b1-a02a-e0a984efc061",
+        "imageName": "university",
+        "pronunciation": "university",
+        "wordKor": "대학교",
+        "wordEng": "university",
+        "isBoss": false
+    },
+    {
+        "id": "1788675f-4fda-4e3c-b623-e46507839270",
+        "categoryId": "21683f6a-74f8-43b1-a02a-e0a984efc061",
+        "imageName": "ice rink",
+        "pronunciation": "ice rink",
+        "wordKor": "아이스링크",
+        "wordEng": "ice rink",
+        "isBoss": false
+    },
+    {
+        "id": "2cfffe4e-2af4-4990-b61b-9257f6fbca74",
+        "categoryId": "21683f6a-74f8-43b1-a02a-e0a984efc061",
+        "imageName": "art studio",
+        "pronunciation": "art studio",
+        "wordKor": "미술 스튜디오",
+        "wordEng": "art studio",
+        "isBoss": false
+    },
+    {
+        "id": "ed683c0e-476f-4bea-83be-ab59bfda7915",
+        "categoryId": "21683f6a-74f8-43b1-a02a-e0a984efc061",
+        "imageName": "amusement park",
+        "pronunciation": "amusement park",
+        "wordKor": "놀이공원",
+        "wordEng": "amusement park",
+        "isBoss": false
+    },
+    {
+        "id": "38e30ece-eed4-4ef8-bf35-ca7ba2fe65b8",
+        "categoryId": "21683f6a-74f8-43b1-a02a-e0a984efc061",
+        "imageName": "lighthouse",
+        "pronunciation": "lighthouse",
+        "wordKor": "등대",
+        "wordEng": "lighthouse",
+        "isBoss": false
+    },
+    {
+        "id": "90adbc7a-b9fc-489d-af9b-49fa0eb17c5d",
+        "categoryId": "21683f6a-74f8-43b1-a02a-e0a984efc061",
+        "imageName": "power plant",
+        "pronunciation": "power plant",
+        "wordKor": "발전소",
+        "wordEng": "power plant",
+        "isBoss": false
+    },
+    {
+        "id": "271835f4-a52b-4278-b15f-a177c6487997",
+        "categoryId": "31463e23-8bb4-436d-ba79-9be25a22edf1",
+        "imageName": "helmet",
+        "pronunciation": "helmet",
+        "wordKor": "헬멧",
+        "wordEng": "helmet",
+        "isBoss": true
+    },
+    {
+        "id": "a3390cb7-4934-4bd9-bf45-6a590c8842ab",
+        "categoryId": "31463e23-8bb4-436d-ba79-9be25a22edf1",
+        "imageName": "cap",
+        "pronunciation": "cap",
+        "wordKor": "모자",
+        "wordEng": "cap",
+        "isBoss": false
+    },
+    {
+        "id": "6a693640-9cfc-4fac-a77e-c72b5bc36f79",
+        "categoryId": "31463e23-8bb4-436d-ba79-9be25a22edf1",
+        "imageName": "socks",
+        "pronunciation": "socks",
+        "wordKor": "양말",
+        "wordEng": "socks",
+        "isBoss": false
+    },
+    {
+        "id": "19209509-58be-4b58-9c59-43f7cc2aa088",
+        "categoryId": "31463e23-8bb4-436d-ba79-9be25a22edf1",
+        "imageName": "shoes",
+        "pronunciation": "shoes",
+        "wordKor": "신발",
+        "wordEng": "shoes",
+        "isBoss": false
+    },
+    {
+        "id": "5d3d9476-2439-4cfa-8a1e-3452fa23c71a",
+        "categoryId": "31463e23-8bb4-436d-ba79-9be25a22edf1",
+        "imageName": "belt",
+        "pronunciation": "belt",
+        "wordKor": "벨트",
+        "wordEng": "belt",
+        "isBoss": false
+    },
+    {
+        "id": "0e7a3c2f-d724-43f5-ace8-7f486899232f",
+        "categoryId": "31463e23-8bb4-436d-ba79-9be25a22edf1",
+        "imageName": "pants",
+        "pronunciation": "pants",
+        "wordKor": "바지",
+        "wordEng": "pants",
+        "isBoss": false
+    },
+    {
+        "id": "3d5b141b-55dc-4748-bc62-fceab86ebbfb",
+        "categoryId": "31463e23-8bb4-436d-ba79-9be25a22edf1",
+        "imageName": "shorts",
+        "pronunciation": "shorts",
+        "wordKor": "반바지",
+        "wordEng": "shorts",
+        "isBoss": false
+    },
+    {
+        "id": "808baa97-73f6-4008-bfed-b0c999c022f3",
+        "categoryId": "31463e23-8bb4-436d-ba79-9be25a22edf1",
+        "imageName": "hair",
+        "pronunciation": "hair",
+        "wordKor": "머리카락",
+        "wordEng": "hair",
+        "isBoss": false
+    },
+    {
+        "id": "635b5d8c-19a7-451b-babe-d61be1fa8909",
+        "categoryId": "31463e23-8bb4-436d-ba79-9be25a22edf1",
+        "imageName": "ear",
+        "pronunciation": "ear",
+        "wordKor": "귀",
+        "wordEng": "ear",
+        "isBoss": false
+    },
+    {
+        "id": "54797000-1171-46fe-9895-1e2c2490688c",
+        "categoryId": "31463e23-8bb4-436d-ba79-9be25a22edf1",
+        "imageName": "vest",
+        "pronunciation": "vest",
+        "wordKor": "조끼",
+        "wordEng": "vest",
+        "isBoss": false
+    },
+    {
+        "id": "7609058c-966c-4202-82bd-df9533211a6c",
+        "categoryId": "ecde2194-fcae-4d89-80a3-74edda820713",
+        "imageName": "sneakers",
+        "pronunciation": "sneakers",
+        "wordKor": "운동화",
+        "wordEng": "sneakers",
+        "isBoss": true
+    },
+    {
+        "id": "4772e56d-8959-4d91-ab1b-f42be2dacd52",
+        "categoryId": "ecde2194-fcae-4d89-80a3-74edda820713",
+        "imageName": "suit",
+        "pronunciation": "suit",
+        "wordKor": "정장",
+        "wordEng": "suit",
+        "isBoss": false
+    },
+    {
+        "id": "e2eac211-058b-4705-a3a8-de25057ac2f5",
+        "categoryId": "ecde2194-fcae-4d89-80a3-74edda820713",
+        "imageName": "overalls",
+        "pronunciation": "overalls",
+        "wordKor": "멜빵바지",
+        "wordEng": "overalls",
+        "isBoss": false
+    },
+    {
+        "id": "370ed9e9-1770-472a-b858-adc802078dad",
+        "categoryId": "ecde2194-fcae-4d89-80a3-74edda820713",
+        "imageName": "sweater",
+        "pronunciation": "sweater",
+        "wordKor": "스웨터",
+        "wordEng": "sweater",
+        "isBoss": false
+    },
+    {
+        "id": "248665b6-9971-410d-9b69-d4012010ff59",
+        "categoryId": "ecde2194-fcae-4d89-80a3-74edda820713",
+        "imageName": "cardigan",
+        "pronunciation": "cardigan",
+        "wordKor": "가디건",
+        "wordEng": "cardigan",
+        "isBoss": false
+    },
+    {
+        "id": "b16c4d90-fea9-422a-8588-27c10755b9e5",
+        "categoryId": "ecde2194-fcae-4d89-80a3-74edda820713",
+        "imageName": "apron",
+        "pronunciation": "apron",
+        "wordKor": "앞치마",
+        "wordEng": "apron",
+        "isBoss": false
+    },
+    {
+        "id": "a97e7f01-0795-47aa-afcc-62ddbdf2d614",
+        "categoryId": "ecde2194-fcae-4d89-80a3-74edda820713",
+        "imageName": "gloves",
+        "pronunciation": "gloves",
+        "wordKor": "장갑",
+        "wordEng": "gloves",
+        "isBoss": false
+    },
+    {
+        "id": "23dd420e-8634-47da-bb54-c315daef4f3f",
+        "categoryId": "ecde2194-fcae-4d89-80a3-74edda820713",
+        "imageName": "bone",
+        "pronunciation": "bone",
+        "wordKor": "뼈",
+        "wordEng": "bone",
+        "isBoss": false
+    },
+    {
+        "id": "d379509f-fd2c-4ba2-8262-01002febdf01",
+        "categoryId": "ecde2194-fcae-4d89-80a3-74edda820713",
+        "imageName": "blood",
+        "pronunciation": "blood",
+        "wordKor": "피",
+        "wordEng": "blood",
+        "isBoss": false
+    },
+    {
+        "id": "c4ee43b8-35b4-461c-ac38-1a9d95778b14",
+        "categoryId": "ecde2194-fcae-4d89-80a3-74edda820713",
+        "imageName": "jeans",
+        "pronunciation": "jeans",
+        "wordKor": "청바지",
+        "wordEng": "jeans",
+        "isBoss": false
+    },
+    {
+        "id": "4e688cdb-554f-4adc-9433-70b5c5f8a844",
+        "categoryId": "8fab3d5a-98b1-4579-995b-067011b87c2f",
+        "imageName": "mustache",
+        "pronunciation": "mustache",
+        "wordKor": "콧수염",
+        "wordEng": "mustache",
+        "isBoss": true
+    },
+    {
+        "id": "24d91330-46c5-4c1f-941f-842bea78a90f",
+        "categoryId": "8fab3d5a-98b1-4579-995b-067011b87c2f",
+        "imageName": "blazer",
+        "pronunciation": "blazer",
+        "wordKor": "블레이저",
+        "wordEng": "blazer",
+        "isBoss": false
+    },
+    {
+        "id": "b74a1eba-4c37-443f-a2e4-15ea6ed01bd5",
+        "categoryId": "8fab3d5a-98b1-4579-995b-067011b87c2f",
+        "imageName": "tuxedo",
+        "pronunciation": "tuxedo",
+        "wordKor": "턱시도",
+        "wordEng": "tuxedo",
+        "isBoss": false
+    },
+    {
+        "id": "f53c9d65-55ab-4f07-ba4e-18dac9e1b315",
+        "categoryId": "8fab3d5a-98b1-4579-995b-067011b87c2f",
+        "imageName": "poncho",
+        "pronunciation": "poncho",
+        "wordKor": "판초",
+        "wordEng": "poncho",
+        "isBoss": false
+    },
+    {
+        "id": "2a98d96b-aeb9-48d6-b359-bf268a1c4a42",
+        "categoryId": "8fab3d5a-98b1-4579-995b-067011b87c2f",
+        "imageName": "parka",
+        "pronunciation": "parka",
+        "wordKor": "파카",
+        "wordEng": "parka",
+        "isBoss": false
+    },
+    {
+        "id": "e955a3a6-a483-472c-bb55-206511acfa45",
+        "categoryId": "8fab3d5a-98b1-4579-995b-067011b87c2f",
+        "imageName": "windbreaker",
+        "pronunciation": "windbreaker",
+        "wordKor": "바람막이",
+        "wordEng": "windbreaker",
+        "isBoss": false
+    },
+    {
+        "id": "81b7ec45-5df5-43cc-94e0-9397ebb918e2",
+        "categoryId": "8fab3d5a-98b1-4579-995b-067011b87c2f",
+        "imageName": "tooth",
+        "pronunciation": "tooth",
+        "wordKor": "이빨",
+        "wordEng": "tooth",
+        "isBoss": false
+    },
+    {
+        "id": "705961f1-1c6e-4bb9-88a5-318215c47b16",
+        "categoryId": "8fab3d5a-98b1-4579-995b-067011b87c2f",
+        "imageName": "heart",
+        "pronunciation": "heart",
+        "wordKor": "심장",
+        "wordEng": "heart",
+        "isBoss": false
+    },
+    {
+        "id": "f8930bc8-281b-4332-834b-4b3c24319422",
+        "categoryId": "8fab3d5a-98b1-4579-995b-067011b87c2f",
+        "imageName": "trench coat",
+        "pronunciation": "trench coat",
+        "wordKor": "트렌치코트",
+        "wordEng": "trench coat",
+        "isBoss": false
+    },
+    {
+        "id": "a442d6b0-e8bb-40d5-9036-47c15c2ee323",
+        "categoryId": "8fab3d5a-98b1-4579-995b-067011b87c2f",
+        "imageName": "turtleneck",
+        "pronunciation": "turtleneck",
+        "wordKor": "목폴라",
+        "wordEng": "turtleneck",
+        "isBoss": false
+    },
+    {
+        "id": "88a02e2f-9717-44eb-aa67-13d38054ba04",
+        "categoryId": "c7390456-40df-4536-a04e-346eb6b03219",
+        "imageName": "mountain",
+        "pronunciation": "mountain",
+        "wordKor": "산",
+        "wordEng": "mountain",
+        "isBoss": true
+    },
+    {
+        "id": "5f4070f1-5246-434c-9e72-541a91951e76",
+        "categoryId": "c7390456-40df-4536-a04e-346eb6b03219",
+        "imageName": "sun",
+        "pronunciation": "sun",
+        "wordKor": "해",
+        "wordEng": "sun",
+        "isBoss": false
+    },
+    {
+        "id": "1656ae28-fb67-4594-9152-04489d6c7875",
+        "categoryId": "c7390456-40df-4536-a04e-346eb6b03219",
+        "imageName": "moon",
+        "pronunciation": "moon",
+        "wordKor": "달",
+        "wordEng": "moon",
+        "isBoss": false
+    },
+    {
+        "id": "aef1b4f1-b50b-4765-890e-f17726ffbd46",
+        "categoryId": "c7390456-40df-4536-a04e-346eb6b03219",
+        "imageName": "star",
+        "pronunciation": "star",
+        "wordKor": "별",
+        "wordEng": "star",
+        "isBoss": false
+    },
+    {
+        "id": "36bdc61d-7bf4-4448-991b-087ecd5b3a01",
+        "categoryId": "c7390456-40df-4536-a04e-346eb6b03219",
+        "imageName": "cloud",
+        "pronunciation": "cloud",
+        "wordKor": "구름",
+        "wordEng": "cloud",
+        "isBoss": false
+    },
+    {
+        "id": "a457eeb6-e89c-4700-8264-a72ac715dadb",
+        "categoryId": "c7390456-40df-4536-a04e-346eb6b03219",
+        "imageName": "rain",
+        "pronunciation": "rain",
+        "wordKor": "비",
+        "wordEng": "rain",
+        "isBoss": false
+    },
+    {
+        "id": "037de81a-8d2a-430c-848c-0d7db0ea5163",
+        "categoryId": "c7390456-40df-4536-a04e-346eb6b03219",
+        "imageName": "snow",
+        "pronunciation": "snow",
+        "wordKor": "눈",
+        "wordEng": "snow",
+        "isBoss": false
+    },
+    {
+        "id": "c1cdaab0-9015-4d69-aa18-6d8713300060",
+        "categoryId": "c7390456-40df-4536-a04e-346eb6b03219",
+        "imageName": "wind",
+        "pronunciation": "wind",
+        "wordKor": "바람",
+        "wordEng": "wind",
+        "isBoss": false
+    },
+    {
+        "id": "05fa7a3c-8b7e-4818-b187-0ab33a796f9b",
+        "categoryId": "c7390456-40df-4536-a04e-346eb6b03219",
+        "imageName": "tree",
+        "pronunciation": "tree",
+        "wordKor": "나무",
+        "wordEng": "tree",
+        "isBoss": false
+    },
+    {
+        "id": "f7d1c5c7-8a5e-4cc6-8e6a-031348d24c16",
+        "categoryId": "c7390456-40df-4536-a04e-346eb6b03219",
+        "imageName": "flower",
+        "pronunciation": "flower",
+        "wordKor": "꽃",
+        "wordEng": "flower",
+        "isBoss": false
+    },
+    {
+        "id": "d0986323-f449-4491-9959-b4cb6412c41e",
+        "categoryId": "3b56520e-9423-45c7-ada2-2bb79644f30f",
+        "imageName": "lightning",
+        "pronunciation": "lightning",
+        "wordKor": "번개",
+        "wordEng": "lightning",
+        "isBoss": true
+    },
+    {
+        "id": "bf4be582-2d02-46a3-814a-ce1cead39a24",
+        "categoryId": "3b56520e-9423-45c7-ada2-2bb79644f30f",
+        "imageName": "winter",
+        "pronunciation": "winter",
+        "wordKor": "겨울",
+        "wordEng": "winter",
+        "isBoss": false
+    },
+    {
+        "id": "1ff4ef9c-4f85-4493-b783-a8d3ae2e278a",
+        "categoryId": "3b56520e-9423-45c7-ada2-2bb79644f30f",
+        "imageName": "jungle",
+        "pronunciation": "jungle",
+        "wordKor": "정글",
+        "wordEng": "jungle",
+        "isBoss": false
+    },
+    {
+        "id": "39ee4a15-901d-448c-a074-128580ebeba3",
+        "categoryId": "3b56520e-9423-45c7-ada2-2bb79644f30f",
+        "imageName": "wave",
+        "pronunciation": "wave",
+        "wordKor": "파도",
+        "wordEng": "wave",
+        "isBoss": false
+    },
+    {
+        "id": "15830c8f-a1c6-4d2f-8e42-93248b4627b4",
+        "categoryId": "3b56520e-9423-45c7-ada2-2bb79644f30f",
+        "imageName": "storm",
+        "pronunciation": "storm",
+        "wordKor": "폭풍",
+        "wordEng": "storm",
+        "isBoss": false
+    },
+    {
+        "id": "22402253-aebc-4bf0-ba3e-42a3935b473d",
+        "categoryId": "3b56520e-9423-45c7-ada2-2bb79644f30f",
+        "imageName": "canyon",
+        "pronunciation": "canyon",
+        "wordKor": "협곡",
+        "wordEng": "canyon",
+        "isBoss": false
+    },
+    {
+        "id": "51bb84e1-efe9-4e87-97e2-eb4ce2be0308",
+        "categoryId": "3b56520e-9423-45c7-ada2-2bb79644f30f",
+        "imageName": "volcano",
+        "pronunciation": "volcano",
+        "wordKor": "화산",
+        "wordEng": "volcano",
+        "isBoss": false
+    },
+    {
+        "id": "f4a8e8e3-3a99-4e29-9c0d-a54545a508c6",
+        "categoryId": "3b56520e-9423-45c7-ada2-2bb79644f30f",
+        "imageName": "desert",
+        "pronunciation": "desert",
+        "wordKor": "사막",
+        "wordEng": "desert",
+        "isBoss": false
+    },
+    {
+        "id": "8a79d0ad-edc2-45af-8138-1237b0e3a315",
+        "categoryId": "3b56520e-9423-45c7-ada2-2bb79644f30f",
+        "imageName": "rainbow",
+        "pronunciation": "rainbow",
+        "wordKor": "무지개",
+        "wordEng": "rainbow",
+        "isBoss": false
+    },
+    {
+        "id": "24995cdc-e974-40c5-8f9b-50aafd46c96d",
+        "categoryId": "3b56520e-9423-45c7-ada2-2bb79644f30f",
+        "imageName": "dew",
+        "pronunciation": "dew",
+        "wordKor": "이슬",
+        "wordEng": "dew",
+        "isBoss": false
+    },
+    {
+        "id": "288c7131-e068-4be2-aae8-714d3e062317",
+        "categoryId": "8da1f378-977c-4e4b-a160-de6dcf9af3b5",
+        "imageName": "asteroid",
+        "pronunciation": "asteroid",
+        "wordKor": "소행성",
+        "wordEng": "asteroid",
+        "isBoss": true
+    },
+    {
+        "id": "d7dee084-9b0b-4483-b579-008a4db5eebb",
+        "categoryId": "8da1f378-977c-4e4b-a160-de6dcf9af3b5",
+        "imageName": "galaxy",
+        "pronunciation": "galaxy",
+        "wordKor": "은하",
+        "wordEng": "galaxy",
+        "isBoss": false
+    },
+    {
+        "id": "11c43882-448e-4b5c-9a25-bbb4d75170a1",
+        "categoryId": "8da1f378-977c-4e4b-a160-de6dcf9af3b5",
+        "imageName": "universe",
+        "pronunciation": "universe",
+        "wordKor": "우주",
+        "wordEng": "universe",
+        "isBoss": false
+    },
+    {
+        "id": "7d7d9041-6fe0-4f21-97f2-db1495d4cc6c",
+        "categoryId": "8da1f378-977c-4e4b-a160-de6dcf9af3b5",
+        "imageName": "lava",
+        "pronunciation": "lava",
+        "wordKor": "용암",
+        "wordEng": "lava",
+        "isBoss": false
+    },
+    {
+        "id": "1a411d68-c325-4e50-826d-c529965bf3fd",
+        "categoryId": "8da1f378-977c-4e4b-a160-de6dcf9af3b5",
+        "imageName": "hurricane",
+        "pronunciation": "hurricane",
+        "wordKor": "허리케인",
+        "wordEng": "hurricane",
+        "isBoss": false
+    },
+    {
+        "id": "7acf5e53-f627-4447-a3f0-ba3f10faf33d",
+        "categoryId": "8da1f378-977c-4e4b-a160-de6dcf9af3b5",
+        "imageName": "meteor",
+        "pronunciation": "meteor",
+        "wordKor": "유성",
+        "wordEng": "meteor",
+        "isBoss": false
+    },
+    {
+        "id": "eeef9f36-da73-404f-8864-95c70ea401e2",
+        "categoryId": "8da1f378-977c-4e4b-a160-de6dcf9af3b5",
+        "imageName": "landslide",
+        "pronunciation": "landslide",
+        "wordKor": "산사태",
+        "wordEng": "landslide",
+        "isBoss": false
+    },
+    {
+        "id": "7821bc73-78e7-411f-a9b9-bf1330610339",
+        "categoryId": "8da1f378-977c-4e4b-a160-de6dcf9af3b5",
+        "imageName": "aurora",
+        "pronunciation": "aurora",
+        "wordKor": "오로라",
+        "wordEng": "aurora",
+        "isBoss": false
+    },
+    {
+        "id": "79767961-2938-4734-b70e-ef0580a8dd6a",
+        "categoryId": "8da1f378-977c-4e4b-a160-de6dcf9af3b5",
+        "imageName": "tornado",
+        "pronunciation": "tornado",
+        "wordKor": "토네이도",
+        "wordEng": "tornado",
+        "isBoss": false
+    },
+    {
+        "id": "80fcd624-c34c-4516-802e-ecaf84e78db0",
+        "categoryId": "8da1f378-977c-4e4b-a160-de6dcf9af3b5",
+        "imageName": "earthquake",
+        "pronunciation": "earthquake",
+        "wordKor": "지진",
+        "wordEng": "earthquake",
+        "isBoss": false
+    },
+    {
+        "id": "c39aa4ae-8435-431f-a5a1-b8d90ddc00fe",
+        "categoryId": "8497a599-3426-4602-ac4b-5e9ab5bd68ef",
+        "imageName": "flag",
+        "pronunciation": "flag",
+        "wordKor": "깃발",
+        "wordEng": "flag",
+        "isBoss": true
+    },
+    {
+        "id": "fbc7c86f-fb3e-4b6e-ae1e-8ad4c69ce3a7",
+        "categoryId": "8497a599-3426-4602-ac4b-5e9ab5bd68ef",
+        "imageName": "pen",
+        "pronunciation": "pen",
+        "wordKor": "펜",
+        "wordEng": "pen",
+        "isBoss": false
+    },
+    {
+        "id": "81c0dc1d-2b50-4472-a785-7812dd906d4e",
+        "categoryId": "8497a599-3426-4602-ac4b-5e9ab5bd68ef",
+        "imageName": "map",
+        "pronunciation": "map",
+        "wordKor": "지도",
+        "wordEng": "map",
+        "isBoss": false
+    },
+    {
+        "id": "72ebcf1a-ddbe-4955-b868-ddd6ed35b521",
+        "categoryId": "8497a599-3426-4602-ac4b-5e9ab5bd68ef",
+        "imageName": "bag",
+        "pronunciation": "bag",
+        "wordKor": "가방",
+        "wordEng": "bag",
+        "isBoss": false
+    },
+    {
+        "id": "c6c558eb-7dd6-44b2-b825-c083eaeafda5",
+        "categoryId": "8497a599-3426-4602-ac4b-5e9ab5bd68ef",
+        "imageName": "cup",
+        "pronunciation": "cup",
+        "wordKor": "컵",
+        "wordEng": "cup",
+        "isBoss": false
+    },
+    {
+        "id": "9c404f78-8094-465f-aecd-fd515460a3da",
+        "categoryId": "8497a599-3426-4602-ac4b-5e9ab5bd68ef",
+        "imageName": "desk",
+        "pronunciation": "desk",
+        "wordKor": "책상",
+        "wordEng": "desk",
+        "isBoss": false
+    },
+    {
+        "id": "8a4debff-cf14-4671-89b9-5dd35ae9d2ad",
+        "categoryId": "8497a599-3426-4602-ac4b-5e9ab5bd68ef",
+        "imageName": "book",
+        "pronunciation": "book",
+        "wordKor": "책",
+        "wordEng": "book",
+        "isBoss": false
+    },
+    {
+        "id": "7ca23723-314e-4047-badc-450abb77dc37",
+        "categoryId": "8497a599-3426-4602-ac4b-5e9ab5bd68ef",
+        "imageName": "tape",
+        "pronunciation": "tape",
+        "wordKor": "테이프",
+        "wordEng": "tape",
+        "isBoss": false
+    },
+    {
+        "id": "7f4cabcb-d3e7-4b77-913d-7a96bd5dd1e8",
+        "categoryId": "8497a599-3426-4602-ac4b-5e9ab5bd68ef",
+        "imageName": "clock",
+        "pronunciation": "clock",
+        "wordKor": "시계",
+        "wordEng": "clock",
+        "isBoss": false
+    },
+    {
+        "id": "aa31262d-5071-4f14-b5ec-ef0914dc7e57",
+        "categoryId": "8497a599-3426-4602-ac4b-5e9ab5bd68ef",
+        "imageName": "paint",
+        "pronunciation": "paint",
+        "wordKor": "물감",
+        "wordEng": "paint",
+        "isBoss": false
+    },
+    {
+        "id": "259e5c07-b652-4aff-b321-411e4698c41c",
+        "categoryId": "bbb698e7-8f3d-47ca-96d8-7d2ec9c2bdb1",
+        "imageName": "stapler",
+        "pronunciation": "stapler",
+        "wordKor": "스테이플러",
+        "wordEng": "stapler",
+        "isBoss": true
+    },
+    {
+        "id": "8eba5adc-b1e7-4471-b5bb-b92bbfef8d89",
+        "categoryId": "bbb698e7-8f3d-47ca-96d8-7d2ec9c2bdb1",
+        "imageName": "pencil",
+        "pronunciation": "pencil",
+        "wordKor": "연필",
+        "wordEng": "pencil",
+        "isBoss": false
+    },
+    {
+        "id": "891feab0-4c48-4bf2-90d4-7668ea814670",
+        "categoryId": "bbb698e7-8f3d-47ca-96d8-7d2ec9c2bdb1",
+        "imageName": "crayon",
+        "pronunciation": "crayon",
+        "wordKor": "크레용",
+        "wordEng": "crayon",
+        "isBoss": false
+    },
+    {
+        "id": "e41cbb4f-97de-4a24-9118-2ff1dece9137",
+        "categoryId": "bbb698e7-8f3d-47ca-96d8-7d2ec9c2bdb1",
+        "imageName": "teacher",
+        "pronunciation": "teacher",
+        "wordKor": "선생님",
+        "wordEng": "teacher",
+        "isBoss": false
+    },
+    {
+        "id": "aa7bd04c-cbbe-4f0d-9670-611163ba3847",
+        "categoryId": "bbb698e7-8f3d-47ca-96d8-7d2ec9c2bdb1",
+        "imageName": "student",
+        "pronunciation": "student",
+        "wordKor": "학생",
+        "wordEng": "student",
+        "isBoss": false
+    },
+    {
+        "id": "78e5de81-9fe9-4088-ad3d-7866527df821",
+        "categoryId": "bbb698e7-8f3d-47ca-96d8-7d2ec9c2bdb1",
+        "imageName": "eraser",
+        "pronunciation": "eraser",
+        "wordKor": "지우개",
+        "wordEng": "eraser",
+        "isBoss": false
+    },
+    {
+        "id": "c961aebd-467e-4596-9bb2-c447476a5b3b",
+        "categoryId": "bbb698e7-8f3d-47ca-96d8-7d2ec9c2bdb1",
+        "imageName": "marker",
+        "pronunciation": "marker",
+        "wordKor": "마커",
+        "wordEng": "marker",
+        "isBoss": false
+    },
+    {
+        "id": "f5f13efd-eecc-4a80-a1f9-9761ae485e16",
+        "categoryId": "bbb698e7-8f3d-47ca-96d8-7d2ec9c2bdb1",
+        "imageName": "brush",
+        "pronunciation": "brush",
+        "wordKor": "붓",
+        "wordEng": "brush",
+        "isBoss": false
+    },
+    {
+        "id": "d9c7cb75-8ebf-478f-ada8-0695092409c8",
+        "categoryId": "bbb698e7-8f3d-47ca-96d8-7d2ec9c2bdb1",
+        "imageName": "ruler",
+        "pronunciation": "ruler",
+        "wordKor": "자",
+        "wordEng": "ruler",
+        "isBoss": false
+    },
+    {
+        "id": "f60c3294-ecee-42b0-a508-fc87a33636e0",
+        "categoryId": "bbb698e7-8f3d-47ca-96d8-7d2ec9c2bdb1",
+        "imageName": "paper",
+        "pronunciation": "paper",
+        "wordKor": "종이",
+        "wordEng": "paper",
+        "isBoss": false
+    },
+    {
+        "id": "7434a6a8-4a68-404a-8d11-05a832e9e43c",
+        "categoryId": "ebb8b437-be9a-44f7-bbe2-505188cd2447",
+        "imageName": "stethoscope",
+        "pronunciation": "stethoscope",
+        "wordKor": "청진기",
+        "wordEng": "stethoscope",
+        "isBoss": true
+    },
+    {
+        "id": "7aa4fea5-5c6e-4278-935f-8d3cbfb5e11b",
+        "categoryId": "ebb8b437-be9a-44f7-bbe2-505188cd2447",
+        "imageName": "scissors",
+        "pronunciation": "scissors",
+        "wordKor": "가위",
+        "wordEng": "scissors",
+        "isBoss": false
+    },
+    {
+        "id": "a977abde-45b7-4dfa-8546-29246d95c960",
+        "categoryId": "ebb8b437-be9a-44f7-bbe2-505188cd2447",
+        "imageName": "sharpener",
+        "pronunciation": "sharpener",
+        "wordKor": "연필깎이",
+        "wordEng": "sharpener",
+        "isBoss": false
+    },
+    {
+        "id": "364b5f2f-b38f-42f1-ae6c-c269c76ca138",
+        "categoryId": "ebb8b437-be9a-44f7-bbe2-505188cd2447",
+        "imageName": "notebook",
+        "pronunciation": "notebook",
+        "wordKor": "공책",
+        "wordEng": "notebook",
+        "isBoss": false
+    },
+    {
+        "id": "c4278a7e-b1e8-4527-8c57-7a6437423ed7",
+        "categoryId": "ebb8b437-be9a-44f7-bbe2-505188cd2447",
+        "imageName": "library",
+        "pronunciation": "library",
+        "wordKor": "도서관",
+        "wordEng": "library",
+        "isBoss": false
+    },
+    {
+        "id": "df15ebe6-103f-4d3c-a959-0eb299dd6b93",
+        "categoryId": "ebb8b437-be9a-44f7-bbe2-505188cd2447",
+        "imageName": "textbook",
+        "pronunciation": "textbook",
+        "wordKor": "교과서",
+        "wordEng": "textbook",
+        "isBoss": false
+    },
+    {
+        "id": "562c16e6-7b40-4689-a923-2ac87b6fb60f",
+        "categoryId": "ebb8b437-be9a-44f7-bbe2-505188cd2447",
+        "imageName": "dictionary",
+        "pronunciation": "dictionary",
+        "wordKor": "사전",
+        "wordEng": "dictionary",
+        "isBoss": false
+    },
+    {
+        "id": "7cdf7cb6-8b56-48f4-9ec7-05fc2178b8c5",
+        "categoryId": "ebb8b437-be9a-44f7-bbe2-505188cd2447",
+        "imageName": "calculator",
+        "pronunciation": "calculator",
+        "wordKor": "계산기",
+        "wordEng": "calculator",
+        "isBoss": false
+    },
+    {
+        "id": "80a7ac65-58e8-49ac-a5a4-4de49d651486",
+        "categoryId": "ebb8b437-be9a-44f7-bbe2-505188cd2447",
+        "imageName": "classroom",
+        "pronunciation": "classroom",
+        "wordKor": "교실",
+        "wordEng": "classroom",
+        "isBoss": false
+    },
+    {
+        "id": "afc0dfc8-386a-42e3-9dae-4db715f937f9",
+        "categoryId": "ebb8b437-be9a-44f7-bbe2-505188cd2447",
+        "imageName": "computer",
+        "pronunciation": "computer",
+        "wordKor": "컴퓨터",
+        "wordEng": "computer",
+        "isBoss": false
+    },
+    {
+        "id": "0db25313-4aa5-4a9a-aacb-0e27e95a2b38",
+        "categoryId": "cc0da98a-fc37-4b6f-8e09-3f69cf36eaa4",
+        "imageName": "chair",
+        "pronunciation": "chair",
+        "wordKor": "의자",
+        "wordEng": "chair",
+        "isBoss": true
+    },
+    {
+        "id": "37c651f1-6d8b-43d0-bbdd-b1e6cca76029",
+        "categoryId": "cc0da98a-fc37-4b6f-8e09-3f69cf36eaa4",
+        "imageName": "bed",
+        "pronunciation": "bed",
+        "wordKor": "침대",
+        "wordEng": "bed",
+        "isBoss": false
+    },
+    {
+        "id": "c4bf8075-29df-4188-b0cf-9311f85c51ae",
+        "categoryId": "cc0da98a-fc37-4b6f-8e09-3f69cf36eaa4",
+        "imageName": "pot",
+        "pronunciation": "pot",
+        "wordKor": "냄비",
+        "wordEng": "pot",
+        "isBoss": false
+    },
+    {
+        "id": "17a480cc-e347-4ae2-b90f-953892872f64",
+        "categoryId": "cc0da98a-fc37-4b6f-8e09-3f69cf36eaa4",
+        "imageName": "door",
+        "pronunciation": "door",
+        "wordKor": "문",
+        "wordEng": "door",
+        "isBoss": false
+    },
+    {
+        "id": "35ed2cd9-1f43-4141-a509-d8bc3343758a",
+        "categoryId": "cc0da98a-fc37-4b6f-8e09-3f69cf36eaa4",
+        "imageName": "soap",
+        "pronunciation": "soap",
+        "wordKor": "비누",
+        "wordEng": "soap",
+        "isBoss": false
+    },
+    {
+        "id": "79da9cb1-3f07-448a-a9e3-cd20db195bf7",
+        "categoryId": "cc0da98a-fc37-4b6f-8e09-3f69cf36eaa4",
+        "imageName": "key",
+        "pronunciation": "key",
+        "wordKor": "열쇠",
+        "wordEng": "key",
+        "isBoss": false
+    },
+    {
+        "id": "fe2fbe02-7389-4d47-8002-62e4e0dc5c65",
+        "categoryId": "cc0da98a-fc37-4b6f-8e09-3f69cf36eaa4",
+        "imageName": "sofa",
+        "pronunciation": "sofa",
+        "wordKor": "소파",
+        "wordEng": "sofa",
+        "isBoss": false
+    },
+    {
+        "id": "8cb54ea1-7b8c-4e3c-a0d8-c2151dec7a26",
+        "categoryId": "cc0da98a-fc37-4b6f-8e09-3f69cf36eaa4",
+        "imageName": "fan",
+        "pronunciation": "fan",
+        "wordKor": "선풍기",
+        "wordEng": "fan",
+        "isBoss": false
+    },
+    {
+        "id": "80f3e78b-9fb6-4a52-b738-5fd1b1a1561f",
+        "categoryId": "cc0da98a-fc37-4b6f-8e09-3f69cf36eaa4",
+        "imageName": "wall",
+        "pronunciation": "wall",
+        "wordKor": "벽",
+        "wordEng": "wall",
+        "isBoss": false
+    },
+    {
+        "id": "13e994d1-5b04-4f19-9307-70afec60b6a5",
+        "categoryId": "cc0da98a-fc37-4b6f-8e09-3f69cf36eaa4",
+        "imageName": "box",
+        "pronunciation": "box",
+        "wordKor": "상자",
+        "wordEng": "box",
+        "isBoss": false
+    },
+    {
+        "id": "06080003-ed76-4101-8243-dedc00acdec5",
+        "categoryId": "6100b024-7100-4778-abb4-5db7ac8f7278",
+        "imageName": "bathroom",
+        "pronunciation": "bathroom",
+        "wordKor": "화장실",
+        "wordEng": "bathroom",
+        "isBoss": true
+    },
+    {
+        "id": "03893d4e-51bb-49e0-aeca-316e0d71ef00",
+        "categoryId": "6100b024-7100-4778-abb4-5db7ac8f7278",
+        "imageName": "mirror",
+        "pronunciation": "mirror",
+        "wordKor": "거울",
+        "wordEng": "mirror",
+        "isBoss": false
+    },
+    {
+        "id": "542d30f0-d3d6-4c78-bcad-31761ab3106f",
+        "categoryId": "6100b024-7100-4778-abb4-5db7ac8f7278",
+        "imageName": "window",
+        "pronunciation": "window",
+        "wordKor": "창문",
+        "wordEng": "window",
+        "isBoss": false
+    },
+    {
+        "id": "48010ce9-7a9a-4217-9cbd-02efddc54983",
+        "categoryId": "6100b024-7100-4778-abb4-5db7ac8f7278",
+        "imageName": "kitchen",
+        "pronunciation": "kitchen",
+        "wordKor": "부엌",
+        "wordEng": "kitchen",
+        "isBoss": false
+    },
+    {
+        "id": "307f9c93-e0d1-4404-a705-5ab809534df2",
+        "categoryId": "6100b024-7100-4778-abb4-5db7ac8f7278",
+        "imageName": "bedroom",
+        "pronunciation": "bedroom",
+        "wordKor": "침실",
+        "wordEng": "bedroom",
+        "isBoss": false
+    },
+    {
+        "id": "9721aabf-448b-449b-8472-865ebd5438fc",
+        "categoryId": "6100b024-7100-4778-abb4-5db7ac8f7278",
+        "imageName": "toilet",
+        "pronunciation": "toilet",
+        "wordKor": "변기",
+        "wordEng": "toilet",
+        "isBoss": false
+    },
+    {
+        "id": "f134f49f-c8ca-43cb-a1f7-5147b04635fe",
+        "categoryId": "6100b024-7100-4778-abb4-5db7ac8f7278",
+        "imageName": "stairs",
+        "pronunciation": "stairs",
+        "wordKor": "계단",
+        "wordEng": "stairs",
+        "isBoss": false
+    },
+    {
+        "id": "6d304602-00e9-4c32-9027-360378e56b13",
+        "categoryId": "6100b024-7100-4778-abb4-5db7ac8f7278",
+        "imageName": "picture",
+        "pronunciation": "picture",
+        "wordKor": "그림",
+        "wordEng": "picture",
+        "isBoss": false
+    },
+    {
+        "id": "d1b648dc-f870-4a3c-9a0b-564d9d806d9d",
+        "categoryId": "6100b024-7100-4778-abb4-5db7ac8f7278",
+        "imageName": "garden",
+        "pronunciation": "garden",
+        "wordKor": "정원",
+        "wordEng": "garden",
+        "isBoss": false
+    },
+    {
+        "id": "4e31c285-29a6-4913-aa46-c2b53575cae5",
+        "categoryId": "6100b024-7100-4778-abb4-5db7ac8f7278",
+        "imageName": "hanger",
+        "pronunciation": "hanger",
+        "wordKor": "옷걸이",
+        "wordEng": "hanger",
+        "isBoss": false
+    },
+    {
+        "id": "5daef872-680d-479f-9c03-e839ed5e0135",
+        "categoryId": "dfc93f06-068b-4949-aac6-06f481a682b7",
+        "imageName": "refrigerator",
+        "pronunciation": "refrigerator",
+        "wordKor": "냉장고",
+        "wordEng": "refrigerator",
+        "isBoss": true
+    },
+    {
+        "id": "a54bf592-d45b-4b4a-b105-eda1452ec77a",
+        "categoryId": "dfc93f06-068b-4949-aac6-06f481a682b7",
+        "imageName": "toothpaste",
+        "pronunciation": "toothpaste",
+        "wordKor": "치약",
+        "wordEng": "toothpaste",
+        "isBoss": false
+    },
+    {
+        "id": "d9d5f66a-a742-4ba3-b3cc-a8910701985b",
+        "categoryId": "dfc93f06-068b-4949-aac6-06f481a682b7",
+        "imageName": "rice cooker",
+        "pronunciation": "rice cooker",
+        "wordKor": "밥솥",
+        "wordEng": "rice cooker",
+        "isBoss": false
+    },
+    {
+        "id": "5eebd5d1-2d4d-4f18-a6c2-7801dc6b7dd8",
+        "categoryId": "dfc93f06-068b-4949-aac6-06f481a682b7",
+        "imageName": "water purifier",
+        "pronunciation": "water purifier",
+        "wordKor": "정수기",
+        "wordEng": "water purifier",
+        "isBoss": false
+    },
+    {
+        "id": "93e6d521-4e85-4459-94fd-91a7dc77899a",
+        "categoryId": "dfc93f06-068b-4949-aac6-06f481a682b7",
+        "imageName": "television",
+        "pronunciation": "television",
+        "wordKor": "텔레비전",
+        "wordEng": "television",
+        "isBoss": false
+    },
+    {
+        "id": "24053ee2-3318-480d-9e32-c745baa41e7f",
+        "categoryId": "dfc93f06-068b-4949-aac6-06f481a682b7",
+        "imageName": "screwdriver",
+        "pronunciation": "screwdriver",
+        "wordKor": "드라이버",
+        "wordEng": "screwdriver",
+        "isBoss": false
+    },
+    {
+        "id": "9c028d14-1b7d-4a00-a6f7-48d23969a7e0",
+        "categoryId": "dfc93f06-068b-4949-aac6-06f481a682b7",
+        "imageName": "microwave",
+        "pronunciation": "microwave",
+        "wordKor": "전자레인지",
+        "wordEng": "microwave",
+        "isBoss": false
+    },
+    {
+        "id": "b63d880a-dbbc-4e70-8623-b59dd078bbb2",
+        "categoryId": "dfc93f06-068b-4949-aac6-06f481a682b7",
+        "imageName": "blender",
+        "pronunciation": "blender",
+        "wordKor": "믹서기",
+        "wordEng": "blender",
+        "isBoss": false
+    },
+    {
+        "id": "c21798d6-9e7f-4908-baee-071f522743f4",
+        "categoryId": "dfc93f06-068b-4949-aac6-06f481a682b7",
+        "imageName": "shampoo",
+        "pronunciation": "shampoo",
+        "wordKor": "샴푸",
+        "wordEng": "shampoo",
+        "isBoss": false
+    },
+    {
+        "id": "7e86c356-6baa-4753-b82f-14559b1035c0",
+        "categoryId": "dfc93f06-068b-4949-aac6-06f481a682b7",
+        "imageName": "toothbrush",
+        "pronunciation": "toothbrush",
+        "wordKor": "칫솔",
+        "wordEng": "toothbrush",
+        "isBoss": false
+    },
+    {
+        "id": "9eb7e5f8-206f-4a18-baff-3a78916db28f",
+        "categoryId": "bab2d8a7-d52a-4d94-96f5-36514c95ed75",
+        "imageName": "rub",
+        "pronunciation": "rub",
+        "wordKor": "문지르다",
+        "wordEng": "rub",
+        "isBoss": true
+    },
+    {
+        "id": "7c12066a-9577-4861-9f3a-881800e45665",
+        "categoryId": "bab2d8a7-d52a-4d94-96f5-36514c95ed75",
+        "imageName": "say",
+        "pronunciation": "say",
+        "wordKor": "말하다",
+        "wordEng": "say",
+        "isBoss": false
+    },
+    {
+        "id": "df2c0600-8f89-4f5f-b766-bc42394705aa",
+        "categoryId": "bab2d8a7-d52a-4d94-96f5-36514c95ed75",
+        "imageName": "eat",
+        "pronunciation": "eat",
+        "wordKor": "먹다",
+        "wordEng": "eat",
+        "isBoss": false
+    },
+    {
+        "id": "d81b92ce-b926-4126-8eaf-cf95805acfe9",
+        "categoryId": "bab2d8a7-d52a-4d94-96f5-36514c95ed75",
+        "imageName": "run",
+        "pronunciation": "run",
+        "wordKor": "달리다",
+        "wordEng": "run",
+        "isBoss": false
+    },
+    {
+        "id": "67f35aca-d249-4099-aa5c-91c6c12dd239",
+        "categoryId": "bab2d8a7-d52a-4d94-96f5-36514c95ed75",
+        "imageName": "sit",
+        "pronunciation": "sit",
+        "wordKor": "앉다",
+        "wordEng": "sit",
+        "isBoss": false
+    },
+    {
+        "id": "a0f70940-6c84-417e-bad5-acbcc2439637",
+        "categoryId": "bab2d8a7-d52a-4d94-96f5-36514c95ed75",
+        "imageName": "cut",
+        "pronunciation": "cut",
+        "wordKor": "자르다",
+        "wordEng": "cut",
+        "isBoss": false
+    },
+    {
+        "id": "53e6e205-c3fd-4a9b-a6ba-a830e8089b33",
+        "categoryId": "bab2d8a7-d52a-4d94-96f5-36514c95ed75",
+        "imageName": "hit",
+        "pronunciation": "hit",
+        "wordKor": "치다",
+        "wordEng": "hit",
+        "isBoss": false
+    },
+    {
+        "id": "a0e82639-269d-48d0-918b-48c0a774daa3",
+        "categoryId": "bab2d8a7-d52a-4d94-96f5-36514c95ed75",
+        "imageName": "put",
+        "pronunciation": "put",
+        "wordKor": "놓다",
+        "wordEng": "put",
+        "isBoss": false
+    },
+    {
+        "id": "831a4370-645e-4486-83e9-6b8af1717e3d",
+        "categoryId": "bab2d8a7-d52a-4d94-96f5-36514c95ed75",
+        "imageName": "dig",
+        "pronunciation": "dig",
+        "wordKor": "파다",
+        "wordEng": "dig",
+        "isBoss": false
+    },
+    {
+        "id": "72c17844-35d5-4106-9177-6e7f0b9775d7",
+        "categoryId": "bab2d8a7-d52a-4d94-96f5-36514c95ed75",
+        "imageName": "jog",
+        "pronunciation": "jog",
+        "wordKor": "조깅하다",
+        "wordEng": "jog",
+        "isBoss": false
+    },
+    {
+        "id": "be8a1fee-9dd9-446f-a322-c8a17f3e017f",
+        "categoryId": "54bc547e-f90a-498f-b363-26b3f0911398",
+        "imageName": "throw",
+        "pronunciation": "throw",
+        "wordKor": "던지다",
+        "wordEng": "throw",
+        "isBoss": true
+    },
+    {
+        "id": "a518c34b-1388-4f00-a8e4-7d676a94b105",
+        "categoryId": "54bc547e-f90a-498f-b363-26b3f0911398",
+        "imageName": "share",
+        "pronunciation": "share",
+        "wordKor": "나누다",
+        "wordEng": "share",
+        "isBoss": false
+    },
+    {
+        "id": "ea55ac67-3ca7-460f-9566-c9fbf5906338",
+        "categoryId": "54bc547e-f90a-498f-b363-26b3f0911398",
+        "imageName": "study",
+        "pronunciation": "study",
+        "wordKor": "공부하다",
+        "wordEng": "study",
+        "isBoss": false
+    },
+    {
+        "id": "9903f4ca-075e-4eb1-b4df-e7426674b58d",
+        "categoryId": "54bc547e-f90a-498f-b363-26b3f0911398",
+        "imageName": "catch",
+        "pronunciation": "catch",
+        "wordKor": "잡다",
+        "wordEng": "catch",
+        "isBoss": false
+    },
+    {
+        "id": "7c0492ec-6f75-42fa-90d3-6ecf2837a898",
+        "categoryId": "54bc547e-f90a-498f-b363-26b3f0911398",
+        "imageName": "wash",
+        "pronunciation": "wash",
+        "wordKor": "씻다",
+        "wordEng": "wash",
+        "isBoss": false
+    },
+    {
+        "id": "168c3d10-d292-4d91-9252-d8c198456726",
+        "categoryId": "54bc547e-f90a-498f-b363-26b3f0911398",
+        "imageName": "cook",
+        "pronunciation": "cook",
+        "wordKor": "요리하다",
+        "wordEng": "cook",
+        "isBoss": false
+    },
+    {
+        "id": "b2f30456-bb31-4c34-8f86-0a0d87e71b7d",
+        "categoryId": "54bc547e-f90a-498f-b363-26b3f0911398",
+        "imageName": "call",
+        "pronunciation": "call",
+        "wordKor": "전화하다",
+        "wordEng": "call",
+        "isBoss": false
+    },
+    {
+        "id": "6da6447b-e429-46e6-ae13-cf639dd1634f",
+        "categoryId": "54bc547e-f90a-498f-b363-26b3f0911398",
+        "imageName": "make",
+        "pronunciation": "make",
+        "wordKor": "만들다",
+        "wordEng": "make",
+        "isBoss": false
+    },
+    {
+        "id": "98e2e733-b081-4cd2-8e9f-f6cda0297de7",
+        "categoryId": "54bc547e-f90a-498f-b363-26b3f0911398",
+        "imageName": "know",
+        "pronunciation": "know",
+        "wordKor": "알다",
+        "wordEng": "know",
+        "isBoss": false
+    },
+    {
+        "id": "aead6204-df0b-4be4-af52-ba1b2d5cddb8",
+        "categoryId": "54bc547e-f90a-498f-b363-26b3f0911398",
+        "imageName": "clean",
+        "pronunciation": "clean",
+        "wordKor": "청소하다",
+        "wordEng": "clean",
+        "isBoss": false
+    },
+    {
+        "id": "65519f9e-85b3-4e1c-b4c8-3c3b4b0df53e",
+        "categoryId": "2e98cc4b-c1ab-4c1d-83f5-1d1452914fae",
+        "imageName": "celebrate",
+        "pronunciation": "celebrate",
+        "wordKor": "축하하다",
+        "wordEng": "celebrate",
+        "isBoss": true
+    },
+    {
+        "id": "2d0c63a5-d507-43e5-a207-72f2b74716c3",
+        "categoryId": "2e98cc4b-c1ab-4c1d-83f5-1d1452914fae",
+        "imageName": "think",
+        "pronunciation": "think",
+        "wordKor": "생각하다",
+        "wordEng": "think",
+        "isBoss": false
+    },
+    {
+        "id": "85d0ea43-ddc8-48ab-9d5f-f31e9cfdb04a",
+        "categoryId": "2e98cc4b-c1ab-4c1d-83f5-1d1452914fae",
+        "imageName": "learn",
+        "pronunciation": "learn",
+        "wordKor": "배우다",
+        "wordEng": "learn",
+        "isBoss": false
+    },
+    {
+        "id": "2ae85ba4-b15d-46fd-86f5-faac66ee03f4",
+        "categoryId": "2e98cc4b-c1ab-4c1d-83f5-1d1452914fae",
+        "imageName": "teach",
+        "pronunciation": "teach",
+        "wordKor": "가르치다",
+        "wordEng": "teach",
+        "isBoss": false
+    },
+    {
+        "id": "811e4722-b207-4417-b3b6-479a50fc5270",
+        "categoryId": "2e98cc4b-c1ab-4c1d-83f5-1d1452914fae",
+        "imageName": "improve",
+        "pronunciation": "improve",
+        "wordKor": "향상시키다",
+        "wordEng": "improve",
+        "isBoss": false
+    },
+    {
+        "id": "eb3fd0c2-cab5-482f-9691-5e3696c572c4",
+        "categoryId": "2e98cc4b-c1ab-4c1d-83f5-1d1452914fae",
+        "imageName": "listen",
+        "pronunciation": "listen",
+        "wordKor": "듣다",
+        "wordEng": "listen",
+        "isBoss": false
+    },
+    {
+        "id": "9b21c8d0-8d49-4056-9914-e7500f51e353",
+        "categoryId": "2e98cc4b-c1ab-4c1d-83f5-1d1452914fae",
+        "imageName": "speak",
+        "pronunciation": "speak",
+        "wordKor": "말하다",
+        "wordEng": "speak",
+        "isBoss": false
+    },
+    {
+        "id": "323e14ec-35f8-4b5b-a552-eb6b16ca828b",
+        "categoryId": "2e98cc4b-c1ab-4c1d-83f5-1d1452914fae",
+        "imageName": "talk",
+        "pronunciation": "talk",
+        "wordKor": "이야기하다",
+        "wordEng": "talk",
+        "isBoss": false
+    },
+    {
+        "id": "9ad03c85-9567-408b-b96d-12982b52f9a6",
+        "categoryId": "2e98cc4b-c1ab-4c1d-83f5-1d1452914fae",
+        "imageName": "remember",
+        "pronunciation": "remember",
+        "wordKor": "기억하다",
+        "wordEng": "remember",
+        "isBoss": false
+    },
+    {
+        "id": "e696d64d-d164-40df-bd30-97841d93bb6f",
+        "categoryId": "2e98cc4b-c1ab-4c1d-83f5-1d1452914fae",
+        "imageName": "promise",
+        "pronunciation": "promise",
+        "wordKor": "약속하다",
+        "wordEng": "promise",
+        "isBoss": false
+    }
+]
