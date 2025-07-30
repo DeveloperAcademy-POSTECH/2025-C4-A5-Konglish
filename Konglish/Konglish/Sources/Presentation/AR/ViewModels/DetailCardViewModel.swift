@@ -93,7 +93,7 @@ class DetailCardViewModel: NSObject {
                         }
                     }
 
-                    let inputNode = audioEngine.inputNode
+//                    let inputNode = audioEngine.inputNode
                     inputNode.removeTap(onBus: 0)
 
                     let format = inputNode.inputFormat(forBus: 0)
