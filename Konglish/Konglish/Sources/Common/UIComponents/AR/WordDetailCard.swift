@@ -144,7 +144,7 @@ struct WordDetailCard: View {
                 .font(.bold20)
                 .foregroundStyle(Color.black01)
             
-            printPointGuide(type: viewModel.accurayType)
+            printPointGuide(type: viewModel.accuracyType)
         })
     }
     
@@ -162,7 +162,7 @@ struct WordDetailCard: View {
     
     private func successFailure(type: AccuracyType) -> some View {
         HStack(spacing: WordDetailCardConstants.guideHspacing, content: {
-            Text("\(viewModel.point ?? 0)%")
+            Text("\(viewModel.currentScore)")
                 .font(type.font)
                 .foregroundStyle(type.color)
             
@@ -205,7 +205,7 @@ struct WordDetailCard: View {
                     )
                     .animation(
                         .easeOut(duration: WordDetailCardConstants.voiceAnimation),
-                        value: viewModel.level
+                        value: viewModel.voiceLevel
                     )
             }
         }
@@ -216,10 +216,10 @@ struct WordDetailCard: View {
         let variationStep: CGFloat = 10
         let variation = variationStep * CGFloat(WordDetailCardConstants.voiceBarCount / 2 - relativeIndex)
         
-        if viewModel.level == 0 {
+        if viewModel.voiceLevel == 0 {
             return base
         } else {
-            return base + variation * CGFloat(viewModel.level)
+            return base + variation * CGFloat(viewModel.voiceLevel)
         }
     }
 }

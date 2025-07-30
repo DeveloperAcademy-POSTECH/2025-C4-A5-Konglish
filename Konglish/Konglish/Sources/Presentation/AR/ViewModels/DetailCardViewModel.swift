@@ -23,12 +23,15 @@ class DetailCardViewModel: NSObject {
     var lastEvaluatedScore: Int? = nil
     var lastPassed: Bool = false
 
+    // MARK: - 음성 레벨
+    var voiceLevel: Float = 0.0
+
     // MARK: - 음성 합성 (TTS)
     let speechSynthesizer = AVSpeechSynthesizer()
 
     func speakWord() {
         guard let word = word?.wordEng else {
-            print("📢 발음할 단어 없음")
+            print("발음할 단어 없음")
             return
         }
 
@@ -39,7 +42,7 @@ class DetailCardViewModel: NSObject {
         speechSynthesizer.speak(utterance)
     }
 
-    // MARK: - 발음 평가 (비동기)
+    // MARK: - 발음 평가
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
     private let audioEngine = AVAudioEngine()
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
@@ -64,6 +67,7 @@ class DetailCardViewModel: NSObject {
                         return
                     }
 
+                    // 인식 작업 시작
                     self.recognitionTask = self.speechRecognizer?.recognitionTask(with: request) { result, error in
                         if let result = result, result.isFinal {
                             let spoken = result.bestTranscription.formattedString.lowercased()
@@ -76,14 +80,27 @@ class DetailCardViewModel: NSObject {
                             inputNode.removeTap(onBus: 0)
                             self.recognitionRequest = nil
                             self.recognitionTask = nil
+                            self.voiceLevel = 0
 
                             continuation.resume()
                         }
                     }
 
+                    // 오디오 입력에서 실시간 볼륨 측정
                     let format = inputNode.outputFormat(forBus: 0)
                     inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { buffer, _ in
                         self.recognitionRequest?.append(buffer)
+
+                        // 볼륨 측정
+                        guard let channelData = buffer.floatChannelData?[0] else { return }
+                        let channelDataArray = Array(UnsafeBufferPointer(start: channelData, count: Int(buffer.frameLength)))
+                        let rms = sqrt(channelDataArray.map { $0 * $0 }.reduce(0, +) / Float(buffer.frameLength))
+                        let avgPower = 20 * log10(rms)
+                        let normalizedPower = max(0, min(1, (avgPower + 50) / 50))
+
+                        DispatchQueue.main.async {
+                            self.voiceLevel = normalizedPower
+                        }
                     }
 
                     try? self.audioEngine.start()
@@ -92,7 +109,7 @@ class DetailCardViewModel: NSObject {
         }
     }
 
-    // MARK: - 점수 평가 및 상태 저장
+    // MARK: - 점수 평가
     private func evaluatePronunciation(scorePercent: Int) {
         switch scorePercent {
         case 100:
@@ -106,7 +123,7 @@ class DetailCardViewModel: NSObject {
         case 60..<70:
             updateScore(base: 1)
         default:
-            print("🔁 발음 실패, 하트 -1")
+            print("발음 실패, 하트 -1")
             heart = max(0, heart - 1)
             accuracyType = .failure
             lastPassed = false
@@ -120,7 +137,7 @@ class DetailCardViewModel: NSObject {
         lastEvaluatedScore = finalScore
         lastPassed = true
         accuracyType = .success
-        print("✅ 점수 획득: \(finalScore)점 \(isBossCard ? "(보스 ×3)" : "")")
+        print("점수 획득: \(finalScore)점 \(isBossCard ? "(보스 ×3)" : "")")
     }
 
     // MARK: - 문자열 유사도
