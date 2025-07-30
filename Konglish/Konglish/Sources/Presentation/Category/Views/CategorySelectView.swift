@@ -31,9 +31,10 @@ struct CategorySelectView: View {
                         })
                     }
                 })
+                .padding(.horizontal, 113)
                 .fixedSize()
             }
-            
+            .scrollIndicators(.hidden)
         }
         .navigationBarBackButtonHidden(true)
         .overlay(alignment: .topLeading, content: {
