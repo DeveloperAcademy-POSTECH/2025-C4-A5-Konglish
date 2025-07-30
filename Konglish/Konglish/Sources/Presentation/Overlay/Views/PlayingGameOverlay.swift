@@ -70,10 +70,8 @@ struct PlayingGameOverlay: View {
     private var bottonGuide: some View {
         ZStack {
             RoundedRectangle(cornerRadius: PlayingGameConstants.cornerRadius)
-                .fill(Color.white01)
-                .background(Material.ultraThin)
+                .fill(Material.ultraThin)
                 .clipShape(RoundedRectangle(cornerRadius: PlayingGameConstants.cornerRadius))
-                .whiteShadow()
                 .frame(width: PlayingGameConstants.guideWidth, height: PlayingGameConstants.guideHeight)
                 .glassShadow(PlayingGameConstants.dropShadowSize)
             

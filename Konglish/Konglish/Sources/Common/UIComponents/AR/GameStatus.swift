@@ -44,7 +44,7 @@ struct GameStatus: View {
         })
         .padding(.vertical, GameStatusConstatns.verticalPadding)
         .padding(.horizontal, GameStatusConstatns.horizonPadding)
-        .background(Material.thin.quaternary)
+        .background(Material.ultraThin.quaternary)
         .clipShape(RoundedRectangle(cornerRadius: GameStatusConstatns.cornerRadius))
         .glassShadow(GameStatusConstatns.dropShadowSize)
     }
@@ -74,6 +74,7 @@ struct GameStatus: View {
                 .customOutline(width: 1, color: .white01)
                 .frame(width: GameStatusConstatns.scoreLabelWidth, alignment: .leading)
         }
+        .safeAreaPadding(.leading, 10)
     }
     
     /// 카드 현재 수집 정보
