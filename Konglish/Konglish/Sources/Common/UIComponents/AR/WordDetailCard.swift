@@ -135,7 +135,8 @@ struct WordDetailCard: View {
     private var dividerLine: some View {
         Capsule()
             .fill(Color.voiceShadow)
-            .frame(width: .infinity, height: WordDetailCardConstants.divicerLine)
+            .frame(maxWidth: .infinity)
+            .frame(height: WordDetailCardConstants.divicerLine)
     }
     
     // MARK: - Bodttom Right

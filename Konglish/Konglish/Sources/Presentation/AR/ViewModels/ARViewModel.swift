@@ -16,7 +16,13 @@ class ARViewModel {
     var currentDetectedPlanes: Int = 0
     
     /// 현재 라이프 카운트 수
-    var currentLifeCounts: Int = 5
+    var currentLifeCounts: Int = 5 {
+        didSet {
+            if currentLifeCounts == 0 {
+                gamePhase = .fisished
+            }
+        }
+    }
     
     /// 현재 획득 점수
     var currentGameScore: Int = 0

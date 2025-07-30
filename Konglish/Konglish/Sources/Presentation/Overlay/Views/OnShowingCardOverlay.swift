@@ -44,19 +44,24 @@ struct OnShowingCardOverlay: View {
             }
         })
         .overlay(alignment: .bottomTrailing, content: {
-            VStack(spacing: 10, content: {
-                
-                MainButton(buttonType: .icon(.micStop)) {
+            MainButton(buttonType: .icon(.mic)) {
+                if detailCardViewModel.recordingState == .recording {
                     detailCardViewModel.stopRecording()
-                    detailCardViewModel.evaluate()
-                }
-                
-                MainButton(buttonType: .icon(.mic)) {
+//                    detailCardViewModel.evaluate()
+                    detailCardViewModel.evaluateStub()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        arViewModel.showingWordDetailCard = false
+                        arViewModel.flippedCardId = nil
+                        detailCardViewModel.lastPassed = false
+                        detailCardViewModel.lastEvaluatedScore = nil
+                        detailCardViewModel.accuracyType = .btnMic
+                    }
+                } else {
                     detailCardViewModel.startRecording()
                 }
-            })
+            }
         })
-        .overlay(alignment: .leading, content: {
+        .overlay(alignment: .trailing, content: {
             MainButton(buttonType: .icon(.close)) {
                 arViewModel.showingWordDetailCard.toggle()
             }
@@ -65,5 +70,12 @@ struct OnShowingCardOverlay: View {
         .safeAreaPadding(.bottom, UIConstants.bottomPadding)
         .safeAreaPadding(.top, UIConstants.topPadding)
         .navigationBarBackButtonHidden(true)
+        .onChange(of: detailCardViewModel.heart) { _, newValue in
+            arViewModel.currentLifeCounts = newValue
+        }
+        .onChange(of: detailCardViewModel.currentScore) { _, newValue in
+            arViewModel.currentGameScore = newValue
+            arViewModel.numberOfFinishedCards = detailCardViewModel.finishedCards.count
+        }
     }
 }

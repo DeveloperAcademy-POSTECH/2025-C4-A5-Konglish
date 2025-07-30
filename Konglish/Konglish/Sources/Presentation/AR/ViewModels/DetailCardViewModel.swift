@@ -14,9 +14,9 @@ import SwiftData
 class DetailCardViewModel: NSObject {
     // MARK: - 모델 상태
     var word: CardModel?
-    var accuracyType: AccuracyType = .failure
+    var accuracyType: AccuracyType = .btnMic
     var isBossCard: Bool = false
-    var heart: Int = 3
+    var heart: Int = 5
     var currentScore: Int = 0
     
     // MARK: - 발음 결과 저장용
@@ -29,6 +29,8 @@ class DetailCardViewModel: NSObject {
     // MARK: - 음성 합성 (TTS)
     let speechSynthesizer = AVSpeechSynthesizer()
     
+    var finishedCards: Set<CardModel> = []
+    
     func speakWord() {
         guard let word = word?.wordEng else {
             print("발음할 단어 없음")
@@ -37,7 +39,7 @@ class DetailCardViewModel: NSObject {
         
         let utterance = AVSpeechUtterance(string: word)
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        utterance.rate = 1.0
+        utterance.rate = 0.5
         utterance.pitchMultiplier = 1.1
         speechSynthesizer.speak(utterance)
     }
@@ -140,6 +142,45 @@ class DetailCardViewModel: NSObject {
                 self.recordingState = .idle
             }
         }
+    }
+    
+    /// 우선 시연을 위해 랜덤 점수를 반환한다.
+    func evaluateStub() { // TODO: 음성 인식 고친 후 삭제 필요
+        self.cleanupAudio()
+        self.recordingState = .idle
+        
+        let scorePercent = Int.random(in: 60..<100)
+        switch scorePercent {
+        case 100:
+            updateScore(base: 5)
+        case 90..<100:
+            updateScore(base: 4)
+        case 80..<90:
+            updateScore(base: 3)
+        case 70..<80:
+            updateScore(base: 2)
+        case 60..<70:
+            updateScore(base: 1)
+        default:
+            print("발음 실패, 하트 -1")
+            heart = max(0, heart - 1)
+            accuracyType = .failure
+            lastPassed = false
+            lastEvaluatedScore = nil
+        }
+        
+        if let word = word {
+            finishedCards.insert(word)
+        }
+    }
+    
+    private func updateScore(base: Int) {
+        let finalScore = isBossCard ? base * 3 : base
+        currentScore += finalScore
+        lastEvaluatedScore = finalScore
+        lastPassed = true
+        accuracyType = .success
+        print("점수 획득: \(finalScore)점 \(isBossCard ? "(보스 ×3)" : "")")
     }
 
     // MARK: - 정리
