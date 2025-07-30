@@ -47,6 +47,7 @@ struct OnShowingCardOverlay: View {
                 detailCardViewModel.speakWord()
                 print(detailCardViewModel.word?.wordEng ?? "데이터 없음")
             }
+            .padding(.bottom, OnShowingCardConstants.bottomPadding - UIConstants.bottomPadding)
         })
         .overlay(alignment: .bottomTrailing, content: {
             MainButton(buttonType: .icon(.mic)) {
@@ -72,6 +73,7 @@ struct OnShowingCardOverlay: View {
                     detailCardViewModel.startRecording()
                 }
             }
+            .padding(.bottom, OnShowingCardConstants.bottomPadding - UIConstants.bottomPadding)
         })
         .overlay(alignment: .trailing, content: {
             MainButton(buttonType: .icon(.close)) {

@@ -35,19 +35,22 @@ struct PlayingGameOverlay: View {
         })
         .overlay(alignment: .bottom, content: {
             bottonGuide
+                .padding(.bottom, PlayingGameConstants.bottomPadding - UIConstants.bottomPadding)
         })
         .overlay(alignment: .bottomLeading, content: {
             targetBtn
+                .padding(.bottom, PlayingGameConstants.bottomPadding - UIConstants.bottomPadding)
         })
         .overlay(alignment: .bottomTrailing, content: {
             targetBtn
+                .padding(.bottom, PlayingGameConstants.bottomPadding - UIConstants.bottomPadding)
         })
         .overlay(content: {
             Image(.aim)
         })
         .safeAreaPadding(.top, UIConstants.topPadding)
         .safeAreaPadding(.horizontal, PlayingGameConstants.horizonPadding)
-        .safeAreaPadding(.bottom, PlayingGameConstants.bottomPadding)
+        .safeAreaPadding(.bottom, UIConstants.bottomPadding)
         .navigationBarBackButtonHidden(true)
     }
     
