@@ -30,7 +30,26 @@ public extension Font {
         }
     }
     
+    enum Poetsen {
+        case regular
+        
+        var fontConvertible: KonglishFontConvertible {
+            switch self {
+            case .regular:
+                return KonglishFontFamily.PoetsenOne.regular
+            }
+        }
+        
+        func font(size: CGFloat) -> Font {
+            fontConvertible.swiftUIFont(size: size)
+        }
+    }
+    
     static func konglish(_ type: Konglish, size: CGFloat) -> Font {
+        return type.font(size: size)
+    }
+    
+    static func poetsen(_ type: Poetsen, size: CGFloat) -> Font {
         return type.font(size: size)
     }
     
@@ -49,6 +68,10 @@ public extension Font {
     
     static var semibold24: Font {
         return .konglish(.extraBold, size: 24)
+    }
+    
+    static var poetsen48: Font {
+        return .poetsen(.regular, size: 48)
     }
     
     // MARK: - Bold

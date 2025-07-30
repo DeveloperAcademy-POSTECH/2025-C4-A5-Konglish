@@ -26,6 +26,10 @@ struct GameStatus: View {
         static let cornerRadius: CGFloat = 30
         static let binWidth: CGFloat = 40
         static let binHeight: CGFloat = 34
+        static let cardBottomSpacing: CGFloat = 0
+        static let cardBottomImagePadding: CGFloat = 16
+        static let scoreLabelWidth: CGFloat = 94
+        static let cardsLabelWidth: CGFloat = 140
         
         static let scoreText: String = "Score"
     }
@@ -53,16 +57,20 @@ struct GameStatus: View {
     
     /// 현재 스코어 표시 텍스트
     private var scoreText: some View {
-        Label(title: {
-            Text("\(currentScore)")
-                .font(.bold40)
-                .foregroundStyle(Color.black)
-                .customOutline(width: 1, color: .white01)
-        }, icon: {
+        HStack(spacing: GameStatusConstatns.cardBottomSpacing) {
             Image(.bin)
                 .resizable()
                 .frame(width: GameStatusConstatns.binWidth, height: GameStatusConstatns.binHeight)
-        })
+            
+            Spacer()
+                .frame(width: GameStatusConstatns.cardBottomImagePadding)
+            
+            Text("\(currentScore)")
+                .font(.poetsen48)
+                .foregroundStyle(Color.black)
+                .customOutline(width: 1, color: .white01)
+                .frame(width: GameStatusConstatns.scoreLabelWidth, alignment: .leading)
+        }
     }
     
     /// 카드 현재 수집 정보
@@ -70,9 +78,10 @@ struct GameStatus: View {
         HStack(spacing: GameStatusConstatns.cardHspacing, content: {
             Image(.totalCard)
             Text("\(currentCard) / \(maxCount)")
-                .font(.bold40)
+                .font(.poetsen48)
                 .foregroundStyle(Color.black01)
                 .customOutline(width: 1, color: .white01)
+                .frame(width: GameStatusConstatns.cardsLabelWidth)
         })
     }
 }
