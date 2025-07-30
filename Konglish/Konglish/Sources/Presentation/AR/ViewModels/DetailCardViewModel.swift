@@ -18,8 +18,6 @@ class DetailCardViewModel: NSObject {
     var isBossCard: Bool = false
     var heart: Int = 3
     var currentScore: Int = 0
-    // MARK: - 상태 추적
-    var isRecording = false
     
     // MARK: - 발음 결과 저장용
     var lastEvaluatedScore: Int? = nil
