@@ -11,6 +11,45 @@ import RealityKit
 import os.log
 import KonglishARProject
 
+/// AR 카드를 3D 공간에 배치하고 관리하는 기능을 제공
+///
+/// ## 주요 기능
+/// - ARPlaneAnchor 기반 카드 배치
+/// - Transform 기반 카드 배치 (포털에서 나오는 카드용)
+/// - Reality Composer Pro Scene에서 카드 엔티티 로드 -> 직접 .usdz 넣음
+///
+/// ## 사용법
+///
+/// ### 1. 평면 앵커 기반 배치
+/// ```swift
+/// let cardPositioner = CardPositioner(arView: arView)
+/// let input = CardPositioner.Input(
+///     planeAnchor: detectedPlaneAnchor,
+///     cardData: gameCard
+/// )
+/// cardPositioner.operate(context: input)
+/// ```
+///
+/// ### 2. Transform 기반 배치 (포털용)
+/// ```swift
+/// let transformInput = CardPositioner.TransformInput(
+///     transform: targetTransform,
+///     cardData: gameCard
+/// )
+/// let cardAnchor = cardPositioner.createCardWithTransform(context: transformInput)
+/// arView.scene.addAnchor(cardAnchor)
+/// ```
+///
+/// ## 카드 엔티티 구조
+/// - **Root Entity**: Reality Composer Pro Scene 루트
+/// - **Card Entity**: "Card" 이름을 가진 실제 카드 모델
+/// - **Components**: CardComponent + HoverComponent 자동 추가
+///
+/// ## 좌표계 변환
+/// - ARPlaneAnchor → AnchorEntity 자동 변환
+/// - simd_float4x4 → Transform → AnchorEntity 변환
+/// - 카드는 평면 위에 정확히 배치되도록 위치 조정
+///
 class CardPositioner: ARFeatureProvider {
     weak var arView: ARView?
     
@@ -58,6 +97,17 @@ class CardPositioner: ARFeatureProvider {
         arView.scene.anchors.append(anchorEntity)
     }
     
+    /// Transform을 기반으로 카드를 생성하고 AnchorEntity를 반환한다.
+    /// - Parameter context: 추가할 카드의 CardData와 대상 transform
+    /// - Returns: 생성된 AnchorEntity
+    func createCardWithTransform(context: TransformInput) -> AnchorEntity? {
+        let cardEntity = createCardEntity(data: context.cardData)
+        let anchorEntity = AnchorEntity(world: context.transform)
+        anchorEntity.addChild(cardEntity)
+        
+        return anchorEntity
+    }
+    
     private func createCardEntity(data: GameCard) -> Entity {
         guard let sceneEntity = try? Entity.load(named: "Scene", in: konglishARProjectBundle),
               let rootEntity = sceneEntity.children.first else {
@@ -88,6 +138,11 @@ class CardPositioner: ARFeatureProvider {
     
     struct Input {
         let planeAnchor: ARPlaneAnchor
+        let cardData: GameCard
+    }
+    
+    struct TransformInput {
+        let transform: simd_float4x4
         let cardData: GameCard
     }
 }

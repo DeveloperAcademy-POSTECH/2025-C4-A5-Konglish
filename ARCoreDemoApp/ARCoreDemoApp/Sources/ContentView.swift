@@ -8,6 +8,7 @@ public struct ContentView: View {
     @State var currentGameScore: Int = 0
     @State var numberOfFinishedCards: Int = 0
     @State var triggerScanStart = false
+    @State var triggerCreatePortal = false
     @State var triggerPlaceCards = false
     @State var triggerSubmitAccuracy: (UUID, Float)?
     @State var gamePhase: GamePhase = .initialized
@@ -55,6 +56,46 @@ public struct ContentView: View {
             image: UIImage(systemName: "sun.max.fill")!,
             isBoss: false
         ),
+//        .init(
+//            id: UUID(uuidString: "55555555-5555-5555-5555-555555555555")!,
+//            imageName: "melon",
+//            wordKor: "멜론",
+//            wordEng: "melon",
+//            image: UIImage(systemName: "circle.grid.hex.fill")!,
+//            isBoss: false
+//        ),
+//        .init(
+//            id: UUID(uuidString: "66666666-6666-6666-6666-666666666666")!,
+//            imageName: "orange",
+//            wordKor: "오렌지",
+//            wordEng: "orange",
+//            image: UIImage(systemName: "circle.fill")!,
+//            isBoss: false
+//        ),
+//        .init(
+//            id: UUID(uuidString: "77777777-7777-7777-7777-777777777777")!,
+//            imageName: "peach",
+//            wordKor: "복숭아",
+//            wordEng: "peach",
+//            image: UIImage(systemName: "cloud.sun.fill")!,
+//            isBoss: false
+//        ),
+//        .init(
+//            id: UUID(uuidString: "88888888-8888-8888-8888-888888888888")!,
+//            imageName: "pineapple",
+//            wordKor: "파인애플",
+//            wordEng: "pineapple",
+//            image: UIImage(systemName: "bolt.fill")!,
+//            isBoss: false
+//        ),
+//        .init(
+//            id: UUID(uuidString: "99999999-9999-9999-9999-999999999999")!,
+//            imageName: "watermelon",
+//            wordKor: "수박",
+//            wordEng: "watermelon",
+//            image: UIImage(systemName: "drop.fill")!,
+//            isBoss: true
+//        ),
     ]
     
     public init() {}
@@ -78,6 +119,7 @@ public struct ContentView: View {
                 numberOfFinishedCards: $numberOfFinishedCards,
                 flippedCardId: $flippedCardId,
                 triggerScanStart: $triggerScanStart,
+                triggerCreatePortal: $triggerCreatePortal,
                 triggerPlaceCards: $triggerPlaceCards,
                 triggerSubmitAccuracy: $triggerSubmitAccuracy,
                 triggerFlipCard: $triggerFlipCard
@@ -98,10 +140,18 @@ public struct ContentView: View {
                 Button("스캔 시작") {
                     triggerScanStart = true
                 }
+                .disabled(gamePhase == .scanning || gamePhase == .portalCreated) // 스캔 시작 후 비활성화
                 
-                Button("카드 배치") {
-                    triggerPlaceCards = true
+                Button {
+                    if gamePhase == .scanned {
+                        triggerCreatePortal = true
+                    } else if gamePhase == .portalCreated {
+                        triggerPlaceCards = true
+                    }
+                } label: {
+                    Text(buttonText)
                 }
+                .disabled(buttonDisabled)
                 
                 Button("단어 정답 제출 1") {
                     if let id = gameCards.first?.id {
@@ -144,6 +194,26 @@ public struct ContentView: View {
                 
                 Spacer()
             }
+        }
+    }
+    
+    var buttonText: String {
+        switch gamePhase {
+        case .scanned:
+            return "포털 생성!"
+        case .portalCreated:
+            return "저 너머의 세계엔..?"
+        default:
+            return "..." // 다른 게임 단계에서는 버튼 텍스트를 다르게 설정하거나 숨길 수 있습니다.
+        }
+    }
+    
+    var buttonDisabled: Bool {
+        switch gamePhase {
+        case .scanned, .portalCreated:
+            return false
+        default:
+            return true
         }
     }
 }

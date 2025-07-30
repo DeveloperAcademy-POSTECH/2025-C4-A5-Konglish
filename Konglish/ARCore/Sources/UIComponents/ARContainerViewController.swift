@@ -30,12 +30,16 @@ public class ARContainerViewController: UIViewController {
     
     /// 기능을 제공하는 클래스들 (ARFeatureProvider)
     var planeVisualizer: PlaneVisualizer?
+    var portalVisualizer: CentralPortalVisualizer?
     var cardPositioner: CardPositioner?
     var cardDetector: CardDetector?
     var cardRotator: CardRotator?
     
     /// 인식된 평면의 시각화 엔티티들
     var detectedPlaneEntities: [ARPlaneAnchor: AnchorEntity] = [:]
+    
+    /// 저장된 평면의 월드 변환 (위치 및 방향)
+    var savedPlaneTransforms: [UUID: simd_float4x4] = [:]
     
     /// 씬에 대한 이벤트 구독을 보관
     var sceneSubscriptions: Set<AnyCancellable> = []

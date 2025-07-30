@@ -51,10 +51,6 @@ class CardRotator: ARFeatureProvider {
     }
     
     private func rotateCard(_ cardEntity: Entity) {
-        guard cardEntity.components[CardComponent.self] != nil else {
-            return
-        }
-        
         let currentRotation = cardEntity.transform.rotation
         let additionalRotation = simd_quatf(angle: .pi, axis: [0, 1, 0]) // Y축 180도
         let targetRotation = currentRotation * additionalRotation
