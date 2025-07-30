@@ -6,81 +6,77 @@
 //
 
 import SwiftUI
+import Dependency
+import SwiftData
 
 /// 플레잉 중 카드 뒤집혔을 때 오버레이
-// TODO: 하이파이 디자인 맞추기
 struct OnShowingCardOverlay: View {
-    var arViewModel: ARViewModel
+    @Bindable var arViewModel: ARViewModel
     @State private var detailCardViewModel = DetailCardViewModel()
-    
+    @EnvironmentObject var container: DIContainer
+    @Environment(\.modelContext) private var modelContext
+    @Query var allCards: [CardModel]
+
+    var currentSession: GameSessionModel
+
     var body: some View {
-        VStack {
-            HStack {
-                VStack {
-                    Text("하트: \(arViewModel.currentLifeCounts)")
-                    Text("점수: \(arViewModel.currentGameScore)")
-                    Text("완료 수: \(arViewModel.numberOfFinishedCards)")
-                }
-                
-                Spacer()
-                
-                MainButton(buttonType: .icon(.exit)) {
-                    print("pause button tapped")
-                }
-            }
-            
-            Spacer()
-            
-            Text("+")
-                .font(.system(size: 32, weight: .bold))
-            
-            Spacer()
-            
-            HStack(alignment: .bottom) {
-                VStack {
-                    // TODO: WordDetailCard 카드에 점수 제출 로직이 들어가면 이 버튼은 지워주세요
-                    // 디버그용 제출 버튼
-                    Button {
-                        if let cardId = arViewModel.flippedCardId {
-                            arViewModel.triggerSubmitAccuracy = (cardId, 0.9)
-                        }
-                        arViewModel.showingWordDetailCard = false
-                        arViewModel.flippedCardId = nil
-                    } label: {
-                        Text("제출성공")
-                            .background {
-                                Rectangle()
-                                    .background(Color.primary)
-                                    .frame(width: 96, height: 96)
-                            }
-                    }
-                    
-                    Spacer()
-                        .frame(height: 72)
-                    
-                    MainButton(buttonType: .icon(.sound)) {
-                        // TODO: 발음 재생 기능
-                    }
-                }
-                
-                Spacer()
-                
-                VStack {                    
-                    Spacer()
-                        .frame(height: 72)
-                    
-                    MainButton(buttonType: .icon(.mic)) {
-                        // TODO: 녹음 및 제출 기능
-                    }
-                }
-            }
-        }
-        .overlay {
+        ZStack {
+            Color.black.opacity(0.4)
+
             if arViewModel.showingWordDetailCard {
                 WordDetailCard(viewModel: detailCardViewModel)
             }
+
+            VStack {
+                HStack {
+                    GameStatus(currentScore: $arViewModel.currentGameScore,
+                               currentCard: $arViewModel.numberOfFinishedCards,
+                               currentLife: $arViewModel.currentLifeCounts)
+
+                    Spacer()
+
+                    MainButton(buttonType: .icon(.exit)) {
+                        container.navigationRouter.pop()
+                    }
+                }
+
+                Spacer()
+
+                HStack {
+                    MainButton(buttonType: .icon(.close)) {
+                        arViewModel.showingWordDetailCard.toggle()
+                    }
+
+                    Spacer()
+
+                    MainButton(buttonType: .icon(.sound)) {
+                        detailCardViewModel.speakWord()
+                    }
+
+                    MainButton(buttonType: .icon(.mic)) {
+                        handlePronunciationAndSave()
+                    }
+                }
+            }
+            .padding()
         }
-        .padding(.vertical, 40)
-        .padding(.horizontal, 36)
+        .onChange(of: arViewModel.flippedCardId) { _, newId in
+            if let id = newId, arViewModel.showingWordDetailCard {
+                detailCardViewModel.word = allCards.first(where: { $0.id == id })
+            }
+        }
+    }
+
+    private func handlePronunciationAndSave() {
+        Task {
+            await detailCardViewModel.startPronunciationEvaluation()
+
+            if let word = detailCardViewModel.word {
+                let usedCard = UsedCardModel(session: currentSession, card: word)
+                modelContext.insert(usedCard)
+                try? modelContext.save()
+                print("UsedCard 저장 완료: \(word.wordEng)")
+            }
+        }
     }
 }

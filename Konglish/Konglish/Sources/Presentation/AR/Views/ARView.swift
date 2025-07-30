@@ -8,12 +8,14 @@
 import SwiftUI
 import ARCore
 import SwiftData
+import Dependency
 
 struct ARView: View {
     // MARK: - SwiftData
-    let levelModelID: PersistentIdentifier
+    let levelModelID: UUID
     @Query var levels: [LevelModel]
     @Query var gameSessions: [GameSessionModel]
+    @EnvironmentObject var container: DIContainer
     
     var selectedLevel: LevelModel? {
         levels.first { levelModel in
@@ -41,7 +43,7 @@ struct ARView: View {
     }
     
     // MARK: - View Model
-    @State var arViewModel: ARViewModel
+    @State var arViewModel: ARViewModel = .init()
     
     // MARK: - 게임 세팅을 위한 프로퍼티
     /// 최소 평면 사이즈
@@ -83,8 +85,10 @@ struct ARView: View {
                 case .scanned, .playing:
                     if !arViewModel.showingWordDetailCard {
                         PlayingGameOverlay(arViewModel: arViewModel)
-                    } else {
-                        OnShowingCardOverlay(arViewModel: arViewModel)
+                            .environmentObject(container)
+                    } else if let currentSession = selectedGameSession {
+                        OnShowingCardOverlay(arViewModel: arViewModel, currentSession: currentSession)
+                            .environmentObject(container)
                     }
                 case .fisished:
                     if let selectedGameSession {

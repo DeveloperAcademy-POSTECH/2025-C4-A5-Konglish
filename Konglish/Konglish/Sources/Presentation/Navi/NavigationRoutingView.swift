@@ -21,8 +21,7 @@ struct NavigationRoutingView: View {
             case .level(let id):
                 LevelView(cateogryID: id)
             case .ar(let id):
-                //TODO: - AR 뷰 사용
-                Text("11")
+                ARView(levelModelID: id)
             }
         }
         .environmentObject(container)
