@@ -264,7 +264,6 @@ public struct ARContainer: UIViewControllerRepresentable {
     }
     
     public class Coordinator: ARContainerViewControllerDelegate {
-        
         var parent: ARContainer
         
         init(_ parent : ARContainer) {
