@@ -60,6 +60,7 @@ class DetailCardViewModel: NSObject {
 
                 DispatchQueue.main.async {
                     self.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+                    self.recognitionRequest?.shouldReportPartialResults = false // 중요!
                     let inputNode = self.audioEngine.inputNode
 
                     guard let request = self.recognitionRequest else {
@@ -67,8 +68,11 @@ class DetailCardViewModel: NSObject {
                         return
                     }
 
-                    // 인식 작업 시작
+                    var didFinish = false
+
                     self.recognitionTask = self.speechRecognizer?.recognitionTask(with: request) { result, error in
+                        if didFinish { return }
+
                         if let result = result, result.isFinal {
                             let spoken = result.bestTranscription.formattedString.lowercased()
                             let similarity = self.calculateSimilarityScore(spoken: spoken, target: target)
@@ -76,22 +80,23 @@ class DetailCardViewModel: NSObject {
 
                             self.evaluatePronunciation(scorePercent: percent)
 
-                            self.audioEngine.stop()
-                            inputNode.removeTap(onBus: 0)
-                            self.recognitionRequest = nil
-                            self.recognitionTask = nil
-                            self.voiceLevel = 0
+                            didFinish = true
+                            self.cleanupAudio()
+                            continuation.resume()
+                        }
 
+                        if let error = error {
+                            print("Speech Recognition Error: \(error.localizedDescription)")
+                            didFinish = true
+                            self.cleanupAudio()
                             continuation.resume()
                         }
                     }
 
-                    // 오디오 입력에서 실시간 볼륨 측정
                     let format = inputNode.outputFormat(forBus: 0)
                     inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { buffer, _ in
                         self.recognitionRequest?.append(buffer)
 
-                        // 볼륨 측정
                         guard let channelData = buffer.floatChannelData?[0] else { return }
                         let channelDataArray = Array(UnsafeBufferPointer(start: channelData, count: Int(buffer.frameLength)))
                         let rms = sqrt(channelDataArray.map { $0 * $0 }.reduce(0, +) / Float(buffer.frameLength))
@@ -104,9 +109,27 @@ class DetailCardViewModel: NSObject {
                     }
 
                     try? self.audioEngine.start()
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                        if !didFinish {
+                            print("⏰ Timeout - No speech detected")
+                            didFinish = true
+                            self.evaluatePronunciation(scorePercent: 0)
+                            self.cleanupAudio()
+                            continuation.resume()
+                        }
+                    }
                 }
             }
         }
+    }
+    
+    private func cleanupAudio() {
+        audioEngine.stop()
+        audioEngine.inputNode.removeTap(onBus: 0)
+        recognitionRequest = nil
+        recognitionTask = nil
+        voiceLevel = 0
     }
 
     // MARK: - 점수 평가

@@ -21,7 +21,7 @@ struct OnShowingCardOverlay: View {
     
     var body: some View {
         ZStack {
-            Color.black.opacity(0.4)
+            Color.black.opacity(0.4).ignoresSafeArea()
             
             if arViewModel.showingWordDetailCard {
                 WordDetailCard(viewModel: detailCardViewModel)
