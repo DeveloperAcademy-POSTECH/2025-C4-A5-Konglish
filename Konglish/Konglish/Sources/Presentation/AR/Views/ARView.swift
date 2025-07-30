@@ -115,6 +115,7 @@ struct ARView: View {
                 arViewModel.gamePhase = .fisished
                 
                 saveScore()
+                saveSuccessCount()
             }
         })
         .ignoresSafeArea()
@@ -124,11 +125,45 @@ struct ARView: View {
 
 extension ARView {
     private func saveScore() {
-        if let selectedGameSession {
-            selectedGameSession.score = detailCardViewModel.currentScore
-            modelContext.insert(selectedGameSession)
+        guard let selectedGameSession,
+              let selectedLevel else { return }
+        
+        // 점수 저장
+        selectedGameSession.score = detailCardViewModel.currentScore
+        modelContext.insert(selectedGameSession)
+        try? modelContext.save()
+        print("점수 저장 완료: \(detailCardViewModel.currentScore)")
+        
+        // 레벨 저장
+        let bestScore = selectedLevel.bestScore
+        if detailCardViewModel.currentScore > bestScore {
+            selectedLevel.bestScore = detailCardViewModel.currentScore
+            print("최고 점수 갱신 완료: \(detailCardViewModel.currentScore)")
+        }
+            
+        try? modelContext.save()
+    }
+    
+    private func saveSuccessCount() {
+        guard let selectedLevel else { return }
+        
+        let descriptor = FetchDescriptor<GameSessionModel>()
+        if let gameSessions = try? modelContext.fetch(descriptor) {
+            var allUsedCardIDs = Set<UUID>()
+            
+            gameSessions
+                .filter{ session in
+                    session.level.id == selectedLevel.id
+                }
+                .forEach { model in
+                    for usedCard in model.usedCards {
+                        let cardID = usedCard.card.id
+                        allUsedCardIDs.insert(cardID)
+                    }
+                }
+            
+            selectedLevel.successCount = allUsedCardIDs.count
             try? modelContext.save()
-            print("점수 저장 완료: \(detailCardViewModel.currentScore)")
         }
     }
 }

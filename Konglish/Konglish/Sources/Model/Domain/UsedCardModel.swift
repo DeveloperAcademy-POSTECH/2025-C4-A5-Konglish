@@ -11,7 +11,7 @@ import SwiftData
 /// N:M 관계 중간 모델
 @Model
 final class UsedCardModel {
-    @Relationship var session: GameSessionModel
+    @Relationship(inverse: \GameSessionModel.usedCards) var session: GameSessionModel
     @Relationship var card: CardModel
     
     init(session: GameSessionModel, card: CardModel) {
