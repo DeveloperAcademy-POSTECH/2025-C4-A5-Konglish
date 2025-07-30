@@ -60,7 +60,8 @@ struct WordDetailCard: View {
                 .safeAreaPadding(WordDetailCardConstants.safePadding)
                 .background {
                     RoundedRectangle(cornerRadius: WordDetailCardConstants.cornerRadius)
-                        .fill(Color.yellow02)
+                        .fill(Color.wordCardYellow)
+                        .background(Material.thin)
                 }
                 .frame(maxWidth: WordDetailCardConstants.maxWidth)
                 .offset(x: -WordDetailCardConstants.offsetValue, y: WordDetailCardConstants.offsetValue)

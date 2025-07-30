@@ -16,52 +16,47 @@ struct OnShowingCardOverlay: View {
     @EnvironmentObject var container: DIContainer
     @Environment(\.modelContext) private var modelContext
     @Query var allCards: [CardModel]
-
+    
     var currentSession: GameSessionModel
-
+    
     var body: some View {
         ZStack {
             Color.black.opacity(0.4)
-
+            
             if arViewModel.showingWordDetailCard {
                 WordDetailCard(viewModel: detailCardViewModel)
             }
-
-            VStack {
-                HStack {
-                    GameStatus(currentScore: $arViewModel.currentGameScore,
-                               currentCard: $arViewModel.numberOfFinishedCards,
-                               currentLife: $arViewModel.currentLifeCounts)
-
-                    Spacer()
-
-                    MainButton(buttonType: .icon(.exit)) {
-                        container.navigationRouter.pop()
-                    }
-                }
-
-                Spacer()
-
-                HStack {
-                    MainButton(buttonType: .icon(.close)) {
-                        arViewModel.showingWordDetailCard.toggle()
-                    }
-
-                    Spacer()
-
-                    MainButton(buttonType: .icon(.sound)) {
-                        detailCardViewModel.speakWord()
-                    }
-
-                    MainButton(buttonType: .icon(.mic)) {
-                        handlePronunciationAndSave()
-                    }
-                }
-            }
-            .padding()
         }
+        .overlay(alignment: .topLeading, content: {
+            GameStatus(currentScore: $arViewModel.currentGameScore,
+                       currentCard: $arViewModel.numberOfFinishedCards,
+                       currentLife: $arViewModel.currentLifeCounts)
+        })
+        .overlay(alignment: .topTrailing, content: {
+            MainButton(buttonType: .icon(.exit)) {
+                container.navigationRouter.pop()
+            }
+        })
+        .overlay(alignment: .bottomLeading, content: {
+            MainButton(buttonType: .icon(.sound)) {
+                detailCardViewModel.speakWord()
+            }
+        })
+        .overlay(alignment: .bottomTrailing, content: {
+            MainButton(buttonType: .icon(.mic)) {
+                handlePronunciationAndSave()
+            }
+        })
+        .overlay(alignment: .leading, content: {
+            MainButton(buttonType: .icon(.close)) {
+                arViewModel.showingWordDetailCard.toggle()
+            }
+        })
+        .safeAreaPadding(.horizontal, UIConstants.horizontalPading)
+        .safeAreaPadding(.bottom, UIConstants.horizonBtnPadding)
+        .safeAreaPadding(.top, UIConstants.topPadding)
     }
-
+    
     private func handlePronunciationAndSave() {
         Task {
             await detailCardViewModel.startPronunciationEvaluation()
