@@ -76,7 +76,7 @@ struct PlayingGameOverlay: View {
                 .frame(width: PlayingGameConstants.guideWidth, height: PlayingGameConstants.guideHeight)
             
             Text(PlayingGameConstants.guideText)
-                .font(.semibold32)
+                .font(.semibold24)
                 .foregroundStyle(Color.black01)
         }
     }
