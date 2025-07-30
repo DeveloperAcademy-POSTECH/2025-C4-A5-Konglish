@@ -66,8 +66,10 @@ struct WordDetailCard: View {
                 }
                 .offset(x: -WordDetailCardConstants.offsetValue, y: WordDetailCardConstants.offsetValue)
                 
-                successText
-                    .rotationEffect(.degrees(WordDetailCardConstants.rotationDegree))
+                if viewModel.lastPassed {
+                    successText
+                        .rotationEffect(.degrees(WordDetailCardConstants.rotationDegree))
+                }
             })
             .frame(width: WordDetailCardConstants.mainMaxWidth, height: WordDetailCardConstants.mainMaxHeight)
         }
