@@ -12,7 +12,7 @@ struct SuccessProgress: View {
     
     // MARK: - Property
     let currentCount: Int
-    let maxCount: Int = 40
+    let maxCount: Int = 10
     var progressValue: Double {
         Double(currentCount) / Double(maxCount)
     }
