@@ -22,11 +22,12 @@ struct OnShowingCardOverlay: View {
     var body: some View {
         ZStack {
             Color.black.opacity(0.4).ignoresSafeArea()
-            
+        }
+        .overlay(alignment: .center, content: {
             if arViewModel.showingWordDetailCard {
                 WordDetailCard(viewModel: detailCardViewModel)
             }
-        }
+        })
         .overlay(alignment: .topLeading, content: {
             GameStatus(currentScore: $arViewModel.currentGameScore,
                        currentCard: $arViewModel.numberOfFinishedCards,

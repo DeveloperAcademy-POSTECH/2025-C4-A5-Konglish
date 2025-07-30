@@ -93,7 +93,11 @@ class DetailCardViewModel: NSObject {
                         }
                     }
 
-                    let format = inputNode.outputFormat(forBus: 0)
+                    let inputNode = audioEngine.inputNode
+                    inputNode.removeTap(onBus: 0)
+
+                    let format = inputNode.inputFormat(forBus: 0)
+
                     inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { buffer, _ in
                         self.recognitionRequest?.append(buffer)
 
@@ -112,7 +116,7 @@ class DetailCardViewModel: NSObject {
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                         if !didFinish {
-                            print("⏰ Timeout - No speech detected")
+                            print("Timeout - No speech detected")
                             didFinish = true
                             self.evaluatePronunciation(scorePercent: 0)
                             self.cleanupAudio()
