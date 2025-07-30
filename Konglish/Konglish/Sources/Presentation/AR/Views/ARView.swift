@@ -85,9 +85,9 @@ struct ARView: View {
                 switch arViewModel.gamePhase {
                 case .initialized:
                     StartOverlay(arViewModel: arViewModel)
-                case .scanning:
+                case .scanning, .scanned:
                     CheckScanOverlay(arViewModel: arViewModel, allPlanesDetected: allPlanesDetected)
-                case .scanned, .playing:
+                case .playing:
                     if !arViewModel.showingWordDetailCard {
                         PlayingGameOverlay(arViewModel: arViewModel)
                             .environmentObject(container)
