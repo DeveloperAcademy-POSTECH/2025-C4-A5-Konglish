@@ -52,13 +52,13 @@ struct SwipeTabView: View {
         ZStack {
             RoundedRectangle(cornerRadius: GuideCardConstants.cornerRadius)
                 .fill(Color.white01)
-                .stroke(Color.gray01, style: .init(lineWidth: GuideCardConstants.lineWidth))
+//                .stroke(Color.gray01, style: .init(lineWidth: GuideCardConstants.lineWidth))
             
             LottieView(animation: .named(lottieName(for: index)))
                 .playing()
                 .looping()
         }
-        .frame(width: GuideCardConstants.bgWidth, height: GuideCardConstants.bgHeight)
+//        .frame(width: GuideCardConstants.bgWidth, height: GuideCardConstants.bgHeight)
     }
     
     private var pageControl: some View {

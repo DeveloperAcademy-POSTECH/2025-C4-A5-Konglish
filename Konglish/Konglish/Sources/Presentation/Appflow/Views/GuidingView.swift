@@ -37,8 +37,8 @@ struct GuidingView: View {
             })
             .overlay(alignment: .center, content: {
                 SwipeTabView()
+                    .safeAreaPadding(.horizontal, GuidingConstants.safeHorizonPadding)
             })
-            .safeAreaPadding(.horizontal, GuidingConstants.safeHorizonPadding)
         }
     }
     
@@ -48,7 +48,6 @@ struct GuidingView: View {
             container.navigationRouter.push(.category)
         })
         .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
-        .safeAreaPadding(.bottom, GuidingConstants.bottomPadding)
     }
     
     private var title: some View {
