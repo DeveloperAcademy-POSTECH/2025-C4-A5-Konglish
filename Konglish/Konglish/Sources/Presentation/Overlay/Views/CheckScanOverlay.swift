@@ -36,7 +36,7 @@ struct CheckScanOverlay: View {
                         })
                     }
                 }
-                .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
+                .safeAreaPadding(.horizontal, UIConstants.horionLongTextPadding)
             })
             .navigationBarBackButtonHidden(true)
             .safeAreaPadding(.trailing, UIConstants.naviLeadingPadding)

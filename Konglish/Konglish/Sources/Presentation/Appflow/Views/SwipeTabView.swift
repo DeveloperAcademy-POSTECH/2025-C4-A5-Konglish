@@ -33,7 +33,9 @@ struct SwipeTabView: View {
                 ForEach(0..<3) { index in
                     card(index: index)
                         .tag(index)
+                        .padding(.horizontal, 10)
                 }
+                
             })
             .tabViewStyle(.page(indexDisplayMode: .never))
             
@@ -49,16 +51,11 @@ struct SwipeTabView: View {
     }
     
     private func card(index: Int) -> some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: GuideCardConstants.cornerRadius)
-                .fill(Color.white01)
-//                .stroke(Color.gray01, style: .init(lineWidth: GuideCardConstants.lineWidth))
-            
-            LottieView(animation: .named(lottieName(for: index)))
-                .playing()
-                .looping()
-        }
-//        .frame(width: GuideCardConstants.bgWidth, height: GuideCardConstants.bgHeight)
+        LottieView(animation: .named(lottieName(for: index)))
+            .playing()
+            .looping()
+            .border(Color.gray02, width: 4)
+
     }
     
     private var pageControl: some View {
