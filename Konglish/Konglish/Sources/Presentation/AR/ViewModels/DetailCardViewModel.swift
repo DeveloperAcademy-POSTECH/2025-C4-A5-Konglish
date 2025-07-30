@@ -49,8 +49,6 @@ class DetailCardViewModel: NSObject {
     private var recognitionTask: SFSpeechRecognitionTask?
 
     func startPronunciationEvaluation() async {
-        let target = word?.wordEng.lowercased() ?? ""
-
         await withCheckedContinuation { continuation in
             SFSpeechRecognizer.requestAuthorization { authStatus in
                 guard authStatus == .authorized else {
@@ -68,9 +66,10 @@ class DetailCardViewModel: NSObject {
                         continuation.resume()
                         return
                     }
-                    
+
                     self.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
-                    self.recognitionRequest?.shouldReportPartialResults = false 
+                    self.recognitionRequest?.shouldReportPartialResults = true
+
                     let inputNode = self.audioEngine.inputNode
 
                     guard let request = self.recognitionRequest else {
@@ -79,28 +78,35 @@ class DetailCardViewModel: NSObject {
                     }
 
                     var didFinish = false
+                    var didDetectVoice = false
 
                     self.recognitionTask = self.speechRecognizer?.recognitionTask(with: request) { result, error in
                         if didFinish { return }
 
-                        if let result = result, result.isFinal {
-                            let spokenRaw = result.bestTranscription.formattedString
-                            let spoken = self.normalize(spokenRaw)
-                            let target = self.normalize(self.word?.wordEng ?? "")
-                            
-                            let similarity = self.calculateSimilarityScore(spoken: spoken, target: target)
-                            let percent = Int(similarity * 100)
+                        if let result = result {
+                            if result.bestTranscription.segments.count > 0 {
+                                didDetectVoice = true
+                            }
 
-                            print("인식 결과: \(spokenRaw)")
-                            print("정제된 인식 결과: \(spoken)")
-                            print("목표 단어: \(target)")
-                            print("유사도 점수: \(percent)")
+                            if result.isFinal {
+                                let spokenRaw = result.bestTranscription.formattedString
+                                let spoken = self.normalize(spokenRaw)
+                                let target = self.normalize(self.word?.wordEng ?? "")
 
-                            self.evaluatePronunciation(scorePercent: percent)
+                                let similarity = self.calculateSimilarityScore(spoken: spoken, target: target)
+                                let percent = Int(similarity * 100)
 
-                            didFinish = true
-                            self.cleanupAudio()
-                            continuation.resume()
+                                print("🎤 인식 결과: \(spokenRaw)")
+                                print("🧼 정제된 인식 결과: \(spoken)")
+                                print("🎯 목표 단어: \(target)")
+                                print("📊 유사도 점수: \(percent)")
+
+                                self.evaluatePronunciation(scorePercent: percent)
+
+                                didFinish = true
+                                self.cleanupAudio()
+                                continuation.resume()
+                            }
                         }
 
                         if let error = error {
@@ -110,9 +116,8 @@ class DetailCardViewModel: NSObject {
                             continuation.resume()
                         }
                     }
-                    
-                    inputNode.removeTap(onBus: 0)
 
+                    inputNode.removeTap(onBus: 0)
                     let format = inputNode.inputFormat(forBus: 0)
 
                     inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { buffer, _ in
@@ -131,10 +136,10 @@ class DetailCardViewModel: NSObject {
 
                     try? self.audioEngine.start()
 
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                        if !didFinish {
-                            print("Timeout - No speech detected")
-                            didFinish = true
+                    /// ✅ 일정 시간 후, 아무 소리도 감지 안됐으면 실패 처리
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                        if !didFinish && !didDetectVoice {
+                            print("⏰ Timeout - No speech detected")
                             self.evaluatePronunciation(scorePercent: 0)
                             self.cleanupAudio()
                             continuation.resume()

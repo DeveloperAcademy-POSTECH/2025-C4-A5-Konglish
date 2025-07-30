@@ -44,8 +44,10 @@ struct PlayingGameOverlay: View {
         .overlay(content: {
             Image(.aim)
         })
+        .safeAreaPadding(.top, UIConstants.topPadding)
         .safeAreaPadding(.horizontal, PlayingGameConstants.horizonPadding)
         .safeAreaPadding(.bottom, UIConstants.bottomPadding)
+        .navigationBarBackButtonHidden(true)
     }
     
     private var pauseBtn: some View {
