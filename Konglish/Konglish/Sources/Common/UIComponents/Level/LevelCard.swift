@@ -100,6 +100,9 @@ struct LevelCard: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: LevelCardConstants.binWidth, height: LevelCardConstants.binHeight)
+            
+            Text("\(level.bestScore)")
+                .font(.bold32)
         })
     }
     
