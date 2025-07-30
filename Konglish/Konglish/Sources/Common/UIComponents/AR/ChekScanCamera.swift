@@ -10,16 +10,16 @@ import SwiftUI
 struct ChekScanCamera: View {
     // MARK: - Property
     @Binding var currentCount : Int
-    let maxCount: Int = 10
+    let maxCount: Int = 5
     
     // MARK: - Constants
     fileprivate enum CheckScanCameraConstants {
         static let mainVspacing: CGFloat = 10
-        static let listSpacing: CGFloat = 16
-        static let horizonPadding: CGFloat = 102
+        static let listSpacing: CGFloat = 32
+        static let horizonPadding: CGFloat = 63
         static let verticalPadding: CGFloat = 20
         static let cornerRadius: CGFloat = 20
-        static let guideText: String = "카메라로 주변을 천천히 찍어서 10개를 채워주세요"
+        static let guideText: String = "카메라로 주변을 천천히 찍어서 5개를 채워주세요"
     }
     
     // MARK: - Body
