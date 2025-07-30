@@ -50,10 +50,17 @@ struct CategoryCard: View {
     /// 카드 하단 정보
     private var cardInfo: some View {
         VStack(spacing: CategoryConstants.cardInfoVspacing, content: {
-            Star(count: categoryModel.difficulty)
+            Star(count: clearedLevelCount)
             title
             subTitle
         })
+    }
+    
+    /// 클리어된 레벨 수 계산
+    private var clearedLevelCount: Int {
+        // 해당 카테고리의 레벨들 중 bestScore > 0인 레벨 수를 계산
+        let clearedLevels = categoryModel.levels.filter { $0.bestScore > 0 }
+        return clearedLevels.count
     }
     
     /// 카테고리 제목
