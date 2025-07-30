@@ -59,6 +59,16 @@ class DetailCardViewModel: NSObject {
                 }
 
                 DispatchQueue.main.async {
+                    let audioSession = AVAudioSession.sharedInstance()
+                    do {
+                        try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
+                        try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+                    } catch {
+                        print("오디오 세션 설정 실패: \(error)")
+                        continuation.resume()
+                        return
+                    }
+                    
                     self.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
                     self.recognitionRequest?.shouldReportPartialResults = false 
                     let inputNode = self.audioEngine.inputNode
