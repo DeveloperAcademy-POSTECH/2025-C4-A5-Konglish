@@ -44,9 +44,17 @@ struct OnShowingCardOverlay: View {
             }
         })
         .overlay(alignment: .bottomTrailing, content: {
-            MainButton(buttonType: .icon(.mic)) {
-                detailCardViewModel.toggleRecording()
-            }
+            VStack(spacing: 10, content: {
+                
+                MainButton(buttonType: .icon(.micStop)) {
+                    detailCardViewModel.stopRecording()
+                    detailCardViewModel.evaluate()
+                }
+                
+                MainButton(buttonType: .icon(.mic)) {
+                    detailCardViewModel.startRecording()
+                }
+            })
         })
         .overlay(alignment: .leading, content: {
             MainButton(buttonType: .icon(.close)) {

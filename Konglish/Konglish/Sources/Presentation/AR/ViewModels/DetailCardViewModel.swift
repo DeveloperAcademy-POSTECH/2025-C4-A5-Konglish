@@ -41,49 +41,22 @@ class DetailCardViewModel: NSObject {
         utterance.pitchMultiplier = 1.1
         speechSynthesizer.speak(utterance)
     }
-    
-    // MARK: - 발음 평가
-    private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
-    private let audioEngine = AVAudioEngine()
-    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
-    private var recognitionTask: SFSpeechRecognitionTask?
+    // MARK: - 상태
     var recordingState: RecordingState = .idle
-    var isRecording: Bool { recordingState == .recording }
 
-    // 오디오 관련 속성
+    // MARK: - 오디오
     var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     var recognitionTask: SFSpeechRecognitionTask?
     let audioEngine = AVAudioEngine()
     let speechRecognizer = SFSpeechRecognizer()
 
-    // 마이크 레벨 표시용
-    var voiceLevel: Float = 0.0
-
-    // 단어
-    var word: CardModel?
-
-    // MARK: - 버튼 눌렀을 때 동작
-    func toggleRecording() {
-        switch recordingState {
-        case .idle:
-            startRecording()
-        case .recording:
-            Task {
-                await stopAndEvaluate()
-            }
-        case .evaluating:
-            // 평가 중이면 무시
-            break
-        }
-    }
-
     // MARK: - 녹음 시작
-    private func startRecording() {
+    func startRecording() {
         cleanupAudio()
 
         SFSpeechRecognizer.requestAuthorization { status in
             guard status == .authorized else {
-                print("Speech recognition not authorized")
+                print("권한 없음")
                 return
             }
 
@@ -117,58 +90,59 @@ class DetailCardViewModel: NSObject {
                     try self.audioEngine.start()
                     self.recordingState = .recording
                 } catch {
-                    print("audioEngine start 실패: \(error)")
+                    print("녹음 시작 실패: \(error)")
                 }
             }
         }
     }
 
-    // MARK: - 녹음 멈추고 평가
-    private func stopAndEvaluate() async {
-        recordingState = .evaluating
-
+    // MARK: - 녹음 중단
+    func stopRecording() {
+        guard recordingState == .recording else { return }
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
         recognitionRequest?.endAudio()
+        recordingState = .readyToEvaluate
+    }
 
-        guard let task = recognitionTask else { return }
+    // MARK: - 평가 실행 (클로저 방식)
+    func evaluate() {
+        guard recordingState == .readyToEvaluate else { return }
 
-        await withCheckedContinuation { continuation in
-            var didFinish = false
+        recordingState = .evaluating
 
-            recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest!) { result, error in
-                if didFinish { return }
+        var didFinish = false
 
-                if let result = result, result.isFinal {
-                    let spokenRaw = result.bestTranscription.formattedString
-                    let spoken = self.normalize(spokenRaw)
-                    let target = self.normalize(self.word?.wordEng ?? "")
-                    let score = self.calculateSimilarityScore(spoken: spoken, target: target)
+        self.recognitionTask = self.speechRecognizer?.recognitionTask(with: self.recognitionRequest!) { result, error in
+            if didFinish { return }
 
-                    print("🎤 인식 결과: \(spokenRaw)")
-                    print("📊 점수: \(Int(score * 100))")
+            if let result = result, result.isFinal {
+                let spokenRaw = result.bestTranscription.formattedString
+                let spoken = self.normalize(spokenRaw)
+                let target = self.normalize(self.word?.wordEng ?? "")
+                let score = self.calculateSimilarityScore(spoken: spoken, target: target)
 
-                    self.evaluatePronunciation(scorePercent: Int(score * 100))
+                print("🎤 인식 결과: \(spokenRaw)")
+                print("📊 점수: \(Int(score * 100))")
 
-                    didFinish = true
-                    self.cleanupAudio()
-                    self.recordingState = .idle
-                    continuation.resume()
-                }
+                self.evaluatePronunciation(scorePercent: Int(score * 100))
 
-                if let error = error {
-                    print("인식 에러: \(error.localizedDescription)")
-                    didFinish = true
-                    self.evaluatePronunciation(scorePercent: 0)
-                    self.cleanupAudio()
-                    self.recordingState = .idle
-                    continuation.resume()
-                }
+                didFinish = true
+                self.cleanupAudio()
+                self.recordingState = .idle
+            }
+
+            if let error = error {
+                print("인식 오류: \(error.localizedDescription)")
+                didFinish = true
+                self.evaluatePronunciation(scorePercent: 0)
+                self.cleanupAudio()
+                self.recordingState = .idle
             }
         }
     }
 
-    // MARK: - 오디오 초기화
+    // MARK: - 정리
     private func cleanupAudio() {
         recognitionTask?.cancel()
         recognitionTask = nil
@@ -198,19 +172,18 @@ class DetailCardViewModel: NSObject {
     }
 
     private func calculateSimilarityScore(spoken: String, target: String) -> Float {
-        // 간단한 예: Levenshtein 거리로 유사도 계산
         return spoken == target ? 1.0 : 0.0
     }
-
+    
     private func evaluatePronunciation(scorePercent: Int) {
-        // 평가 결과 처리
-        print("결과 점수: \(scorePercent)")
-    }
+           print("💯 최종 점수: \(scorePercent)")
+       }
 }
 
 
 enum RecordingState {
-    case idle
-    case recording
-    case evaluating
+    case idle              // 녹음 안함
+    case recording         // 녹음 중
+    case readyToEvaluate   // 녹음 중단 후 평가 대기
+    case evaluating        // 평가 중
 }
