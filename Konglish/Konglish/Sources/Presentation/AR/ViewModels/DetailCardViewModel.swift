@@ -18,183 +18,172 @@ class DetailCardViewModel: NSObject {
     var isBossCard: Bool = false
     var heart: Int = 3
     var currentScore: Int = 0
-
+    
     // MARK: - 발음 결과 저장용
     var lastEvaluatedScore: Int? = nil
     var lastPassed: Bool = false
-
+    
     // MARK: - 음성 레벨
     var voiceLevel: Float = 0.0
-
+    
     // MARK: - 음성 합성 (TTS)
     let speechSynthesizer = AVSpeechSynthesizer()
-
+    
     func speakWord() {
         guard let word = word?.wordEng else {
             print("발음할 단어 없음")
             return
         }
-
+        
         let utterance = AVSpeechUtterance(string: word)
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         utterance.rate = 1.0
         utterance.pitchMultiplier = 1.1
         speechSynthesizer.speak(utterance)
     }
+    // MARK: - 상태
+    var recordingState: RecordingState = .idle
 
-    // MARK: - 발음 평가
-    private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
-    private let audioEngine = AVAudioEngine()
-    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
-    private var recognitionTask: SFSpeechRecognitionTask?
+    // MARK: - 오디오
+    var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    var recognitionTask: SFSpeechRecognitionTask?
+    let audioEngine = AVAudioEngine()
+    let speechRecognizer = SFSpeechRecognizer()
 
-    func startPronunciationEvaluation() async {
-        let target = word?.wordEng.lowercased() ?? ""
+    // MARK: - 녹음 시작
+    func startRecording() {
+        cleanupAudio()
 
-        await withCheckedContinuation { continuation in
-            SFSpeechRecognizer.requestAuthorization { authStatus in
-                guard authStatus == .authorized else {
-                    continuation.resume()
+        SFSpeechRecognizer.requestAuthorization { status in
+            guard status == .authorized else {
+                print("권한 없음")
+                return
+            }
+
+            DispatchQueue.main.async {
+                do {
+                    let session = AVAudioSession.sharedInstance()
+                    try session.setCategory(.record, mode: .measurement, options: .duckOthers)
+                    try session.setActive(true, options: .notifyOthersOnDeactivation)
+                } catch {
+                    print("AVAudioSession 설정 실패: \(error)")
                     return
                 }
 
-                DispatchQueue.main.async {
-                    self.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
-                    self.recognitionRequest?.shouldReportPartialResults = false // 중요!
-                    let inputNode = self.audioEngine.inputNode
+                self.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+                self.recognitionRequest?.shouldReportPartialResults = true
 
-                    guard let request = self.recognitionRequest else {
-                        continuation.resume()
-                        return
-                    }
+                guard let request = self.recognitionRequest else { return }
 
-                    var didFinish = false
+                let inputNode = self.audioEngine.inputNode
+                let format = inputNode.inputFormat(forBus: 0)
 
-                    self.recognitionTask = self.speechRecognizer?.recognitionTask(with: request) { result, error in
-                        if didFinish { return }
+                inputNode.removeTap(onBus: 0)
+                inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { buffer, _ in
+                    request.append(buffer)
+                    self.updateVoiceLevel(from: buffer)
+                }
 
-                        if let result = result, result.isFinal {
-                            let spoken = result.bestTranscription.formattedString.lowercased()
-                            let similarity = self.calculateSimilarityScore(spoken: spoken, target: target)
-                            let percent = Int(similarity * 100)
+                self.recognitionTask = self.speechRecognizer?.recognitionTask(with: request) { _, _ in }
 
-                            self.evaluatePronunciation(scorePercent: percent)
-
-                            didFinish = true
-                            self.cleanupAudio()
-                            continuation.resume()
-                        }
-
-                        if let error = error {
-                            print("Speech Recognition Error: \(error.localizedDescription)")
-                            didFinish = true
-                            self.cleanupAudio()
-                            continuation.resume()
-                        }
-                    }
-
-//                    let inputNode = audioEngine.inputNode
-                    inputNode.removeTap(onBus: 0)
-
-                    let format = inputNode.inputFormat(forBus: 0)
-
-                    inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { buffer, _ in
-                        self.recognitionRequest?.append(buffer)
-
-                        guard let channelData = buffer.floatChannelData?[0] else { return }
-                        let channelDataArray = Array(UnsafeBufferPointer(start: channelData, count: Int(buffer.frameLength)))
-                        let rms = sqrt(channelDataArray.map { $0 * $0 }.reduce(0, +) / Float(buffer.frameLength))
-                        let avgPower = 20 * log10(rms)
-                        let normalizedPower = max(0, min(1, (avgPower + 50) / 50))
-
-                        DispatchQueue.main.async {
-                            self.voiceLevel = normalizedPower
-                        }
-                    }
-
-                    try? self.audioEngine.start()
-
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                        if !didFinish {
-                            print("Timeout - No speech detected")
-                            didFinish = true
-                            self.evaluatePronunciation(scorePercent: 0)
-                            self.cleanupAudio()
-                            continuation.resume()
-                        }
-                    }
+                do {
+                    try self.audioEngine.start()
+                    self.recordingState = .recording
+                } catch {
+                    print("녹음 시작 실패: \(error)")
                 }
             }
         }
     }
-    
-    private func cleanupAudio() {
+
+    // MARK: - 녹음 중단
+    func stopRecording() {
+        guard recordingState == .recording else { return }
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
-        recognitionRequest = nil
-        recognitionTask = nil
-        voiceLevel = 0
+        recognitionRequest?.endAudio()
+        recordingState = .readyToEvaluate
     }
 
-    // MARK: - 점수 평가
-    private func evaluatePronunciation(scorePercent: Int) {
-        switch scorePercent {
-        case 100:
-            updateScore(base: 5)
-        case 90..<100:
-            updateScore(base: 4)
-        case 80..<90:
-            updateScore(base: 3)
-        case 70..<80:
-            updateScore(base: 2)
-        case 60..<70:
-            updateScore(base: 1)
-        default:
-            print("발음 실패, 하트 -1")
-            heart = max(0, heart - 1)
-            accuracyType = .failure
-            lastPassed = false
-            lastEvaluatedScore = nil
-        }
-    }
+    // MARK: - 평가 실행 (클로저 방식)
+    func evaluate() {
+        guard recordingState == .readyToEvaluate else { return }
 
-    private func updateScore(base: Int) {
-        let finalScore = isBossCard ? base * 3 : base
-        currentScore += finalScore
-        lastEvaluatedScore = finalScore
-        lastPassed = true
-        accuracyType = .success
-        print("점수 획득: \(finalScore)점 \(isBossCard ? "(보스 ×3)" : "")")
-    }
+        recordingState = .evaluating
 
-    // MARK: - 문자열 유사도
-    private func calculateSimilarityScore(spoken: String, target: String) -> Double {
-        let distance = levenshtein(aStr: spoken, bStr: target)
-        let maxLength = max(spoken.count, target.count)
-        return maxLength == 0 ? 1.0 : 1.0 - Double(distance) / Double(maxLength)
-    }
+        var didFinish = false
 
-    private func levenshtein(aStr: String, bStr: String) -> Int {
-        let a = Array(aStr)
-        let b = Array(bStr)
-        var dist = Array(repeating: Array(repeating: 0, count: b.count + 1), count: a.count + 1)
+        self.recognitionTask = self.speechRecognizer?.recognitionTask(with: self.recognitionRequest!) { result, error in
+            if didFinish { return }
 
-        for i in 0...a.count { dist[i][0] = i }
-        for j in 0...b.count { dist[0][j] = j }
+            if let result = result, result.isFinal {
+                let spokenRaw = result.bestTranscription.formattedString
+                let spoken = self.normalize(spokenRaw)
+                let target = self.normalize(self.word?.wordEng ?? "")
+                let score = self.calculateSimilarityScore(spoken: spoken, target: target)
 
-        for i in 1...a.count {
-            for j in 1...b.count {
-                if a[i - 1] == b[j - 1] {
-                    dist[i][j] = dist[i - 1][j - 1]
-                } else {
-                    dist[i][j] = min(
-                        dist[i - 1][j] + 1,
-                        dist[i][j - 1] + 1,
-                        dist[i - 1][j - 1] + 1
-                    )
-                }
+                print("🎤 인식 결과: \(spokenRaw)")
+                print("📊 점수: \(Int(score * 100))")
+
+                self.evaluatePronunciation(scorePercent: Int(score * 100))
+
+                didFinish = true
+                self.cleanupAudio()
+                self.recordingState = .idle
+            }
+
+            if let error = error {
+                print("인식 오류: \(error.localizedDescription)")
+                didFinish = true
+                self.evaluatePronunciation(scorePercent: 0)
+                self.cleanupAudio()
+                self.recordingState = .idle
             }
         }
-        return dist[a.count][b.count]
     }
+
+    // MARK: - 정리
+    private func cleanupAudio() {
+        recognitionTask?.cancel()
+        recognitionTask = nil
+        recognitionRequest = nil
+
+        if audioEngine.isRunning {
+            audioEngine.stop()
+        }
+
+        audioEngine.inputNode.removeTap(onBus: 0)
+    }
+
+    private func updateVoiceLevel(from buffer: AVAudioPCMBuffer) {
+        guard let channelData = buffer.floatChannelData?[0] else { return }
+        let array = Array(UnsafeBufferPointer(start: channelData, count: Int(buffer.frameLength)))
+        let rms = sqrt(array.map { $0 * $0 }.reduce(0, +) / Float(buffer.frameLength))
+        let power = 20 * log10(rms)
+        let normalized = max(0, min(1, (power + 50) / 50))
+
+        DispatchQueue.main.async {
+            self.voiceLevel = normalized
+        }
+    }
+
+    private func normalize(_ string: String) -> String {
+        string.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private func calculateSimilarityScore(spoken: String, target: String) -> Float {
+        return spoken == target ? 1.0 : 0.0
+    }
+    
+    private func evaluatePronunciation(scorePercent: Int) {
+           print("💯 최종 점수: \(scorePercent)")
+       }
+}
+
+
+enum RecordingState {
+    case idle              // 녹음 안함
+    case recording         // 녹음 중
+    case readyToEvaluate   // 녹음 중단 후 평가 대기
+    case evaluating        // 평가 중
 }

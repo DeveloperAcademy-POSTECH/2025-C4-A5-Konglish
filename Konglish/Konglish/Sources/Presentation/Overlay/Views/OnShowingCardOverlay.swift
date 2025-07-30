@@ -44,9 +44,17 @@ struct OnShowingCardOverlay: View {
             }
         })
         .overlay(alignment: .bottomTrailing, content: {
-            MainButton(buttonType: .icon(.mic)) {
-                handlePronunciationAndSave()
-            }
+            VStack(spacing: 10, content: {
+                
+                MainButton(buttonType: .icon(.micStop)) {
+                    detailCardViewModel.stopRecording()
+                    detailCardViewModel.evaluate()
+                }
+                
+                MainButton(buttonType: .icon(.mic)) {
+                    detailCardViewModel.startRecording()
+                }
+            })
         })
         .overlay(alignment: .leading, content: {
             MainButton(buttonType: .icon(.close)) {
@@ -54,20 +62,7 @@ struct OnShowingCardOverlay: View {
             }
         })
         .safeAreaPadding(.horizontal, UIConstants.horizontalPading)
-        .safeAreaPadding(.bottom, UIConstants.horizonBtnPadding)
+        .safeAreaPadding(.bottom, UIConstants.bottomPadding)
         .safeAreaPadding(.top, UIConstants.topPadding)
-    }
-    
-    private func handlePronunciationAndSave() {
-        Task {
-            await detailCardViewModel.startPronunciationEvaluation()
-
-            if let word = detailCardViewModel.word {
-                let usedCard = UsedCardModel(session: currentSession, card: word)
-                modelContext.insert(usedCard)
-                try? modelContext.save()
-                print("UsedCard 저장 완료: \(word.wordEng)")
-            }
-        }
     }
 }
