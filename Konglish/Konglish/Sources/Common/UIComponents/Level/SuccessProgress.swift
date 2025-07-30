@@ -23,6 +23,7 @@ struct SuccessProgress: View {
         static let progressTopHeight: CGFloat = 26
         static let progressBottomHeight: CGFloat = 30
         static let cardInfoHspacing: CGFloat = 17
+        static let progressZeroWidth: CGFloat = 31
     }
     
     // MARK: - Init
@@ -36,7 +37,7 @@ struct SuccessProgress: View {
             progressBarBg(bottom: .bgShadow, top: .progressBg)
             GeometryReader { geo in
                 progressBarBg(bottom: .tintShadow, top: .green05)
-                    .frame(width: geo.size.width * progressValue)
+                    .frame(width: SuccessProgressConstants.progressZeroWidth + geo.size.width * progressValue)
             }
             successInfo
         }
