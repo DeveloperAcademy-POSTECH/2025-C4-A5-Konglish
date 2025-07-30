@@ -107,5 +107,6 @@ struct ARView: View {
             }
         }
         .ignoresSafeArea()
+        .navigationBarBackButtonHidden(true)
     }
 }

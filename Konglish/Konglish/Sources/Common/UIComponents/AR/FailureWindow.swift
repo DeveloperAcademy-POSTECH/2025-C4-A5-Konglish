@@ -7,9 +7,11 @@
 
 import Foundation
 import SwiftUI
+import Dependency
 
 struct FailureWindow: View {
     let model: GameSessionModel
+    @EnvironmentObject var container: DIContainer
     
     fileprivate enum CompleteWindowConstants {
         static let maxWidth: CGFloat = 749
@@ -54,11 +56,8 @@ struct FailureWindow: View {
     
     private var btnContents: some View {
         VStack(spacing: CompleteWindowConstants.btnVspacing, content: {
-            MainButton(buttonType: .text(.restart), action: {
-                print("Hello")
-            })
             MainButton(buttonType: .text(.returnCategory), action: {
-                print("hello")
+                container.navigationRouter.reset()
             })
         })
     }

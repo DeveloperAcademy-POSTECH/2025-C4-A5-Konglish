@@ -64,5 +64,6 @@ struct OnShowingCardOverlay: View {
         .safeAreaPadding(.horizontal, UIConstants.horizontalPading)
         .safeAreaPadding(.bottom, UIConstants.bottomPadding)
         .safeAreaPadding(.top, UIConstants.topPadding)
+        .navigationBarBackButtonHidden(true)
     }
 }

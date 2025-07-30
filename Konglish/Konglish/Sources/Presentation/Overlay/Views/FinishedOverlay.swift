@@ -12,5 +12,6 @@ struct FinishedOverlay: View {
     
     var body: some View {
         CompleteWindow(model: gameSessionModel)
+            .navigationBarBackButtonHidden(true)
     }
 }

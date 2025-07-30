@@ -40,6 +40,7 @@ struct StartOverlay: View {
             })
             .safeAreaPadding(.horizontal, UIConstants.naviLeadingPadding)
         })
+        .navigationBarBackButtonHidden(true)
     }
     
     private var guideText: some View {
