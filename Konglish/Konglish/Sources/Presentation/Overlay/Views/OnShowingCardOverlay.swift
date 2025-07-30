@@ -41,6 +41,7 @@ struct OnShowingCardOverlay: View {
         .overlay(alignment: .bottomLeading, content: {
             MainButton(buttonType: .icon(.sound)) {
                 detailCardViewModel.speakWord()
+                print(detailCardViewModel.word?.wordEng ?? "데이터 없음")
             }
         })
         .overlay(alignment: .bottomTrailing, content: {
@@ -58,7 +59,7 @@ struct OnShowingCardOverlay: View {
                     }
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                        arViewModel.flippedCardId = nil
+//                        arViewModel.flippedCardId = nil
                         detailCardViewModel.lastPassed = false
                         detailCardViewModel.lastEvaluatedScore = nil
                         detailCardViewModel.accuracyType = .btnMic

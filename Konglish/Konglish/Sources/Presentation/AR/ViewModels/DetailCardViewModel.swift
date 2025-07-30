@@ -66,7 +66,7 @@ class DetailCardViewModel: NSObject {
             DispatchQueue.main.async {
                 do {
                     let session = AVAudioSession.sharedInstance()
-                    try session.setCategory(.record, mode: .measurement, options: .duckOthers)
+                    try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .allowBluetooth])
                     try session.setActive(true, options: .notifyOthersOnDeactivation)
                 } catch {
                     print("AVAudioSession 설정 실패: \(error)")
@@ -101,7 +101,10 @@ class DetailCardViewModel: NSObject {
 
     // MARK: - 녹음 중단
     func stopRecording() {
-        guard recordingState == .recording else { return }
+        guard recordingState == .recording else {
+            print("중단 못해씀")
+            return
+        }
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
         recognitionRequest?.endAudio()

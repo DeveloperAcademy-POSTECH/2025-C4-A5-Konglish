@@ -39,6 +39,7 @@ struct GuidingView: View {
                 SwipeTabView()
                     .safeAreaPadding(.horizontal, GuidingConstants.safeHorizonPadding)
             })
+            .safeAreaPadding(.bottom, UIConstants.bottomPadding)
         }
     }
     

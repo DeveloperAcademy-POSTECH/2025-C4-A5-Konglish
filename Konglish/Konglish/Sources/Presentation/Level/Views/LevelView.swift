@@ -38,7 +38,9 @@ struct LevelView: View {
                             }, isTapped: Binding(
                                 get: { selectedLevel?.id == level.id },
                                 set: { new in
-                                    selected = new
+                                    if new {
+                                        selected = new
+                                    }
                                 }
                             ))
                         }
@@ -58,6 +60,7 @@ struct LevelView: View {
             })
             .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
         })
+        .safeAreaPadding(.bottom, UIConstants.bottomPadding)
     }
     
     private var topNavi: some View {

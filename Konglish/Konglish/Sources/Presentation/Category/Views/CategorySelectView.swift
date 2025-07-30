@@ -64,7 +64,7 @@ struct CategorySelectView: View {
             
             ScrollView(.horizontal) {
                 LazyHStack(spacing: CategorySelectConstants.hspacing, content: {
-                    ForEach(allCategories, id: \.self) { category in
+                    ForEach(filteredCategories, id: \.self) { category in
                         CategoryCard(categoryModel: category, action: {
                             container.navigationRouter.push(.level(categoryId: category.id))
                             print(category.imageName)
