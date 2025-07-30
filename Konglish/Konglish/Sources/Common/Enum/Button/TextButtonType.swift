@@ -67,7 +67,7 @@ enum TextButtonType {
     var shadowColor: Color {
         switch self {
         case .cardSprinkle(let onOff), .openPotal(let onOff), .start(let onOff):
-            return onOff ? .green09 : .gray03
+            return onOff ? .greenShadow : .gray03
         case .backMain, .restart:
             return .greenShadow
         case .returnCategory:
