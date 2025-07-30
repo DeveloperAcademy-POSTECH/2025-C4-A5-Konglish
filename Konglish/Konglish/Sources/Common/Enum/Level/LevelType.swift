@@ -20,7 +20,7 @@ enum LevelType: String, Codable, Hashable, CaseIterable {
         case .normal:
             return .yellow00
         case .hard:
-            return .red04
+            return .redBg
         }
     }
     

@@ -31,7 +31,7 @@ struct LevelView: View {
             
             VStack(spacing: .zero, content: {
                 if let category = category.first(where: { $0.id == cateogryID }) {
-                    HStack(content: {
+                    HStack(spacing: LevelCardConstants.levelHspacing, content: {
                         ForEach(category.levels, id: \.id) { level in
                             LevelCard(level: level, num: level.levelNumber, action: {
                                 selectedLevel = level
@@ -42,21 +42,20 @@ struct LevelView: View {
                         }
                     })
                 }
-                
-                Spacer()
-                
-                MainButton(buttonType: .text(.start), action: {
-                    if let id = selectedLevel?.id {
-                        container.navigationRouter.push(.ar(levelId: id))
-                    }
-                })
-                .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
             })
         }
         .navigationBarBackButtonHidden(true)
         .overlay(alignment: .topLeading, content: {
             topNavi
         })
+        .overlay(alignment: .bottom, content: {
+            MainButton(buttonType: .text(.start), action: {
+                if let id = selectedLevel?.id {
+                    container.navigationRouter.push(.ar(levelId: id))
+                }
+            })
+        })
+        .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
     }
     
     private var topNavi: some View {

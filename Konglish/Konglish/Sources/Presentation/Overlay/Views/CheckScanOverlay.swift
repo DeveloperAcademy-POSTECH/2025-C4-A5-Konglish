@@ -22,7 +22,6 @@ struct CheckScanOverlay: View {
                 MainButton(buttonType: .icon(.exit), action: {
                     container.navigationRouter.pop()
                 })
-                .safeAreaPadding(.trailing, UIConstants.naviLeadingPadding)
             })
             .overlay(alignment: .bottom, content: {
                 MainButton(buttonType: .text(.cardSprinkle(onOff: allPlanesDetected)), action: {
@@ -31,9 +30,9 @@ struct CheckScanOverlay: View {
                 .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
             })
             .navigationBarBackButtonHidden(true)
-            .safeAreaPadding(.horizontal, UIConstants.naviLeadingPadding)
+            .safeAreaPadding(.trailing, UIConstants.naviLeadingPadding)
             .safeAreaPadding(.bottom, UIConstants.bottomPadding)
-            .safeAreaPadding(.top, 20)
+            .safeAreaPadding(.top, UIConstants.topPadding)
     }
 }
 

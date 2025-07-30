@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import Dependency
 
 struct StartOverlay: View {
     @Bindable var arViewModel: ARViewModel
+    @EnvironmentObject var container: DIContainer
     
     // MARK: - Constants
     fileprivate enum StartOverlayConstants {
@@ -34,7 +36,7 @@ struct StartOverlay: View {
         }
         .overlay(alignment: .topLeading, content: {
             MainButton(buttonType: .icon(.back), action: {
-              //TODO: - 종료
+                container.navigationRouter.pop()
             })
             .safeAreaPadding(.horizontal, UIConstants.naviLeadingPadding)
         })

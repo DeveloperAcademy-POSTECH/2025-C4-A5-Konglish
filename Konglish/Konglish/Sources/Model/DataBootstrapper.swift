@@ -39,14 +39,21 @@ struct DataBootstrapper {
         logger.info("started to bootstrap data")
         
         categories.forEach { categoryDTO in
-            let model = mapToCategoryModel(category: categoryDTO)
-            model.levels = [
-                LevelModel(levelNumber: .easy, category: model),
-                LevelModel(levelNumber: .normal, category: model),
-                LevelModel(levelNumber: .hard, category: model),
-            ]
+            let categoryModel = mapToCategoryModel(category: categoryDTO)
             
-            context.insert(model)
+            let levelModels = LevelType.allCases.map { levelType in
+                let levelModel = LevelModel(levelNumber: levelType, category: categoryModel)
+                categoryModel.levels.append(levelModel)
+                return levelModel
+            }
+            
+            let gameSessionModels = levelModels.map { levelModel in
+                GameSessionModel(score: 0, level: levelModel)
+            }
+            
+            context.insert(categoryModel)
+            levelModels.forEach { context.insert($0) }
+            gameSessionModels.forEach { context.insert($0) }
         }
         
         do {

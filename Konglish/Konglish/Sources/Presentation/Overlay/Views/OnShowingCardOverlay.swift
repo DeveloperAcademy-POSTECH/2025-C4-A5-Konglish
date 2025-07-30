@@ -12,7 +12,7 @@ import SwiftData
 /// 플레잉 중 카드 뒤집혔을 때 오버레이
 struct OnShowingCardOverlay: View {
     @Bindable var arViewModel: ARViewModel
-    @State private var detailCardViewModel = DetailCardViewModel()
+    var detailCardViewModel: DetailCardViewModel
     @EnvironmentObject var container: DIContainer
     @Environment(\.modelContext) private var modelContext
     @Query var allCards: [CardModel]
@@ -59,11 +59,6 @@ struct OnShowingCardOverlay: View {
                 }
             }
             .padding()
-        }
-        .onChange(of: arViewModel.flippedCardId) { _, newId in
-            if let id = newId, arViewModel.showingWordDetailCard {
-                detailCardViewModel.word = allCards.first(where: { $0.id == id })
-            }
         }
     }
 

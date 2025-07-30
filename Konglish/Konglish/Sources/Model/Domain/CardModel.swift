@@ -17,7 +17,7 @@ final class CardModel {
     var wordKor: String
     var wordEng: String
 
-    @Relationship var category: CategoryModel
+    @Relationship(inverse: \CategoryModel.cards) var category: CategoryModel
     
     init(id: UUID = UUID(), imageName: String, pronunciation: String, wordKor: String, wordEng: String, category: CategoryModel) {
         self.id = id

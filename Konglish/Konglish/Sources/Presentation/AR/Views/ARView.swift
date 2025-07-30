@@ -15,6 +15,7 @@ struct ARView: View {
     let levelModelID: UUID
     @Query var levels: [LevelModel]
     @Query var gameSessions: [GameSessionModel]
+    @Query var allCards: [CardModel]
     @EnvironmentObject var container: DIContainer
     
     var selectedLevel: LevelModel? {
@@ -36,7 +37,8 @@ struct ARView: View {
     // ARCore 데이터 모델
     var gameCards: [GameCard] {
         if let selectedLevel {
-            return selectedLevel.category.cards.compactMap { GameModelMapper.toGameModel($0) }
+            let everyCardInLevel = selectedLevel.category.cards.compactMap { GameModelMapper.toGameModel($0) }
+            everyCardInLevel.ran
         }
         
         return []
@@ -44,6 +46,7 @@ struct ARView: View {
     
     // MARK: - View Model
     @State var arViewModel: ARViewModel = .init()
+    @State var detailCardViewModel: DetailCardViewModel = .init()
     
     // MARK: - 게임 세팅을 위한 프로퍼티
     /// 최소 평면 사이즈
@@ -87,7 +90,7 @@ struct ARView: View {
                         PlayingGameOverlay(arViewModel: arViewModel)
                             .environmentObject(container)
                     } else if let currentSession = selectedGameSession {
-                        OnShowingCardOverlay(arViewModel: arViewModel, currentSession: currentSession)
+                        OnShowingCardOverlay(arViewModel: arViewModel, detailCardViewModel: detailCardViewModel, currentSession: currentSession)
                             .environmentObject(container)
                     }
                 case .fisished:
@@ -97,6 +100,11 @@ struct ARView: View {
                 default:
                     EmptyView()
                 }
+            }
+        }
+        .onChange(of: arViewModel.flippedCardId) { _, newId in
+            if let id = newId {
+                detailCardViewModel.word = allCards.first(where: { $0.id == id })
             }
         }
         .ignoresSafeArea()
