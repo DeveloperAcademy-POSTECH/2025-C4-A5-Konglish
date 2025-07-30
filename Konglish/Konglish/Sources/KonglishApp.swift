@@ -1,10 +1,14 @@
 import SwiftUI
+import Dependency
 
 @main
 struct KonglishApp: App {
+    
+    @State var container = DIContainer(navigationRouter: NavigationRouter<AppRoute>())
     var body: some Scene {
         WindowGroup {
-            Text("11")
+            GuidingView()
+                .environmentObject(container)
         }
     }
 }

@@ -6,7 +6,10 @@
 //
 
 import Foundation
+import SwiftData
 
 public enum AppRoute: Hashable {
     case category
+    case level(categoryId: UUID)
+    case ar(levelId: UUID)
 }

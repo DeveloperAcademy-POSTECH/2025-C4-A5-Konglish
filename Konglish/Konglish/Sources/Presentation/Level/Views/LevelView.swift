@@ -6,11 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
+import Dependency
 
 struct LevelView: View {
     
-    let category: CategoryModel
+    let cateogryID: UUID
+    @Query var category: [CategoryModel]
     @State private var selected: Bool = false
+    @State private var selectedLevel: LevelModel?
+    @EnvironmentObject var container: DIContainer
     
     fileprivate enum LevelCardConstants {
         static let buttonPading: CGFloat = 409
@@ -21,38 +26,43 @@ struct LevelView: View {
     }
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.green01.ignoresSafeArea()
-                
-                VStack(spacing: .zero, content: {
+        ZStack {
+            Color.green01.ignoresSafeArea()
+            
+            VStack(spacing: .zero, content: {
+                if let category = category.first(where: { $0.id == cateogryID }) {
                     HStack(content: {
                         ForEach(category.levels, id: \.id) { level in
                             LevelCard(level: level, num: level.levelNumber, action: {
-                                // TODO: - 버튼 레벨 저장
-                            }, isTapped: $selected)
+                                selectedLevel = level
+                            }, isTapped: Binding(
+                                get: { selectedLevel?.id == level.id },
+                                set: { _ in }
+                            ))
                         }
                     })
-                    
-                    Spacer()
-                    
-                    MainButton(buttonType: .text(.start), action: {
-                        // TODO: - AR View 진입
-                    })
-                    .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
+                }
+                
+                Spacer()
+                
+                MainButton(buttonType: .text(.start), action: {
+                    if let id = selectedLevel?.id {
+                        container.navigationRouter.push(.ar(levelId: id))
+                    }
                 })
-            }
-            .navigationBarBackButtonHidden(true)
-            .overlay(alignment: .topLeading, content: {
-                topNavi
+                .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
             })
         }
+        .navigationBarBackButtonHidden(true)
+        .overlay(alignment: .topLeading, content: {
+            topNavi
+        })
     }
     
     private var topNavi: some View {
         HStack(spacing: LevelCardConstants.naviHspacing, content: {
             MainButton(buttonType: .icon(.back), action: {
-                print("Hello")
+                container.navigationRouter.pop()
             })
             
             Text(LevelCardConstants.naviTitle)
@@ -61,10 +71,4 @@ struct LevelView: View {
         })
         .safeAreaPadding(.leading, UIConstants.naviLeadingPadding)
     }
-}
-
-#Preview {
-    @Previewable @State var selected: Bool = false
-    
-    LevelView(category: .init(imageName: "11", difficulty: 1, nameKor: "11", nameEng: "22"))
 }

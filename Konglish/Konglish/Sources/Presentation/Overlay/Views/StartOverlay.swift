@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StartOverlay: View {
-    var arViewModel: ARViewModel
+    @Bindable var arViewModel: ARViewModel
     
     // MARK: - Constants
     fileprivate enum StartOverlayConstants {
