@@ -40,6 +40,8 @@ struct CategoryCard: View {
     private var cardContetns: some View {
         VStack(spacing: CategoryConstants.cardContetnsVspacing, content: {
             Image(categoryModel.imageName)
+                .resizable()
+                .frame(width: 230, height: 230)
             cardInfo
         })
     }

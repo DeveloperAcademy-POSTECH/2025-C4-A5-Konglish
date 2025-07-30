@@ -23,14 +23,16 @@ struct CategorySelectView: View {
         ZStack {
             Color.green01.ignoresSafeArea()
             
-            LazyHStack(spacing: CategorySelectConstants.hspacing, content: {
-                ForEach(category, id: \.self) { category in
-                    CategoryCard(categoryModel: category, action: {
-                        container.navigationRouter.push(.level(categoryId: category.id))
-                    })
-                }
-            })
-            .fixedSize()
+            ScrollView(.horizontal) {
+                LazyHStack(spacing: CategorySelectConstants.hspacing, content: {
+                    ForEach(category, id: \.self) { category in
+                        CategoryCard(categoryModel: category, action: {
+                            container.navigationRouter.push(.level(categoryId: category.id))
+                        })
+                    }
+                })
+                .fixedSize()
+            }
             
         }
         .navigationBarBackButtonHidden(true)

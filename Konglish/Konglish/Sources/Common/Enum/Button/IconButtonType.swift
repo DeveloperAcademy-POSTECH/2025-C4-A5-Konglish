@@ -33,7 +33,7 @@ enum IconButtonType {
         case .aim:
             return .aim
         case .door:
-            return .door
+            return .doorIcon
         case .target:
             return .targetBtn
         }

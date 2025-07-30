@@ -29,7 +29,7 @@ struct Star: View {
         HStack(spacing: StarConstants.spacing, content: {
             ForEach(.zero..<maxCount, id: \.self) { index in
                 if index < count {
-                    Image(.star)
+                    Image(.starIcon)
                 } else {
                     Image(.emptyStar)
                 }

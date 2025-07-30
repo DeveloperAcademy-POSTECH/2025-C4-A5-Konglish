@@ -29,7 +29,7 @@ struct LifeHeart: View {
         HStack(spacing: GameStatusConstatns.spacing, content: {
             ForEach(.zero..<maxCount, id: \.self) { index in
                 if index < currentLife {
-                    Image(.heart)
+                    Image(.heartIcon)
                 } else {
                     Image(.emptyHeart)
                 }

@@ -35,8 +35,8 @@ struct ARView: View {
     
     // ARCore 데이터 모델
     var gameCards: [GameCard] {
-        if let selectedGameSession {
-            return selectedGameSession.usedCards.compactMap { GameModelMapper.toGameModel($0.card) }
+        if let selectedLevel {
+            return selectedLevel.category.cards.compactMap { GameModelMapper.toGameModel($0) }
         }
         
         return []

@@ -42,7 +42,7 @@ struct ExitOption: View {
             Button(action: {
                 
             }, label: {
-                makeBtn(image: .door, btnText: ExitOptionWindowConstants.rightText)
+                makeBtn(image: .doorIcon, btnText: ExitOptionWindowConstants.rightText)
             })
         })
     }

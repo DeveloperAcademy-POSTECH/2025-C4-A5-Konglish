@@ -40,6 +40,12 @@ struct DataBootstrapper {
         
         categories.forEach { categoryDTO in
             let model = mapToCategoryModel(category: categoryDTO)
+            model.levels = [
+                LevelModel(levelNumber: .easy, category: model),
+                LevelModel(levelNumber: .normal, category: model),
+                LevelModel(levelNumber: .hard, category: model),
+            ]
+            
             context.insert(model)
         }
         

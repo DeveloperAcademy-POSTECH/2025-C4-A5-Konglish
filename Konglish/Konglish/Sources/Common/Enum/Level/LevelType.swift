@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum LevelType: String, Codable, Hashable {
+enum LevelType: String, Codable, Hashable, CaseIterable {
     case easy = "Easy"
     case normal = "Normal"
     case hard = "Hard"
