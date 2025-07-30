@@ -16,6 +16,7 @@ struct GuidingView: View {
     fileprivate enum GuidingConstants {
         static let title: UIImage = #imageLiteral(resourceName: "appLogo")
         static let cornerRadius: CGFloat = 20
+        static let topPadding: CGFloat = 58
         static let bottomPadding: CGFloat = 58
         static let contentsVspacing: CGFloat = 64
         static let safeHorizonPadding: CGFloat = 160
@@ -28,6 +29,8 @@ struct GuidingView: View {
             }
             .navigationDestination(for: AppRoute.self, destination: { destination in
                 NavigationRoutingView(destination: destination)
+                    .safeAreaPadding(.top, UIConstants.topPadding)
+                    .safeAreaPadding(.bottom, UIConstants.bottomPadding)
             })
             .overlay(alignment: .topLeading, content: {
                 title
@@ -39,6 +42,7 @@ struct GuidingView: View {
                 SwipeTabView()
                     .safeAreaPadding(.horizontal, GuidingConstants.safeHorizonPadding)
             })
+            .safeAreaPadding(.top, UIConstants.topPadding)
             .safeAreaPadding(.bottom, UIConstants.bottomPadding)
         }
     }
