@@ -47,6 +47,7 @@ struct LevelView: View {
         .navigationBarBackButtonHidden(true)
         .overlay(alignment: .topLeading, content: {
             topNavi
+                .safeAreaPadding(.horizontal, UIConstants.naviLeadingPadding)
         })
         .overlay(alignment: .bottom, content: {
             MainButton(buttonType: .text(.start), action: {
@@ -54,8 +55,8 @@ struct LevelView: View {
                     container.navigationRouter.push(.ar(levelId: id))
                 }
             })
+            .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
         })
-        .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
     }
     
     private var topNavi: some View {
