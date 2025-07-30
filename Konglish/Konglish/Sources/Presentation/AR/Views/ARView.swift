@@ -12,6 +12,7 @@ import Dependency
 
 struct ARView: View {
     // MARK: - SwiftData
+    @Environment(\.modelContext) var modelContext
     let levelModelID: UUID
     @Query var levels: [LevelModel]
     @Query var gameSessions: [GameSessionModel]
@@ -103,17 +104,30 @@ struct ARView: View {
                 }
             }
         }
-        .onChange(of: arViewModel.numberOfFinishedCards, { _, newValue in
-            if newValue == gameCards.count {
-                arViewModel.gamePhase = .fisished
-            }
-        })
         .onChange(of: arViewModel.flippedCardId) { _, newId in
             if let id = newId {
                 detailCardViewModel.word = allCards.first(where: { $0.id == id })
             }
         }
+        .onChange(of: arViewModel.numberOfFinishedCards, { _, newValue in
+            if newValue == gameCards.count {
+                arViewModel.gamePhase = .fisished
+                
+                saveScore()
+            }
+        })
         .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
+    }
+}
+
+extension ARView {
+    private func saveScore() {
+        if let selectedGameSession {
+            selectedGameSession.score = detailCardViewModel.currentScore
+            modelContext.insert(selectedGameSession)
+            try? modelContext.save()
+            print("점수 저장 완료: \(detailCardViewModel.currentScore)")
+        }
     }
 }

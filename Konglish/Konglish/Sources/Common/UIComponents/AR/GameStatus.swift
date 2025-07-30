@@ -13,7 +13,7 @@ struct GameStatus: View {
     @Binding var currentScore: Int
     @Binding var currentCard: Int
     @Binding var currentLife: Int
-    let maxCount: Int = 15
+    let maxCount: Int = 5
     
     // MARK: - Constants
     fileprivate enum GameStatusConstatns {
