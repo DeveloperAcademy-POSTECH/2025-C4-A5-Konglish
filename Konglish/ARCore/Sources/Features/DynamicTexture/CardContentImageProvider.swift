@@ -51,7 +51,7 @@ actor CardContentImageProvider {
     
     /// 모든 카드 이미지를 쓰고 캐시에 넣는다
     func loadAllImages() async {
-        await withTaskGroup { group in
+        await withTaskGroup(of: Void.self) { group in
             for card in self.allCards {
                 group.addTask {
                     await self.loadImage(cardData: card)

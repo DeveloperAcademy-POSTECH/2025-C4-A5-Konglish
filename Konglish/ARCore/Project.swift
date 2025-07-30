@@ -18,7 +18,7 @@ let project = Project(
                 bundleId: "app.arCore.Konglish",
                 infoPlist: .default,
                 sources: ["Sources/**"],
-                resources: [],
+                resources: ["Resources/**"],
                 dependencies: [.package(product: "KonglishARProject")]
         )
     ]

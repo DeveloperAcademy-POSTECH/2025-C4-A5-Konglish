@@ -16,6 +16,30 @@ class CardPositioner: ARFeatureProvider {
     
     let logger = Logger.of("CardPositioner")
     
+    private var cardParticleEmitter: ParticleEmitterComponent {
+        var particleEmitter = ParticleEmitterComponent()
+        particleEmitter.mainEmitter.birthRate = 300
+        particleEmitter.mainEmitter.lifeSpan = 1.5
+        particleEmitter.mainEmitter.size = 0.02
+    
+        particleEmitter.mainEmitter.color = .evolving(
+            start: .single(UIColor(red: 0.1, green: 0.9, blue: 0.6, alpha: 0.6)),
+            end: .single(UIColor(red: 0.1, green: 0.45, blue: 0.8, alpha: 0.0))
+        )
+        
+        particleEmitter.emitterShape = .box
+        particleEmitter.emitterShapeSize = [0.34, 0.001, 0.22]
+        particleEmitter.emissionDirection = [0, 1, 0]
+        particleEmitter.speed = 0.35
+        particleEmitter.speedVariation = 0.08
+        particleEmitter.mainEmitter.spreadingAngle = .pi * 0.1
+        
+        particleEmitter.mainEmitter.acceleration = [0, -0.1, 0]
+        
+        particleEmitter.isEmitting = false
+        return particleEmitter
+    }
+    
     init(arView: ARView) {
         self.arView = arView
     }
@@ -53,6 +77,9 @@ class CardPositioner: ARFeatureProvider {
                 
                 // 호버 컴포넌트 추가
                 entity.components[HoverComponent.self] = HoverComponent(cardData: data)
+                
+                // 파티클 에미터 추가
+                entity.components.set(cardParticleEmitter)
             }
         }
         
