@@ -62,8 +62,8 @@ struct WordDetailCard: View {
                     RoundedRectangle(cornerRadius: WordDetailCardConstants.cornerRadius)
                         .fill(Color.wordCardYellow)
                         .background(Material.thin)
+                        .clipShape(RoundedRectangle(cornerRadius: WordDetailCardConstants.cornerRadius))
                 }
-                .frame(maxWidth: WordDetailCardConstants.maxWidth)
                 .offset(x: -WordDetailCardConstants.offsetValue, y: WordDetailCardConstants.offsetValue)
                 
                 successText
@@ -89,12 +89,10 @@ struct WordDetailCard: View {
     
     // MARK: - Top
     private func topContents(model: CardModel) -> some View {
-        HStack {
+        HStack(spacing: 40) {
             image(model: model)
-            Spacer()
             wordText(model: model)
         }
-        .safeAreaPadding(.horizontal, WordDetailCardConstants.horizonPadding)
     }
     /// 단어 이미지
     private func image(model: CardModel) -> some View {
@@ -109,10 +107,6 @@ struct WordDetailCard: View {
             Text(model.wordEng)
                 .font(.semibold64)
                 .customOutline(width: WordDetailCardConstants.textTStroke, color: .white)
-            
-            Text(model.pronunciation)
-                .font(.bold32)
-                .customOutline(width: WordDetailCardConstants.textBStroke, color: .white)
             
             Text(model.wordKor)
                 .font(.bold32)
@@ -164,7 +158,7 @@ struct WordDetailCard: View {
     
     private func successFailure(type: AccuracyType) -> some View {
         HStack(spacing: WordDetailCardConstants.guideHspacing, content: {
-            Text("\(viewModel.currentScore)")
+            Text("\(viewModel.accuracyPercent)%")
                 .font(type.font)
                 .foregroundStyle(type.color)
             

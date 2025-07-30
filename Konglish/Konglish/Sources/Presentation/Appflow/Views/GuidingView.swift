@@ -44,7 +44,7 @@ struct GuidingView: View {
     
     // MARK: - Bottom
     private var bottomContents: some View {
-        MainButton(buttonType: .text(.start), action: {
+        MainButton(buttonType: .text(.start(onOff: true)), action: {
             container.navigationRouter.push(.category)
         })
         .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)

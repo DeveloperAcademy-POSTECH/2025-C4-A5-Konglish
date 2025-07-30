@@ -28,11 +28,13 @@ struct StartOverlay: View {
             guideText
         })
         .overlay(alignment: .bottom, content: {
-            MainButton(buttonType: .text(.start), action: {
-                arViewModel.startButtonTapped()
-            })
-            .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
-            .safeAreaPadding(.bottom, UIConstants.bottomPadding)
+            withAnimation(.easeInOut) {
+                MainButton(buttonType: .text(.start(onOff: true)), action: {
+                    arViewModel.startButtonTapped()
+                })
+                .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
+                .safeAreaPadding(.bottom, UIConstants.bottomPadding)
+            }
         })
         .overlay(alignment: .topLeading, content: {
             MainButton(buttonType: .icon(.back), action: {
@@ -40,6 +42,7 @@ struct StartOverlay: View {
             })
             .safeAreaPadding(.horizontal, UIConstants.naviLeadingPadding)
         })
+        .safeAreaPadding(.top, UIConstants.topPadding)
         .navigationBarBackButtonHidden(true)
     }
     

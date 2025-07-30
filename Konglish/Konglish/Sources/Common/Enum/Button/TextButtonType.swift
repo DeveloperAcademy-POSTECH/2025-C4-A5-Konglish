@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 enum TextButtonType {
-    case start
+    case start(onOff: Bool)
     case cardSprinkle(onOff: Bool)
     case openPotal(onOff: Bool)
     case backMain
@@ -40,9 +40,9 @@ enum TextButtonType {
     
     var color: Color {
         switch self {
-        case .start, .backMain, .restart:
+        case .backMain, .restart:
             return .green09
-        case .cardSprinkle(let onOff), .openPotal(let onOff):
+        case .cardSprinkle(let onOff), .openPotal(let onOff), .start(let onOff):
             return onOff ? .green09 : .offBtn
         case .returnCategory:
             return .white01
@@ -51,9 +51,9 @@ enum TextButtonType {
     
     var bgColor: Color {
         switch self {
-        case .start, .backMain, .restart:
+        case .backMain, .restart:
             return .green02
-        case .cardSprinkle(let onOff), .openPotal(let onOff):
+        case .cardSprinkle(let onOff), .openPotal(let onOff), .start(let onOff):
             return onOff ? .green02 : .gray01
         case .returnCategory:
             return .green08
@@ -66,9 +66,7 @@ enum TextButtonType {
     
     var shadowColor: Color {
         switch self {
-        case .start:
-            return .green09
-        case .cardSprinkle(let onOff), .openPotal(let onOff):
+        case .cardSprinkle(let onOff), .openPotal(let onOff), .start(let onOff):
             return onOff ? .green09 : .gray03
         case .backMain, .restart:
             return .greenShadow

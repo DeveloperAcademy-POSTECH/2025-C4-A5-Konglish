@@ -18,6 +18,7 @@ class DetailCardViewModel: NSObject {
     var isBossCard: Bool = false
     var heart: Int = 5
     var currentScore: Int = 0
+    var accuracyPercent: Int = 0
     
     // MARK: - 발음 결과 저장용
     var lastEvaluatedScore: Int? = nil
@@ -149,8 +150,8 @@ class DetailCardViewModel: NSObject {
         self.cleanupAudio()
         self.recordingState = .idle
         
-        let scorePercent = Int.random(in: 60..<100)
-        switch scorePercent {
+        self.accuracyPercent = Int.random(in: 60..<100)
+        switch accuracyPercent {
         case 100:
             updateScore(base: 5)
         case 90..<100:

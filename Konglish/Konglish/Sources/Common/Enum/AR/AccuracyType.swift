@@ -44,7 +44,7 @@ enum AccuracyType {
         case .btnMic:
             return .green02
         case .success:
-            return .green01
+            return .green08
         case .failure:
             return .red01
         }

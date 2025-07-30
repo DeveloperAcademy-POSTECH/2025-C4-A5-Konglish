@@ -37,7 +37,9 @@ struct LevelView: View {
                                 selectedLevel = level
                             }, isTapped: Binding(
                                 get: { selectedLevel?.id == level.id },
-                                set: { _ in }
+                                set: { new in
+                                    selected = new
+                                }
                             ))
                         }
                     })
@@ -47,10 +49,9 @@ struct LevelView: View {
         .navigationBarBackButtonHidden(true)
         .overlay(alignment: .topLeading, content: {
             topNavi
-                .safeAreaPadding(.horizontal, UIConstants.naviLeadingPadding)
         })
         .overlay(alignment: .bottom, content: {
-            MainButton(buttonType: .text(.start), action: {
+            MainButton(buttonType: .text(.start(onOff: selected)), action: {
                 if let id = selectedLevel?.id {
                     container.navigationRouter.push(.ar(levelId: id))
                 }

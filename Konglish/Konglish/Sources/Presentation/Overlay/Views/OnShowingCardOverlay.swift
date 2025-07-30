@@ -48,7 +48,6 @@ struct OnShowingCardOverlay: View {
                 // FIXME: 발음 평가 정상화 후 아래 수정
                 if detailCardViewModel.recordingState == .recording {
                     detailCardViewModel.stopRecording()
-//                    detailCardViewModel.evaluate()
                     detailCardViewModel.evaluateStub()
                     
                     if let word = detailCardViewModel.word {
@@ -58,8 +57,7 @@ struct OnShowingCardOverlay: View {
                         print("UsedCard 저장 완료: \(word.wordEng)")
                     }
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        arViewModel.showingWordDetailCard = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                         arViewModel.flippedCardId = nil
                         detailCardViewModel.lastPassed = false
                         detailCardViewModel.lastEvaluatedScore = nil
@@ -72,10 +70,12 @@ struct OnShowingCardOverlay: View {
         })
         .overlay(alignment: .trailing, content: {
             MainButton(buttonType: .icon(.close)) {
-                arViewModel.showingWordDetailCard.toggle()
+                withAnimation(.easeInOut) {
+                    arViewModel.showingWordDetailCard.toggle()
+                }
             }
         })
-        .safeAreaPadding(.horizontal, UIConstants.horizontalPading)
+        .safeAreaPadding(.horizontal, UIConstants.topPadding)
         .safeAreaPadding(.bottom, UIConstants.bottomPadding)
         .safeAreaPadding(.top, UIConstants.topPadding)
         .navigationBarBackButtonHidden(true)
@@ -85,6 +85,9 @@ struct OnShowingCardOverlay: View {
         .onChange(of: detailCardViewModel.currentScore) { _, newValue in
             arViewModel.currentGameScore = newValue
             arViewModel.numberOfFinishedCards = detailCardViewModel.finishedCards.count
+        }
+        .task {
+            detailCardViewModel.speakWord()
         }
     }
 }
