@@ -54,7 +54,7 @@ struct OnShowingCardOverlay: View {
             }
         })
         .safeAreaPadding(.horizontal, UIConstants.horizontalPading)
-        .safeAreaPadding(.bottom, UIConstants.horizonBtnPadding)
+        .safeAreaPadding(.bottom, UIConstants.bottomPadding)
         .safeAreaPadding(.top, UIConstants.topPadding)
     }
     

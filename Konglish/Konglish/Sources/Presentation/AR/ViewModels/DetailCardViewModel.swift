@@ -60,7 +60,7 @@ class DetailCardViewModel: NSObject {
 
                 DispatchQueue.main.async {
                     self.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
-                    self.recognitionRequest?.shouldReportPartialResults = false // 중요!
+                    self.recognitionRequest?.shouldReportPartialResults = false 
                     let inputNode = self.audioEngine.inputNode
 
                     guard let request = self.recognitionRequest else {
@@ -74,9 +74,17 @@ class DetailCardViewModel: NSObject {
                         if didFinish { return }
 
                         if let result = result, result.isFinal {
-                            let spoken = result.bestTranscription.formattedString.lowercased()
+                            let spokenRaw = result.bestTranscription.formattedString
+                            let spoken = self.normalize(spokenRaw)
+                            let target = self.normalize(self.word?.wordEng ?? "")
+                            
                             let similarity = self.calculateSimilarityScore(spoken: spoken, target: target)
                             let percent = Int(similarity * 100)
+
+                            print("인식 결과: \(spokenRaw)")
+                            print("정제된 인식 결과: \(spoken)")
+                            print("목표 단어: \(target)")
+                            print("유사도 점수: \(percent)")
 
                             self.evaluatePronunciation(scorePercent: percent)
 
@@ -92,8 +100,7 @@ class DetailCardViewModel: NSObject {
                             continuation.resume()
                         }
                     }
-
-                    let inputNode = audioEngine.inputNode
+                    
                     inputNode.removeTap(onBus: 0)
 
                     let format = inputNode.inputFormat(forBus: 0)
@@ -197,4 +204,12 @@ class DetailCardViewModel: NSObject {
         }
         return dist[a.count][b.count]
     }
+    
+    private func normalize(_ string: String) -> String {
+        let lowercased = string.lowercased()
+        let trimmed = lowercased.trimmingCharacters(in: .whitespacesAndNewlines)
+        let filtered = trimmed.filter { $0.isLetter }
+        return filtered
+    }
 }
+
