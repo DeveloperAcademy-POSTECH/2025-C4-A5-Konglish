@@ -15,10 +15,11 @@ struct CompleteWindow: View {
     
     fileprivate enum CompleteWindowConstants {
         static let maxWidth: CGFloat = 749
+        static let vstackWidth: CGFloat = 419
         static let safeAreaVerticalPadding: CGFloat = 203
         static let safeAreaHorionPadding: CGFloat = 222
-        static let mainVerticalPadding: CGFloat = 70
-        static let mainHorizonPadding: CGFloat = 167
+        static let mainVerticalPadding: CGFloat = 40
+        static let mainHorizonPadding: CGFloat = 135
         static let verticalPadding: CGFloat = 14
         static let horizonPadding: CGFloat = 30
         static let cornerRadius: CGFloat = 30
@@ -29,13 +30,6 @@ struct CompleteWindow: View {
     }
     
     var body: some View {
-        ZStack {
-            Color.black.opacity(0.4)
-            
-            RoundedRectangle(cornerRadius: CompleteWindowConstants.cornerRadius)
-                .fill(Color.white.opacity(0.8))
-                .background(Material.ultraThin.quaternary)
-            
             VStack {
                 title
                 score
@@ -43,12 +37,15 @@ struct CompleteWindow: View {
                     container.navigationRouter.reset()
                 })
             }
+            .frame(width: CompleteWindowConstants.vstackWidth)
             .padding(.vertical, CompleteWindowConstants.mainVerticalPadding)
             .padding(.horizontal, CompleteWindowConstants.mainHorizonPadding)
-            .frame(maxWidth: CompleteWindowConstants.maxWidth)
-        }
-        .safeAreaPadding(.vertical, CompleteWindowConstants.safeAreaVerticalPadding)
-        .safeAreaPadding(.horizontal, CompleteWindowConstants.safeAreaHorionPadding)
+            .background {
+                RoundedRectangle(cornerRadius: CompleteWindowConstants.cornerRadius)
+                    .fill(Color.white.opacity(0.4))
+                    .background(Material.ultraThin.quaternary)
+                    .clipShape(RoundedRectangle(cornerRadius: CompleteWindowConstants.cornerRadius))
+            }
     }
     
     private var title: some View {
@@ -59,12 +56,12 @@ struct CompleteWindow: View {
     }
     
     private var score: some View {
-        Label(title: {
+        HStack(spacing: 20, content: {
+            Image(.bin)
+            
             Text("\(model.score)")
                 .font(.poetsen(.regular, size: 80))
                 .foregroundStyle(Color.gray04)
-        }, icon: {
-            Image(.bin)
         })
     }
 }

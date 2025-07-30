@@ -11,7 +11,14 @@ struct FinishedOverlay: View {
     let gameSessionModel: GameSessionModel
     
     var body: some View {
-        CompleteWindow(model: gameSessionModel)
-            .navigationBarBackButtonHidden(true)
+        ZStack {
+            Color.black.opacity(0.4).ignoresSafeArea()
+        }
+        .overlay(alignment: .center, content: {
+            CompleteWindow(model: gameSessionModel)
+                .navigationBarBackButtonHidden(true)
+        })
+        .safeAreaPadding(.horizontal, UIConstants.horizontalPading)
+        
     }
 }
