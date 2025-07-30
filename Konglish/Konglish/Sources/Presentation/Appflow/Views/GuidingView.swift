@@ -25,8 +25,6 @@ struct GuidingView: View {
         NavigationStack(path: $container.navigationRouter.path) {
             ZStack {
                 Color.green01.ignoresSafeArea()
-                SwipeTabView()
-                    .safeAreaPadding(.horizontal, GuidingConstants.safeHorizonPadding)
             }
             .navigationDestination(for: AppRoute.self, destination: { destination in
                 NavigationRoutingView(destination: destination)
@@ -37,6 +35,10 @@ struct GuidingView: View {
             .overlay(alignment: .bottom, content: {
                 bottomContents
             })
+            .overlay(alignment: .center, content: {
+                SwipeTabView()
+            })
+            .safeAreaPadding(.horizontal, GuidingConstants.safeHorizonPadding)
         }
     }
     

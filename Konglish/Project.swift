@@ -2,7 +2,10 @@ import ProjectDescription
 
 let project = Project(
     name: "Konglish",
-    packages: [.remote(url: "https://github.com/Moya/Moya", requirement: .upToNextMinor(from: "15.0.3"))],
+    packages: [
+        .remote(url: "https://github.com/Moya/Moya", requirement: .upToNextMinor(from: "15.0.3")),
+        .remote(url: "https://github.com/airbnb/lottie-spm", requirement: .upToNextMinor(from: "4.5.2"))
+    ],
     targets: [
         .target(
             name: "Konglish",
@@ -21,7 +24,9 @@ let project = Project(
             resources: ["Konglish/Resources/**"],
             dependencies: [
                 .project(target: "Dependency", path: "./Dependency"),
-                .project(target: "ARCore", path: "./ARCore")
+                .project(target: "ARCore", path: "./ARCore"),
+                .package(product: "Moya"),         
+                .package(product: "Lottie")
             ]
         ),
         .target(
