@@ -24,7 +24,7 @@ struct PlayingGameOverlay: View {
     
     var body: some View {
         ZStack {
-            Color.black.opacity(0.4).ignoresSafeArea()
+            Color.clear
         }
         .overlay(alignment: .topLeading, content: {
             GameStatus(currentScore: $arViewModel.currentGameScore, currentCard: $arViewModel.numberOfFinishedCards, currentLife: $arViewModel.currentLifeCounts)

@@ -25,12 +25,12 @@ struct CheckScanOverlay: View {
             })
             .overlay(alignment: .bottom, content: {
                 Group {
-                    if !arViewModel.triggerOpenPortal {
+                    if arViewModel.gamePhase == .scanned {
                         MainButton(buttonType: .text(.openPotal(onOff: allPlanesDetected)), action: {
-                            arViewModel.triggerOpenPortal.toggle()
+                            arViewModel.triggerOpenPortal = true
                         })
                         .disabled(!allPlanesDetected)
-                    } else {
+                    } else if arViewModel.gamePhase == .portalCreated {
                         MainButton(buttonType: .text(.cardSprinkle(onOff: true)), action: {
                             arViewModel.placeCardsButtonTapped()
                         })
