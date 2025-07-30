@@ -8,12 +8,16 @@
 import SwiftUI
 import ARCore
 import SwiftData
+import Dependency
 
 struct ARView: View {
     // MARK: - SwiftData
-    let levelModelID: PersistentIdentifier
+    @Environment(\.modelContext) var modelContext
+    let levelModelID: UUID
     @Query var levels: [LevelModel]
     @Query var gameSessions: [GameSessionModel]
+    @Query var allCards: [CardModel]
+    @EnvironmentObject var container: DIContainer
     
     var selectedLevel: LevelModel? {
         levels.first { levelModel in
@@ -33,15 +37,18 @@ struct ARView: View {
     
     // ARCore 데이터 모델
     var gameCards: [GameCard] {
-        if let selectedGameSession {
-            return selectedGameSession.usedCards.compactMap { GameModelMapper.toGameModel($0.card) }
+        if let selectedLevel {
+            let everyCardInLevel = selectedLevel.category.cards.compactMap { GameModelMapper.toGameModel($0) }
+            let randomCards = everyCardInLevel.shuffled().prefix(5)
+            return Array(randomCards)
         }
         
         return []
     }
     
     // MARK: - View Model
-    @State var arViewModel: ARViewModel
+    @State var arViewModel: ARViewModel = .init()
+    @State var detailCardViewModel: DetailCardViewModel = .init()
     
     // MARK: - 게임 세팅을 위한 프로퍼티
     /// 최소 평면 사이즈
@@ -83,8 +90,10 @@ struct ARView: View {
                 case .scanned, .playing:
                     if !arViewModel.showingWordDetailCard {
                         PlayingGameOverlay(arViewModel: arViewModel)
-                    } else {
-                        OnShowingCardOverlay(arViewModel: arViewModel)
+                            .environmentObject(container)
+                    } else if let currentSession = selectedGameSession {
+                        OnShowingCardOverlay(arViewModel: arViewModel, detailCardViewModel: detailCardViewModel, currentSession: currentSession)
+                            .environmentObject(container)
                     }
                 case .fisished:
                     if let selectedGameSession {
@@ -95,6 +104,30 @@ struct ARView: View {
                 }
             }
         }
+        .onChange(of: arViewModel.flippedCardId) { _, newId in
+            if let id = newId {
+                detailCardViewModel.word = allCards.first(where: { $0.id == id })
+            }
+        }
+        .onChange(of: arViewModel.numberOfFinishedCards, { _, newValue in
+            if newValue == gameCards.count {
+                arViewModel.gamePhase = .fisished
+                
+                saveScore()
+            }
+        })
         .ignoresSafeArea()
+        .navigationBarBackButtonHidden(true)
+    }
+}
+
+extension ARView {
+    private func saveScore() {
+        if let selectedGameSession {
+            selectedGameSession.score = detailCardViewModel.currentScore
+            modelContext.insert(selectedGameSession)
+            try? modelContext.save()
+            print("점수 저장 완료: \(detailCardViewModel.currentScore)")
+        }
     }
 }

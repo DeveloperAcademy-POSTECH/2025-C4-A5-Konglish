@@ -17,7 +17,7 @@ final class LevelModel {
     var bestScore: Int
     var successCount: Int
     
-    @Relationship var category: CategoryModel
+    @Relationship(inverse: \CategoryModel.levels) var category: CategoryModel
     @Relationship(deleteRule: .cascade) var sessions: [GameSessionModel] = []
     
     init(id: UUID = UUID(), levelNumber: LevelType, bestScore: Int = 0, successCount: Int = 0, category: CategoryModel) {

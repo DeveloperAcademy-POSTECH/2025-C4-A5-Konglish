@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import Dependency
 
 struct CheckScanOverlay: View {
     @Bindable var arViewModel: ARViewModel
+    @EnvironmentObject var container: DIContainer
     let allPlanesDetected: Bool
     
     var body: some View {
@@ -18,9 +20,8 @@ struct CheckScanOverlay: View {
             })
             .overlay(alignment: .topTrailing, content: {
                 MainButton(buttonType: .icon(.exit), action: {
-                    // TODO: - Stop
+                    container.navigationRouter.pop()
                 })
-                .safeAreaPadding(.trailing, UIConstants.naviLeadingPadding)
             })
             .overlay(alignment: .bottom, content: {
                 MainButton(buttonType: .text(.cardSprinkle(onOff: allPlanesDetected)), action: {
@@ -28,6 +29,10 @@ struct CheckScanOverlay: View {
                 })
                 .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
             })
+            .navigationBarBackButtonHidden(true)
+            .safeAreaPadding(.trailing, UIConstants.naviLeadingPadding)
+            .safeAreaPadding(.bottom, UIConstants.bottomPadding)
+            .safeAreaPadding(.top, UIConstants.topPadding)
     }
 }
 

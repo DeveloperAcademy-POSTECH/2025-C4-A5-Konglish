@@ -14,7 +14,7 @@ struct GuidingView: View {
     @EnvironmentObject var container: DIContainer
     
     fileprivate enum GuidingConstants {
-        static let title: String = "App Title Logo"
+        static let title: UIImage = #imageLiteral(resourceName: "appLogo")
         static let cornerRadius: CGFloat = 20
         static let bottomPadding: CGFloat = 58
         static let contentsVspacing: CGFloat = 64
@@ -25,8 +25,6 @@ struct GuidingView: View {
         NavigationStack(path: $container.navigationRouter.path) {
             ZStack {
                 Color.green01.ignoresSafeArea()
-                SwipeTabView()
-                    .safeAreaPadding(.horizontal, GuidingConstants.safeHorizonPadding)
             }
             .navigationDestination(for: AppRoute.self, destination: { destination in
                 NavigationRoutingView(destination: destination)
@@ -37,6 +35,10 @@ struct GuidingView: View {
             .overlay(alignment: .bottom, content: {
                 bottomContents
             })
+            .overlay(alignment: .center, content: {
+                SwipeTabView()
+            })
+            .safeAreaPadding(.horizontal, GuidingConstants.safeHorizonPadding)
         }
     }
     
@@ -50,9 +52,7 @@ struct GuidingView: View {
     }
     
     private var title: some View {
-        Text(GuidingConstants.title)
-            .font(.semibold64)
-            .foregroundStyle(Color.green09)
+        Image(uiImage: GuidingConstants.title)
             .safeAreaPadding(.leading, UIConstants.naviLeadingPadding)
     }
 }

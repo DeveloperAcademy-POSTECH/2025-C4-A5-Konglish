@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Lottie
 
 struct SwipeTabView: View {
     @State var selectedIndex = 0
@@ -44,7 +45,7 @@ struct SwipeTabView: View {
                 .fill(Color.white)
                 .grayShadow()
         }
-        .frame(height: GuideCardConstants.cardGuideHeight)
+        .frame(maxHeight: GuideCardConstants.cardGuideHeight)
     }
     
     private func card(index: Int) -> some View {
@@ -53,7 +54,9 @@ struct SwipeTabView: View {
                 .fill(Color.white01)
                 .stroke(Color.gray01, style: .init(lineWidth: GuideCardConstants.lineWidth))
             
-            // TODO: - 로티
+            LottieView(animation: .named(lottieName(for: index)))
+                .playing()
+                .looping()
         }
         .frame(width: GuideCardConstants.bgWidth, height: GuideCardConstants.bgHeight)
     }
@@ -66,6 +69,15 @@ struct SwipeTabView: View {
                     .frame(width: GuideCardConstants.guideCircleSize)
             }
         })
+    }
+    
+    private func lottieName(for index: Int) -> String {
+        switch index {
+        case 0: return "one"
+        case 1: return "two"
+        case 2: return "three"
+        default: return ""
+        }
     }
 }
 

@@ -16,6 +16,8 @@ enum IconButtonType {
     case mic
     case aim
     case door
+    case target
+    case micStop
     
     var image: ImageResource {
         switch self {
@@ -32,7 +34,11 @@ enum IconButtonType {
         case .aim:
             return .aim
         case .door:
-            return .door    
+            return .doorIcon
+        case .target:
+            return .targetBtn
+        case .micStop:
+            return .micStop
         }
     }
     

@@ -7,9 +7,11 @@
 
 import Foundation
 import SwiftUI
+import Dependency
 
 struct CompleteWindow: View {
     let model: GameSessionModel
+    @EnvironmentObject var container: DIContainer
     
     fileprivate enum CompleteWindowConstants {
         static let maxWidth: CGFloat = 749
@@ -37,7 +39,7 @@ struct CompleteWindow: View {
                 title
                 score
                 MainButton(buttonType: .text(.backMain), action: {
-                    print("Hello")
+                    container.navigationRouter.reset()
                 })
             }
             .padding(.vertical, CompleteWindowConstants.mainVerticalPadding)

@@ -18,6 +18,10 @@ struct NavigationRoutingView: View {
             switch destination {
             case .category:
                 CategorySelectView()
+            case .level(let id):
+                LevelView(cateogryID: id)
+            case .ar(let id):
+                ARView(levelModelID: id)
             }
         }
         .environmentObject(container)

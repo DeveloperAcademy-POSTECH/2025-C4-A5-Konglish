@@ -14,7 +14,7 @@ struct ButtonCard<Contents: View>: View {
     let action: () -> Void
     
     let cardWidth: CGFloat = 280
-    let cardBottomHeight: CGFloat = 448
+    let cardBottomHeight: CGFloat = 380
     let cardTopHeight: CGFloat = 440
     let cornerRadius: CGFloat = 20
     

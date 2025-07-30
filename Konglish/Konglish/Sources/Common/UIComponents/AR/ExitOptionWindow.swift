@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import Dependency
 
 struct ExitOption: View {
+    @Environment(\.dismiss) var dimiss
+    @EnvironmentObject var container: DIContainer
     
     fileprivate enum ExitOptionWindowConstants {
         static let cornerRadius: CGFloat = 30
@@ -34,15 +37,15 @@ struct ExitOption: View {
     private var btnGroup: some View {
         HStack(spacing: ExitOptionWindowConstants.btnHspacing, content: {
             Button(action: {
-                
+                dimiss()
             }, label: {
                 makeBtn(image: .continue, btnText: ExitOptionWindowConstants.leftText)
             })
             
             Button(action: {
-                
+                container.navigationRouter.pop()
             }, label: {
-                makeBtn(image: .door, btnText: ExitOptionWindowConstants.rightText)
+                makeBtn(image: .doorIcon, btnText: ExitOptionWindowConstants.rightText)
             })
         })
     }

@@ -17,11 +17,14 @@ struct LevelCard: View {
     
     // MARK: - LevelCardConstants
     fileprivate enum LevelCardConstants {
+        static let bgWidth: CGFloat = 280
+        static let bgHeight: CGFloat = 380
         static let cornerRadius: CGFloat = 30
         static let middleVspacing: CGFloat = 30
-        static let lelvelNumSize: CGFloat = 172
+        static let lelvelNumHeight: CGFloat = 116
+        static let lelvelNumWidth: CGFloat = 172
         static let contentsWiddth: CGFloat = 232
-        static let contentsHeight: CGFloat = 116
+        static let contentsHeight: CGFloat = 316
         static let pointHspacing: CGFloat = 10
         static let binWidth: CGFloat = 34
         static let binHeight: CGFloat = 28
@@ -32,11 +35,17 @@ struct LevelCard: View {
     
     // MARK: - Body
     var body: some View {
-        ButtonCard(content: {
-            contents
-        }, action: {
+        Button(action: {
             isTapped.toggle()
             action()
+        }, label: {
+            ZStack {
+                RoundedRectangle(cornerRadius: LevelCardConstants.cornerRadius)
+                    .fill(isTapped ? num.backgroundColor : .white)
+                    .stroke(isTapped ? num.buttonStrokeColor : .clear, style: .init(lineWidth: 4))
+                    .frame(width: LevelCardConstants.bgWidth, height: LevelCardConstants.bgHeight)
+                contents
+            }
         })
     }
     
@@ -46,14 +55,10 @@ struct LevelCard: View {
             Spacer()
             bestScore
             Spacer()
+            bottomProgress
         }
         .frame(width: LevelCardConstants.contentsWiddth)
         .frame(height: LevelCardConstants.contentsHeight)
-        .background {
-            RoundedRectangle(cornerRadius: LevelCardConstants.cornerRadius)
-                .fill(isTapped ? num.backgroundColor : .white)
-                .stroke(isTapped ? num.buttonStrokeColor : .clear, style: .init(lineWidth: 4))
-        }
     }
     
     // MARK: - TopContents
@@ -62,7 +67,7 @@ struct LevelCard: View {
         ZStack {
             RoundedRectangle(cornerRadius: LevelCardConstants.cornerRadius)
                 .fill(num.color)
-                .frame(width: LevelCardConstants.lelvelNumSize, height: LevelCardConstants.lelvelNumSize)
+                .frame(width: LevelCardConstants.lelvelNumWidth, height: LevelCardConstants.lelvelNumHeight)
             
             Text(num.rawValue)
                 .font(.semibold36)
@@ -106,4 +111,10 @@ struct LevelCard: View {
             SuccessProgress(currentCount: level.successCount)
         }
     }
+}
+
+#Preview {
+    LevelCard(level: .init(levelNumber: .easy, category: .init(imageName: "11", difficulty: 1, nameKor: "2", nameEng: "3")), num: .easy, action: {
+        print("hello")
+    }, isTapped: .constant(true))
 }

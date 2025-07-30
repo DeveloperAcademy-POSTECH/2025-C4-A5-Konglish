@@ -75,7 +75,7 @@ extension ARContainerViewController {
     
     func handleRemovedAnchors(for anchors: [ARAnchor]) {
         
-        guard (gamePhase == .scanning || gamePhase == .scanned) else {
+        guard gamePhase == .scanning, !checkAllPlanesAttached() else {
             return
         }
         
@@ -85,10 +85,7 @@ extension ARContainerViewController {
             if let planeEntity = detectedPlaneEntities[planeAnchor] {
                 planeEntity.removeFromParent()
                 detectedPlaneEntities.removeValue(forKey: planeAnchor)
-                // 평면이 부족해지면 다시 scanning 상태로 변경
-                if gamePhase == .scanned && !checkAllPlanesAttached() {
-                    gamePhase = .scanning
-                }
+                logger.debug("🗑️ 평면 제거됨 - 남은 개수: \(self.detectedPlaneEntities.count)")
                 
                 // 다시 스캔 가능하게 delegate 호출
                 delegate?.arContainerDidLosePlaneAnchor(self)

@@ -1,0 +1,241 @@
+Category,English,Korean,Level,Boss
+Animals,butterfly,나비,1,TRUE
+Animals,dog,개,1,FALSE
+Animals,cat,고양이,1,FALSE
+Animals,fish,물고기,1,FALSE
+Animals,bird,새,1,FALSE
+Animals,cow,소,1,FALSE
+Animals,pig,돼지,1,FALSE
+Animals,chicken,닭,1,FALSE
+Animals,duck,오리,1,FALSE
+Animals,sheep,양,1,FALSE
+Animals,crocodile,악어,2,TRUE
+Animals,camel,낙타,2,FALSE
+Animals,donkey,당나귀,2,FALSE
+Animals,raccoon,너구리,2,FALSE
+Animals,hedgehog,고슴도치,2,FALSE
+Animals,goose,거위,2,FALSE
+Animals,wolf,늑대,2,FALSE
+Animals,parrot,앵무새,2,FALSE
+Animals,otter,수달,2,FALSE
+Animals,eagle,독수리,2,FALSE
+Animals,komodo dragon,코모도왕도마뱀,3,TRUE
+Animals,alpaca,알파카,3,FALSE
+Animals,reindeer,순록,3,FALSE
+Animals,polar bear,북극곰,3,FALSE
+Animals,platypus,오리너구리,3,FALSE
+Animals,sloth,나무늘보,3,FALSE
+Animals,stingray,가오리,3,FALSE
+Animals,dinosaur,공룡,3,FALSE
+Animals,squid,오징어,3,FALSE
+Animals,meerkat,미어캣,3,FALSE
+Food,potato,감자,1,TRUE
+Food,egg,계란,1,FALSE
+Food,apple,사과,1,FALSE
+Food,carrot,당근,1,FALSE
+Food,banana,바나나,1,FALSE
+Food,ham,햄,1,FALSE
+Food,jam,잼,1,FALSE
+Food,milk,우유,1,FALSE
+Food,water,물,1,FALSE
+Food,rice,밥,1,FALSE
+Food,hamburger,햄버거,2,TRUE
+Food,sugar,설탕,2,FALSE
+Food,flour,밀가루,2,FALSE
+Food,salad,샐러드,2,FALSE
+Food,cake,케이크,2,FALSE
+Food,bread,빵,2,FALSE
+Food,candy,사탕,2,FALSE
+Food,curry,카레,2,FALSE
+Food,sushi,초밥,2,FALSE
+Food,honey,꿀,2,FALSE
+Food,croissant,크루아상,3,TRUE
+Food,milkshake,밀크셰이크,3,FALSE
+Food,sandwich,샌드위치,3,FALSE
+Food,spaghetti,스파게티,3,FALSE
+Food,dumpling,만두,3,FALSE
+Food,pudding,푸딩,3,FALSE
+Food,cheesecake,치즈케이크,3,FALSE
+Food,breakfast,아침식사,3,FALSE
+Food,tiramisu,티라미수,3,FALSE
+Food,gelato,젤라토,3,FALSE
+Places,post office,우체국,1,TRUE
+Places,zoo,동물원,1,FALSE
+Places,park,공원,1,FALSE
+Places,farm,농장,1,FALSE
+Places,home,집,1,FALSE
+Places,room,방,1,FALSE
+Places,bank,은행,1,FALSE
+Places,store,가게,1,FALSE
+Places,shop,상점,1,FALSE
+Places,cafe,카페,1,FALSE
+Places,police station,경찰서,2,TRUE
+Places,bus stop,버스정류장,2,FALSE
+Places,waterfall,폭포,2,FALSE
+Places,lake,호수,2,FALSE
+Places,sea,바다,2,FALSE
+Places,museum,박물관,2,FALSE
+Places,cinema,영화관,2,FALSE
+Places,hill,언덕,2,FALSE
+Places,bakery,빵집,2,FALSE
+Places,valley,계곡,2,FALSE
+Places,space station,우주정거장,3,TRUE
+Places,science center,과학관,3,FALSE
+Places,soccer field,축구장,3,FALSE
+Places,orchard,과수원,3,FALSE
+Places,university,대학교,3,FALSE
+Places,ice rink,아이스링크,3,FALSE
+Places,art studio,미술 스튜디오,3,FALSE
+Places,amusement park,놀이공원,3,FALSE
+Places,lighthouse,등대,3,FALSE
+Places,power plant,발전소,3,FALSE
+My Body & Clothes,helmet,헬멧,1,TRUE
+My Body & Clothes,cap,모자,1,FALSE
+My Body & Clothes,socks,양말,1,FALSE
+My Body & Clothes,shoes,신발,1,FALSE
+My Body & Clothes,belt,벨트,1,FALSE
+My Body & Clothes,pants,바지,1,FALSE
+My Body & Clothes,shorts,반바지,1,FALSE
+My Body & Clothes,hair,머리카락,1,FALSE
+My Body & Clothes,ear,귀,1,FALSE
+My Body & Clothes,vest,조끼,1,FALSE
+My Body & Clothes,sneakers,운동화,2,TRUE
+My Body & Clothes,suit,정장,2,FALSE
+My Body & Clothes,overalls,멜빵바지,2,FALSE
+My Body & Clothes,sweater,스웨터,2,FALSE
+My Body & Clothes,cardigan,가디건,2,FALSE
+My Body & Clothes,apron,앞치마,2,FALSE
+My Body & Clothes,gloves,장갑,2,FALSE
+My Body & Clothes,bone,뼈,2,FALSE
+My Body & Clothes,blood,피,2,FALSE
+My Body & Clothes,jeans,청바지,2,FALSE
+My Body & Clothes,mustache,콧수염,3,TRUE
+My Body & Clothes,blazer,블레이저,3,FALSE
+My Body & Clothes,tuxedo,턱시도,3,FALSE
+My Body & Clothes,poncho,판초,3,FALSE
+My Body & Clothes,parka,파카,3,FALSE
+My Body & Clothes,windbreaker,바람막이,3,FALSE
+My Body & Clothes,tooth,이빨,3,FALSE
+My Body & Clothes,heart,심장,3,FALSE
+My Body & Clothes,trench coat,트렌치코트,3,FALSE
+My Body & Clothes,turtleneck,목폴라,3,FALSE
+Nature,mountain,산,1,TRUE
+Nature,sun,해,1,FALSE
+Nature,moon,달,1,FALSE
+Nature,star,별,1,FALSE
+Nature,cloud,구름,1,FALSE
+Nature,rain,비,1,FALSE
+Nature,snow,눈,1,FALSE
+Nature,wind,바람,1,FALSE
+Nature,tree,나무,1,FALSE
+Nature,flower,꽃,1,FALSE
+Nature,lightning,번개,2,TRUE
+Nature,winter,겨울,2,FALSE
+Nature,jungle,정글,2,FALSE
+Nature,wave,파도,2,FALSE
+Nature,storm,폭풍,2,FALSE
+Nature,canyon,협곡,2,FALSE
+Nature,volcano,화산,2,FALSE
+Nature,desert,사막,2,FALSE
+Nature,rainbow,무지개,2,FALSE
+Nature,dew,이슬,2,FALSE
+Nature,asteroid,소행성,3,TRUE
+Nature,galaxy,은하,3,FALSE
+Nature,universe,우주,3,FALSE
+Nature,lava,용암,3,FALSE
+Nature,hurricane,허리케인,3,FALSE
+Nature,meteor,유성,3,FALSE
+Nature,landslide,산사태,3,FALSE
+Nature,aurora,오로라,3,FALSE
+Nature,tornado,토네이도,3,FALSE
+Nature,earthquake,지진,3,FALSE
+School,flag,깃발,1,TRUE
+School,pen,펜,1,FALSE
+School,map,지도,1,FALSE
+School,bag,가방,1,FALSE
+School,cup,컵,1,FALSE
+School,desk,책상,1,FALSE
+School,book,책,1,FALSE
+School,tape,테이프,1,FALSE
+School,clock,시계,1,FALSE
+School,paint,물감,1,FALSE
+School,stapler,스테이플러,2,TRUE
+School,pencil,연필,2,FALSE
+School,crayon,크레용,2,FALSE
+School,teacher,선생님,2,FALSE
+School,student,학생,2,FALSE
+School,eraser,지우개,2,FALSE
+School,marker,마커,2,FALSE
+School,brush,붓,2,FALSE
+School,ruler,자,2,FALSE
+School,paper,종이,2,FALSE
+School,stethoscope,청진기,3,TRUE
+School,scissors,가위,3,FALSE
+School,sharpener,연필깎이,3,FALSE
+School,notebook,공책,3,FALSE
+School,library,도서관,3,FALSE
+School,textbook,교과서,3,FALSE
+School,dictionary,사전,3,FALSE
+School,calculator,계산기,3,FALSE
+School,classroom,교실,3,FALSE
+School,computer,컴퓨터,3,FALSE
+Things at Home,chair,의자,1,TRUE
+Things at Home,bed,침대,1,FALSE
+Things at Home,pot,냄비,1,FALSE
+Things at Home,door,문,1,FALSE
+Things at Home,soap,비누,1,FALSE
+Things at Home,key,열쇠,1,FALSE
+Things at Home,sofa,소파,1,FALSE
+Things at Home,fan,선풍기,1,FALSE
+Things at Home,wall,벽,1,FALSE
+Things at Home,box,상자,1,FALSE
+Things at Home,bathroom,화장실,2,TRUE
+Things at Home,mirror,거울,2,FALSE
+Things at Home,window,창문,2,FALSE
+Things at Home,kitchen,부엌,2,FALSE
+Things at Home,bedroom,침실,2,FALSE
+Things at Home,toilet,변기,2,FALSE
+Things at Home,stairs,계단,2,FALSE
+Things at Home,picture,그림,2,FALSE
+Things at Home,garden,정원,2,FALSE
+Things at Home,hanger,옷걸이,2,FALSE
+Things at Home,refrigerator,냉장고,3,TRUE
+Things at Home,toothpaste,치약,3,FALSE
+Things at Home,rice cooker,밥솥,3,FALSE
+Things at Home,water purifier,정수기,3,FALSE
+Things at Home,television,텔레비전,3,FALSE
+Things at Home,screwdriver,드라이버,3,FALSE
+Things at Home,microwave,전자레인지,3,FALSE
+Things at Home,blender,믹서기,3,FALSE
+Things at Home,shampoo,샴푸,3,FALSE
+Things at Home,toothbrush,칫솔,3,FALSE
+Action,rub,문지르다,1,TRUE
+Action,say,말하다,1,FALSE
+Action,eat,먹다,1,FALSE
+Action,run,달리다,1,FALSE
+Action,sit,앉다,1,FALSE
+Action,cut,자르다,1,FALSE
+Action,hit,치다,1,FALSE
+Action,put,놓다,1,FALSE
+Action,dig,파다,1,FALSE
+Action,jog,조깅하다,1,FALSE
+Action,throw,던지다,2,TRUE
+Action,share,나누다,2,FALSE
+Action,study,공부하다,2,FALSE
+Action,catch,잡다,2,FALSE
+Action,wash,씻다,2,FALSE
+Action,cook,요리하다,2,FALSE
+Action,call,전화하다,2,FALSE
+Action,make,만들다,2,FALSE
+Action,know,알다,2,FALSE
+Action,clean,청소하다,2,FALSE
+Action,celebrate,축하하다,3,TRUE
+Action,think,생각하다,3,FALSE
+Action,learn,배우다,3,FALSE
+Action,teach,가르치다,3,FALSE
+Action,improve,향상시키다,3,FALSE
+Action,listen,듣다,3,FALSE
+Action,speak,말하다,3,FALSE
+Action,talk,이야기하다,3,FALSE
+Action,remember,기억하다,3,FALSE
+Action,promise,약속하다,3,FALSE

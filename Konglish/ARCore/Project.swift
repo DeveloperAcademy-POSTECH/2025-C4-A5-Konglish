@@ -10,7 +10,7 @@ import ProjectDescription
 
 let project = Project(
     name: "ARCore",
-    packages: [.local(path: "Packages/KonglishARProject/")],
+    packages: [.local(path: "./Packages/KonglishARProject")],
     targets: [
         .target(name: "ARCore",
                 destinations: .iOS,
