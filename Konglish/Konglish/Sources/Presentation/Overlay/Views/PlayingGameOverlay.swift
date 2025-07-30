@@ -21,6 +21,7 @@ struct PlayingGameOverlay: View {
         static let cornerRadius: CGFloat = 20
         static let guideText: String = "가운데의 조준점을 카드 위에 대고 버튼을 눌러주세요"
         static let bottomPadding: CGFloat = 177
+        static let dropShadowSize: CGFloat = 4
     }
     
     var body: some View {
@@ -74,6 +75,7 @@ struct PlayingGameOverlay: View {
                 .clipShape(RoundedRectangle(cornerRadius: PlayingGameConstants.cornerRadius))
                 .whiteShadow()
                 .frame(width: PlayingGameConstants.guideWidth, height: PlayingGameConstants.guideHeight)
+                .glassShadow(PlayingGameConstants.dropShadowSize)
             
             Text(PlayingGameConstants.guideText)
                 .font(.semibold24)

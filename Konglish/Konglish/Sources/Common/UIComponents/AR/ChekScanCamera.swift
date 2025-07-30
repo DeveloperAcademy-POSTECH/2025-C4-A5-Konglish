@@ -20,6 +20,7 @@ struct ChekScanCamera: View {
         static let verticalPadding: CGFloat = 20
         static let cornerRadius: CGFloat = 20
         static let guideText: String = "카메라로 주변을 천천히 찍어서 5개를 채워주세요"
+        static let dropShadowSize: CGFloat = 4
     }
     
     // MARK: - Body
@@ -32,6 +33,7 @@ struct ChekScanCamera: View {
         .padding(.vertical, CheckScanCameraConstants.verticalPadding)
         .background(Material.thin)
         .clipShape(RoundedRectangle(cornerRadius: CheckScanCameraConstants.cornerRadius))
+        .glassShadow(CheckScanCameraConstants.dropShadowSize)
     }
     
     /// 체크 리스트

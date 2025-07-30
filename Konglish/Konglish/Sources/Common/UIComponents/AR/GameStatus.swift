@@ -31,6 +31,8 @@ struct GameStatus: View {
         static let scoreLabelWidth: CGFloat = 94
         static let cardsLabelWidth: CGFloat = 140
         
+        static let dropShadowSize: CGFloat = 6
+        
         static let scoreText: String = "Score"
     }
     
@@ -44,6 +46,7 @@ struct GameStatus: View {
         .padding(.horizontal, GameStatusConstatns.horizonPadding)
         .background(Material.thin.quaternary)
         .clipShape(RoundedRectangle(cornerRadius: GameStatusConstatns.cornerRadius))
+        .glassShadow(GameStatusConstatns.dropShadowSize)
     }
     // MARK: - Bottom
     /// 하단 점수 및 카드 수집 정보
