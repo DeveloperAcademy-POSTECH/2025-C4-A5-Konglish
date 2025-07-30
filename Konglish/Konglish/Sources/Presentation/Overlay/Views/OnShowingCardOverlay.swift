@@ -83,7 +83,6 @@ struct OnShowingCardOverlay: View {
             }
         })
         .safeAreaPadding(.horizontal, UIConstants.topPadding)
-        .safeAreaPadding(.bottom, UIConstants.bottomPadding)
         .safeAreaPadding(.top, UIConstants.topPadding)
         .navigationBarBackButtonHidden(true)
         .onChange(of: detailCardViewModel.heart) { _, newValue in

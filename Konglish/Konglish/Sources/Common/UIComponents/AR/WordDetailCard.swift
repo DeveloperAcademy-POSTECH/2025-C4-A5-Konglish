@@ -82,7 +82,7 @@ struct WordDetailCard: View {
     private var successText: some View {
         Text(WordDetailCardConstants.successText)
             .font(.semibold64)
-            .foregroundStyle(Color.green01)
+            .foregroundStyle(Color.green03)
             .customOutline(width: WordDetailCardConstants.textTStroke, color: .white01)
             .offset(x: WordDetailCardConstants.offsetValue.0 ,y: -WordDetailCardConstants.offsetValue.1)
     }
@@ -211,7 +211,7 @@ struct WordDetailCard: View {
     }
     
     private func computedBarHeight(relativeIndex: Int) -> CGFloat {
-        let base: CGFloat = 24
+        let base: CGFloat = 26
         let variationStep: CGFloat = 10
         let variation = variationStep * CGFloat(WordDetailCardConstants.voiceBarCount / 2 - relativeIndex)
         

@@ -30,10 +30,11 @@ struct CompleteWindow: View {
     
     var body: some View {
         ZStack {
+            Color.black.opacity(0.4)
+            
             RoundedRectangle(cornerRadius: CompleteWindowConstants.cornerRadius)
-                .fill(Color.white01)
-                .background(Material.ultraThin)
-                .grayShadow()
+                .fill(Color.white.opacity(0.8))
+                .background(Material.ultraThin.quaternary)
             
             VStack {
                 title
@@ -60,7 +61,7 @@ struct CompleteWindow: View {
     private var score: some View {
         Label(title: {
             Text("\(model.score)")
-                .font(.semibold64)
+                .font(.poetsen(.regular, size: 80))
                 .foregroundStyle(Color.gray04)
         }, icon: {
             Image(.bin)

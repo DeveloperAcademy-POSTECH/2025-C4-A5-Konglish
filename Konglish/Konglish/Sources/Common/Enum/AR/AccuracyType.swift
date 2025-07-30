@@ -42,9 +42,9 @@ enum AccuracyType {
     var color: Color {
         switch self {
         case .btnMic:
-            return .green02
+            return .green05
         case .success:
-            return .green08
+            return .green09
         case .failure:
             return .red01
         }
