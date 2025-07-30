@@ -26,12 +26,13 @@ struct WordDetailCard: View {
         static let voiceHspacing: CGFloat = 4
         static let accuracyHspacing: CGFloat = 8
         
-        static let offsetValue: CGFloat = 25
+        static let offsetValue: (CGFloat,CGFloat) = (30, 70)
         static let maxWidth: CGFloat = 680
+        static let rectangleMaxHeight: CGFloat = 440
         static let mainMaxHeight: CGFloat = 493
         static let mainMaxWidth: CGFloat = 730
         static let capsuleWidth: CGFloat = 6
-        static let capsuleHeight: CGFloat = 56
+        static let capsuleHeight: CGFloat = 80
         static let divicerLine: CGFloat = 4
         static let imageSize: CGFloat = 280
         static let voiceBarCount: Int = 8
@@ -46,39 +47,35 @@ struct WordDetailCard: View {
         static let accuracyText: String = "발음 정확도"
         static let successText: String = "성공"
         
+        static let dropShadowColor: Color = .init(red: 177 / 255, green: 177 / 255, blue: 131 / 255) // #B1B183
+        static let dropShadowSize: CGFloat = 8   
     }
     // MARK: - Body
     var body: some View {
         if let model = viewModel.word {
             ZStack(alignment: .topTrailing, content: {
+                RoundedRectangle(cornerRadius: WordDetailCardConstants.cornerRadius)
+                    .fill(Color.wordCardYellow.opacity(0.8))
+                    .background(Material.thin.quaternary)
+                    .clipShape(RoundedRectangle(cornerRadius: WordDetailCardConstants.cornerRadius))
+                    .shadow(color: WordDetailCardConstants.dropShadowColor, radius: 0, x: 0, y: WordDetailCardConstants.dropShadowSize)
+                    .frame(width: WordDetailCardConstants.mainMaxWidth, height: WordDetailCardConstants.rectangleMaxHeight)
+                
                 VStack {
-                    closeBtn
                     topContents(model: model)
+                    Spacer()
                     dividerLine
                     bottomContents
                 }
+                .frame(height: 380)
                 .safeAreaPadding(WordDetailCardConstants.safePadding)
-                .background {
-                    RoundedRectangle(cornerRadius: WordDetailCardConstants.cornerRadius)
-                        .fill(Color.wordCardYellow)
-                        .background(Material.thin)
-                        .clipShape(RoundedRectangle(cornerRadius: WordDetailCardConstants.cornerRadius))
-                }
-                .offset(x: -WordDetailCardConstants.offsetValue, y: WordDetailCardConstants.offsetValue)
                 
                 if viewModel.lastPassed {
                     successText
                         .rotationEffect(.degrees(WordDetailCardConstants.rotationDegree))
                 }
             })
-            .frame(width: WordDetailCardConstants.mainMaxWidth, height: WordDetailCardConstants.mainMaxHeight)
-        }
-    }
-    
-    private var closeBtn: some View {
-        HStack {
-            Spacer()
-            Image(.closeBtn)
+            .frame(width: WordDetailCardConstants.mainMaxWidth, height: WordDetailCardConstants.rectangleMaxHeight)
         }
     }
     
@@ -87,6 +84,7 @@ struct WordDetailCard: View {
             .font(.semibold64)
             .foregroundStyle(Color.green01)
             .customOutline(width: WordDetailCardConstants.textTStroke, color: .white01)
+            .offset(x: WordDetailCardConstants.offsetValue.0 ,y: -WordDetailCardConstants.offsetValue.1)
     }
     
     // MARK: - Top
@@ -119,13 +117,15 @@ struct WordDetailCard: View {
     
     // MARK: - Bottom
     private var bottomContents: some View {
-        HStack(spacing: WordDetailCardConstants.bottomContentsHspacing, content: {
+        HStack(alignment: .center, spacing: WordDetailCardConstants.bottomContentsHspacing, content: {
             voiceLevel
             Capsule()
                 .fill(Color.voiceShadow)
                 .frame(width: WordDetailCardConstants.capsuleWidth, height: WordDetailCardConstants.capsuleHeight)
             pronunciationAccuracy
         })
+        .frame(height: WordDetailCardConstants.capsuleHeight + 10, alignment: .bottom)
+        .offset(y: 20)
     }
     
     private var dividerLine: some View {
@@ -133,6 +133,7 @@ struct WordDetailCard: View {
             .fill(Color.voiceShadow)
             .frame(maxWidth: .infinity)
             .frame(height: WordDetailCardConstants.divicerLine)
+            .offset(y: 30)
     }
     
     // MARK: - Bodttom Right
