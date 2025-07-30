@@ -41,6 +41,9 @@ struct PlayingGameOverlay: View {
         .overlay(alignment: .bottomTrailing, content: {
             targetBtn
         })
+        .overlay(content: {
+            Image(.aim)
+        })
         .safeAreaPadding(.horizontal, PlayingGameConstants.horizonPadding)
         .safeAreaPadding(.bottom, UIConstants.bottomPadding)
     }
