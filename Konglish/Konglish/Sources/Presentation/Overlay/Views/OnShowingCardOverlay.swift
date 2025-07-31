@@ -51,23 +51,14 @@ struct OnShowingCardOverlay: View {
         })
         .overlay(alignment: .bottomTrailing, content: {
             MainButton(buttonType: .icon(.mic)) {
-                // FIXME: 발음 평가 정상화 후 아래 수정
                 if detailCardViewModel.recordingState == .recording {
                     detailCardViewModel.stopRecording()
-                    detailCardViewModel.evaluateStub()
                     
                     if let word = detailCardViewModel.word {
                         let usedCard = UsedCardModel(session: currentSession, card: word)
                         modelContext.insert(usedCard)
                         try? modelContext.save()
                         print("UsedCard 저장 완료: \(word.wordEng)")
-                    }
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-//                        arViewModel.flippedCardId = nil
-                        detailCardViewModel.lastPassed = false
-                        detailCardViewModel.lastEvaluatedScore = nil
-                        detailCardViewModel.accuracyType = .btnMic
                     }
                 } else {
                     detailCardViewModel.startRecording()
