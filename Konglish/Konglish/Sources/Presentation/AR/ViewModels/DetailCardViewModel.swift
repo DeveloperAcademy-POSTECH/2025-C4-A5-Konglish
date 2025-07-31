@@ -57,10 +57,11 @@ class DetailCardViewModel: NSObject {
     override init() {
         super.init()
         checkAuthorizationStatus()
+        setAudioSession()
     }
     
     // MARK: - STT 권한
-    func checkAuthorizationStatus() {
+    private func checkAuthorizationStatus() {
         SFSpeechRecognizer.requestAuthorization { authStatus in
             Task { @MainActor in
                 switch authStatus {
@@ -82,16 +83,9 @@ class DetailCardViewModel: NSObject {
             }
         }
     }
-
-    // MARK: - 녹음 시작
-    func startRecording() {
-        guard speechRecognitionAvaliable else {
-            print("speech recognition is not available...")
-            return
-        }
-        
-        cleanupAudio()
-        
+    
+    // MARK: - 오디오 세션 세팅
+    private func setAudioSession() {
         // Configure the audio session for the app.
         let audioSession = AVAudioSession.sharedInstance()
         
@@ -101,6 +95,16 @@ class DetailCardViewModel: NSObject {
         } catch {
             print("error setting up audio session: \(error)")
         }
+    }
+
+    // MARK: - 녹음 시작
+    func startRecording() {
+        guard speechRecognitionAvaliable else {
+            print("speech recognition is not available...")
+            return
+        }
+        
+        cleanupAudio()
         
         let inputNode = audioEngine.inputNode
 
