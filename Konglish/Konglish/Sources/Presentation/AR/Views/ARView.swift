@@ -110,14 +110,23 @@ struct ARView: View {
                 detailCardViewModel.word = allCards.first(where: { $0.id == id })
             }
         }
-        .onChange(of: arViewModel.numberOfFinishedCards, { _, newValue in
+        .onChange(of: arViewModel.numberOfFinishedCards) { _, newValue in
             if newValue == gameCards.count {
                 arViewModel.gamePhase = .fisished
                 
                 saveScore()
                 saveSuccessCount()
             }
-        })
+        }
+        .onChange(of: arViewModel.showingWordDetailCard) { _, newValue in
+            // 단어 창이 닫힐 떄 이전 점수를 초기화한다
+            if !newValue {
+                detailCardViewModel.lastPassed = false
+                detailCardViewModel.lastEvaluatedScore = nil
+                detailCardViewModel.accuracyType = .btnMic
+                detailCardViewModel.accuracyPercent = 0
+            }
+        }
         .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
     }

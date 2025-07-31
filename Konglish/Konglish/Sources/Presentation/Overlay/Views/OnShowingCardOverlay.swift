@@ -83,14 +83,6 @@ struct OnShowingCardOverlay: View {
             arViewModel.currentGameScore = newValue
             arViewModel.numberOfFinishedCards = detailCardViewModel.finishedCards.count
         }
-        .onChange(of: arViewModel.showingWordDetailCard) { _, newValue in
-            // 창이 닫힐 떄 이전 점수를 초기화한다
-            if !newValue {
-                detailCardViewModel.lastPassed = false
-                detailCardViewModel.lastEvaluatedScore = nil
-                detailCardViewModel.accuracyType = .btnMic
-            }
-        }
         .task {
             detailCardViewModel.speakWord()
         }
