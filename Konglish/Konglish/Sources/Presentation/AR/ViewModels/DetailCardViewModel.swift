@@ -212,12 +212,42 @@ class DetailCardViewModel: NSObject {
         }
     }
 
-    private func normalize(_ string: String) -> String {
+    private func normalizeWord(_ string: String) -> String {
         string.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
     }
+    
+    /// 두 문자열 사이 [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance)를 계산한다.
+    private func levenshtein(_ s: String, _ t: String) -> Int {
+        let sChars = Array(s)
+        let tChars = Array(t)
+        let m = sChars.count
+        let n = tChars.count
+
+        var dist = [[Int]](repeating: [Int](repeating: 0, count: n + 1), count: m + 1)
+
+        for i in 0...m { dist[i][0] = i }
+        for j in 0...n { dist[0][j] = j }
 
     private func calculateSimilarityScore(spoken: String, target: String) -> Float {
         return spoken == target ? 1.0 : 0.0
+        for i in 1...m {
+            for j in 1...n {
+                if sChars[i - 1] == tChars[j - 1] {
+                    dist[i][j] = dist[i - 1][j - 1]
+                } else {
+                    dist[i][j] = min(dist[i - 1][j], dist[i][j - 1], dist[i - 1][j - 1]) + 1
+                }
+            }
+        }
+
+        return dist[m][n]
+    }
+
+    /// 인식된 단어가 타겟 단어와 다른 경우 유사도를 기반으로 점수를 결정한다
+    private func evaluateSimilarityScore(_ a: String, _ b: String) -> Double {
+        let distance = Double(levenshtein(a, b))
+        let maxLength = Double(max(a.count, b.count))
+        return max(0, 1.0 - (distance / maxLength)) // 0.0 ~ 1.0
     }
     
     private func evaluatePronunciation(scorePercent: Int) {
