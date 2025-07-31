@@ -51,23 +51,14 @@ struct OnShowingCardOverlay: View {
         })
         .overlay(alignment: .bottomTrailing, content: {
             MainButton(buttonType: .icon(.mic)) {
-                // FIXME: 발음 평가 정상화 후 아래 수정
                 if detailCardViewModel.recordingState == .recording {
                     detailCardViewModel.stopRecording()
-                    detailCardViewModel.evaluateStub()
                     
                     if let word = detailCardViewModel.word {
                         let usedCard = UsedCardModel(session: currentSession, card: word)
                         modelContext.insert(usedCard)
                         try? modelContext.save()
                         print("UsedCard 저장 완료: \(word.wordEng)")
-                    }
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-//                        arViewModel.flippedCardId = nil
-                        detailCardViewModel.lastPassed = false
-                        detailCardViewModel.lastEvaluatedScore = nil
-                        detailCardViewModel.accuracyType = .btnMic
                     }
                 } else {
                     detailCardViewModel.startRecording()
@@ -91,6 +82,14 @@ struct OnShowingCardOverlay: View {
         .onChange(of: detailCardViewModel.currentScore) { _, newValue in
             arViewModel.currentGameScore = newValue
             arViewModel.numberOfFinishedCards = detailCardViewModel.finishedCards.count
+        }
+        .onChange(of: arViewModel.showingWordDetailCard) { _, newValue in
+            // 창이 닫힐 떄 이전 점수를 초기화한다
+            if !newValue {
+                detailCardViewModel.lastPassed = false
+                detailCardViewModel.lastEvaluatedScore = nil
+                detailCardViewModel.accuracyType = .btnMic
+            }
         }
         .task {
             detailCardViewModel.speakWord()
