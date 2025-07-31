@@ -32,7 +32,10 @@ struct LevelView: View {
             VStack(spacing: .zero, content: {
                 if let category = category.first(where: { $0.id == cateogryID }) {
                     HStack(spacing: LevelCardConstants.levelHspacing, content: {
-                        ForEach(category.levels, id: \.id) { level in
+                        ForEach(
+                            category.levels.sorted(by: { $0.levelNumber.numericValue < $1.levelNumber.numericValue }),
+                            id: \.id
+                        ) { level in
                             LevelCard(level: level, num: level.levelNumber, action: {
                                 selectedLevel = level
                             }, isTapped: Binding(

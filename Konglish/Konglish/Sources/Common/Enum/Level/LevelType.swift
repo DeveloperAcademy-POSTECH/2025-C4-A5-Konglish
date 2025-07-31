@@ -57,5 +57,14 @@ enum LevelType: String, Codable, Hashable, CaseIterable {
         }
     }
     
-    
+    var numericValue: Int {
+        switch self {
+        case .easy:
+            return 0
+        case .normal:
+            return 1
+        case .hard:
+            return 2
+        }
+    }
 }
