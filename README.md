@@ -1,4 +1,4 @@
-# 🚀 프로젝트 이름
+# 🫛 Konglish
 
 ![Konglish Banner](./Docs/Assets/appLogo.png)
 
