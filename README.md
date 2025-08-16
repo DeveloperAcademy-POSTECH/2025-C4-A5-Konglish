@@ -8,6 +8,12 @@ Konglish는 아동기 유저에게 증강현실에서의 즐거운 영어 학습
 [![Xcode](https://img.shields.io/badge/Xcode-16.4-blue.svg)]()
 [![License](https://img.shields.io/badge/license-MIT-green.svg)]()
 
+<br>
+
+> 챌린지 기간 동안의 이슈와 PR은 [이 Repo](https://github.com/JEONG-J/AppleAcademyChange4_Konglish)를 확인해주세요.
+
+<br>
+
 ---
 
 <br>
