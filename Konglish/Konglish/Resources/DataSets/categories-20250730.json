@@ -1,0 +1,170 @@
+[
+    {
+        "id": "9c5240a0-2efd-46b8-a32e-98b54528a23a",
+        "imageName": "Food",
+        "difficulty": 1,
+        "nameKor": "음식",
+        "nameEng": "Food"
+    },
+    {
+        "id": "8bec299f-7f42-45f4-bd7f-9a5ba7d19124",
+        "imageName": "Food",
+        "difficulty": 2,
+        "nameKor": "음식",
+        "nameEng": "Food"
+    },
+    {
+        "id": "4b4dba0d-7241-460f-80d0-8b601192af2b",
+        "imageName": "Food",
+        "difficulty": 3,
+        "nameKor": "음식",
+        "nameEng": "Food"
+    },
+    {
+        "id": "ea7f8c97-5839-40e2-aa90-b56f54184911",
+        "imageName": "Animals",
+        "difficulty": 1,
+        "nameKor": "동물",
+        "nameEng": "Animals"
+    },
+    {
+        "id": "4c84b2a5-6bf2-48f9-979d-1bc1739870c1",
+        "imageName": "Animals",
+        "difficulty": 2,
+        "nameKor": "동물",
+        "nameEng": "Animals"
+    },
+    {
+        "id": "78907b2f-8214-4745-828a-998b1c757cd1",
+        "imageName": "Animals",
+        "difficulty": 3,
+        "nameKor": "동물",
+        "nameEng": "Animals"
+    },
+    {
+        "id": "bab2d8a7-d52a-4d94-96f5-36514c95ed75",
+        "imageName": "Action",
+        "difficulty": 1,
+        "nameKor": "움직임",
+        "nameEng": "Action"
+    },
+    {
+        "id": "54bc547e-f90a-498f-b363-26b3f0911398",
+        "imageName": "Action",
+        "difficulty": 2,
+        "nameKor": "움직임",
+        "nameEng": "Action"
+    },
+    {
+        "id": "2e98cc4b-c1ab-4c1d-83f5-1d1452914fae",
+        "imageName": "Action",
+        "difficulty": 3,
+        "nameKor": "움직임",
+        "nameEng": "Action"
+    },
+    {
+        "id": "c7390456-40df-4536-a04e-346eb6b03219",
+        "imageName": "Nature",
+        "difficulty": 1,
+        "nameKor": "자연",
+        "nameEng": "Nature"
+    },
+    {
+        "id": "3b56520e-9423-45c7-ada2-2bb79644f30f",
+        "imageName": "Nature",
+        "difficulty": 2,
+        "nameKor": "자연",
+        "nameEng": "Nature"
+    },
+    {
+        "id": "8da1f378-977c-4e4b-a160-de6dcf9af3b5",
+        "imageName": "Nature",
+        "difficulty": 3,
+        "nameKor": "자연",
+        "nameEng": "Nature"
+    },
+    {
+        "id": "862bb2b8-52a0-4540-becf-270c43c7eb56",
+        "imageName": "Places",
+        "difficulty": 1,
+        "nameKor": "장소",
+        "nameEng": "Places"
+    },
+    {
+        "id": "8a4a6561-8ab9-41af-9d30-c5a456c01553",
+        "imageName": "Places",
+        "difficulty": 2,
+        "nameKor": "장소",
+        "nameEng": "Places"
+    },
+    {
+        "id": "21683f6a-74f8-43b1-a02a-e0a984efc061",
+        "imageName": "Places",
+        "difficulty": 3,
+        "nameKor": "장소",
+        "nameEng": "Places"
+    },
+    {
+        "id": "cc0da98a-fc37-4b6f-8e09-3f69cf36eaa4",
+        "imageName": "Things at Home",
+        "difficulty": 1,
+        "nameKor": "집 안 물건",
+        "nameEng": "Things at Home"
+    },
+    {
+        "id": "6100b024-7100-4778-abb4-5db7ac8f7278",
+        "imageName": "Things at Home",
+        "difficulty": 2,
+        "nameKor": "집 안 물건",
+        "nameEng": "Things at Home"
+    },
+    {
+        "id": "dfc93f06-068b-4949-aac6-06f481a682b7",
+        "imageName": "Things at Home",
+        "difficulty": 3,
+        "nameKor": "집 안 물건",
+        "nameEng": "Things at Home"
+    },
+    {
+        "id": "31463e23-8bb4-436d-ba79-9be25a22edf1",
+        "imageName": "My Body & Clothes",
+        "difficulty": 1,
+        "nameKor": "내 몸과 옷",
+        "nameEng": "My Body & Clothes"
+    },
+    {
+        "id": "ecde2194-fcae-4d89-80a3-74edda820713",
+        "imageName": "My Body & Clothes",
+        "difficulty": 2,
+        "nameKor": "내 몸과 옷",
+        "nameEng": "My Body & Clothes"
+    },
+    {
+        "id": "8fab3d5a-98b1-4579-995b-067011b87c2f",
+        "imageName": "My Body & Clothes",
+        "difficulty": 3,
+        "nameKor": "내 몸과 옷",
+        "nameEng": "My Body & Clothes"
+    },
+    {
+        "id": "8497a599-3426-4602-ac4b-5e9ab5bd68ef",
+        "imageName": "School",
+        "difficulty": 1,
+        "nameKor": "학교",
+        "nameEng": "School"
+    },
+    {
+        "id": "bbb698e7-8f3d-47ca-96d8-7d2ec9c2bdb1",
+        "imageName": "School",
+        "difficulty": 2,
+        "nameKor": "학교",
+        "nameEng": "School"
+    },
+    {
+        "id": "ebb8b437-be9a-44f7-bbe2-505188cd2447",
+        "imageName": "School",
+        "difficulty": 3,
+        "nameKor": "학교",
+        "nameEng": "School"
+    }
+]
