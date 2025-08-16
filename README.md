@@ -1,8 +1,8 @@
 # 🚀 프로젝트 이름
 
-![배너 이미지 또는 로고](링크)
+![Konglish Banner](./Docs/Assets/appLogo.png)
 
-> 간단한 한 줄 소개 – 프로젝트의 핵심 가치 또는 기능
+Konglish는 아동기 유저에게 증강현실에서의 즐거운 영어 학습 경험을 제공하는 AR 학습 게임 앱입니다.
 
 [![Swift](https://img.shields.io/badge/Swift-6.1-orange.svg)]()
 [![Xcode](https://img.shields.io/badge/Xcode-16.4-blue.svg)]()
@@ -23,33 +23,51 @@
 
 ## 📱 소개
 
-> 프로젝트의 주요 목적과 사용자가 얻게 될 경험을 설명해주세요.
+## Challenge Statement
+
+Spatial Computing(ARKit, RealityKit, …)기술을 찰떡같이 사용한 앱을 만들자
+
+## Use Case
+
+👤 영단어 암기 + 발음 학습을 재미있게 하고 싶은 사람  
+🔨 방을 스캔하고 방 안에 학습을 위한 가상 오브젝트를 배치해줌
+
+## Solution Concept
+
+영어 학습을 시작한지 얼마 되지 않은 아동기(초등학교 저학년 정도) 유저에게, AR을 이용한 증강현실에서의 즐거운 영어 학습 방법을 제공하여, 유저가 흥미를 잃지 않고 재미있게 영어 발음을 학습할 수 있도록 하자
+
+## App Statement
+
+초등학교 저학년 정도의 유저에게 Apple의 AR 기술을 이용해, 증강현실에서의 즐거운 영어 학습 경험을 제공해, 유저가 흥미를 잃지 않고 재미있게 영어 발음을 학습할 수 있게 하는 앱
 
 <br>
 
 ## 📆 프로젝트 기간
-- 전체 기간: `YYYY.MM.DD - YYYY.MM.DD`
-- 개발 기간: `YYYY.MM.DD - YYYY.MM.DD`
+- 챌린지 기간: `2025.06.25 ~ 2025.07.28`
+- 유지 보수: `2025.08 ~`
 
 <br>
 
 ## 🤔 요구사항
-For building and running the application you need:
 
-iOS 18.5 <br>
-Xcode 16.4 <br>
-Swift 6.1
+- Xcode 
+- Tuist 4.61.x 이상
 
 <br>
 
 ## ⚒️ 개발 환경
 * Front : SwiftUI
 * 버전 및 이슈 관리 : Github, Github Issues
-* 협업 툴 : Discord, Notion
 
 <br>
 
 ## 🔎 기술 스택
+
+### Apple Technologies
+| ![SwiftUI](https://developer.apple.com/assets/elements/icons/swiftui/swiftui-96x96_2x.png) | ![ARKit](https://developer.apple.com/assets/elements/icons/arkit/arkit-96x96_2x.png) | ![RealityKit](https://developer.apple.com/assets/elements/icons/realitykit/realitykit-96x96_2x.png) | ![Speech Framework](https://developer.apple.com/assets/elements/icons/avfoundation/avfoundation-96x96_2x.png) |
+|:------:|:------:|:------:|:------:|
+| SwiftUI | ARKit | RealityKit | Speech |
+
 ### Envrionment
 <div align="left">
 <img src="https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white" />
@@ -60,9 +78,7 @@ Swift 6.1
 ### Development
 <div align="left">
 <img src="https://img.shields.io/badge/Xcode-007ACC?style=for-the-badge&logo=Xcode&logoColor=white" />
-<img src="https://img.shields.io/badge/Moya-8A4182?style=for-the-badge&logo=swift&logoColor=white" />
-<img src="https://img.shields.io/badge/Kingfisher-0F92F3?style=for-the-badge&logo=swift&logoColor=white" />
-<img src="https://img.shields.io/badge/Combine-FF2D55?style=for-the-badge&logo=apple&logoColor=white" />
+<img src="https://img.shields.io/badge/TUIST-8A2BE2?style=for-the-badge">
 </div>
 
 ### Communication
@@ -73,19 +89,6 @@ Swift 6.1
 </div>
 
 <br>
-
-## 📱 화면 구성
-<table>
-  <tr>
-    <td>
-      사진 넣어주세요
-    </td>
-    <td>
-      사진 넣어주세요
-    </td>
-   
-  </tr>
-</table>
 
 ## 🔖 브랜치 컨벤션
 * `main` - 제품 출시 브랜치
@@ -210,7 +213,3 @@ if let user = self.veryLongFunctionNameWhichReturnsOptionalUser(),
 > 📝 [Docs] README에 프로젝트 소개 추가 <br>
 
 <br>
-
-## 🗂️ 폴더 컨벤션
-```
-```
