@@ -24,11 +24,13 @@ class DetailCardViewModel: NSObject {
     var lastEvaluatedScore: Int? = nil
     var lastPassed: Bool = false
     
-    // MARK: - 음성 레벨
-    var voiceLevel: Float = 0.0
-    
     // MARK: - 음성 합성 (TTS)
     let speechSynthesizer = AVSpeechSynthesizer()
+    
+    // MARK: - 무음 감지 관련 프로퍼티
+    private let silenceThreshold: Float = -45.0 // 45db 이하면 무음으로 친다
+    private let watingTime: TimeInterval = 2.5 // 무음 판정을 위해 대기할 시간
+    private var lastSpokenTime: Date?
     
     var finishedCards: Set<CardModel> = []
     
@@ -104,6 +106,8 @@ class DetailCardViewModel: NSObject {
             return
         }
         
+        accuracyType = .recording
+        
         cleanupAudio()
         
         let inputNode = audioEngine.inputNode
@@ -164,7 +168,38 @@ class DetailCardViewModel: NSObject {
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
             self.recognitionRequest?.append(buffer)
-            self.updateVoiceLevel(from: buffer)
+            
+            // MARK: 무음 감지
+            // 음성 레벨 측정
+            let channelData = buffer.floatChannelData?[0]
+            let channelDataValueArray = stride(from: 0,
+                                               to: Int(buffer.frameLength),
+                                               by: buffer.stride).map { channelData?[$0] ?? 0 }
+
+            // RMS 계산
+            let rms = sqrt(channelDataValueArray.map { $0 * $0 }.reduce(0, +) / Float(buffer.frameLength))
+            let avgPower = 20 * log10(rms)
+            print("avgPower: \(avgPower)")
+
+            if avgPower > self.silenceThreshold {
+                // 말한 것으로 판단 → 마지막 발화 시점 업데이트
+                self.lastSpokenTime = Date()
+            }
+            
+            // 아직 lastSpokenTime이 nil이면 지금으로 설정
+            if self.lastSpokenTime == nil {
+                self.lastSpokenTime = Date()
+            }
+
+            // 무음 시간 체크
+            if let lastSpokenTime = self.lastSpokenTime {
+                let silenceDuration = Date().timeIntervalSince(lastSpokenTime)
+                if silenceDuration > self.watingTime {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.stopRecording()
+                    }
+                }
+            }
         }
         
         audioEngine.prepare()
@@ -184,10 +219,14 @@ class DetailCardViewModel: NSObject {
             return
         }
         
+        accuracyType = .btnMic
+        
         audioEngine.stop()
         recognitionRequest?.endAudio()
         
         recordingState = .readyToEvaluate
+        
+        lastSpokenTime = nil
     }
     
     /// 인식 컨피던스를 바탕으로 점수를 업데이트한다.
@@ -236,18 +275,6 @@ class DetailCardViewModel: NSObject {
         }
 
         audioEngine.inputNode.removeTap(onBus: 0)
-    }
-
-    private func updateVoiceLevel(from buffer: AVAudioPCMBuffer) {
-        guard let channelData = buffer.floatChannelData?[0] else { return }
-        let array = Array(UnsafeBufferPointer(start: channelData, count: Int(buffer.frameLength)))
-        let rms = sqrt(array.map { $0 * $0 }.reduce(0, +) / Float(buffer.frameLength))
-        let power = 20 * log10(rms)
-        let normalized = max(0, min(1, (power + 50) / 50))
-
-        DispatchQueue.main.async {
-            self.voiceLevel = normalized
-        }
     }
 
     private func normalizeWord(_ string: String) -> String {
