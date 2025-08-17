@@ -25,9 +25,6 @@ struct PauseButtonModifier: ViewModifier {
                 if showExitOption {
                     Color.black.opacity(0.3)
                         .ignoresSafeArea()
-                        .onTapGesture {
-                            showExitOption = false
-                        }
                         .overlay {
                             ExitOptionWindow(onContinue: {
                                 showExitOption = false
