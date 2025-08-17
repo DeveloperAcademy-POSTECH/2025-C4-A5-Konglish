@@ -65,5 +65,5 @@ struct FailureWindow: View {
 
 
 #Preview {
-    FailureWindow(model: .init(score: 46, level: .init(levelNumber: .easy, category: .init(imageName: "", difficulty: 1, nameKor: "1", nameEng: "2"))))
+    FailureWindow(model: .init(score: 46, level: .init(levelNumber: .easy, category: .init(imageName: "", nameKor: "1", nameEng: "2"))))
 }

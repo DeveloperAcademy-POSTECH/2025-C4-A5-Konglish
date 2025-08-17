@@ -38,7 +38,7 @@ struct ARView: View {
     // ARCore 데이터 모델
     var gameCards: [GameCard] {
         if let selectedLevel {
-            let everyCardInLevel = selectedLevel.category.cards.compactMap { GameModelMapper.toGameModel($0) }
+            let everyCardInLevel = selectedLevel.cards.compactMap { GameModelMapper.toGameModel($0) }
             let randomCards = everyCardInLevel.shuffled().prefix(5)
             return Array(randomCards)
         }
