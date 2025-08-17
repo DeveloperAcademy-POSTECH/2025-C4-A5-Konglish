@@ -19,6 +19,7 @@ final class LevelModel {
     
     @Relationship(inverse: \CategoryModel.levels) var category: CategoryModel
     @Relationship(deleteRule: .cascade) var sessions: [GameSessionModel] = []
+    @Relationship(deleteRule: .cascade) var cards: [CardModel] = []
     
     init(id: UUID = UUID(), levelNumber: LevelType, bestScore: Int = 0, successCount: Int = 0, category: CategoryModel) {
         self.id = id

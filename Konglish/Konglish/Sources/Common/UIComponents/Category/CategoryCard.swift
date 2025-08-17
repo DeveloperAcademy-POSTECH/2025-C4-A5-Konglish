@@ -79,7 +79,7 @@ struct CategoryCard: View {
 }
 
 #Preview {
-    CategoryCard(categoryModel: .init(imageName: "", difficulty: 2, nameKor: "1", nameEng: "1"), action: {
+    CategoryCard(categoryModel: .init(imageName: "", nameKor: "1", nameEng: "1"), action: {
         print("hello")
     })
 }
