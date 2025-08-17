@@ -31,9 +31,6 @@ struct PlayingGameOverlay: View {
         .overlay(alignment: .topLeading, content: {
             GameStatus(currentScore: $arViewModel.currentGameScore, currentCard: $arViewModel.numberOfFinishedCards, currentLife: $arViewModel.currentLifeCounts)
         })
-        .overlay(alignment: .topTrailing, content: {
-            pauseBtn
-        })
         .overlay(alignment: .bottom, content: {
             bottonGuide
                 .padding(.bottom, PlayingGameConstants.bottomPadding - UIConstants.bottomPadding)
@@ -53,13 +50,9 @@ struct PlayingGameOverlay: View {
         .safeAreaPadding(.horizontal, PlayingGameConstants.horizonPadding)
         .safeAreaPadding(.bottom, UIConstants.bottomPadding)
         .navigationBarBackButtonHidden(true)
+        .pauseButton()
     }
     
-    private var pauseBtn: some View {
-        MainButton(buttonType: .icon(.pause), action: {
-            container.navigationRouter.pop()
-        })
-    }
     
     private var targetBtn: some View {
         MainButton(buttonType: .icon(.target), action: {

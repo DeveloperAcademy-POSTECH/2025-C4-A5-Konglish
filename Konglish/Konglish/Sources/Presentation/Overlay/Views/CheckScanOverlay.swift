@@ -18,11 +18,6 @@ struct CheckScanOverlay: View {
             .overlay(alignment: .top, content: {
                 ChekScanCamera(currentCount: $arViewModel.currentDetectedPlanes)
             })
-            .overlay(alignment: .topTrailing, content: {
-                MainButton(buttonType: .icon(.pause), action: {
-                    container.navigationRouter.pop()
-                })
-            })
             .overlay(alignment: .bottom, content: {
                 Group {
                     if arViewModel.gamePhase == .scanned {
@@ -42,6 +37,7 @@ struct CheckScanOverlay: View {
             .safeAreaPadding(.trailing, UIConstants.naviLeadingPadding)
             .safeAreaPadding(.bottom, UIConstants.bottomPadding)
             .safeAreaPadding(.top, UIConstants.topPadding)
+            .pauseButton()
     }
 }
 
