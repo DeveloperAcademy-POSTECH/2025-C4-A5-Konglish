@@ -16,12 +16,9 @@ class DetailCardViewModel: NSObject {
     var word: CardModel?
     var accuracyType: AccuracyType = .btnMic
     var isBossCard: Bool = false
-    var heart: Int = 5
-    var currentScore: Int = 0
     var accuracyPercent: Int = 0
     
     // MARK: - 발음 결과 저장용
-    var lastEvaluatedScore: Int? = nil
     var lastPassed: Bool = false
     
     // MARK: - 음성 합성 (TTS)
@@ -31,8 +28,6 @@ class DetailCardViewModel: NSObject {
     private let silenceThreshold: Float = -45.0 // 45db 이하면 무음으로 친다
     private let watingTime: TimeInterval = 2.5 // 무음 판정을 위해 대기할 시간
     private var lastSpokenTime: Date?
-    
-    var finishedCards: Set<CardModel> = []
     
     func speakWord() {
         guard let word = word?.wordEng else {
@@ -133,12 +128,10 @@ class DetailCardViewModel: NSObject {
                             print("인식 성공 \(lastSpokenWord)")
                             print("🎤 인식 결과: \(lastSpokenWord)")
                             print("📊 점수: \(Int(score * 100))")
-                            self.evaluate(scorePercent: Int(score * 100))
                             self.accuracyPercent = Int(score * 100)
                         } else {
                             let similarityScore = self.evaluateSimilarityScore(lastSpokenWord, targetWord)
                             print("인식 실패 target=\(targetWord) spoken=\(lastSpokenWord) similarityScore=\(similarityScore)")
-                            self.evaluate(scorePercent: Int(similarityScore * 100))
                             self.accuracyPercent = Int(similarityScore * 100)
                         }
                     } else {
@@ -156,7 +149,7 @@ class DetailCardViewModel: NSObject {
                 if let error = error as? NSError,
                    error.domain == "kAFAssistantErrorDomain" && error.code == 1110 {
                     print("👂🏻 음성이 감지되지 않았습니다.")
-                    self.evaluate(scorePercent: 0)
+                    self.accuracyPercent = 0
                 }
                 
                 self.cleanupAudio()
@@ -225,43 +218,6 @@ class DetailCardViewModel: NSObject {
         recognitionRequest?.endAudio()
         
         recordingState = .readyToEvaluate
-        
-        lastSpokenTime = nil
-    }
-    
-    /// 인식 컨피던스를 바탕으로 점수를 업데이트한다.
-    private func evaluate(scorePercent: Int) {
-        switch scorePercent {
-        case 100:
-            updateScore(base: 5)
-        case 90..<100:
-            updateScore(base: 4)
-        case 80..<90:
-            updateScore(base: 3)
-        case 70..<80:
-            updateScore(base: 2)
-        case 60..<70:
-            updateScore(base: 1)
-        default:
-            print("발음 실패, 하트 -1")
-            heart = max(0, heart - 1)
-            accuracyType = .failure
-            lastPassed = false
-            lastEvaluatedScore = nil
-        }
-        
-        if let word = word {
-            finishedCards.insert(word)
-        }
-   }
-    
-    private func updateScore(base: Int) {
-        let finalScore = isBossCard ? base * 3 : base
-        currentScore += finalScore
-        lastEvaluatedScore = finalScore
-        lastPassed = true
-        accuracyType = .success
-        print("점수 획득: \(finalScore)점 \(isBossCard ? "(보스 ×3)" : "")")
     }
 
     // MARK: - 정리

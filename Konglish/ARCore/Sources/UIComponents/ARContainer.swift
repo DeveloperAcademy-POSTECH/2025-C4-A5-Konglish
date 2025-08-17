@@ -188,6 +188,9 @@ public struct ARContainer: UIViewControllerRepresentable {
     /// 뒤집힌 카드 UUID
     @Binding var flippedCardId: UUID?
     
+    /// 제출된 카드 UUID에 대한 정확도 점수
+    @Binding var cardSubmissions: [UUID: Float]
+    
     /// 단어의 아이디와 정확도
     /// 세팅하면 ARContainer에서 점수를 계산해 반영한다
     @Binding var triggerSubmitAccuracy: (UUID, Float)?
@@ -201,6 +204,7 @@ public struct ARContainer: UIViewControllerRepresentable {
         currentGameScore: Binding<Int>,
         numberOfFinishedCards: Binding<Int>,
         flippedCardId: Binding<UUID?>,
+        cardSubmissions: Binding<[UUID: Float]>,
         triggerScanStart: Binding<Bool>,
         triggerCreatePortal: Binding<Bool>,
         triggerPlaceCards: Binding<Bool>,
@@ -215,6 +219,7 @@ public struct ARContainer: UIViewControllerRepresentable {
         self._currentGameScore = currentGameScore
         self._numberOfFinishedCards = numberOfFinishedCards
         self._flippedCardId = flippedCardId
+        self._cardSubmissions = cardSubmissions
         self._triggerScanStart = triggerScanStart
         self._triggerCreatePortal = triggerCreatePortal
         self._triggerPlaceCards = triggerPlaceCards
@@ -321,6 +326,9 @@ public struct ARContainer: UIViewControllerRepresentable {
             DispatchQueue.main.async {
                 self.parent.currentGameScore = arContainer.currentScore
                 self.parent.numberOfFinishedCards = arContainer.numberOfFinishedCards
+                arContainer.gameCardToAccuracy.forEach { key, value in
+                    self.parent.cardSubmissions[key.id] = value
+                }
             }
         }
     }

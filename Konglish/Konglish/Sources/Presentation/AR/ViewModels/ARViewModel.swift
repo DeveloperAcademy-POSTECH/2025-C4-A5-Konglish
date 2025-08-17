@@ -47,6 +47,9 @@ class ARViewModel {
         }
     }
     
+    /// 제출된 카드 ID에 대한 정확도 점수
+    var cardSubmissions: [UUID: Float] = [:]
+    
     var triggerOpenPortal = false
     var triggerScanStart = false
     var triggerPlaceCards = false

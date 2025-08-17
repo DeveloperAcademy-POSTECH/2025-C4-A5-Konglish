@@ -75,6 +75,7 @@ struct ARView: View {
             currentGameScore: $arViewModel.currentGameScore,
             numberOfFinishedCards: $arViewModel.numberOfFinishedCards,
             flippedCardId: $arViewModel.flippedCardId,
+            cardSubmissions: $arViewModel.cardSubmissions,
             triggerScanStart: $arViewModel.triggerScanStart,
             triggerCreatePortal: $arViewModel.triggerOpenPortal,
             triggerPlaceCards: $arViewModel.triggerPlaceCards,
@@ -122,7 +123,6 @@ struct ARView: View {
             // 단어 창이 닫힐 떄 이전 점수를 초기화한다
             if !newValue {
                 detailCardViewModel.lastPassed = false
-                detailCardViewModel.lastEvaluatedScore = nil
                 detailCardViewModel.accuracyType = .btnMic
                 detailCardViewModel.accuracyPercent = 0
             }
@@ -138,16 +138,16 @@ extension ARView {
               let selectedLevel else { return }
         
         // 점수 저장
-        selectedGameSession.score = detailCardViewModel.currentScore
+        selectedGameSession.score = arViewModel.currentGameScore
         modelContext.insert(selectedGameSession)
         try? modelContext.save()
-        print("점수 저장 완료: \(detailCardViewModel.currentScore)")
+        print("점수 저장 완료: \(arViewModel.currentGameScore)")
         
         // 레벨 저장
         let bestScore = selectedLevel.bestScore
-        if detailCardViewModel.currentScore > bestScore {
-            selectedLevel.bestScore = detailCardViewModel.currentScore
-            print("최고 점수 갱신 완료: \(detailCardViewModel.currentScore)")
+        if arViewModel.currentGameScore > bestScore {
+            selectedLevel.bestScore = arViewModel.currentGameScore
+            print("최고 점수 갱신 완료: \(arViewModel.currentGameScore)")
         }
             
         try? modelContext.save()
