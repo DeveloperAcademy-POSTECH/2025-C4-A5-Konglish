@@ -17,14 +17,14 @@ final class CardModel {
     var wordKor: String
     var wordEng: String
 
-    @Relationship(inverse: \CategoryModel.cards) var category: CategoryModel
+    @Relationship(inverse: \LevelModel.cards) var level: LevelModel
     
-    init(id: UUID = UUID(), imageName: String, pronunciation: String, wordKor: String, wordEng: String, category: CategoryModel) {
+    init(id: UUID = UUID(), imageName: String, pronunciation: String, wordKor: String, wordEng: String, level: LevelModel) {
         self.id = id
         self.imageName = imageName
         self.pronunciation = pronunciation
         self.wordKor = wordKor
         self.wordEng = wordEng
-        self.category = category
+        self.level = level
     }
 }

@@ -14,10 +14,13 @@ struct DataBootstrapper {
     private let context: ModelContext
     
     /// 카테고리 데이터셋 파일 이름
-    private let categoriesFileName = "categories-20250730"
+    private let categoriesFileName = "categories-20250817"
+    
+    /// 레벨 데이터셋 파일 이름
+    private let levelsFileName = "levels-20250817"
     
     /// 카드 데이터셋 파일 이름
-    private let cardsFileName = "cards-20250730"
+    private let cardsFileName = "cards-20250817"
     
     /// 데이터셋 확장자
     private let fileExt = "json"
@@ -29,9 +32,10 @@ struct DataBootstrapper {
     }
     
     /// 부트스트랩을 진행한다
-    func bootstrap() {
+    func bootstrap() throws {
         guard let categories = loadData(type: [ImportedCategory].self, fileName: categoriesFileName, ext: fileExt),
-           let cards = loadData(type: [ImportedCard].self, fileName: cardsFileName, ext: fileExt) else {
+              let levels = loadData(type: [ImportedLevel].self, fileName: levelsFileName, ext: fileExt),
+              let cards = loadData(type: [ImportedCard].self, fileName: cardsFileName, ext: fileExt) else {
             logger.error("failed to load category and card json files")
             return
         }
@@ -40,27 +44,22 @@ struct DataBootstrapper {
         
         categories.forEach { categoryDTO in
             let categoryModel = mapToCategoryModel(category: categoryDTO)
-            
-            let levelModels = LevelType.allCases.map { levelType in
-                let levelModel = LevelModel(levelNumber: levelType, category: categoryModel)
-                categoryModel.levels.append(levelModel)
-                return levelModel
-            }
-            
-            let gameSessionModels = levelModels.map { levelModel in
-                GameSessionModel(score: 0, level: levelModel)
-            }
-            
             context.insert(categoryModel)
-            levelModels.forEach { context.insert($0) }
-            gameSessionModels.forEach { context.insert($0) }
+        }
+        
+        levels.forEach { levelDTO in
+            let levelModel = mapToLevelModel(level: levelDTO)
+            context.insert(levelModel)
+            
+            let gameSessionModel = GameSessionModel(score: 0, level: levelModel)
+            context.insert(gameSessionModel)
         }
         
         do {
             try context.save()
         } catch {
             logger.error("failed to save context after insert categories")
-            fatalError()
+            throw error
         }
         
         cards.forEach { cardDTO in
@@ -72,7 +71,7 @@ struct DataBootstrapper {
             try context.save()
         } catch {
             logger.error("failed to save context after insert cards")
-            fatalError()
+            throw error
         }
         
         logger.info("bootstrap data completed!")
@@ -101,20 +100,19 @@ struct DataBootstrapper {
         return CategoryModel(
             id: id,
             imageName: category.imageName,
-            difficulty: category.difficulty,
             nameKor: category.nameKor,
             nameEng: category.nameEng
         )
     }
     
-    /// 카드 DTO 구조체를 SwiftData 모델로 매핑한다
-    private func mapToCardModel(card: ImportedCard) -> CardModel {
-        guard let id = UUID(uuidString: card.id) else {
-            logger.error("card id is invalid uuid...")
+    /// 레벨 DTO 구조체를 SwiftData 모델로 매핑한다
+    private func mapToLevelModel(level: ImportedLevel) -> LevelModel {
+        guard let id = UUID(uuidString: level.id) else {
+            logger.error("level id is invalid uuid...")
             fatalError()
         }
         
-        guard let categoryId = UUID(uuidString: card.categoryId) else {
+        guard let categoryId = UUID(uuidString: level.categoryId) else {
             logger.error("category id is invalid uuid...")
             fatalError()
         }
@@ -130,16 +128,51 @@ struct DataBootstrapper {
                 fatalError()
             }
             
+            guard let levelType = LevelType.from(numericValue: level.level) else {
+                logger.error("level is empty... rawValue=\(level.level)")
+                fatalError()
+            }
+            
+            return LevelModel(id: id, levelNumber: levelType, category: categoryModel)
+        } catch {
+            logger.error("no categoryModel")
+            fatalError()
+        }
+    }
+    
+    /// 카드 DTO 구조체를 SwiftData 모델로 매핑한다
+    private func mapToCardModel(card: ImportedCard) -> CardModel {
+        guard let id = UUID(uuidString: card.id) else {
+            logger.error("card id is invalid uuid...")
+            fatalError()
+        }
+        
+        guard let levelId = UUID(uuidString: card.levelId) else {
+            logger.error("category id is invalid uuid...")
+            fatalError()
+        }
+        
+        let levelDescription = FetchDescriptor<LevelModel>(predicate: #Predicate{
+            $0.id == levelId
+        })
+        
+        do {
+            let levelModelFetchResult = try context.fetch(levelDescription)
+            guard let levelModel = levelModelFetchResult.first else {
+                logger.error("fetch result is empty... id=\(levelId)")
+                fatalError()
+            }
+            
             return CardModel(
                 id: id,
                 imageName: card.imageName,
                 pronunciation: card.pronunciation,
                 wordKor: card.wordKor,
                 wordEng: card.wordEng,
-                category: categoryModel
+                level: levelModel
             )
         } catch {
-            logger.error("no categoryModel")
+            logger.error("no level model")
             fatalError()
         }
     }
@@ -148,14 +181,22 @@ struct DataBootstrapper {
 fileprivate struct ImportedCategory: Decodable {
     let id: String
     let imageName: String
-    let difficulty: Int
     let nameKor: String
     let nameEng: String
 }
 
+fileprivate struct ImportedLevel: Decodable {
+    let id: String
+    let categoryTitle: String
+    let categoryId: String
+    let level: Int
+}
+
 fileprivate struct ImportedCard: Decodable {
     let id: String
-    let categoryId: String
+    let categoryTitle: String
+    let levelId: String
+    let wordLevel: Int
     let imageName: String
     let pronunciation: String
     let wordKor: String

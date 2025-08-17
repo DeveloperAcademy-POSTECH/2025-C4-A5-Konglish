@@ -13,17 +13,14 @@ import SwiftData
 final class CategoryModel {
     @Attribute(.unique) var id: UUID
     var imageName: String
-    var difficulty: Int
     var nameKor: String
     var nameEng: String
     
     @Relationship(deleteRule: .cascade) var levels: [LevelModel] = []
-    @Relationship(deleteRule: .cascade) var cards: [CardModel] = []
     
-    init(id: UUID = UUID(), imageName: String, difficulty: Int, nameKor: String, nameEng: String) {
+    init(id: UUID = UUID(), imageName: String, nameKor: String, nameEng: String) {
         self.id = id
         self.imageName = imageName
-        self.difficulty = difficulty
         self.nameKor = nameKor
         self.nameEng = nameEng
     }

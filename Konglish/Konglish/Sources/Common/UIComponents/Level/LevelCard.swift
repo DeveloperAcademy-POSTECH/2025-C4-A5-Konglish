@@ -117,7 +117,7 @@ struct LevelCard: View {
 }
 
 #Preview {
-    LevelCard(level: .init(levelNumber: .easy, category: .init(imageName: "11", difficulty: 1, nameKor: "2", nameEng: "3")), num: .easy, action: {
+    LevelCard(level: .init(levelNumber: .easy, category: .init(imageName: "11", nameKor: "2", nameEng: "3")), num: .easy, action: {
         print("hello")
     }, isTapped: .constant(true))
 }

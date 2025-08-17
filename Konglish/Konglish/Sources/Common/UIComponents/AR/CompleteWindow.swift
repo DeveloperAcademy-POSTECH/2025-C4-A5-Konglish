@@ -68,5 +68,5 @@ struct CompleteWindow: View {
 
 
 #Preview {
-    CompleteWindow(model: .init(score: 46, level: .init(levelNumber: .easy, category: .init(imageName: "", difficulty: 1, nameKor: "1", nameEng: "2"))))
+    CompleteWindow(model: .init(score: 46, level: .init(levelNumber: .easy, category: .init(imageName: "", nameKor: "1", nameEng: "2"))))
 }
