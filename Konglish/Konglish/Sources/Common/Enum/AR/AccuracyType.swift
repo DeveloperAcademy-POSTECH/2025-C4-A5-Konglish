@@ -10,6 +10,7 @@ import SwiftUI
 
 enum AccuracyType {
     case btnMic
+    case recording
     case success
     case failure
     
@@ -17,6 +18,8 @@ enum AccuracyType {
         switch self {
         case .btnMic:
             return "마이크 버튼을 눌러 따라해보세요"
+        case .recording:
+            return "지금 말하세요!"
         case .success:
             return "아주 잘했어요!"
         case .failure:
@@ -27,6 +30,8 @@ enum AccuracyType {
     var image: ImageResource? {
         switch self {
         case .btnMic:
+            return nil
+        case .recording:
             return nil
         case .success:
             return .greenCheck
@@ -42,6 +47,8 @@ enum AccuracyType {
     var color: Color {
         switch self {
         case .btnMic:
+            return .green05
+        case .recording:
             return .green05
         case .success:
             return .green09
