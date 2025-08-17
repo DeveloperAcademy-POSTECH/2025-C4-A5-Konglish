@@ -52,7 +52,6 @@ extension ARContainerViewController {
     public func resetSession() {
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = [.vertical]
-        configuration.sceneReconstruction = .mesh
         
         if isDebugModeEnabled {
             arView.debugOptions = [
