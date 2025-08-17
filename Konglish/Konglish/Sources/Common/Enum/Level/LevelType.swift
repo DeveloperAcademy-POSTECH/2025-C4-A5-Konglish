@@ -67,4 +67,17 @@ enum LevelType: String, Codable, Hashable, CaseIterable {
             return 2
         }
     }
+    
+    static func from(numericValue: Int) -> LevelType? {
+        switch numericValue {
+        case 1:
+            return .easy
+        case 2:
+            return .normal
+        case 3:
+            return .hard
+        default:
+            return nil
+        }
+    }
 }
