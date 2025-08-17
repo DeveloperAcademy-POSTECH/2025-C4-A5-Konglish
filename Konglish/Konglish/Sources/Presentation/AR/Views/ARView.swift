@@ -127,6 +127,19 @@ struct ARView: View {
                 detailCardViewModel.accuracyPercent = 0
             }
         }
+        .onChange(of: arViewModel.cardSubmissions) { _, newValue in
+            guard let flippedId = arViewModel.flippedCardId else {
+                print("cardSubmissions changed but no flipped card")
+                return
+            }
+
+            guard let submission = newValue[flippedId] else {
+                print("cardSubmissions changed but not for current card")
+                return
+            }
+
+            detailCardViewModel.accuracyType = submission.isPassed ? .success : .failure
+        }
         .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
     }

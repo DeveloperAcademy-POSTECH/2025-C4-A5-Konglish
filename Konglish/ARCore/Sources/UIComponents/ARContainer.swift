@@ -15,140 +15,140 @@ import SwiftUI
  ```swift
  import SwiftUI
  import ARCore
-
+ 
  public struct ContentView: View {
-     @State var arError: Error?
-     @State var currentDetectedPlanes: Int = 0
-     @State var currentLifeCounts: Int = 5
-     @State var currentGameScore: Int = 0
-     @State var numberOfFinishedCards: Int = 0
-     @State var triggerScanStart = false
-     @State var triggerCreatePortal = false
-     @State var triggerPlaceCards = false
-     @State var triggerSubmitAccuracy: (UUID, Float)?
-     @State var gamePhase: GamePhase = .initialized
-     @State var triggerFlipCard = false
-     @State var flippedCardId: UUID?
-     
-     let gameCards: [GameCard] = [
-         .init(
-             id: UUID(uuidString: "00000000-0000-0000-0000-000000000000")!,
-             imageName: "apple",
-             wordKor: "사과",
-             wordEng: "apple",
-             image: UIImage(systemName: "apple.logo")!,
-             isBoss: true
-         ),
-         .init(
-             id: UUID(uuidString: "11111111-1111-1111-1111-111111111111")!,
-             imageName: "banana",
-             wordKor: "바나나",
-             wordEng: "banana",
-             image: UIImage(systemName: "questionmark.app.fill")!,
-             isBoss: false
-         ),
-     ]
-     
-     
-     public init() {}
-     
-     public var body: some View {
-         ZStack {
-             ARContainer(
-                 gameSettings: GameSettings(
-                     gameCards: gameCards,
-                     minimumSizeOfPlane: 0.5,
-                     fontSetting: ARCoreFontSetting(
-                         title: KonglishFontFamily.NPSFont.extraBold.font(size: 64),
-                         subtitle: KonglishFontFamily.NPSFont.bold.font(size: 32)
-                     )
-                 ),
-                 gamePhase: $gamePhase,
-                 arError: $arError,
-                 currentDetectedPlanes: $currentDetectedPlanes,
-                 currentLifeCounts: $currentLifeCounts,
-                 currentGameScore: $currentGameScore,
-                 numberOfFinishedCards: $numberOfFinishedCards,
-                 flippedCardId: $flippedCardId,
-                 triggerScanStart: $triggerScanStart,
-                 triggerCreatePortal: $triggerCreatePortal,
-                 triggerPlaceCards: $triggerPlaceCards,
-                 triggerSubmitAccuracy: $triggerSubmitAccuracy,
-                 triggerFlipCard: $triggerFlipCard
-             )
-             .ignoresSafeArea()
-             
-             VStack {
-                 Text("gamePhase: \(gamePhase)")
-                 
-                 Text("currentDetectedPlanes: \(currentDetectedPlanes)")
-                 
-                 Text("currentLifeCounts: \(currentLifeCounts)")
-                 
-                 Text("currentGameScore: \(currentGameScore)")
-                 
-                 Text("numberOfPassedCards: \(numberOfFinishedCards)")
-                 
-                 Button("스캔 시작") {
-                     triggerScanStart = true
-                 }
-                 
-                 Button(buttonText(for: gamePhase)) {
-                     if gamePhase == .scanned {
-                         triggerCreatePortal = true
-                     } else if gamePhase == .portalCreated {
-                         triggerPlaceCards = true
-                     }
-                 }
-                 
-                 Button("단어 정답 제출 1") {
-                     if let id = gameCards.first?.id {
-                         triggerSubmitAccuracy = (
-                             id,
-                             0.6
-                         )
-                     }
-                 }
-                 
-                 Button("단어 정답 제출 2") {
-                     if gameCards.count >= 2 {
-                         triggerSubmitAccuracy = (
-                             gameCards[1].id,
-                             0.3
-                         )
-                     }
-                 }
-                 
-                 Button("카드 뒤집기") {
-                     triggerFlipCard = true
-                 }
-                 
-                 if let flippedCardId = flippedCardId {
-                     Text("뒤집힌 카드: \(flippedCardId)")
-                 }
-                 
-                 if let arError = arError {
-                     Text("에러: \(arError.localizedDescription)")
-                 }
-                 
-                 Spacer()
-             }
-         }
-     }
-     
-     /// GamePhase에 따른 버튼 텍스트 반환
-     private func buttonText(for phase: GamePhase) -> String {
-         switch phase {
-         case .scanned:
-             return "포털 생성"
-         case .portalCreated:
-             return "저 너머 세계엔..?"
-         default:
-             return "카드 배치"
-         }
-     }
+ @State var arError: Error?
+ @State var currentDetectedPlanes: Int = 0
+ @State var currentLifeCounts: Int = 5
+ @State var currentGameScore: Int = 0
+ @State var numberOfFinishedCards: Int = 0
+ @State var triggerScanStart = false
+ @State var triggerCreatePortal = false
+ @State var triggerPlaceCards = false
+ @State var triggerSubmitAccuracy: (UUID, Float)?
+ @State var gamePhase: GamePhase = .initialized
+ @State var triggerFlipCard = false
+ @State var flippedCardId: UUID?
+ 
+ let gameCards: [GameCard] = [
+ .init(
+ id: UUID(uuidString: "00000000-0000-0000-0000-000000000000")!,
+ imageName: "apple",
+ wordKor: "사과",
+ wordEng: "apple",
+ image: UIImage(systemName: "apple.logo")!,
+ isBoss: true
+ ),
+ .init(
+ id: UUID(uuidString: "11111111-1111-1111-1111-111111111111")!,
+ imageName: "banana",
+ wordKor: "바나나",
+ wordEng: "banana",
+ image: UIImage(systemName: "questionmark.app.fill")!,
+ isBoss: false
+ ),
+ ]
+ 
+ 
+ public init() {}
+ 
+ public var body: some View {
+ ZStack {
+ ARContainer(
+ gameSettings: GameSettings(
+ gameCards: gameCards,
+ minimumSizeOfPlane: 0.5,
+ fontSetting: ARCoreFontSetting(
+ title: KonglishFontFamily.NPSFont.extraBold.font(size: 64),
+ subtitle: KonglishFontFamily.NPSFont.bold.font(size: 32)
+ )
+ ),
+ gamePhase: $gamePhase,
+ arError: $arError,
+ currentDetectedPlanes: $currentDetectedPlanes,
+ currentLifeCounts: $currentLifeCounts,
+ currentGameScore: $currentGameScore,
+ numberOfFinishedCards: $numberOfFinishedCards,
+ flippedCardId: $flippedCardId,
+ triggerScanStart: $triggerScanStart,
+ triggerCreatePortal: $triggerCreatePortal,
+ triggerPlaceCards: $triggerPlaceCards,
+ triggerSubmitAccuracy: $triggerSubmitAccuracy,
+ triggerFlipCard: $triggerFlipCard
+ )
+ .ignoresSafeArea()
+ 
+ VStack {
+ Text("gamePhase: \(gamePhase)")
+ 
+ Text("currentDetectedPlanes: \(currentDetectedPlanes)")
+ 
+ Text("currentLifeCounts: \(currentLifeCounts)")
+ 
+ Text("currentGameScore: \(currentGameScore)")
+ 
+ Text("numberOfPassedCards: \(numberOfFinishedCards)")
+ 
+ Button("스캔 시작") {
+ triggerScanStart = true
  }
-
+ 
+ Button(buttonText(for: gamePhase)) {
+ if gamePhase == .scanned {
+ triggerCreatePortal = true
+ } else if gamePhase == .portalCreated {
+ triggerPlaceCards = true
+ }
+ }
+ 
+ Button("단어 정답 제출 1") {
+ if let id = gameCards.first?.id {
+ triggerSubmitAccuracy = (
+ id,
+ 0.6
+ )
+ }
+ }
+ 
+ Button("단어 정답 제출 2") {
+ if gameCards.count >= 2 {
+ triggerSubmitAccuracy = (
+ gameCards[1].id,
+ 0.3
+ )
+ }
+ }
+ 
+ Button("카드 뒤집기") {
+ triggerFlipCard = true
+ }
+ 
+ if let flippedCardId = flippedCardId {
+ Text("뒤집힌 카드: \(flippedCardId)")
+ }
+ 
+ if let arError = arError {
+ Text("에러: \(arError.localizedDescription)")
+ }
+ 
+ Spacer()
+ }
+ }
+ }
+ 
+ /// GamePhase에 따른 버튼 텍스트 반환
+ private func buttonText(for phase: GamePhase) -> String {
+ switch phase {
+ case .scanned:
+ return "포털 생성"
+ case .portalCreated:
+ return "저 너머 세계엔..?"
+ default:
+ return "카드 배치"
+ }
+ }
+ }
+ 
  ```
  */
 public struct ARContainer: UIViewControllerRepresentable {
@@ -188,8 +188,8 @@ public struct ARContainer: UIViewControllerRepresentable {
     /// 뒤집힌 카드 UUID
     @Binding var flippedCardId: UUID?
     
-    /// 제출된 카드 UUID에 대한 정확도 점수
-    @Binding var cardSubmissions: [UUID: Float]
+    /// 제출된 카드 UUID에 대한 제출 정보
+    @Binding var cardSubmissions: [UUID: GameCardSubmission]
     
     /// 단어의 아이디와 정확도
     /// 세팅하면 ARContainer에서 점수를 계산해 반영한다
@@ -204,7 +204,7 @@ public struct ARContainer: UIViewControllerRepresentable {
         currentGameScore: Binding<Int>,
         numberOfFinishedCards: Binding<Int>,
         flippedCardId: Binding<UUID?>,
-        cardSubmissions: Binding<[UUID: Float]>,
+        cardSubmissions: Binding<[UUID: GameCardSubmission]>,
         triggerScanStart: Binding<Bool>,
         triggerCreatePortal: Binding<Bool>,
         triggerPlaceCards: Binding<Bool>,
@@ -326,9 +326,15 @@ public struct ARContainer: UIViewControllerRepresentable {
             DispatchQueue.main.async {
                 self.parent.currentGameScore = arContainer.currentScore
                 self.parent.numberOfFinishedCards = arContainer.numberOfFinishedCards
-                arContainer.gameCardToAccuracy.forEach { key, value in
-                    self.parent.cardSubmissions[key.id] = value
-                }
+                arContainer.gameCardToAccuracy
+                    .compactMapValues({ $0 })
+                    .forEach { key, value in
+                        self.parent.cardSubmissions[key.id] = GameCardSubmission(
+                            cardId: key.id,
+                            score: value,
+                            isPassed: arContainer.isPassed(accuracy: value)
+                        )
+                    }
             }
         }
     }
