@@ -38,7 +38,7 @@ struct OnShowingCardOverlay: View {
                        currentLife: $arViewModel.currentLifeCounts)
         })
         .overlay(alignment: .topTrailing, content: {
-            MainButton(buttonType: .icon(.exit)) {
+            MainButton(buttonType: .icon(.pause)) {
                 container.navigationRouter.pop()
             }
         })

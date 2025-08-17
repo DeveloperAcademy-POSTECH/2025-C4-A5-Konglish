@@ -15,7 +15,7 @@ enum IconButtonType {
     case sound
     case mic
     case aim
-    case door
+    case pause
     case target
     case micStop
     
@@ -33,8 +33,8 @@ enum IconButtonType {
             return .mic
         case .aim:
             return .aim
-        case .door:
-            return .doorIcon
+        case .pause:
+            return .pause
         case .target:
             return .targetBtn
         case .micStop:

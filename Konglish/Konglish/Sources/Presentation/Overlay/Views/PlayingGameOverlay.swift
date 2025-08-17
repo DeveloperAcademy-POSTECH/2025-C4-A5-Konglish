@@ -56,7 +56,7 @@ struct PlayingGameOverlay: View {
     }
     
     private var pauseBtn: some View {
-        MainButton(buttonType: .icon(.exit), action: {
+        MainButton(buttonType: .icon(.pause), action: {
             container.navigationRouter.pop()
         })
     }

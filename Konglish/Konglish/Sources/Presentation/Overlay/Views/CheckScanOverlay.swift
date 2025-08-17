@@ -19,7 +19,7 @@ struct CheckScanOverlay: View {
                 ChekScanCamera(currentCount: $arViewModel.currentDetectedPlanes)
             })
             .overlay(alignment: .topTrailing, content: {
-                MainButton(buttonType: .icon(.exit), action: {
+                MainButton(buttonType: .icon(.pause), action: {
                     container.navigationRouter.pop()
                 })
             })

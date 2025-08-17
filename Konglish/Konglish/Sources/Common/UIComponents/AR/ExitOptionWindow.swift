@@ -45,7 +45,7 @@ struct ExitOption: View {
             Button(action: {
                 container.navigationRouter.pop()
             }, label: {
-                makeBtn(image: .doorIcon, btnText: ExitOptionWindowConstants.rightText)
+                makeBtn(image: .exit, btnText: ExitOptionWindowConstants.rightText)
             })
         })
     }
