@@ -20,7 +20,7 @@ enum LevelType: String, Codable, Hashable, CaseIterable {
         case .normal:
             return .yellow00
         case .hard:
-            return .redBg
+            return .red05
         }
     }
     
@@ -49,11 +49,11 @@ enum LevelType: String, Codable, Hashable, CaseIterable {
     var backgroundColor: Color {
         switch self {
         case .easy:
-            return .green01
+            return .levelTappedGreen
         case .normal:
-            return .yellow00
+            return .levelTappedYellow
         case .hard:
-            return .redBg
+            return .levelTappedRed
         }
     }
     
