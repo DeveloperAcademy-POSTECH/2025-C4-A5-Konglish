@@ -47,6 +47,9 @@ class ARViewModel {
         }
     }
     
+    /// 제출된 카드 ID에 대한 채점 정보
+    var cardSubmissions: [UUID: GameCardSubmission] = [:]
+    
     var triggerOpenPortal = false
     var triggerScanStart = false
     var triggerPlaceCards = false
