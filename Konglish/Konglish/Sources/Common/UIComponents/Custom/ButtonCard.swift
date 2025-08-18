@@ -32,14 +32,18 @@ struct ButtonCard<Contents: View>: View {
         Button(action: {
             action()
         }, label: {
-            ZStack(alignment: .top, content: {
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(Color.gray01)
-                    .frame(width: cardWidth, height: cardBottomHeight)
-                
-                topArea
-            })
+            cardView
         })
+        .buttonStyle(.plain)
+    }
+    
+    private var cardView: some View {
+        ZStack(alignment: .top) {
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .fill(Color.gray01)
+                .frame(width: cardWidth, height: cardBottomHeight)
+            topArea
+        }
     }
     
     // MARK: - TopArea
@@ -49,8 +53,9 @@ struct ButtonCard<Contents: View>: View {
             RoundedRectangle(cornerRadius: cornerRadius)
                 .fill(Color.white)
                 .frame(width: cardWidth, height: cardTopHeight)
-            
+                .grayShadow()
             content()
         }
+        .padding(.bottom, 8)
     }
 }

@@ -33,8 +33,6 @@ struct CategorySelectView: View {
                     ForEach(sortedCategories, id: \.self) { category in
                         CategoryCard(categoryModel: category, action: {
                             container.navigationRouter.push(.level(categoryId: category.id))
-                            print(category.imageName)
-                            print(category.id)
                         })
                     }
                 })
