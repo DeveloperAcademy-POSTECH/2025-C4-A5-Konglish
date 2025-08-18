@@ -166,10 +166,6 @@ public struct ARContainer: UIViewControllerRepresentable {
             parent.currentDetectedPlanes -= 1
         }
         
-        public func arContainerDidFindAllPlaneAnchor(_ arContainer: ARContainerViewController) {
-            // TODO: 추후에 게임 준비 완료 등 게임 전역 상태를 관리하게 되면, 여기서 "카드 배치 준비 완료"로 전역 상태를 변경
-        }
-        
         public func didChangeGamePhase(_ arContainer: ARContainerViewController) {
             DispatchQueue.main.async {
                 self.parent.gamePhage = arContainer.gamePhase
