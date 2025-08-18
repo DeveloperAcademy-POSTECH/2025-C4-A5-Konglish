@@ -19,7 +19,7 @@ struct LevelCard: View {
     fileprivate enum LevelCardConstants {
         static let bgWidth: CGFloat = 280
         static let bgHeight: CGFloat = 388
-        static let cornerRadius: CGFloat = 30
+        static let cornerRadius: CGFloat = 40
         static let middleVspacing: CGFloat = 30
         static let levelNumHeight: CGFloat = 116
         static let levelNumWidth: CGFloat = 172
