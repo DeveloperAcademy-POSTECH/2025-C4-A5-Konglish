@@ -8,9 +8,9 @@
 import SwiftUI
 import Dependency
 
-struct ExitOption: View {
-    @Environment(\.dismiss) var dimiss
+struct ExitOptionWindow: View {
     @EnvironmentObject var container: DIContainer
+    let onContinue: () -> Void
     
     fileprivate enum ExitOptionWindowConstants {
         static let cornerRadius: CGFloat = 30
@@ -25,9 +25,12 @@ struct ExitOption: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: ExitOptionWindowConstants.cornerRadius)
-                .fill(Color.white)
+                .fill(Material.ultraThin)
+                .overlay(
+                    RoundedRectangle(cornerRadius: ExitOptionWindowConstants.cornerRadius)
+                        .fill(Color.white)
+                )
                 .grayShadow()
-                .background(Material.ultraThin)
                 .frame(width: ExitOptionWindowConstants.bgWidth, height: ExitOptionWindowConstants.bgHeight)
             
             btnGroup
@@ -37,7 +40,7 @@ struct ExitOption: View {
     private var btnGroup: some View {
         HStack(spacing: ExitOptionWindowConstants.btnHspacing, content: {
             Button(action: {
-                dimiss()
+                onContinue()
             }, label: {
                 makeBtn(image: .continue, btnText: ExitOptionWindowConstants.leftText)
             })
@@ -45,7 +48,7 @@ struct ExitOption: View {
             Button(action: {
                 container.navigationRouter.pop()
             }, label: {
-                makeBtn(image: .doorIcon, btnText: ExitOptionWindowConstants.rightText)
+                makeBtn(image: .exit, btnText: ExitOptionWindowConstants.rightText)
             })
         })
     }
@@ -73,5 +76,5 @@ struct ExitOption: View {
 }
 
 #Preview {
-    ExitOption()
+    ExitOptionWindow(onContinue: {})
 }
