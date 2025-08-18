@@ -16,7 +16,8 @@ struct Star: View {
     
     // MARK: - Constants
     fileprivate enum StarConstants {
-        static let spacing: CGFloat = 8
+        static let upSpacing: CGFloat = 12
+        static let hSpacing: CGFloat = 8
     }
     
     // MARK: - Init
@@ -26,7 +27,7 @@ struct Star: View {
     
     // MARK: - Body
     var body: some View {
-        HStack(spacing: StarConstants.spacing, content: {
+        HStack(spacing: StarConstants.hSpacing, content: {
             ForEach(.zero..<maxCount, id: \.self) { index in
                 if index < count {
                     Image(.starIcon)
@@ -35,6 +36,7 @@ struct Star: View {
                 }
             }
         })
+        .padding(.top, StarConstants.upSpacing)
     }
 }
 

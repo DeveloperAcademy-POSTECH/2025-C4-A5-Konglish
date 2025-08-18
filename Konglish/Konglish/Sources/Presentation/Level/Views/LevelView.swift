@@ -22,6 +22,8 @@ struct LevelView: View {
         static let levelVspacing: CGFloat = 77
         static let levelHspacing: CGFloat = 64
         static let naviHspacing: CGFloat = 56
+        static let backBtnShadowOffset: CGFloat = 6
+        static let startBtnshadowOffset: CGFloat = 8
         static let naviTitle: String = "레벨 선택"
     }
     
@@ -60,7 +62,7 @@ struct LevelView: View {
                 if let id = selectedLevel?.id {
                     container.navigationRouter.push(.ar(levelId: id))
                 }
-            })
+            }, shadowOffset: LevelCardConstants.startBtnshadowOffset)
             .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
         })
         .safeAreaPadding(.bottom, UIConstants.bottomPadding)
@@ -70,7 +72,7 @@ struct LevelView: View {
         HStack(spacing: LevelCardConstants.naviHspacing, content: {
             MainButton(buttonType: .icon(.back), action: {
                 container.navigationRouter.pop()
-            })
+            }, shadowOffset: LevelCardConstants.backBtnShadowOffset)
             
             Text(LevelCardConstants.naviTitle)
                 .font(.semibold64)

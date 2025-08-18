@@ -43,7 +43,7 @@ enum IconButtonType {
     }
     
     var btnSize: (CGFloat, CGFloat) {
-        return (90, 90)
+        return (96, 90)
     }
     
     var bgColor: Color {

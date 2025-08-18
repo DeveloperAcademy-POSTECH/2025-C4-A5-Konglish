@@ -22,6 +22,7 @@ struct PlayingGameOverlay: View {
         static let guideText: String = "가운데의 조준점을 카드 위에 대고 버튼을 눌러주세요"
         static let bottomPadding: CGFloat = 177
         static let dropShadowSize: CGFloat = 4
+        static let shadowOffset: CGFloat = 6
     }
     
     var body: some View {
@@ -57,7 +58,7 @@ struct PlayingGameOverlay: View {
     private var targetBtn: some View {
         MainButton(buttonType: .icon(.target), action: {
             arViewModel.triggerFlipCard = true
-        })
+        }, shadowOffset: PlayingGameConstants.shadowOffset)
     }
     
     private var bottonGuide: some View {

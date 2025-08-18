@@ -13,6 +13,10 @@ struct CheckScanOverlay: View {
     @EnvironmentObject var container: DIContainer
     let allPlanesDetected: Bool
     
+    fileprivate enum CheckScanOverlayConstants {
+        static let shadowOffset: CGFloat = 6
+    }
+    
     var body: some View {
         Color.clear
             .overlay(alignment: .top, content: {
@@ -23,12 +27,12 @@ struct CheckScanOverlay: View {
                     if arViewModel.gamePhase == .scanned {
                         MainButton(buttonType: .text(.openPotal(onOff: allPlanesDetected)), action: {
                             arViewModel.triggerOpenPortal = true
-                        })
+                        }, shadowOffset: CheckScanOverlayConstants.shadowOffset)
                         .disabled(!allPlanesDetected)
                     } else if arViewModel.gamePhase == .portalCreated {
                         MainButton(buttonType: .text(.cardSprinkle(onOff: true)), action: {
                             arViewModel.placeCardsButtonTapped()
-                        })
+                        }, shadowOffset: CheckScanOverlayConstants.shadowOffset)
                     }
                 }
                 .safeAreaPadding(.horizontal, UIConstants.horionLongTextPadding)

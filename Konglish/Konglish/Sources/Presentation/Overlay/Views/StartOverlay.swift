@@ -18,6 +18,9 @@ struct StartOverlay: View {
         static let guidPadding: CGFloat = 222
         static let cornerRadius: CGFloat = 20
         static let guideHeight: CGFloat = 67
+        static let backBtnShadowOffset: CGFloat = 6
+        static let startBtnShadowOffset: CGFloat = 6
+        static let shadowOffset: CGFloat = 6
         static let guideText: String = "준비가 되었다면 시작해볼까요?"
     }
     var body: some View {
@@ -31,7 +34,7 @@ struct StartOverlay: View {
             withAnimation(.easeInOut) {
                 MainButton(buttonType: .text(.start(onOff: true)), action: {
                     arViewModel.startButtonTapped()
-                })
+                }, shadowOffset: StartOverlayConstants.startBtnShadowOffset)
                 .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
                 .safeAreaPadding(.bottom, UIConstants.bottomPadding)
             }
@@ -39,7 +42,7 @@ struct StartOverlay: View {
         .overlay(alignment: .topLeading, content: {
             MainButton(buttonType: .icon(.back), action: {
                 container.navigationRouter.pop()
-            })
+            }, shadowOffset: StartOverlayConstants.backBtnShadowOffset)
             .safeAreaPadding(.horizontal, UIConstants.naviLeadingPadding)
         })
         .safeAreaPadding(.top, UIConstants.topPadding)

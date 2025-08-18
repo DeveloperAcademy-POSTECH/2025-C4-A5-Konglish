@@ -25,6 +25,7 @@ struct CompleteWindow: View {
         static let cornerRadius: CGFloat = 30
         static let titleOutline: CGFloat = 4
         static let scoreOutline: CGFloat = 3
+        static let shadowOffset: CGFloat = 8
         static let title: String = "Clear!"
         static let subTitle: String = "카테고리로 돌아가기"
     }
@@ -35,7 +36,7 @@ struct CompleteWindow: View {
                 score
                 MainButton(buttonType: .text(.backMain), action: {
                     container.navigationRouter.reset()
-                })
+                }, shadowOffset: CompleteWindowConstants.shadowOffset)
             }
             .frame(width: CompleteWindowConstants.vstackWidth)
             .padding(.vertical, CompleteWindowConstants.mainVerticalPadding)

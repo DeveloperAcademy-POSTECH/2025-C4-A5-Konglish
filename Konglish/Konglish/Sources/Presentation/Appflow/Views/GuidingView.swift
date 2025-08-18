@@ -20,6 +20,7 @@ struct GuidingView: View {
         static let bottomPadding: CGFloat = 58
         static let contentsVspacing: CGFloat = 64
         static let safeHorizonPadding: CGFloat = 160
+        static let shadowOffset: CGFloat = 8
     }
     
     var body: some View {
@@ -51,7 +52,7 @@ struct GuidingView: View {
     private var bottomContents: some View {
         MainButton(buttonType: .text(.start(onOff: true)), action: {
             container.navigationRouter.push(.category)
-        })
+        }, shadowOffset: GuidingConstants.shadowOffset)
         .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
     }
     
