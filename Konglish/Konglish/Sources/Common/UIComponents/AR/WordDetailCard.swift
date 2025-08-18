@@ -48,7 +48,10 @@ struct WordDetailCard: View {
         static let successText: String = "성공"
         
         static let dropShadowColor: Color = .init(red: 177 / 255, green: 177 / 255, blue: 131 / 255) // #B1B183
-        static let dropShadowSize: CGFloat = 8   
+        static let dropShadowSize: CGFloat = 8
+        
+        static let audioBandWidth: CGFloat = 82
+        static let audioBandHeight: CGFloat = 44
     }
     // MARK: - Body
     var body: some View {
@@ -152,6 +155,8 @@ struct WordDetailCard: View {
         switch type {
         case .btnMic:
             makeTextView(type: type)
+        case .recording:
+            makeTextView(type: type)
         case .success:
             successFailure(type: type)
         case .failure:
@@ -187,39 +192,14 @@ struct WordDetailCard: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: WordDetailCardConstants.micImageSize, height: WordDetailCardConstants.micImageSize)
             
-            voiceLevelRectangle
+            AudioBand(
+                isPlaying: Binding(
+                    get: { viewModel.recordingState == .recording },
+                    set: { _ in }
+                )
+            )
+            .frame(width: WordDetailCardConstants.audioBandWidth, height: WordDetailCardConstants.audioBandHeight)
         })
-    }
-    
-    private var voiceLevelRectangle: some View {
-        HStack(spacing: WordDetailCardConstants.voiceHspacing) {
-            ForEach(0..<WordDetailCardConstants.voiceBarCount, id: \.self) { index in
-                Capsule()
-                    .fill(Color.green02)
-                    .frame(
-                        width: WordDetailCardConstants.voiceWidth,
-                        height: computedBarHeight(
-                            relativeIndex: abs(index - WordDetailCardConstants.voiceBarCount / 2)
-                        )
-                    )
-                    .animation(
-                        .easeOut(duration: WordDetailCardConstants.voiceAnimation),
-                        value: viewModel.voiceLevel
-                    )
-            }
-        }
-    }
-    
-    private func computedBarHeight(relativeIndex: Int) -> CGFloat {
-        let base: CGFloat = 26
-        let variationStep: CGFloat = 10
-        let variation = variationStep * CGFloat(WordDetailCardConstants.voiceBarCount / 2 - relativeIndex)
-        
-        if viewModel.voiceLevel == 0 {
-            return base
-        } else {
-            return base + variation * CGFloat(viewModel.voiceLevel)
-        }
     }
 }
 
