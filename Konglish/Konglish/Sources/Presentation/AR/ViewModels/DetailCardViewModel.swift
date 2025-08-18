@@ -218,6 +218,8 @@ class DetailCardViewModel: NSObject {
         recognitionRequest?.endAudio()
         
         recordingState = .readyToEvaluate
+        
+        lastSpokenTime = nil // 레코딩 중지 시 마지막 발화 시간 초기화
     }
 
     // MARK: - 정리
