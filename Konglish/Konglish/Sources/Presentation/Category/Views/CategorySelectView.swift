@@ -62,7 +62,3 @@ struct CategorySelectView: View {
         .safeAreaPadding(.leading, UIConstants.naviLeadingPadding)
     }
 }
-
-#Preview {
-    CategorySelectView()
-}

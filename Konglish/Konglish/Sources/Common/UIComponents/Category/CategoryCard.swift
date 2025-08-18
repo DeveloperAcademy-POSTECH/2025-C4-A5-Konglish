@@ -67,7 +67,7 @@ struct CategoryCard: View {
     private var title: some View {
         Text(categoryModel.nameKor)
             .font(.bold32)
-            .foregroundStyle(Color.gray03)
+            .foregroundStyle(Color.gray04)
     }
     
     /// 카테고리 영어 제목
