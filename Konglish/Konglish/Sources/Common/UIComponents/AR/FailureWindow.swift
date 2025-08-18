@@ -24,6 +24,7 @@ struct FailureWindow: View {
         static let cornerRadius: CGFloat = 30
         static let btnVspacing: CGFloat = 26
         static let titleOutline: CGFloat = 4
+        static let shadowOffset: CGFloat = 8
         static let title: String = "Game Over!"
         static let subTitle: String = "카테고리로 돌아가기"
     }
@@ -58,7 +59,7 @@ struct FailureWindow: View {
         VStack(spacing: CompleteWindowConstants.btnVspacing, content: {
             MainButton(buttonType: .text(.returnCategory), action: {
                 container.navigationRouter.reset()
-            })
+            }, shadowOffset: CompleteWindowConstants.shadowOffset)
         })
     }
 }

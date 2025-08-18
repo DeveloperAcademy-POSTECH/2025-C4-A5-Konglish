@@ -12,6 +12,7 @@ struct MainButton: View {
     // MARK: - Property
     let buttonType: ButtonType
     let action: () -> Void
+    let shadowOffset: CGFloat
     
     // MARK: - Constants
     fileprivate enum MainButtonConstant {
@@ -19,9 +20,10 @@ struct MainButton: View {
     }
     
     // MARK: - Init
-    init(buttonType: ButtonType, action: @escaping () -> Void) {
+    init(buttonType: ButtonType, action: @escaping () -> Void, shadowOffset: CGFloat) {
         self.buttonType = buttonType
         self.action = action
+        self.shadowOffset = shadowOffset
     }
     
     // MARK: - Body
@@ -34,7 +36,7 @@ struct MainButton: View {
                     .fill(buttonType.bgColor)
                     .frame(maxWidth: buttonType.width == nil ? .infinity : nil)
                     .frame(width: buttonType.width, height: buttonType.height)
-                    .mainButtonShadow(shadowColor: buttonType.shadowColor)
+                    .mainButtonShadow(shadowColor: buttonType.shadowColor, yOffset: shadowOffset)
                 
                 buttonStyle
             }
@@ -70,10 +72,4 @@ struct MainButton: View {
         Image(type.image)
             .fixedSize()
     }
-}
-
-#Preview {
-    MainButton(buttonType: .icon(.back), action: {
-        print("hello")
-    })
 }

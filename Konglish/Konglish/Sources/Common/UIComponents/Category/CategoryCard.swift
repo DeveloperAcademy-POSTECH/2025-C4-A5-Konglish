@@ -16,8 +16,8 @@ struct CategoryCard: View {
     
     // MARK: - Property
     fileprivate enum CategoryConstants {
-        static let cardInfoVspacing: CGFloat = 8
-        static let cardContetnsVspacing: CGFloat = 12
+        static let starAndKorSpacing: CGFloat = 12
+        static let KorAndEngSpacing: CGFloat = 8
     }
     
     // MARK: - Init
@@ -29,27 +29,19 @@ struct CategoryCard: View {
     // MARK: - Body
     var body: some View {
         ButtonCard(content: {
-            cardContetns
+            cardContents
         }, action: {
             action()
         })
     }
     
     // MARK: - Top
-    /// 카드 내부 컨텐츠
-    private var cardContetns: some View {
-        VStack(spacing: CategoryConstants.cardContetnsVspacing, content: {
+    /// 카드 이미지, 별, 한글명
+    private var cardContents: some View {
+        VStack(spacing: 0, content: {
             Image(categoryModel.imageName)
                 .resizable()
                 .frame(width: 230, height: 230)
-            cardInfo
-        })
-    }
-    
-    // MARK: - Bottom
-    /// 카드 하단 정보
-    private var cardInfo: some View {
-        VStack(spacing: CategoryConstants.cardInfoVspacing, content: {
             Star(count: clearedLevelCount)
             title
             subTitle
@@ -67,7 +59,8 @@ struct CategoryCard: View {
     private var title: some View {
         Text(categoryModel.nameKor)
             .font(.bold32)
-            .foregroundStyle(Color.gray03)
+            .foregroundStyle(Color.gray04)
+            .padding(.top, CategoryConstants.starAndKorSpacing)
     }
     
     /// 카테고리 영어 제목
@@ -75,6 +68,7 @@ struct CategoryCard: View {
         Text(categoryModel.nameEng)
             .font(.bold20)
             .foregroundStyle(Color.gray02)
+            .padding(.top, CategoryConstants.KorAndEngSpacing)
     }
 }
 

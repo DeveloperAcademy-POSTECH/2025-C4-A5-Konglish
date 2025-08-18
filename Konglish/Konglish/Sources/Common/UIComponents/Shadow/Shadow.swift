@@ -11,10 +11,11 @@ import SwiftUI
 struct MainButtonShadow: ViewModifier {
     
     let shadowColor: Color
+    let yOffset: CGFloat
     
     func body(content: Content) -> some View {
         content
-            .shadow(color: shadowColor, radius: 0, x: 0, y: 8)
+            .shadow(color: shadowColor, radius: 0, x: 0, y: yOffset)
     }
 }
 
@@ -47,8 +48,8 @@ struct GlassShadow: ViewModifier {
 }
 
 extension View {
-    func mainButtonShadow(shadowColor: Color) -> some View {
-        self.modifier(MainButtonShadow(shadowColor: shadowColor))
+    func mainButtonShadow(shadowColor: Color, yOffset: CGFloat) -> some View {
+        self.modifier(MainButtonShadow(shadowColor: shadowColor, yOffset: yOffset))
     }
     
     func whiteShadow() -> some View {
