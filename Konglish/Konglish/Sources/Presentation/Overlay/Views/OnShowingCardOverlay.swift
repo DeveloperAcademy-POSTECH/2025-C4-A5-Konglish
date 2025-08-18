@@ -37,11 +37,6 @@ struct OnShowingCardOverlay: View {
                        currentCard: $arViewModel.numberOfFinishedCards,
                        currentLife: $arViewModel.currentLifeCounts)
         })
-        .overlay(alignment: .topTrailing, content: {
-            MainButton(buttonType: .icon(.exit)) {
-                container.navigationRouter.pop()
-            }
-        })
         .overlay(alignment: .bottomLeading, content: {
             MainButton(buttonType: .icon(.sound)) {
                 detailCardViewModel.speakWord()
@@ -76,6 +71,7 @@ struct OnShowingCardOverlay: View {
         .safeAreaPadding(.horizontal, UIConstants.topPadding)
         .safeAreaPadding(.top, UIConstants.topPadding)
         .navigationBarBackButtonHidden(true)
+        .pauseButton()
         .onChange(of: detailCardViewModel.heart) { _, newValue in
             arViewModel.currentLifeCounts = newValue
         }
