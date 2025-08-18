@@ -42,7 +42,7 @@ struct CategorySelectView: View {
                 
                 // ZStack 기본이 Center인데, 현재 컴포넌트들 기준
                 // 패딩 맞추기가 너무 복잡해서 조금 내리는 패딩 주는거로 했습니다.
-                .safeAreaPadding(.top, 60)
+                .safeAreaPadding(.top, 55)
                 .fixedSize()
             }
             .scrollIndicators(.hidden)

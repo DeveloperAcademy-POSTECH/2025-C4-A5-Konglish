@@ -18,8 +18,7 @@ struct LevelView: View {
     @EnvironmentObject var container: DIContainer
     
     fileprivate enum LevelCardConstants {
-        static let buttonPading: CGFloat = 409
-        static let levelVspacing: CGFloat = 77
+        static let buttonPadding: CGFloat = 409
         static let levelHspacing: CGFloat = 64
         static let naviHspacing: CGFloat = 56
         static let backBtnShadowOffset: CGFloat = 6
@@ -65,7 +64,6 @@ struct LevelView: View {
             }, shadowOffset: LevelCardConstants.startBtnshadowOffset)
             .safeAreaPadding(.horizontal, UIConstants.horizonBtnPadding)
         })
-        .safeAreaPadding(.bottom, UIConstants.bottomPadding)
     }
     
     private var topNavi: some View {
