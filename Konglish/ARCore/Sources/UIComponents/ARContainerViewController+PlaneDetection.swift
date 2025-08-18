@@ -67,8 +67,7 @@ extension ARContainerViewController {
             addPlaneVisualization(planeAnchor: planeAnchor, animate: true)
             delegate?.arContainerDidFindPlaneAnchor(self)
             if checkAllPlanesAttached() {
-                gamePhase = .scanned  // 모든 평면 감지 완료 시 scanned 상태로 변경
-                delegate?.arContainerDidFindAllPlaneAnchor(self)
+                gamePhase = .scanned
             }
         }
     }
@@ -125,7 +124,6 @@ extension ARContainerViewController {
                 delegate?.arContainerDidFindPlaneAnchor(self)
                 if checkAllPlanesAttached() {
                     gamePhase = .scanned  // 모든 평면 감지 완료 시 scanned 상태로 변경
-                    delegate?.arContainerDidFindAllPlaneAnchor(self)
                 }
             }
         }
