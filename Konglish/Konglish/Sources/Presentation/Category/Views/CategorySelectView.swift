@@ -22,8 +22,10 @@ struct CategorySelectView: View {
     fileprivate enum CategorySelectConstants {
         static let hspacing: CGFloat = 64
         static let naviHspacing: CGFloat = 56
+        static let shadowOffset: CGFloat = 6
         static let naviTitle: String = "카테고리 선택"
     }
+    
     var body: some View {
         ZStack {
             Color.green01.ignoresSafeArea()
@@ -37,6 +39,10 @@ struct CategorySelectView: View {
                     }
                 })
                 .padding(.horizontal, 113)
+                
+                // ZStack 기본이 Center인데, 현재 컴포넌트들 기준
+                // 패딩 맞추기가 너무 복잡해서 조금 내리는 패딩 주는거로 했습니다.
+                .safeAreaPadding(.top, 60)
                 .fixedSize()
             }
             .scrollIndicators(.hidden)
@@ -51,7 +57,7 @@ struct CategorySelectView: View {
         HStack(spacing: CategorySelectConstants.naviHspacing, content: {
             MainButton(buttonType: .icon(.back), action: {
                 container.navigationRouter.pop()
-            })
+            }, shadowOffset: CategorySelectConstants.shadowOffset)
             
             Text(CategorySelectConstants.naviTitle)
                 .font(.semibold64)

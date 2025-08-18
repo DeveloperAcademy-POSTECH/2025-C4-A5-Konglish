@@ -19,6 +19,7 @@ struct ExitOptionWindow: View {
         static let bgHeight: CGFloat = 308
         static let imageSize: CGFloat = 100
         static let btnSize: CGFloat = 136
+        static let shadowOffset: CGFloat = 6
         static let leftText: String = "계속하기"
         static let rightText: String = "나가기"
     }
@@ -60,7 +61,7 @@ struct ExitOptionWindow: View {
                 RoundedRectangle(cornerRadius: ExitOptionWindowConstants.cornerRadius)
                     .fill(Color.green02)
                     .frame(width: ExitOptionWindowConstants.btnSize, height: ExitOptionWindowConstants.btnSize)
-                    .mainButtonShadow(shadowColor: Color.green09)
+                    .mainButtonShadow(shadowColor: Color.green09, yOffset: ExitOptionWindowConstants.shadowOffset)
                 
                 Image(image)
                     .resizable()

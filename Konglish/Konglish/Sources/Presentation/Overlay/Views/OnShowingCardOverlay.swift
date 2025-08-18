@@ -21,6 +21,7 @@ struct OnShowingCardOverlay: View {
     
     fileprivate enum OnShowingCardConstants {
         static let bottomPadding: CGFloat = 177
+        static let shadowOffset: CGFloat = 6
     }
     
     var body: some View {
@@ -38,14 +39,13 @@ struct OnShowingCardOverlay: View {
                        currentLife: $arViewModel.currentLifeCounts)
         })
         .overlay(alignment: .bottomLeading, content: {
-            MainButton(buttonType: .icon(.sound)) {
+            MainButton(buttonType: .icon(.sound), action: {
                 detailCardViewModel.speakWord()
                 print(detailCardViewModel.word?.wordEng ?? "데이터 없음")
-            }
-            .padding(.bottom, OnShowingCardConstants.bottomPadding - UIConstants.bottomPadding)
+            }, shadowOffset: OnShowingCardConstants.shadowOffset)
         })
         .overlay(alignment: .bottomTrailing, content: {
-            MainButton(buttonType: .icon(.mic)) {
+            MainButton(buttonType: .icon(.mic), action: {
                 if detailCardViewModel.recordingState == .recording {
                     detailCardViewModel.stopRecording()
                     
@@ -58,15 +58,15 @@ struct OnShowingCardOverlay: View {
                 } else {
                     detailCardViewModel.startRecording()
                 }
-            }
+            }, shadowOffset: OnShowingCardConstants.shadowOffset)
             .padding(.bottom, OnShowingCardConstants.bottomPadding - UIConstants.bottomPadding)
         })
         .overlay(alignment: .trailing, content: {
-            MainButton(buttonType: .icon(.close)) {
+            MainButton(buttonType: .icon(.close), action: {
                 withAnimation(.easeInOut) {
                     arViewModel.showingWordDetailCard.toggle()
                 }
-            }
+            }, shadowOffset: OnShowingCardConstants.shadowOffset)
         })
         .safeAreaPadding(.horizontal, UIConstants.topPadding)
         .safeAreaPadding(.top, UIConstants.topPadding)
