@@ -60,6 +60,17 @@ extension View {
         self.modifier(GrayShadow())
     }
     
+    /// 조건이 참일 때만 grayShadow를 적용하는 View Modifier
+    @ViewBuilder
+    func grayShadow(if condition: Bool) -> some View {
+        if condition {
+            self.grayShadow()
+        } else {
+            self
+        }
+    }
+    
+    
     func glassShadow(_ ySize: CGFloat) -> some View {
         self.modifier(GlassShadow(ySize))
     }

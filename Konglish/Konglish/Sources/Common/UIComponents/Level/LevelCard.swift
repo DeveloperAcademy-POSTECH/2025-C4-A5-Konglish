@@ -44,7 +44,7 @@ struct LevelCard: View {
                     .fill(isTapped ? num.backgroundColor : .white)
                     .stroke(isTapped ? num.buttonStrokeColor : .clear, style: .init(lineWidth: 4))
                     .frame(width: LevelCardConstants.bgWidth, height: LevelCardConstants.bgHeight)
-                    .grayShadow()
+                    .grayShadow(if: isTapped ? false : true)
                 contents
             }
         })
@@ -52,7 +52,7 @@ struct LevelCard: View {
     
     private var contents: some View {
         VStack {
-            topNumber
+            levelBox
             Spacer()
             bestScore
             Spacer()
@@ -63,8 +63,8 @@ struct LevelCard: View {
     }
     
     // MARK: - TopContents
-    /// 상단 레벨 숫자 넘버
-    private var topNumber: some View {
+    /// 레벨 표시 박스 (Easy, Normal, Hard)
+    private var levelBox: some View {
         ZStack {
             RoundedRectangle(cornerRadius: LevelCardConstants.cornerRadius)
                 .fill(num.color)
