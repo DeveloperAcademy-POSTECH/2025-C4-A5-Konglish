@@ -18,19 +18,19 @@ struct LevelCard: View {
     // MARK: - LevelCardConstants
     fileprivate enum LevelCardConstants {
         static let bgWidth: CGFloat = 280
-        static let bgHeight: CGFloat = 380
+        static let bgHeight: CGFloat = 388
         static let cornerRadius: CGFloat = 30
         static let middleVspacing: CGFloat = 30
-        static let lelvelNumHeight: CGFloat = 116
-        static let lelvelNumWidth: CGFloat = 172
+        static let levelNumHeight: CGFloat = 116
+        static let levelNumWidth: CGFloat = 172
         static let contentsWiddth: CGFloat = 232
         static let contentsHeight: CGFloat = 316
         static let pointHspacing: CGFloat = 10
         static let binWidth: CGFloat = 34
         static let binHeight: CGFloat = 28
-        static let bestScoreText: String = "BestScore"
-        static let noScoreText: String = "NoScore"
-        static let progressText: String = "학습 진행도"
+        static let bestScoreText: String = "Best Score"
+        static let noScoreText: String = "No Score"
+        static let progressText: String = "단어 수집 진행도"
     }
     
     // MARK: - Body
@@ -44,6 +44,7 @@ struct LevelCard: View {
                     .fill(isTapped ? num.backgroundColor : .white)
                     .stroke(isTapped ? num.buttonStrokeColor : .clear, style: .init(lineWidth: 4))
                     .frame(width: LevelCardConstants.bgWidth, height: LevelCardConstants.bgHeight)
+                    .grayShadow()
                 contents
             }
         })
@@ -67,7 +68,7 @@ struct LevelCard: View {
         ZStack {
             RoundedRectangle(cornerRadius: LevelCardConstants.cornerRadius)
                 .fill(num.color)
-                .frame(width: LevelCardConstants.lelvelNumWidth, height: LevelCardConstants.lelvelNumHeight)
+                .frame(width: LevelCardConstants.levelNumWidth, height: LevelCardConstants.levelNumHeight)
             
             Text(num.rawValue)
                 .font(.semibold36)
@@ -110,6 +111,7 @@ struct LevelCard: View {
         VStack {
             Text(LevelCardConstants.progressText)
                 .font(.bold16)
+                .foregroundStyle(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2)))
             
             SuccessProgress(currentCount: level.successCount)
         }
