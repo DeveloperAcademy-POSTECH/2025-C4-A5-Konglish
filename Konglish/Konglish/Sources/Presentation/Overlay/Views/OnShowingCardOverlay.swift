@@ -29,7 +29,7 @@ struct OnShowingCardOverlay: View {
         }
         .overlay(alignment: .center, content: {
             if arViewModel.showingWordDetailCard {
-                WordDetailCard(viewModel: detailCardViewModel)
+                WordDetailCard(detailCardViewModel: detailCardViewModel, arViewModel: arViewModel)
             }
         })
         .overlay(alignment: .topLeading, content: {
@@ -49,7 +49,7 @@ struct OnShowingCardOverlay: View {
                 if detailCardViewModel.recordingState == .recording {
                     detailCardViewModel.stopRecording()
                     
-                    if let word = detailCardViewModel.word {
+                    if let word = detailCardViewModel.word { // FIXME: 이걸 여기서 저장하는게 맞나...? 어디서 저장되는지 한참 찾았네...
                         let usedCard = UsedCardModel(session: currentSession, card: word)
                         modelContext.insert(usedCard)
                         try? modelContext.save()

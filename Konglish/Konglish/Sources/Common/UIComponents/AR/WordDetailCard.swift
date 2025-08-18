@@ -10,7 +10,8 @@ import SwiftUI
 /// 단어 카드 상세 컴포넌트
 struct WordDetailCard: View {
     // MARK: - Property
-    @Bindable var viewModel: DetailCardViewModel
+    @Bindable var detailCardViewModel: DetailCardViewModel
+    @Bindable var arViewModel: ARViewModel
     
     // MARK: - Constants
     fileprivate enum WordDetailCardConstants {
@@ -55,7 +56,7 @@ struct WordDetailCard: View {
     }
     // MARK: - Body
     var body: some View {
-        if let model = viewModel.word {
+        if let model = detailCardViewModel.word {
             ZStack(alignment: .topTrailing, content: {
                 RoundedRectangle(cornerRadius: WordDetailCardConstants.cornerRadius)
                     .fill(Color.wordCardYellow.opacity(0.8))
@@ -73,11 +74,19 @@ struct WordDetailCard: View {
                 .frame(height: 380)
                 .safeAreaPadding(WordDetailCardConstants.safePadding)
                 
-                if viewModel.lastPassed {
+                if detailCardViewModel.lastPassed {
                     successText
                         .rotationEffect(.degrees(WordDetailCardConstants.rotationDegree))
                 }
             })
+            .onChange(of: detailCardViewModel.accuracyPercent) { oldValue, newValue in
+                if let wordId = detailCardViewModel.word?.id {
+                    arViewModel.triggerSubmitAccuracy = (
+                        wordId,
+                        Float(detailCardViewModel.accuracyPercent) / 100
+                    )
+                }
+            }
             .frame(width: WordDetailCardConstants.mainMaxWidth, height: WordDetailCardConstants.rectangleMaxHeight)
         }
     }
@@ -146,7 +155,7 @@ struct WordDetailCard: View {
                 .font(.bold20)
                 .foregroundStyle(Color.black01)
             
-            printPointGuide(type: viewModel.accuracyType)
+            printPointGuide(type: detailCardViewModel.accuracyType)
         })
     }
     
@@ -166,7 +175,7 @@ struct WordDetailCard: View {
     
     private func successFailure(type: AccuracyType) -> some View {
         HStack(spacing: WordDetailCardConstants.guideHspacing, content: {
-            Text("\(viewModel.accuracyPercent)%")
+            Text("\(detailCardViewModel.accuracyPercent)%")
                 .font(type.font)
                 .foregroundStyle(type.color)
             
@@ -194,7 +203,7 @@ struct WordDetailCard: View {
             
             AudioBand(
                 isPlaying: Binding(
-                    get: { viewModel.recordingState == .recording },
+                    get: { detailCardViewModel.recordingState == .recording },
                     set: { _ in }
                 )
             )
@@ -204,5 +213,5 @@ struct WordDetailCard: View {
 }
 
 #Preview {
-    WordDetailCard(viewModel: .init())
+    WordDetailCard(detailCardViewModel: .init(), arViewModel: .init())
 }
