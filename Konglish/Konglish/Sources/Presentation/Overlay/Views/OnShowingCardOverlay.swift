@@ -72,13 +72,6 @@ struct OnShowingCardOverlay: View {
         .safeAreaPadding(.top, UIConstants.topPadding)
         .navigationBarBackButtonHidden(true)
         .pauseButton()
-        .onChange(of: detailCardViewModel.heart) { _, newValue in
-            arViewModel.currentLifeCounts = newValue
-        }
-        .onChange(of: detailCardViewModel.currentScore) { _, newValue in
-            arViewModel.currentGameScore = newValue
-            arViewModel.numberOfFinishedCards = detailCardViewModel.finishedCards.count
-        }
         .task {
             detailCardViewModel.speakWord()
         }
