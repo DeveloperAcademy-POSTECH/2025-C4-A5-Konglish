@@ -18,6 +18,8 @@ extension ARContainerViewController {
             return
         }
         
+        self.gamePhase = .portalCreating
+        
         // 화면 중앙에서 수직 평면을 대상으로 레이캐스트 수행
         let results = arView.raycast(from: arView.center, allowing: .estimatedPlane, alignment: .vertical)
         
@@ -39,7 +41,6 @@ extension ARContainerViewController {
             let portalAnchor = portalVisualizer.operate(context: .init(arAnchor: arAnchor))
             
             if portalAnchor != nil {
-                self.gamePhase = .portalCreated
                 
                 // 평면들이 포털로 빨려 들어가는 애니메이션
                 let animationDuration: TimeInterval = 3.0
@@ -66,8 +67,9 @@ extension ARContainerViewController {
                     )
                 }
                 
-                // 애니메이션 완료 후 평면 엔티티 제거
+                // 애니메이션 완료 후 평면 엔티티 제거 및 게임 페이즈 변경
                 DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration) {
+                    self.gamePhase = .portalCreated
                     self.removeDetectedPlaneEntities()
                 }
                 

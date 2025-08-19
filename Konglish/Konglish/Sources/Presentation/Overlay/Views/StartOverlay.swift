@@ -52,8 +52,7 @@ struct StartOverlay: View {
     private var guideText: some View {
         ZStack {
             RoundedRectangle(cornerRadius: StartOverlayConstants.cornerRadius)
-                .fill(Color.white01)
-                .opacity(0.65)
+                .fill(Material.ultraThin)
                 .frame(height: StartOverlayConstants.guideHeight)
                 .whiteShadow()
             

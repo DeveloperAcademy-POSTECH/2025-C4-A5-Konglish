@@ -40,20 +40,37 @@ enum AccuracyType {
         }
     }
     
-    var font: Font {
+    var accuracyFont: Font {
+        return .semibold24
+    }
+    
+    var reactionTextFont: Font {
         return .bold20
     }
     
-    var color: Color {
+    var accuracyColor: Color {
         switch self {
         case .btnMic:
-            return .green05
-        case .recording:
-            return .green05
-        case .success:
             return .green09
+        case .recording:
+            return .green09
+        case .success:
+            return .green03
         case .failure:
-            return .red01
+            return .red00
+        }
+    }
+    
+    var reactionTextColor: Color {
+        switch self {
+        case .btnMic:
+            return .green09
+        case .recording:
+            return .green09
+        case .success:
+            return .green11
+        case .failure:
+            return .red06
         }
     }
 }
