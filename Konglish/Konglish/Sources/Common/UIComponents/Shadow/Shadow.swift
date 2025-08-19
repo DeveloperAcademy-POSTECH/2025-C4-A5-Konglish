@@ -54,6 +54,21 @@ struct GlassShadow: ViewModifier {
     }
 }
 
+struct PauseGlassShadow: ViewModifier {
+    let ySize: CGFloat
+    static let dropShadowColor: Color = Color(#colorLiteral(red: 0.6980392157, green: 0.6980392157, blue: 0.6980392157, alpha: 1))
+    
+    init(_ ySize: CGFloat) {
+        self.ySize = ySize
+    }
+    
+    func body(content: Content) -> some View {
+        content
+            .shadow(color: Self.dropShadowColor, radius: 0, x: 0, y: ySize)
+    }
+}
+
+
 extension View {
     func mainButtonShadow(shadowColor: Color, yOffset: CGFloat) -> some View {
         self.modifier(MainButtonShadow(shadowColor: shadowColor, yOffset: yOffset))
@@ -84,5 +99,9 @@ extension View {
     
     func glassShadow(_ ySize: CGFloat) -> some View {
         self.modifier(GlassShadow(ySize))
+    }
+    
+    func pauseGlassShadow(_ ySize: CGFloat) -> some View {
+        self.modifier(PauseGlassShadow(ySize))
     }
 }
