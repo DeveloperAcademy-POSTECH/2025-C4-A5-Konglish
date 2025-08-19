@@ -129,6 +129,7 @@ class DetailCardViewModel: NSObject {
                             print("🎤 인식 결과: \(lastSpokenWord)")
                             print("📊 점수: \(Int(score * 100))")
                             self.accuracyPercent = Int(score * 100)
+                            self.lastPassed = true
                         } else {
                             let similarityScore = self.evaluateSimilarityScore(lastSpokenWord, targetWord)
                             print("인식 실패 target=\(targetWord) spoken=\(lastSpokenWord) similarityScore=\(similarityScore)")
