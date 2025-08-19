@@ -13,17 +13,18 @@ struct SwipeTabView: View {
     let totalPages = 3
     
     fileprivate enum GuideCardConstants {
-        static let cardGuideHeight: CGFloat = 480
-        static let contentsWidth: CGFloat = 804
-        static let contentsHeight: CGFloat = 425
-        static let cornerRadiust: CGFloat = 20
-        static let padding: CGFloat = 30
+        static let cardGuideWidth: CGFloat = 804
+        static let cardGuideHeight: CGFloat = 425
+        static let contentsWidth: CGFloat = 756
+        static let contentsHeight: CGFloat = 339
+        static let cardVpadding: CGFloat = 25
         static let bgWidth: CGFloat = 756
         static let bgHeight: CGFloat = 339
         static let cornerRadius: CGFloat = 20
         static let guideVspacing: CGFloat = 16
         static let guideCircleSize: CGFloat = 12
-        static let pageHspacing: CGFloat = 8
+        static let pageHspacing: CGFloat = 32
+        static let lottieBorderPadding: CGFloat = 4
         static let lineWidth: CGFloat = 4
     }
     
@@ -33,15 +34,13 @@ struct SwipeTabView: View {
                 ForEach(0..<3) { index in
                     card(index: index)
                         .tag(index)
-                        .padding(.horizontal, 10)
                 }
-                
             })
             .tabViewStyle(.page(indexDisplayMode: .never))
             
             pageControl
         })
-        .padding(GuideCardConstants.padding)
+        .padding(GuideCardConstants.cardVpadding)
         .background {
             RoundedRectangle(cornerRadius: GuideCardConstants.cornerRadius)
                 .fill(Color.white)
@@ -54,8 +53,12 @@ struct SwipeTabView: View {
         LottieView(animation: .named(lottieName(for: index)))
             .playing()
             .looping()
-            .border(Color.gray02, width: 4)
-
+            .clipShape(RoundedRectangle(cornerRadius: GuideCardConstants.cornerRadius))
+            .overlay(
+                RoundedRectangle(cornerRadius: GuideCardConstants.cornerRadius)
+                    .stroke(.gray01, lineWidth: 4)
+            )
+            .padding(GuideCardConstants.lottieBorderPadding)
     }
     
     private var pageControl: some View {
