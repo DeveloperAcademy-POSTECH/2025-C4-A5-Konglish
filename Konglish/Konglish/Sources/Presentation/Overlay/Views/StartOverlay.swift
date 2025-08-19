@@ -21,7 +21,7 @@ struct StartOverlay: View {
         static let backBtnShadowOffset: CGFloat = 6
         static let startBtnShadowOffset: CGFloat = 6
         static let shadowOffset: CGFloat = 6
-        static let guideText: String = "준비가 되었다면 시작해볼까요?"
+        static let guideMessage: String = "준비가 되었다면 시작해볼까요?"
     }
     var body: some View {
         ZStack {
@@ -52,11 +52,12 @@ struct StartOverlay: View {
     private var guideText: some View {
         ZStack {
             RoundedRectangle(cornerRadius: StartOverlayConstants.cornerRadius)
-                .fill(Material.ultraThin)
+                .fill(Color.white01)
+                .opacity(0.65)
                 .frame(height: StartOverlayConstants.guideHeight)
                 .whiteShadow()
             
-            Text(StartOverlayConstants.guideText)
+            Text(StartOverlayConstants.guideMessage)
                 .font(.semibold24)
                 .foregroundStyle(Color.black)
         }
