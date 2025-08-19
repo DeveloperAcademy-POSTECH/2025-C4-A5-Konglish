@@ -58,6 +58,8 @@ struct GuidingView: View {
     
     private var title: some View {
         Image(uiImage: GuidingConstants.title)
+            .resizable()
+            .frame(width: 350, height: 100)
             .safeAreaPadding(.leading, UIConstants.naviLeadingPadding)
     }
 }
