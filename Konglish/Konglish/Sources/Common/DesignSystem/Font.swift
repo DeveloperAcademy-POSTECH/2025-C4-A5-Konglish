@@ -70,6 +70,10 @@ public extension Font {
         return .konglish(.extraBold, size: 24)
     }
     
+    static var semibold16: Font {
+        return .konglish(.extraBold, size: 16)
+    }
+    
     static var poetsen48: Font {
         return .poetsen(.regular, size: 48)
     }

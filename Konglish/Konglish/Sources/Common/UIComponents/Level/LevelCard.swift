@@ -18,19 +18,20 @@ struct LevelCard: View {
     // MARK: - LevelCardConstants
     fileprivate enum LevelCardConstants {
         static let bgWidth: CGFloat = 280
-        static let bgHeight: CGFloat = 380
-        static let cornerRadius: CGFloat = 30
-        static let middleVspacing: CGFloat = 30
-        static let lelvelNumHeight: CGFloat = 116
-        static let lelvelNumWidth: CGFloat = 172
+        static let bgHeight: CGFloat = 388
+        static let cornerRadius: CGFloat = 40
+        static let middleVspacing: CGFloat = 32
+        static let levelNumHeight: CGFloat = 116
+        static let levelNumWidth: CGFloat = 172
         static let contentsWiddth: CGFloat = 232
         static let contentsHeight: CGFloat = 316
         static let pointHspacing: CGFloat = 10
         static let binWidth: CGFloat = 34
         static let binHeight: CGFloat = 28
-        static let bestScoreText: String = "BestScore"
-        static let noScoreText: String = "NoScore"
-        static let progressText: String = "학습 진행도"
+        static let noScoreTextTopPadding: CGFloat = 24
+        static let bestScoreText: String = "Best Score"
+        static let noScoreText: String = "No Score"
+        static let progressText: String = "단어 수집 진행도"
     }
     
     // MARK: - Body
@@ -44,6 +45,7 @@ struct LevelCard: View {
                     .fill(isTapped ? num.backgroundColor : .white)
                     .stroke(isTapped ? num.buttonStrokeColor : .clear, style: .init(lineWidth: 4))
                     .frame(width: LevelCardConstants.bgWidth, height: LevelCardConstants.bgHeight)
+                    .grayShadow(if: isTapped ? false : true)
                 contents
             }
         })
@@ -51,7 +53,7 @@ struct LevelCard: View {
     
     private var contents: some View {
         VStack {
-            topNumber
+            levelBox
             Spacer()
             bestScore
             Spacer()
@@ -62,12 +64,12 @@ struct LevelCard: View {
     }
     
     // MARK: - TopContents
-    /// 상단 레벨 숫자 넘버
-    private var topNumber: some View {
+    /// 레벨 표시 박스 (Easy, Normal, Hard)
+    private var levelBox: some View {
         ZStack {
             RoundedRectangle(cornerRadius: LevelCardConstants.cornerRadius)
                 .fill(num.color)
-                .frame(width: LevelCardConstants.lelvelNumWidth, height: LevelCardConstants.lelvelNumHeight)
+                .frame(width: LevelCardConstants.levelNumWidth, height: LevelCardConstants.levelNumHeight)
             
             Text(num.rawValue)
                 .font(.semibold36)
@@ -80,17 +82,20 @@ struct LevelCard: View {
     @ViewBuilder
     private var bestScore: some View {
         if level.bestScore > .zero {
-            VStack(alignment: .center, spacing: LevelCardConstants.middleVspacing, content: {
+            VStack(alignment: .center, spacing: 0, content: {
                 Text(LevelCardConstants.bestScoreText)
                     .font(.semibold32)
+                    .foregroundStyle(Color.gray04)
                 
                 pointHstack
             })
             .foregroundStyle(Color.gray03)
+            .padding(.top, LevelCardConstants.middleVspacing)
         } else {
             Text(LevelCardConstants.noScoreText)
                 .font(.semibold32)
                 .foregroundStyle(Color.gray04)
+                .padding(.top, LevelCardConstants.noScoreTextTopPadding)
         }
     }
     
@@ -102,7 +107,8 @@ struct LevelCard: View {
                 .frame(width: LevelCardConstants.binWidth, height: LevelCardConstants.binHeight)
             
             Text("\(level.bestScore)")
-                .font(.bold32)
+                .font(.poetsen(.regular, size: 30))
+                .foregroundStyle(Color.gray04)
         })
     }
     
@@ -110,6 +116,7 @@ struct LevelCard: View {
         VStack {
             Text(LevelCardConstants.progressText)
                 .font(.bold16)
+                .foregroundStyle(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2)))
             
             SuccessProgress(currentCount: level.successCount)
         }

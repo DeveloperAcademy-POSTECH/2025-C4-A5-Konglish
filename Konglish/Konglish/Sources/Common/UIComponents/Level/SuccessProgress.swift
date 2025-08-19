@@ -22,7 +22,7 @@ struct SuccessProgress: View {
         static let cornerRadius: CGFloat = 20
         static let progressTopHeight: CGFloat = 26
         static let progressBottomHeight: CGFloat = 30
-        static let cardInfoHspacing: CGFloat = 17
+        static let cardInfoHspacing: CGFloat = 10
         static let progressZeroWidth: CGFloat = 31
     }
     
@@ -51,8 +51,8 @@ struct SuccessProgress: View {
         HStack(spacing: SuccessProgressConstants.cardInfoHspacing, content: {
             Image(.successCard)
             Text("\(currentCount) / \(maxCount)")
-                .font(.bold20)
-                .foregroundStyle(Color.white)
+                .font(.semibold16)
+                .foregroundStyle(Color.white01)
         })
     }
     
