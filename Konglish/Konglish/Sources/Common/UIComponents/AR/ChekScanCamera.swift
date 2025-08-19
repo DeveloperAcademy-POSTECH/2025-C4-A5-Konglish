@@ -31,9 +31,9 @@ struct ChekScanCamera: View {
         })
         .padding(.horizontal, CheckScanCameraConstants.horizonPadding)
         .padding(.vertical, CheckScanCameraConstants.verticalPadding)
-        .background(Material.thin)
+        .background(Material.ultraThin)
         .clipShape(RoundedRectangle(cornerRadius: CheckScanCameraConstants.cornerRadius))
-        .glassShadow(CheckScanCameraConstants.dropShadowSize)
+        .grayShadow4()
     }
     
     /// 체크 리스트
