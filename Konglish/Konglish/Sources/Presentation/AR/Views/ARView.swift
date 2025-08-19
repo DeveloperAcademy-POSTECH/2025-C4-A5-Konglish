@@ -97,9 +97,9 @@ struct ARView: View {
                         OnShowingCardOverlay(arViewModel: arViewModel, detailCardViewModel: detailCardViewModel, currentSession: currentSession)
                             .environmentObject(container)
                     }
-                case .fisished:
+                case .finished:
                     if let selectedGameSession {
-                        FinishedOverlay(gameSessionModel: selectedGameSession)
+                        FinishedOverlay(gameSessionModel: selectedGameSession, currentLifeCounts: arViewModel.currentLifeCounts)
                     }
                 default:
                     EmptyView()
@@ -113,7 +113,7 @@ struct ARView: View {
         }
         .onChange(of: arViewModel.numberOfFinishedCards) { _, newValue in
             if newValue == gameCards.count {
-                arViewModel.gamePhase = .fisished
+                arViewModel.gamePhase = .finished
                 
                 saveScore()
                 saveSuccessCount()

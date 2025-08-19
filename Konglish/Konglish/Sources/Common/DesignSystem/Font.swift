@@ -54,6 +54,10 @@ public extension Font {
     }
     
     // MARK: - ExtraBold
+    static var semibold80: Font {
+        return .konglish(.extraBold, size: 80)
+    }
+    
     static var semibold64: Font {
         return .konglish(.extraBold, size: 64)
     }

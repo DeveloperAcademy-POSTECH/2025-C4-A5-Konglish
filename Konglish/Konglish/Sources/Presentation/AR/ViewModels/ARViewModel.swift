@@ -19,7 +19,7 @@ class ARViewModel {
     var currentLifeCounts: Int = 5 {
         didSet {
             if currentLifeCounts == 0 {
-                gamePhase = .fisished
+                gamePhase = .finished
             }
         }
     }
