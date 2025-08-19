@@ -31,7 +31,7 @@ extension ARContainerViewController {
         
         // 모두 완료한 경우 완료 상태로 게임 페이즈 변경
         if numberOfFinishedCards == gameSettings.gameCards.count {
-            gamePhase = .fisished
+            gamePhase = .finished
         }
     }
     
