@@ -24,6 +24,9 @@ public enum GamePhase {
     /// 포탈 생성이 완료된 단계
     case portalCreated
     
+    /// 카드가 슝슝 배치중인 단계
+    case cardPlacing
+    
     /// 카드가 모두 뿌려지고 게임이 진행중인 단계
     case playing
     

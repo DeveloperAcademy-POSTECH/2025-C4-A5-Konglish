@@ -18,12 +18,12 @@ extension ARContainerViewController {
             return
         }
         
-        self.gamePhase = .portalCreating
-        
         // 화면 중앙에서 수직 평면을 대상으로 레이캐스트 수행
         let results = arView.raycast(from: arView.center, allowing: .estimatedPlane, alignment: .vertical)
         
         if let firstResult = results.first {
+            // 레이캐스트 성공 후에만 gamePhase 변경
+            self.gamePhase = .portalCreating
             // 현재 감지된 모든 평면의 위치를 저장 -> 다시 해당 위치로 카드를 배치하기 위함.
             for (planeAnchor, _) in detectedPlaneEntities {
                 savedPlaneTransforms[planeAnchor.identifier] = planeAnchor.transform
@@ -74,7 +74,8 @@ extension ARContainerViewController {
                 }
                 
             } else {
-                // 포털 생성 실패
+                // 포털 생성 실패 시 원래 상태로 복구
+                self.gamePhase = .scanned
                 logger.error("Hit-Test는 성공했으나 포털 생성에 실패했습니다.")
             }
             

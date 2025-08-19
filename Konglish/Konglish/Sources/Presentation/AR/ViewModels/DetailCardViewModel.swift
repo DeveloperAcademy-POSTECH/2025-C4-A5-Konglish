@@ -124,16 +124,31 @@ class DetailCardViewModel: NSObject {
                         let score = lastSegment.confidence
                         let targetWord = self.normalizeWord(self.word?.wordEng ?? "")
                         
+                        let similarityScore = self.evaluateSimilarityScore(lastSpokenWord, targetWord)
+                        
                         if lastSpokenWord == targetWord {
-                            print("인식 성공 \(lastSpokenWord)")
-                            print("🎤 인식 결과: \(lastSpokenWord)")
-                            print("📊 점수: \(Int(score * 100))")
-                            self.accuracyPercent = Int(score * 100)
+                            // 완전 일치여도 confidence가 65% 이상이어야 성공
+                            let confidenceScore = Int(score * 100)
+                            self.accuracyPercent = confidenceScore
+                            
+                            if score >= 0.65 {
+                                print("인식 결과: \(lastSpokenWord)")
+                                print("신뢰도: \(confidenceScore)%")
+                                self.lastPassed = true
+                            } else {
+                                print("신뢰도: \(confidenceScore)% (65% 미만)")
+                            }
+                        } else if similarityScore >= 0.6 {
+                            // 60% 이상 유사도면 성공
+                            self.accuracyPercent = Int(similarityScore * 100)
+                            print("유사도 성공! target=\(targetWord) spoken=\(lastSpokenWord)")
+                            print("유사도 점수: \(Int(similarityScore * 100))%")
                             self.lastPassed = true
                         } else {
-                            let similarityScore = self.evaluateSimilarityScore(lastSpokenWord, targetWord)
-                            print("인식 실패 target=\(targetWord) spoken=\(lastSpokenWord) similarityScore=\(similarityScore)")
+                            // 60% 미만이면 실패
                             self.accuracyPercent = Int(similarityScore * 100)
+                            print("인식 실패! target=\(targetWord) spoken=\(lastSpokenWord)")
+                            print("유사도 점수: \(Int(similarityScore * 100))%")
                         }
                     } else {
                         print("no lastSegment")
