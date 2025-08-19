@@ -19,6 +19,7 @@ struct WordDetailCard: View {
         static let cornerRadius: CGFloat = 30
         static let safePadding: CGFloat = 12
         static let topPadding: CGFloat = 19
+        static let detailViewTopPadding: CGFloat = 37
         
         static let bottomContentsHspacing: CGFloat = 40
         static let topRightVspacing: CGFloat = 12
@@ -27,12 +28,12 @@ struct WordDetailCard: View {
         static let voiceHspacing: CGFloat = 4
         static let accuracyHspacing: CGFloat = 8
         
-        static let offsetValue: (CGFloat,CGFloat) = (40, 90)
+        static let offsetValue: (CGFloat,CGFloat) = (40, 95)
         static let maxWidth: CGFloat = 680
         static let rectangleMaxHeight: CGFloat = 440
         static let mainMaxHeight: CGFloat = 493
         static let mainMaxWidth: CGFloat = 730
-        static let capsuleWidth: CGFloat = 6
+        static let capsuleWidth: CGFloat = 4
         static let capsuleHeight: CGFloat = 80
         static let dividerLine: CGFloat = 4
         static let imageSize: CGFloat = 280
@@ -79,6 +80,7 @@ struct WordDetailCard: View {
                         .rotationEffect(.degrees(WordDetailCardConstants.rotationDegree))
                 }
             })
+            .safeAreaPadding(.top, WordDetailCardConstants.detailViewTopPadding)
             .onChange(of: detailCardViewModel.accuracyPercent) { oldValue, newValue in
                 if let wordId = detailCardViewModel.word?.id {
                     arViewModel.triggerSubmitAccuracy = (
@@ -122,7 +124,7 @@ struct WordDetailCard: View {
             
             Text(model.wordKor)
                 .font(.bold32)
-                .customOutline(width: WordDetailCardConstants.textCStroke, color: .white)
+                .customOutline(width: WordDetailCardConstants.textBStroke, color: .white)
         })
         .foregroundStyle(Color.black)
     }
@@ -132,18 +134,17 @@ struct WordDetailCard: View {
         HStack(spacing: WordDetailCardConstants.bottomContentsHspacing, content: {
             voiceLevel
             Capsule()
-                .fill(Color.voiceShadow)
+                .fill(Color.dividerYellow)
                 .frame(width: WordDetailCardConstants.capsuleWidth, height: WordDetailCardConstants.capsuleHeight)
             pronunciationAccuracy
         })
         .frame(height: WordDetailCardConstants.capsuleHeight + 10, alignment: .bottomLeading)
-        .padding(.leading, WordDetailCardConstants.horizonPadding)
         .offset(y: 20)
     }
     
     private var dividerLine: some View {
         Capsule()
-            .fill(Color.voiceShadow)
+            .fill(Color.dividerYellow)
             .frame(maxWidth: .infinity)
             .frame(height: WordDetailCardConstants.dividerLine)
             .offset(y: 30)
@@ -153,7 +154,7 @@ struct WordDetailCard: View {
     private var pronunciationAccuracy: some View {
         HStack(spacing: WordDetailCardConstants.accuracyHspacing, content: {
             Text(WordDetailCardConstants.accuracyText)
-                .font(.bold20)
+                .font(.bold24)
                 .foregroundStyle(Color.black01)
             
             printPointGuide(type: detailCardViewModel.accuracyType)
@@ -176,9 +177,11 @@ struct WordDetailCard: View {
     
     private func successFailure(type: AccuracyType) -> some View {
         HStack(spacing: WordDetailCardConstants.guideHspacing, content: {
+            
             Text("\(detailCardViewModel.accuracyPercent)%")
-                .font(type.font)
-                .foregroundStyle(type.color)
+                .font(type.accuracyFont)
+                .foregroundStyle(type.accuracyColor)
+                .customOutline(width: WordDetailCardConstants.textCStroke, color: .white)
             
             Label(title: {
                 makeTextView(type: type)
@@ -190,8 +193,8 @@ struct WordDetailCard: View {
     
     private func makeTextView(type: AccuracyType) -> some View {
         Text(type.text)
-            .font(type.font)
-            .foregroundStyle(type.color)
+            .font(type.reactionTextFont)
+            .foregroundStyle(type.reactionTextColor)
     }
     
     // MARK: - BottomLeft

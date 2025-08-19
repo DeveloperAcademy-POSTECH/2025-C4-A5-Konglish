@@ -103,6 +103,10 @@ public extension Font {
         return .konglish(.bold, size: 32)
     }
     
+    static var bold24: Font {
+        return .konglish(.bold, size: 24)
+    }
+    
     static var bold20: Font {
         return .konglish(.bold, size: 20)
     }
