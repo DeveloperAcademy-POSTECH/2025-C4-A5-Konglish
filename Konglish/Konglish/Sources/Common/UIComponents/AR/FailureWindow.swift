@@ -15,11 +15,12 @@ struct FailureWindow: View {
     
     fileprivate enum CompleteWindowConstants {
         static let maxWidth: CGFloat = 749
+        static let vstackWidth: CGFloat = 419
         static let safeAreaVerticalPadding: CGFloat = 203
         static let safeAreaHorionPadding: CGFloat = 222
         static let mainVerticalPadding: CGFloat = 70
         static let mainHorizonPadding: CGFloat = 167
-        static let verticalPadding: CGFloat = 14
+        static let verticalPadding: CGFloat = 30
         static let horizonPadding: CGFloat = 30
         static let cornerRadius: CGFloat = 30
         static let btnVspacing: CGFloat = 26
@@ -30,29 +31,30 @@ struct FailureWindow: View {
     }
     
     var body: some View {
-        ZStack {
+        VStack(alignment: .center, spacing: CompleteWindowConstants.verticalPadding) {
+            title
+            btnContents
+        }
+        .frame(width: CompleteWindowConstants.vstackWidth)
+        .padding(.vertical, CompleteWindowConstants.mainVerticalPadding)
+        .padding(.horizontal, CompleteWindowConstants.mainHorizonPadding)
+        .background {
             RoundedRectangle(cornerRadius: CompleteWindowConstants.cornerRadius)
                 .fill(Color.white01)
+                .opacity(0.65)
                 .background(Material.ultraThin)
+                .clipShape(RoundedRectangle(cornerRadius: CompleteWindowConstants.cornerRadius))
                 .grayShadow()
-            
-            VStack {
-                title
-                btnContents
-            }
-            .padding(.vertical, CompleteWindowConstants.mainVerticalPadding)
-            .padding(.horizontal, CompleteWindowConstants.mainHorizonPadding)
-            .frame(maxWidth: CompleteWindowConstants.maxWidth)
         }
-        .safeAreaPadding(.vertical, CompleteWindowConstants.safeAreaVerticalPadding)
-        .safeAreaPadding(.horizontal, CompleteWindowConstants.safeAreaHorionPadding)
     }
     
     private var title: some View {
         Text(CompleteWindowConstants.title)
-            .font(.semibold64)
+            .font(.semibold80)
             .foregroundStyle(Color.red01)
             .customOutline(width: CompleteWindowConstants.titleOutline, color: .white)
+            .lineLimit(1)
+            .fixedSize()
     }
     
     private var btnContents: some View {

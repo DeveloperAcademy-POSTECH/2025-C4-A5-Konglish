@@ -9,14 +9,24 @@ import SwiftUI
 
 struct FinishedOverlay: View {
     let gameSessionModel: GameSessionModel
+    let currentLifeCounts: Int
+    
+    private var isGameSuccess: Bool {
+        return currentLifeCounts > 0
+    }
     
     var body: some View {
         ZStack {
             Color.black.opacity(0.4).ignoresSafeArea()
         }
         .overlay(alignment: .center, content: {
-            CompleteWindow(model: gameSessionModel)
-                .navigationBarBackButtonHidden(true)
+            if isGameSuccess {
+                CompleteWindow(model: gameSessionModel)
+                    .navigationBarBackButtonHidden(true)
+            } else {
+                FailureWindow(model: gameSessionModel)
+                    .navigationBarBackButtonHidden(true)
+            }
         })
         .safeAreaPadding(.horizontal, UIConstants.horizontalPading)
         

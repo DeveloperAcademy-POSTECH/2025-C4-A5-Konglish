@@ -69,7 +69,7 @@ public class ARContainerViewController: UIViewController {
         didSet {
             delegate?.didChangeLifeCount(self)
             if reaminLifeCounts <= 0 {
-                gamePhase = .fisished // Game Over
+                gamePhase = .finished // Game Over
             }
         }
     }

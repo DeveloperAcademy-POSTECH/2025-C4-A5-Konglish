@@ -56,7 +56,7 @@ enum TextButtonType {
         case .cardSprinkle(let onOff), .openPotal(let onOff), .start(let onOff):
             return onOff ? .green02 : .gray01
         case .returnCategory:
-            return .green08
+            return .returnCategoryGreen
         }
     }
     

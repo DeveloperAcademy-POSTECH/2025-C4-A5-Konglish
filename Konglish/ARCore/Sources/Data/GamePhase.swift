@@ -31,5 +31,5 @@ public enum GamePhase {
     case paused
     
     /// 게임이 클리어된 단계
-    case fisished
+    case finished
 }
