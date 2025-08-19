@@ -9,11 +9,14 @@ let project = Project(
     targets: [
         .target(
             name: "Konglish",
-            destinations: .iOS,
+            destinations: [.iPad],
             product: .app,
             bundleId: "app.konglish.Konglish",
+            deploymentTargets: .iOS("18.0"),
             infoPlist: .extendingDefault(
                 with: [
+                    "UIRequiredDeviceCapabilities": ["arkit"],
+                    "UIRequiresFullScreen": true,
                     "UILaunchScreen": [
                         "UIColorName": "",
                         "UIImageName": "",
@@ -23,6 +26,10 @@ let project = Project(
                     "NSSpeechRecognitionUsageDescription": "발음 분석을 위해 음성 인식이 필요합니다",
                     "UIViewControllerBasedStatusBarAppearance": false,
                     "UIStatusBarHidden": true,
+                    "UISupportedInterfaceOrientations~ipad": [
+                        "UIInterfaceOrientationLandscapeLeft",
+                        "UIInterfaceOrientationLandscapeRight"
+                    ]
                 ]
             ),
             sources: ["Konglish/Sources/**"],
@@ -30,13 +37,13 @@ let project = Project(
             dependencies: [
                 .project(target: "Dependency", path: "./Dependency"),
                 .project(target: "ARCore", path: "./ARCore"),
-                .package(product: "Moya"),         
+                .package(product: "Moya"),
                 .package(product: "Lottie")
             ]
         ),
         .target(
             name: "KonglishTests",
-            destinations: .iOS,
+            destinations: [.iPad],
             product: .unitTests,
             bundleId: "dev.tuist.KonglishTests",
             infoPlist: .default,
