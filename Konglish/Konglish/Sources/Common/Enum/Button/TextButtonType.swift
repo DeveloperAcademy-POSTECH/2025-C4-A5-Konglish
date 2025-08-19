@@ -22,7 +22,7 @@ enum TextButtonType {
         case .start:
             return "시작하기"
         case .cardSprinkle:
-            return "저 넘어 세상엔..?"
+            return "저 너머 세상엔..?"
         case .openPotal:
             return "단어 세상 포탈 열기!"
         case .backMain:
