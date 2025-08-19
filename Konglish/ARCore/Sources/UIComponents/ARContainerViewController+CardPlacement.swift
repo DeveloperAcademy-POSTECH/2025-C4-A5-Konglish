@@ -60,6 +60,9 @@ extension ARContainerViewController {
             return
         }
         
+        // 카드 배치 시작 즉시 상태 변경하여 다중 클릭 방지
+        gamePhase = .cardPlacing
+        
         let portalWorldPosition = portalAnchor.position(relativeTo: nil)
         
         // GameCard들과 저장된 위치들을 매칭
@@ -81,7 +84,7 @@ extension ARContainerViewController {
             )
         }
         
-        // 모든 카드 애니메이션이 완료되면 게임 상태 변경 및 포털 제거
+        // 모든 카드 애니메이션이 완료되면 포털 제거 및 게임 시작
         let totalAnimationTime = Float(gameCards.count) * 0.3 + 2.5
         DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(totalAnimationTime)) {
             self.removePortalWithAnimation()
