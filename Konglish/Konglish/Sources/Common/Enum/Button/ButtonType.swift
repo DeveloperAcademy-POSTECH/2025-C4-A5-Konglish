@@ -60,7 +60,7 @@ enum ButtonType {
     var width: CGFloat? {
         switch self {
         case .text:
-            return nil
+            return 376
         case .icon(let type):
             return type.btnSize.0
         }
