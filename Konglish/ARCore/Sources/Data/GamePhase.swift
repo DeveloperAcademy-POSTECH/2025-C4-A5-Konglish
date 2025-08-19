@@ -18,6 +18,9 @@ public enum GamePhase {
     /// 평면 스캔이 완료된 단계
     case scanned
     
+    /// 포탈이 생성중인 단계
+    case portalCreating
+    
     /// 포탈 생성이 완료된 단계
     case portalCreated
     

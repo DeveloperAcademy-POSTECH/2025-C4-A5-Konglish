@@ -19,7 +19,8 @@ struct ExitOptionWindow: View {
         static let bgHeight: CGFloat = 308
         static let imageSize: CGFloat = 100
         static let btnSize: CGFloat = 136
-        static let shadowOffset: CGFloat = 6
+        static let btnShadowOffset: CGFloat = 6
+        static let pauseViewShadowOffset: CGFloat = 8
         static let leftText: String = "계속하기"
         static let rightText: String = "나가기"
     }
@@ -29,9 +30,9 @@ struct ExitOptionWindow: View {
                 .fill(Material.ultraThin)
                 .overlay(
                     RoundedRectangle(cornerRadius: ExitOptionWindowConstants.cornerRadius)
-                        .fill(Color.white)
+                        .fill(Material.ultraThin)
                 )
-                .grayShadow()
+                .pauseGlassShadow(ExitOptionWindowConstants.pauseViewShadowOffset)
                 .frame(width: ExitOptionWindowConstants.bgWidth, height: ExitOptionWindowConstants.bgHeight)
             
             btnGroup
@@ -61,7 +62,7 @@ struct ExitOptionWindow: View {
                 RoundedRectangle(cornerRadius: ExitOptionWindowConstants.cornerRadius)
                     .fill(Color.green02)
                     .frame(width: ExitOptionWindowConstants.btnSize, height: ExitOptionWindowConstants.btnSize)
-                    .mainButtonShadow(shadowColor: Color.green09, yOffset: ExitOptionWindowConstants.shadowOffset)
+                    .mainButtonShadow(shadowColor: Color.greenShadow, yOffset: ExitOptionWindowConstants.btnShadowOffset)
                 
                 Image(image)
                     .resizable()

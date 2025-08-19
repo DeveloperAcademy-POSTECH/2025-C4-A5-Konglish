@@ -15,8 +15,9 @@ struct LifeHeart: View {
     let maxCount: Int = 5
     
     // MARK: - Constants
-    fileprivate enum GameStatusConstatns {
-        static let spacing: CGFloat = 16
+    fileprivate enum GameStatusConstants {
+        static let spacing: CGFloat = 12
+        static let horizonPadding: CGFloat = 16
     }
     
     
@@ -26,7 +27,7 @@ struct LifeHeart: View {
     }
     // MARK: - Body
     var body: some View {
-        HStack(spacing: GameStatusConstatns.spacing, content: {
+        HStack(alignment: .center, spacing: GameStatusConstants.spacing, content: {
             ForEach(.zero..<maxCount, id: \.self) { index in
                 if index < currentLife {
                     Image(.heartIcon)
@@ -35,6 +36,7 @@ struct LifeHeart: View {
                 }
             }
         })
+        .padding(.horizontal, GameStatusConstants.horizonPadding)
     }
 }
 
