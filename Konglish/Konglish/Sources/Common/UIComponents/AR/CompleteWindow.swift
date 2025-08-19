@@ -23,7 +23,7 @@ struct CompleteWindow: View {
         static let verticalPadding: CGFloat = 14
         static let horizonPadding: CGFloat = 30
         static let cornerRadius: CGFloat = 30
-        static let titleOutline: CGFloat = 4
+        static let titleOutline: CGFloat = 6
         static let scoreOutline: CGFloat = 3
         static let shadowOffset: CGFloat = 8
         static let title: String = "Clear!"
@@ -43,21 +43,23 @@ struct CompleteWindow: View {
             .padding(.horizontal, CompleteWindowConstants.mainHorizonPadding)
             .background {
                 RoundedRectangle(cornerRadius: CompleteWindowConstants.cornerRadius)
-                    .fill(Color.white.opacity(0.4))
-                    .background(Material.ultraThin.quaternary)
+                    .fill(Color.white01)
+                    .opacity(0.65)
+                    .background(Material.ultraThin)
                     .clipShape(RoundedRectangle(cornerRadius: CompleteWindowConstants.cornerRadius))
+                    .grayShadow()
             }
     }
     
     private var title: some View {
         Text(CompleteWindowConstants.title)
-            .font(.semibold64)
+            .font(.semibold80)
             .foregroundStyle(Color.green07)
             .customOutline(width: CompleteWindowConstants.titleOutline, color: .white)
     }
     
     private var score: some View {
-        HStack(spacing: 20, content: {
+        HStack(spacing: 36, content: {
             Image(.bin)
             
             Text("\(model.score)")
