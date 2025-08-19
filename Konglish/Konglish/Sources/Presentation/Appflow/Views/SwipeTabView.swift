@@ -23,7 +23,7 @@ struct SwipeTabView: View {
         static let cornerRadius: CGFloat = 20
         static let guideVspacing: CGFloat = 16
         static let guideCircleSize: CGFloat = 12
-        static let pageHspacing: CGFloat = 8
+        static let pageHspacing: CGFloat = 32
         static let lottieBorderPadding: CGFloat = 4
         static let lineWidth: CGFloat = 4
     }
