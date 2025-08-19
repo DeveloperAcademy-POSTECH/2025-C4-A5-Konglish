@@ -52,7 +52,7 @@ struct ChekScanCamera: View {
     /// 하단 가이드 텍스트
     private var guideText: some View {
         Text(CheckScanCameraConstants.guideText)
-            .font(.bold20)
+            .font(.semibold20)
             .foregroundStyle(Color.black01)
     }
 }
