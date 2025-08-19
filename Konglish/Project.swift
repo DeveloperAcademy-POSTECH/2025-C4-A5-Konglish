@@ -1,5 +1,9 @@
 import ProjectDescription
 
+// 버전 정보
+let marketingVersion = "1.0.0"
+let currentProjectVersion = "1"
+
 let project = Project(
     name: "Konglish",
     packages: [
@@ -15,6 +19,9 @@ let project = Project(
             deploymentTargets: .iOS("18.0"),
             infoPlist: .extendingDefault(
                 with: [
+                    "CFBundleShortVersionString": .string(marketingVersion),
+                    "CFBundleVersion": .string(currentProjectVersion),
+                    "LSApplicationCategoryType": "public.app-category.education",         
                     "UIRequiredDeviceCapabilities": ["arkit"],
                     "UIRequiresFullScreen": true,
                     "UILaunchScreen": [
@@ -39,7 +46,13 @@ let project = Project(
                 .project(target: "ARCore", path: "./ARCore"),
                 .package(product: "Moya"),
                 .package(product: "Lottie")
-            ]
+            ],
+            settings: .settings(
+                base: [
+                    "MARKETING_VERSION": .string(marketingVersion),
+                    "CURRENT_PROJECT_VERSION": .string(currentProjectVersion)
+                ]
+            )
         ),
         .target(
             name: "KonglishTests",
