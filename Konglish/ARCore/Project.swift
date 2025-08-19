@@ -16,6 +16,7 @@ let project = Project(
                 destinations: .iOS,
                 product: .staticFramework,
                 bundleId: "app.arCore.Konglish",
+                deploymentTargets: .iOS("18.0"),
                 infoPlist: .default,
                 sources: ["Sources/**"],
                 resources: ["Resources/**"],
