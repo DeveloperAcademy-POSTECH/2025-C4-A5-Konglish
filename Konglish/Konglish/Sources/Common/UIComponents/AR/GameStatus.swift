@@ -16,13 +16,13 @@ struct GameStatus: View {
     let maxCount: Int = 5
     
     // MARK: - Constants
-    fileprivate enum GameStatusConstatns {
-        static let bottomInfoWidth: CGFloat = 440
+    fileprivate enum GameStatusConstants {
         static let verticalPadding: CGFloat = 8
         static let horizonPadding: CGFloat = 16
         static let statusVspacing: CGFloat = 10
         static let cardHspacing: CGFloat = 8
-        static let bottomInfoHspacing: CGFloat = 20
+        static let bottomInfoHspacing: CGFloat = 24
+        static let scoreLeadingPadding: CGFloat = 16
         static let cornerRadius: CGFloat = 30
         static let binWidth: CGFloat = 40
         static let binHeight: CGFloat = 34
@@ -30,62 +30,59 @@ struct GameStatus: View {
         static let cardBottomImagePadding: CGFloat = 16
         static let scoreLabelWidth: CGFloat = 94
         static let cardsLabelWidth: CGFloat = 140
-        
         static let dropShadowSize: CGFloat = 6
-        
         static let scoreText: String = "Score"
     }
     
     // MARK: - Body
     var body: some View {
-        VStack(alignment: .leading, spacing: GameStatusConstatns.statusVspacing, content: {
+        VStack(alignment: .leading, spacing: GameStatusConstants.statusVspacing, content: {
             LifeHeart(currentLife: currentLife)
             bottomContents
         })
-        .padding(.vertical, GameStatusConstatns.verticalPadding)
-        .padding(.horizontal, GameStatusConstatns.horizonPadding)
-        .background(Material.ultraThin.quaternary)
-        .clipShape(RoundedRectangle(cornerRadius: GameStatusConstatns.cornerRadius))
-        .glassShadow(GameStatusConstatns.dropShadowSize)
+        .padding(.vertical, GameStatusConstants.verticalPadding)
+        .background(Material.ultraThin)
+        .clipShape(RoundedRectangle(cornerRadius: GameStatusConstants.cornerRadius))
+        .glassShadow(GameStatusConstants.dropShadowSize)
     }
     // MARK: - Bottom
     /// 하단 점수 및 카드 수집 정보
     private var bottomContents: some View {
-        HStack(spacing: GameStatusConstatns.bottomInfoHspacing, content: {
+        HStack(spacing: GameStatusConstants.bottomInfoHspacing, content: {
             scoreText
             currentCardInfo
         })
-        .frame(width: GameStatusConstatns.bottomInfoWidth, alignment: .leading)
+        .frame(alignment: .leading)
     }
     
     /// 현재 스코어 표시 텍스트
     private var scoreText: some View {
-        HStack(spacing: GameStatusConstatns.cardBottomSpacing) {
+        HStack(spacing: GameStatusConstants.cardBottomSpacing) {
             Image(.bin)
                 .resizable()
-                .frame(width: GameStatusConstatns.binWidth, height: GameStatusConstatns.binHeight)
+                .frame(width: GameStatusConstants.binWidth, height: GameStatusConstants.binHeight)
             
             Spacer()
-                .frame(width: GameStatusConstatns.cardBottomImagePadding)
+                .frame(width: GameStatusConstants.cardBottomImagePadding)
             
             Text("\(currentScore)")
                 .font(.poetsen48)
                 .foregroundStyle(Color.black)
                 .customOutline(width: 1, color: .white01)
-                .frame(width: GameStatusConstatns.scoreLabelWidth, alignment: .leading)
+                .frame(width: GameStatusConstants.scoreLabelWidth, alignment: .leading)
         }
-        .safeAreaPadding(.leading, 10)
+        .safeAreaPadding(.leading, GameStatusConstants.scoreLeadingPadding)
     }
     
     /// 카드 현재 수집 정보
     private var currentCardInfo: some View {
-        HStack(spacing: GameStatusConstatns.cardHspacing, content: {
+        HStack(spacing: GameStatusConstants.cardHspacing, content: {
             Image(.totalCard)
-            Text("\(currentCard) / \(maxCount)")
+            Text("\(currentCard)/\(maxCount)")
                 .font(.poetsen48)
                 .foregroundStyle(Color.black01)
                 .customOutline(width: 1, color: .white01)
-                .frame(width: GameStatusConstatns.cardsLabelWidth)
+                .frame(width: GameStatusConstants.cardsLabelWidth)
         })
     }
 }
