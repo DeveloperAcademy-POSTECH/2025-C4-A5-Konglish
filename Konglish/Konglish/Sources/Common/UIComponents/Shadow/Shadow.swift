@@ -33,6 +33,13 @@ struct GrayShadow: ViewModifier {
     }
 }
 
+struct GrayShadow4: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .shadow(color: .gray01, radius: 0, x: 0, y: 4)
+    }
+}
+
 struct GlassShadow: ViewModifier {
     let ySize: CGFloat
     static let dropShadowColor: Color = Color(red: 224 / 255, green: 224 / 255, blue: 224 / 255) // #E0E0E0
@@ -58,6 +65,10 @@ extension View {
     
     func grayShadow() -> some View {
         self.modifier(GrayShadow())
+    }
+    
+    func grayShadow4() -> some View {
+        self.modifier(GrayShadow4())
     }
     
     /// 조건이 참일 때만 grayShadow를 적용하는 View Modifier

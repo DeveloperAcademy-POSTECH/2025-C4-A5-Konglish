@@ -24,15 +24,16 @@ struct CheckScanOverlay: View {
             })
             .overlay(alignment: .bottom, content: {
                 Group {
-                    if arViewModel.gamePhase == .scanned {
+                    if arViewModel.gamePhase == .portalCreated {
+                        MainButton(buttonType: .text(.cardSprinkle(onOff: true)), action: {
+                            arViewModel.placeCardsButtonTapped()
+                        }, shadowOffset: CheckScanOverlayConstants.shadowOffset)
+                    }
+                    else {
                         MainButton(buttonType: .text(.openPotal(onOff: allPlanesDetected)), action: {
                             arViewModel.triggerOpenPortal = true
                         }, shadowOffset: CheckScanOverlayConstants.shadowOffset)
                         .disabled(!allPlanesDetected)
-                    } else if arViewModel.gamePhase == .portalCreated {
-                        MainButton(buttonType: .text(.cardSprinkle(onOff: true)), action: {
-                            arViewModel.placeCardsButtonTapped()
-                        }, shadowOffset: CheckScanOverlayConstants.shadowOffset)
                     }
                 }
                 .safeAreaPadding(.horizontal, UIConstants.horionLongTextPadding)

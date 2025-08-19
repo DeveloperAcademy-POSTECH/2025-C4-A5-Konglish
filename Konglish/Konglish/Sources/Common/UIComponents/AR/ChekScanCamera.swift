@@ -31,9 +31,9 @@ struct ChekScanCamera: View {
         })
         .padding(.horizontal, CheckScanCameraConstants.horizonPadding)
         .padding(.vertical, CheckScanCameraConstants.verticalPadding)
-        .background(Material.thin)
+        .background(Material.ultraThin)
         .clipShape(RoundedRectangle(cornerRadius: CheckScanCameraConstants.cornerRadius))
-        .glassShadow(CheckScanCameraConstants.dropShadowSize)
+        .grayShadow4()
     }
     
     /// 체크 리스트
@@ -52,7 +52,7 @@ struct ChekScanCamera: View {
     /// 하단 가이드 텍스트
     private var guideText: some View {
         Text(CheckScanCameraConstants.guideText)
-            .font(.bold20)
+            .font(.semibold20)
             .foregroundStyle(Color.black01)
     }
 }
