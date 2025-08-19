@@ -19,12 +19,9 @@ let project = Project(
             deploymentTargets: .iOS("18.0"),
             infoPlist: .extendingDefault(
                 with: [
-                    
                     "CFBundleShortVersionString": .string(marketingVersion),
                     "CFBundleVersion": .string(currentProjectVersion),
-                    "LSApplicationCategoryType": "public.app-category.education",
-                    
-                    
+                    "LSApplicationCategoryType": "public.app-category.education",         
                     "UIRequiredDeviceCapabilities": ["arkit"],
                     "UIRequiresFullScreen": true,
                     "UILaunchScreen": [
