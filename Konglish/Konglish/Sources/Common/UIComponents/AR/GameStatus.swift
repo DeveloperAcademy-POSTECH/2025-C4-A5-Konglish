@@ -20,9 +20,9 @@ struct GameStatus: View {
         static let verticalPadding: CGFloat = 8
         static let horizonPadding: CGFloat = 16
         static let statusVspacing: CGFloat = 10
-        static let cardHspacing: CGFloat = 8
+        static let cardHspacing: CGFloat = 16
         static let bottomInfoHspacing: CGFloat = 24
-        static let scoreLeadingPadding: CGFloat = 16
+        static let scoreLeadingPadding: CGFloat = 24
         static let cornerRadius: CGFloat = 30
         static let binWidth: CGFloat = 40
         static let binHeight: CGFloat = 34
@@ -82,7 +82,6 @@ struct GameStatus: View {
                 .font(.poetsen48)
                 .foregroundStyle(Color.black01)
                 .customOutline(width: 1, color: .white01)
-                .frame(width: GameStatusConstants.cardsLabelWidth)
         })
     }
 }
